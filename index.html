@@ -1,95 +1,181 @@
-<!doctype html><html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>紫墙｜首页（v6.4 深紫）</title>
-<link rel="stylesheet" href="styles.css">
-<script defer src="script.js"></script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PurpleWall 紫墙 | 您见未来，我执匠心</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="home">
-<header class="header">
-  <div class="nav">
-    <a href="index.html" class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></a>
-    <div></div>
-    <nav class="nav-links">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-    <button class="menu-btn">目录</button>
-  </div>
-</header>
 
-<section class="hero" id="top">
-  <video id="heroVideo" playsinline webkit-playsinline muted autoplay loop preload="auto" poster="assets/0250613105122.jpg">
-    <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
-    <source src="assets/2024.mp4" type="video/mp4">
-    <source src="https://cdn.coverr.co/videos/coverr-architecture-shadow-6437/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="shade"></div>
-  <div class="copy"><h1 class="h1">您见未来，我执匠心</h1></div>
-</section>
+    <!-- 导航栏 -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" class="brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link active"></i> 首页</a>
+                    <a href="services.html" class="nav-link"></i> 服务</a>
+                    <a href="cases.html" class="nav-link"></i> 案例</a>
+                    <a href="about.html" class="nav-link"></i> 关于</a>
+                    <a href="contact.html" class="nav-link"></i> 联系</a>
+                </nav>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<div class="spacer-xl"></div>
+    <!-- 主视觉区域 (Hero) -->
+    <section class="hero">
+        <video id="heroVideo" playsinline webkit-playsinline muted autoplay loop preload="auto" poster="assets/0250613105122.jpg">
+            <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
+            <source src="assets/2024.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">展示道具，全案服务专家</h1>
+                <div class="hero-divider"></div>
+                <p class="hero-subtitle">创意到落地，全案服务，您见未来，我执匠心</p>
+                <a href="cases.html" class="hero-button">查看案例</a>
+            </div>
+        </div>
+    </section>
 
-<section class="section" id="advantages" style="padding-top:0">
-  <div class="container">
-    <h2 class="h2">我们为什么更可靠</h2>
-    <p class="p-lg" style="margin-top:8px">同一团队负责从创意、打样到生产安装；柔性制造按件定制，降低非必要成本；对接全球物流与安装，跨区域高效交付。</p>
-    <div style="margin-top:18px">
-      <a class="btn" href="cases.html">所有案例</a>
-    </div>
-  </div>
-</section>
+    <!-- 服务区域 -->
+    <section class="section services-section">
+        <div class="container">
+            <h2 class="section-title">我们的服务</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">设计</div>
+                    <h3 class="service-title">创意设计</h3>
+                    <p class="service-description">概念 / 效果图 / 工程拆解</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">打样</div>
+                    <h3 class="service-title">打样制样</h3>
+                    <p class="service-description">材料实验 / 结构验证</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">生产</div>
+                    <h3 class="service-title">生产制作</h3>
+                    <p class="service-description">柔性制造 / 按件定制</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">配送</div>
+                    <h3 class="service-title">全球物流</h3>
+                    <p class="service-description">包装 / 报关 / 航线</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">安装</div>
+                    <h3 class="service-title">安装交付</h3>
+                    <p class="service-description">不影响门店运营</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">维护</div>
+                    <h3 class="service-title">维护升级</h3>
+                    <p class="service-description">快拆复用 / 生命周期管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="marquee" id="works">
-  <div class="inner">
-    <div class="track">
-      <a class="tile" href="case-a.html"><img src="assets/微信图片_2025-08-11_133845_823.jpg" alt=""></a>
-      <a class="tile" href="case-b.html"><img src="assets/微信图片_2025-08-11_133856_756.jpg" alt=""></a>
-      <a class="tile" href="case-c.html"><img src="assets/微信图片_2025-08-11_133913_165.jpg" alt=""></a>
-      <a class="tile" href="case-d.html"><img src="assets/微信图片_20250417121620.jpg" alt=""></a>
-      <a class="tile" href="case-e.html"><img src="assets/微信图片_20250417121703.jpg" alt=""></a>
-      <a class="tile" href="case-f.html"><img src="assets/微信图片_20250514131803.png" alt=""></a>
-      <a class="tile" href="case-a.html"><img src="assets/微信图片_2025-08-11_133845_823.jpg" alt=""></a>
-      <a class="tile" href="case-b.html"><img src="assets/微信图片_2025-08-11_133856_756.jpg" alt=""></a>
-      <a class="tile" href="case-c.html"><img src="assets/微信图片_2025-08-11_133913_165.jpg" alt=""></a>
-      <a class="tile" href="case-d.html"><img src="assets/微信图片_20250417121620.jpg" alt=""></a>
-      <a class="tile" href="case-e.html"><img src="assets/微信图片_20250417121703.jpg" alt=""></a>
-      <a class="tile" href="case-f.html"><img src="assets/微信图片_20250514131803.png" alt=""></a>
-    </div>
-  </div>
-</section>
+    <!-- 精选案例区域 -->
+    <section class="section cases-section">
+        <div class="container">
+            <h2 class="section-title">精选案例</h2>
+            <p class="section-subtitle">
+                我们为全球高端品牌提供从创意、打样到生产与安装的一体化展示道具解决方案。
+                每一个案例，都是一次品牌与空间的深度对话。
+            </p>
+            <div class="text-center">
+                <a href="cases.html" class="btn-secondary">所有案例</a>
+            </div>
+        </div>
 
-<section class="section" id="services">
-  <div class="container">
-    <h2 class="h2">我们的服务</h2>
-    <div class="cards" style="margin-top:18px">
-      <div class="card"><div class="icon">创</div><div class="h3">创意设计</div><div class="small">概念/效果图/工程拆解</div></div>
-      <div class="card"><div class="icon">样</div><div class="h3">打样制样</div><div class="small">材料实验/结构验证</div></div>
-      <div class="card"><div class="icon">产</div><div class="h3">生产制作</div><div class="small">柔性制造/按件定制</div></div>
-      <div class="card"><div class="icon">配</div><div class="h3">全球物流</div><div class="small">包装/报关/航线</div></div>
-      <div class="card"><div class="icon">装</div><div class="h3">安装交付</div><div class="small">不影响门店运营</div></div>
-      <div class="card"><div class="icon">护</div><div class="h3">维护升级</div><div class="small">快拆复用/生命周期管理</div></div>
-    </div>
-  </div>
-</section>
+        <!-- 案例跑马灯 -->
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <div class="marquee-item">
+                    <a href="case-a.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="marquee-item">
+                    <a href="case-b.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="marquee-item">
+                    <a href="case-c.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="marquee-item">
+                    <a href="case-d.html" class="case-link">
+                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="marquee-item">
+                    <a href="case-e.html" class="case-link">
+                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="marquee-item">
+                    <a href="case-f.html" class="case-link">
+                        <img src="assets/微信图片_20250514131803.png" alt="案例 F">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-<section class="clients-strip">
-  <div class="container"><img src="assets/640 (1).png" alt="Client logos"></div>
-</section>
+        <!-- 品牌Logo墙 -->
+        <div class="logo-wall-section">
+            <div class="container">
+                <h3 class="logo-wall-title">我们的合作伙伴</h3>
+                <p class="logo-wall-subtitle">与全球知名品牌共创价值</p>
+                <div class="logo-wall">
+                    <img src="assets/640 (1).png" alt="合作伙伴Logo墙" class="logo-wall-image">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer class="footer">
-  <div class="row">
-    <div>
-      <div class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></div>
-      <div class="copyright">© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd. All rights reserved.</div>
-    </div>
-    <nav class="fnav">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">所有案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-  </div>
-</footer>
-</body></html>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
+                    <p class="footer-slogan">您见未来，我执匠心</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">首页</a>
+                    <a href="services.html" class="footer-link">我们的服务</a>
+                    <a href="cases.html" class="footer-link">案例</a>
+                    <a href="about.html" class="footer-link">关于我们</a>
+                    <a href="contact.html" class="footer-link">联系</a>
+                </div>
+                <div class="footer-info">
+                    <p>© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd.</p>
+                    <p>All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
