@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const navLinksItems = navLinks.querySelectorAll('a');
         navLinksItems.forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth <= 992) {
+                if (window.innerWidth <= 480) {
                     navLinks.classList.remove('active');
                     const icon = menuBtn.querySelector('i');
                     icon.classList.remove('fa-times');
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. 窗口大小变化处理
     window.addEventListener('resize', () => {
         // 如果窗口变大，隐藏移动端菜单
-        if (window.innerWidth > 992 && navLinks) {
+        if (window.innerWidth > 480 && navLinks) {
             navLinks.classList.remove('active');
             if (menuBtn) {
                 const icon = menuBtn.querySelector('i');
