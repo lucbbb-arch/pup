@@ -125,7 +125,7 @@ body.home {
     font-weight: 700;
     text-align: center;
     margin-bottom: 24px;
-    color: var(--text-dark);
+    color: var(--text-primary);
     letter-spacing: 6px;
 }
 .section-title2 {
@@ -708,7 +708,7 @@ body.home {
     height: 60vh;
     min-height: 500px;
     overflow: hidden;
-    margin-top: 80px;
+    margin-top: 50px;
     background: var(--bg-dark);
 }
 
@@ -894,7 +894,7 @@ body.home {
 .form-group label {
     display: block;
     margin-bottom: 10px;
-    color: var(--text-primary);
+    color: var(--brand-purple-light);
     font-weight: 500;
 }
 
@@ -906,7 +906,7 @@ body.home {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    color: var(--text-primary);
+    color: var(--brand-purple-light);
     font-size: 16px;
     transition: var(--transition);
 }
@@ -914,7 +914,7 @@ body.home {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    outline: none;
+    outline: rgba(255, 255, 255, 0.15);
     border-color: var(--brand-purple-light);
     background: rgba(255, 255, 255, 0.15);
 }
@@ -940,14 +940,14 @@ body.home {
     align-items: center;
     margin-bottom: 50px;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(22, 22, 22, 0.08);
     border-radius: var(--radius);
     border-left: 4px solid var(--brand-purple);
     transition: var(--transition);
 }
 
 .service-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(22, 22, 22, 0.08);
     transform: translateX(10px);
 }
 
@@ -965,12 +965,12 @@ body.home {
 
 .service-content h3 {
     font-size: 24px;
-    color: var(--text-primary);
+    color: var(--brand-purple-light);
     margin-bottom: 10px;
 }
 
 .service-content p {
-    color: var(--text-secondary);
+    color: var(--text-dark);
     line-height: 1.6;
 }
 
@@ -1343,3 +1343,94 @@ body.home {
 .case-item:nth-child(4) { animation-delay: 0.4s; }
 .case-item:nth-child(5) { animation-delay: 0.5s; }
 .case-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* =====================
+   子页面样式（白底深字）
+   ===================== */
+
+/* 子页面整体样式 */
+body.subpage {
+    background: #ffffff;
+    color: #d40404;
+}
+
+/* 子页面主内容区域 */
+.subpage .section {
+    background: #ffffff;
+    color: #333333;
+    padding: 80px 0;
+}
+
+/* 子页面标题 */
+.subpage .h1 {
+    color: #222222;
+    font-size: clamp(36px, 5vw, 56px);
+    margin-bottom: 24px;
+}
+
+.subpage .h2 {
+    color: #222222;
+    font-size: clamp(28px, 4vw, 40px);
+    margin-bottom: 20px;
+}
+
+.subpage .h3 {
+    color: #222222;
+    font-size: clamp(22px, 3vw, 28px);
+    margin-bottom: 16px;
+}
+
+/* 子页面正文文字 */
+.subpage .p-lg {
+    color: #8b0606;
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+/* 子页面卡片 */
+.subpage .card {
+    background: #eeeeee;
+    color: #991010;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.subpage .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* 子页面按钮 */
+.subpage .btn {
+    background:  #9D7BCB;
+    color: #c70c0c;
+    border: 2px solid var(--brand-purple);
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.subpage .btn:hover {
+    background: var(--brand-purple-light);
+    border-color: var(--brand-purple-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(119, 86, 160, 0.2);
+}
+
+/* 子页面导航栏 */
+.subpage .header {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* 子页面副标题样式 */
+.subpage .sub-hero {
+    background: linear-gradient(135deg, #1B1030 0%, #2a1a40 100%);
+    color: #181818;
+}
+
+.subpage .sub-hero .h1 {
+    color: #ffffff;
+}

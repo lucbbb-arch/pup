@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoWall = document.querySelector('.logo-wall');
     if (logoWall) {
         logoWall.addEventListener('mouseenter', () => {
-            logoWall.style.transform = 'scale(1.02)';
+            logoWall.style.transform = 'scale(1)';
         });
         
         logoWall.addEventListener('mouseleave', () => {
