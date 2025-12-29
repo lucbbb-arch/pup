@@ -1,53 +1,138 @@
-<!doctype html><html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>我们的服务｜紫墙</title>
-<link rel="stylesheet" href="styles.css"><script defer src="script.js"></script></head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我们的服务 | PurpleWall 上海紫墙</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 <body>
-<header class="header">
-  <div class="nav">
-    <a href="index.html" class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></a>
-    <div></div>
-    <nav class="nav-links">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-    <button class="menu-btn">菜单</button>
-  </div>
-</header>
+    <!-- 导航栏 - 与主页统一 -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" class="brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="services.html" class="nav-link active">服务</a>
+                    <a href="cases.html" class="nav-link">案例</a>
+                    <a href="about.html" class="nav-link">关于</a>
+                    <a href="contact.html" class="nav-link">联系</a>
+                </nav>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<section class="sub-hero">
-  <div class="img"><img src="assets/微信图片_2025-08-11_133913_165.jpg" alt=""></div>
-  <div class="shade"></div>
-  <div class="copy"><h1 class="h1" style="color:#fff">我们的服务</h1></div>
-</section>
+    <!-- 子页面Hero区域 -->
+    <section class="sub-hero">
+        <div class="img">
+            <img src="assets/微信图片_20250514131803.png" alt="我们的服务">
+        </div>
+        <div class="shade"></div>
+        <div class="copy">
+            <h1 class="h1">我们的服务</h1>
+        </div>
+    </section>
 
+    <!-- 主要内容区域 -->
+    <main class="section">
+        <div class="container">
+            <div class="services-list">
+                <!-- 设计服务 -->
+                <div class="service-item">
+                    <div class="service-number">01</div>
+                    <div class="service-content">
+                        <h3>设计服务</h3>
+                        <p>我们提供从概念创意到施工图的全流程设计服务。我们的设计团队深谙品牌美学与空间逻辑，能够将品牌理念转化为可落地的展示方案。服务内容包括：品牌空间分析、概念方案设计、3D效果图呈现、施工图绘制、材料与工艺选型建议。</p>
+                    </div>
+                </div>
+                
+                <!-- 打样服务 -->
+                <div class="service-item">
+                    <div class="service-number">02</div>
+                    <div class="service-content">
+                        <h3>打样服务</h3>
+                        <p>在批量生产前，我们提供专业的打样服务，通过实物样件验证设计的可行性与效果。我们的打样中心配备先进的数字化制造设备，能够快速实现复杂结构的原型制作。服务内容包括：材料实验、结构验证、表面处理测试、功能测试、成本优化建议。</p>
+                    </div>
+                </div>
+                
+                <!-- 生产服务 -->
+                <div class="service-item">
+                    <div class="service-number">03</div>
+                    <div class="service-content">
+                        <h3>生产服务</h3>
+                        <p>我们拥有自建工厂和严格的质量控制体系，能够实现从单件定制到批量生产的柔性制造。我们采用数字化生产管理系统，确保每个环节的可追溯性。服务内容包括：精密加工、表面处理、组装调试、质量检验、包装防护。</p>
+                    </div>
+                </div>
+                
+                <!-- 配送服务 -->
+                <div class="service-item">
+                    <div class="service-number">04</div>
+                    <div class="service-content">
+                        <h3>配送服务</h3>
+                        <p>我们建立了全球物流网络，能够提供安全、高效的配送服务。针对高端展示道具，我们提供专业的包装方案和运输监控，确保产品完好送达。服务内容包括：专业包装设计、国内国际运输、报关清关、保险服务、实时追踪。</p>
+                    </div>
+                </div>
+                
+                <!-- 安装服务 -->
+                <div class="service-item">
+                    <div class="service-number">05</div>
+                    <div class="service-content">
+                        <h3>安装服务</h3>
+                        <p>我们拥有专业的安装团队，能够在全球范围内提供标准化安装服务。我们特别注重安装过程对门店运营的影响，采用分阶段、错峰作业方式，最大限度减少对正常营业的干扰。服务内容包括：现场勘查、安装方案制定、专业安装施工、现场调试、客户培训。</p>
+                    </div>
+                </div>
+                
+                <!-- 维护服务 -->
+                <div class="service-item">
+                    <div class="service-number">06</div>
+                    <div class="service-content">
+                        <h3>维护服务</h3>
+                        <p>我们提供全生命周期的维护服务，确保展示系统长期稳定运行。我们采用模块化设计理念，使维护和升级更加便捷高效。服务内容包括：定期巡检、预防性维护、快速响应维修、部件更换、系统升级、生命周期管理。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 服务流程 -->
+            <div class="card" style="margin-top:80px;text-align:center;">
+                <div class="h3">全案服务流程</div>
+                <div class="small" style="max-width:800px;margin:20px auto;line-height:1.8;">
+                    我们的全案服务遵循标准化流程：需求分析 → 概念设计 → 方案深化 → 打样验证 → 生产制造 → 质量检验 → 物流配送 → 现场安装 → 验收交付 → 售后维护。每个环节都有专业的团队负责，并通过项目管理平台实现全程可视化跟踪，确保项目按时、按质、按预算完成。
+                </div>
+                <a href="contact.html" class="btn-primary" style="margin-top:30px;">开始您的项目</a>
+            </div>
+        </div>
+    </main>
 
-<main class="section"><div class="container">
-  <div class="cards">
-    <div class="card"><div class="icon">创</div><div class="h3">创意设计</div><div class="small">概念/效果图/工程拆解</div></div>
-    <div class="card"><div class="icon">样</div><div class="h3">打样制样</div><div class="small">材料实验/结构验证</div></div>
-    <div class="card"><div class="icon">产</div><div class="h3">生产制作</div><div class="small">柔性制造/按件定制</div></div>
-    <div class="card"><div class="icon">配</div><div class="h3">全球物流</div><div class="small">包装/报关/航线</div></div>
-    <div class="card"><div class="icon">装</div><div class="h3">安装交付</div><div class="small">不影响门店运营</div></div>
-    <div class="card"><div class="icon">护</div><div class="h3">维护升级</div><div class="small">快拆复用/生命周期管理</div></div>
-  </div>
-</div></main>
+    <!-- 页脚 - 与主页统一 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
+                    <p class="footer-slogan">您见未来，我执匠心</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">首页</a>
+                    <a href="services.html" class="footer-link active">我们的服务</a>
+                    <a href="cases.html" class="footer-link">案例</a>
+                    <a href="about.html" class="footer-link">关于我们</a>
+                    <a href="contact.html" class="footer-link">联系</a>
+                </div>
+                <div class="footer-info">
+                    <p>© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd.</p>
+                    <p>All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-<footer class="footer">
-  <div class="row">
-    <div>
-      <div class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></div>
-      <div class="copyright">© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd. All rights reserved.</div>
-    </div>
-    <nav class="fnav">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">所有案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-  </div>
-</footer>
-</body></html>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,53 +1,102 @@
-<!doctype html><html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>关于我们｜紫墙</title>
-<link rel="stylesheet" href="styles.css"><script defer src="script.js"></script></head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>关于我们 | PurpleWall 上海紫墙</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 <body>
-<header class="header">
-  <div class="nav">
-    <a href="index.html" class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></a>
-    <div></div>
-    <nav class="nav-links">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-    <button class="menu-btn">菜单</button>
-  </div>
-</header>
+    <!-- 导航栏 - 与主页统一 -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" class="brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="services.html" class="nav-link">服务</a>
+                    <a href="cases.html" class="nav-link">案例</a>
+                    <a href="about.html" class="nav-link active">关于</a>
+                    <a href="contact.html" class="nav-link">联系</a>
+                </nav>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<section class="sub-hero">
-  <div class="img"><img src="assets/微信图片_2025-08-11_133845_823.jpg" alt=""></div>
-  <div class="shade"></div>
-  <div class="copy"><h1 class="h1" style="color:#fff">关于我们</h1></div>
-</section>
+    <!-- 子页面Hero区域 -->
+    <section class="sub-hero">
+        <div class="img">
+            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="关于我们">
+        </div>
+        <div class="shade"></div>
+        <div class="copy">
+            <h1 class="h1">关于我们</h1>
+        </div>
+    </section>
 
+    <!-- 主要内容区域 -->
+    <main class="section">
+        <div class="container">
+            <div class="cards">
+                <div class="card">
+                    <div class="h3">创意到落地</div>
+                    <div class="small">从概念设计到最终安装，我们提供一站式解决方案。单一团队全程负责，确保创意完整呈现，减少沟通成本，提升执行效率。</div>
+                </div>
+                <div class="card">
+                    <div class="h3">柔性生产</div>
+                    <div class="small">我们采用按件定制的柔性生产模式，既能满足小批量个性化需求，又能实现大规模高效生产，为您节省不必要的成本支出。</div>
+                </div>
+                <div class="card">
+                    <div class="h3">全球协同</div>
+                    <div class="small">我们在全球范围内建立高效协作网络，实现跨区域物流与安装的无缝对接，确保项目无论在世界何处都能完美落地。</div>
+                </div>
+            </div>
+            
+            <div class="case-detail">
+                <div class="case-description">
+                    <p>PurpleWall 上海紫墙成立于2015年，专注于高端品牌展示道具的全案服务。我们汇聚了来自设计、工程、制造和项目管理领域的专业人才，致力于为全球奢侈品牌提供从创意概念到最终落地的完整解决方案。</p>
+                    
+                    <p>我们的核心优势在于全链条服务能力。不同于传统供应商只负责单一环节，我们能够整合设计、打样、生产、物流、安装和维护各个环节，确保项目的高品质和一致性。这种一体化服务模式使我们能够更深入地理解品牌需求，更高效地响应市场变化。</p>
+                    
+                    <p>多年来，我们与众多国际知名品牌建立了长期合作关系，服务网络覆盖亚洲、欧洲和北美主要市场。每个项目对我们来说都是一次全新的挑战和创作，我们以匠人精神对待每一个细节，致力于为客户创造卓越的品牌体验空间。</p>
+                </div>
+                
+                <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <img src="assets/wechat_2025-08-11_125908_245.jpg" alt="PurpleWall团队" style="width:100%;height:auto;display:block;">
+                </div>
+            </div>
+        </div>
+    </main>
 
-<main class="section"><div class="container">
-  <div class="cards">
-    <div class="card"><div class="h3">创意到落地</div><div class="small">从概念到安装，单一团队负责到底。</div></div>
-    <div class="card"><div class="h3">柔性生产</div><div class="small">按件定制，节省非必要成本。</div></div>
-    <div class="card"><div class="h3">全球协同</div><div class="small">跨区域物流与安装协作。</div></div>
-  </div>
-  <div style="margin-top:20px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow)">
-    <img src="assets/wechat_2025-08-11_125908_245.jpg" alt="团队">
-  </div>
-</div></main>
+    <!-- 页脚 - 与主页统一 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
+                    <p class="footer-slogan">您见未来，我执匠心</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">首页</a>
+                    <a href="services.html" class="footer-link">我们的服务</a>
+                    <a href="cases.html" class="footer-link">案例</a>
+                    <a href="about.html" class="footer-link active">关于我们</a>
+                    <a href="contact.html" class="footer-link">联系</a>
+                </div>
+                <div class="footer-info">
+                    <p>© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd.</p>
+                    <p>All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-<footer class="footer">
-  <div class="row">
-    <div>
-      <div class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></div>
-      <div class="copyright">© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd. All rights reserved.</div>
-    </div>
-    <nav class="fnav">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">所有案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-  </div>
-</footer>
-</body></html>
+    <script src="script.js"></script>
+</body>
+</html>
