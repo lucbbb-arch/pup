@@ -1,50 +1,356 @@
-<!doctype html><html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>案例｜紫墙</title>
-<link rel="stylesheet" href="styles.css"><script defer src="script.js"></script></head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>案例展示 | PurpleWall 上海紫墙</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 <body>
-<header class="header">
-  <div class="nav">
-    <a href="index.html" class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></a>
-    <div></div>
-    <nav class="nav-links">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-    <button class="menu-btn">菜单</button>
-  </div>
-</header>
+    <!-- 导航栏 - 与主页统一 -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" class="brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="services.html" class="nav-link">服务</a>
+                    <a href="cases.html" class="nav-link active">案例</a>
+                    <a href="about.html" class="nav-link">关于</a>
+                    <a href="contact.html" class="nav-link">联系</a>
+                </nav>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<section class="sub-hero">
-  <div class="img"><img src="assets/微信图片_20250417121620.jpg" alt=""></div>
-  <div class="shade"></div>
-  <div class="copy"><h1 class="h1" style="color:#fff">案例</h1></div>
-</section>
+    <!-- 子页面Hero区域 -->
+    <section class="sub-hero">
+        <div class="img">
+            <img src="assets/微信图片_20250417121620.jpg" alt="案例展示">
+        </div>
+        <div class="shade"></div>
+        <div class="copy">
+            <h1 class="h1">案例展示</h1>
+            <p style="color:var(--text-secondary);font-size:20px;margin-top:20px;max-width:700px;line-height:1.6;">
+                探索我们为全球高端品牌打造的展示道具解决方案，每一个案例都是一次品牌与空间的深度对话
+            </p>
+        </div>
+    </section>
 
+    <!-- 主要内容区域 -->
+    <main class="section">
+        <div class="container">
+            <!-- 案例统计数据 -->
+            <div class="case-stats">
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">成功案例</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">行业经验</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">客户满意度</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">合作品牌</div>
+                </div>
+            </div>
+            
+            <!-- 案例筛选器 -->
+            <div class="case-filter">
+                <button class="filter-btn active" data-filter="all">全部案例</button>
+                <button class="filter-btn" data-filter="retail">零售空间</button>
+                <button class="filter-btn" data-filter="exhibition">展览展示</button>
+                <button class="filter-btn" data-filter="popup">快闪店</button>
+                <button class="filter-btn" data-filter="window">橱窗展示</button>
+                <button class="filter-btn" data-filter="luxury">奢侈品</button>
+            </div>
+            
+            <!-- 案例网格 -->
+            <div class="case-grid">
+                <!-- 案例 A -->
+                <div class="case-item" data-category="retail luxury">
+                    <div class="case-image">
+                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="高级珠宝展示系统">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">零售空间 / 奢侈品</span>
+                        <h3 class="case-title">高级珠宝展示系统</h3>
+                        <p class="case-desc">为国际顶级珠宝品牌打造模块化展示系统，集成智能照明与安全装置，支持快速拆装与布局调整。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2024年3月</span>
+                            <a href="case-a.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例 B -->
+                <div class="case-item" data-category="exhibition">
+                    <div class="case-image">
+                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="品牌体验展">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">展览展示</span>
+                        <h3 class="case-title">沉浸式品牌体验展</h3>
+                        <p class="case-desc">为时尚品牌打造360度沉浸式展览空间，结合多媒体互动装置，创造独特的品牌叙事体验。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2024年1月</span>
+                            <a href="case-b.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例 C -->
+                <div class="case-item" data-category="window luxury">
+                    <div class="case-image">
+                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="节日橱窗">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">橱窗展示 / 奢侈品</span>
+                        <h3 class="case-title">节日主题橱窗系列</h3>
+                        <p class="case-desc">为奢侈品牌设计制作圣诞季橱窗展示，采用可回收材料，结合动态机械装置，营造节日氛围。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2023年12月</span>
+                            <a href="case-c.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例 D -->
+                <div class="case-item" data-category="popup retail">
+                    <div class="case-image">
+                        <img src="assets/微信图片_20250417121620.jpg" alt="城市快闪店">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">快闪店 / 零售空间</span>
+                        <h3 class="case-title">城市中心快闪店</h3>
+                        <p class="case-desc">模块化快闪店解决方案，7天内完成从设计到落地的全过程，支持多城市快速复制部署。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2023年10月</span>
+                            <a href="case-d.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例 E -->
+                <div class="case-item" data-category="exhibition">
+                    <div class="case-image">
+                        <img src="assets/微信图片_20250417121703.jpg" alt="艺术装置展">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">展览展示</span>
+                        <h3 class="case-title">当代艺术装置展览</h3>
+                        <p class="case-desc">为美术馆打造大型艺术装置展示系统，解决复杂结构支撑与安全稳定性的技术挑战。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2023年8月</span>
+                            <a href="case-e.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例 F -->
+                <div class="case-item" data-category="retail luxury">
+                    <div class="case-image">
+                        <img src="assets/微信图片_20250514131803.png" alt="旗舰店陈列">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-category">零售空间 / 奢侈品</span>
+                        <h3 class="case-title">旗舰店全案陈列系统</h3>
+                        <p class="case-desc">为奢侈品牌旗舰店提供从入口到VIP室的全套陈列解决方案，实现品牌形象的高度统一。</p>
+                        <div class="case-meta">
+                            <span class="case-date">2023年6月</span>
+                            <a href="case-f.html" class="case-link">
+                                查看详情 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 加载更多 -->
+            <div class="load-more">
+                <button class="btn-secondary" id="loadMoreBtn">
+                    <i class="fas fa-plus" style="margin-right:10px;"></i> 加载更多案例
+                </button>
+            </div>
+            
+            <!-- 客户证言 -->
+            <div class="card" style="text-align:center;max-width:900px;margin:80px auto;">
+                <div class="h3">客户评价</div>
+                <div class="small" style="font-size:18px;line-height:1.8;margin:30px auto;font-style:italic;">
+                    "PurpleWall团队对细节的执着和对品质的追求令人印象深刻。他们不仅提供了卓越的展示解决方案，更重要的是深刻理解我们的品牌理念，将其完美转化为空间语言。"
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:30px;">
+                    <div style="width:60px;height:60px;border-radius:50%;background:#7756A0;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">
+                        JD
+                    </div>
+                    <div style="text-align:left;">
+                        <div style="font-weight:500;color:var(--text-primary);">Jane Doe</div>
+                        <div style="font-size:14px;color:var(--text-secondary);">某国际奢侈品牌视觉总监</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-<main class="section"><div class="container">
-  <div class="cards" style="grid-template-columns:1fr 1fr 1fr">
-    <div class="card"><a href="case-a.html"><img src="assets/微信图片_2025-08-11_133845_823.jpg" alt=""></a><div class="h3" style="margin-top:10px">案例 A</div></div>
-    <div class="card"><a href="case-b.html"><img src="assets/微信图片_2025-08-11_133856_756.jpg" alt=""></a><div class="h3" style="margin-top:10px">案例 B</div></div>
-    <div class="card"><a href="case-c.html"><img src="assets/微信图片_2025-08-11_133913_165.jpg" alt=""></a><div class="h3" style="margin-top:10px">案例 C</div></div>
-  </div>
-</div></main>
+    <!-- 页脚 - 与主页统一 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
+                    <p class="footer-slogan">您见未来，我执匠心</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">首页</a>
+                    <a href="services.html" class="footer-link">我们的服务</a>
+                    <a href="cases.html" class="footer-link active">案例</a>
+                    <a href="about.html" class="footer-link">关于我们</a>
+                    <a href="contact.html" class="footer-link">联系</a>
+                </div>
+                <div class="footer-info">
+                    <p>© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd.</p>
+                    <p>All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-<footer class="footer">
-  <div class="row">
-    <div>
-      <div class="brand"><img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall"></div>
-      <div class="copyright">© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd. All rights reserved.</div>
-    </div>
-    <nav class="fnav">
-      <a href="about.html">关于我们</a>
-      <a href="services.html">我们的服务</a>
-      <a href="cases.html">所有案例</a>
-      <a href="contact.html">联系</a>
-    </nav>
-  </div>
-</footer>
-</body></html>
+    <script src="script.js"></script>
+    <script>
+        // 案例筛选功能
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const caseItems = document.querySelectorAll('.case-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 更新按钮状态
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+                    
+                    // 筛选案例
+                    caseItems.forEach(item => {
+                        const categories = item.getAttribute('data-category');
+                        
+                        if (filter === 'all' || categories.includes(filter)) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // 加载更多功能
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            let caseCount = 6; // 初始显示数量
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    // 模拟加载更多案例
+                    loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> 加载中...';
+                    loadMoreBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        // 这里可以添加实际加载更多案例的逻辑
+                        // 暂时只是模拟
+                        loadMoreBtn.innerHTML = '<i class="fas fa-check" style="margin-right:10px;"></i> 已加载全部案例';
+                        loadMoreBtn.style.opacity = '0.5';
+                        loadMoreBtn.style.cursor = 'default';
+                        
+                        // 显示提示信息
+                        const message = document.createElement('div');
+                        message.style.cssText = `
+                            text-align: center;
+                            color: var(--brand-purple-light);
+                            margin-top: 20px;
+                            font-size: 14px;
+                        `;
+                        message.textContent = '已显示全部案例';
+                        loadMoreBtn.parentNode.appendChild(message);
+                        
+                        // 3秒后移除按钮
+                        setTimeout(() => {
+                            loadMoreBtn.style.display = 'none';
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+            
+            // 案例卡片悬停效果增强
+            caseItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const link = item.querySelector('.case-link');
+                    if (link) {
+                        link.style.gap = '12px';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    const link = item.querySelector('.case-link');
+                    if (link) {
+                        link.style.gap = '8px';
+                    }
+                });
+            });
+            
+            // 滚动动画
+            function animateCaseItems() {
+                caseItems.forEach(item => {
+                    const itemPosition = item.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (itemPosition < screenPosition) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // 初始设置
+            caseItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // 监听滚动
+            window.addEventListener('scroll', animateCaseItems);
+            
+            // 初始化检查
+            setTimeout(animateCaseItems, 100);
+        });
+    </script>
+</body>
+</html>

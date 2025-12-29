@@ -217,3 +217,97 @@ window.addEventListener('load', () => {
         }, 1000);
     }, 100);
 });
+
+// 案例页面特定功能
+if (window.location.pathname.includes('cases.html')) {
+    // 案例筛选功能
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const caseItems = document.querySelectorAll('.case-item');
+    
+    if (filterBtns.length > 0 && caseItems.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有按钮的active类
+                filterBtns.forEach(b => b.classList.remove('active'));
+                
+                // 为当前按钮添加active类
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // 筛选案例
+                caseItems.forEach(item => {
+                    const categories = item.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        item.style.display = 'block';
+                        // 添加淡入动画
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        // 添加淡出动画
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+    
+    // 加载更多功能
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 加载中...';
+            this.disabled = true;
+            
+            // 模拟加载延迟
+            setTimeout(() => {
+                // 这里可以添加AJAX请求来加载更多案例
+                // 暂时显示提示信息
+                this.innerHTML = '<i class="fas fa-check"></i> 已加载全部案例';
+                this.style.opacity = '0.5';
+                this.style.cursor = 'default';
+                
+                // 显示加载完成的消息
+                const message = document.createElement('div');
+                message.className = 'load-complete';
+                message.style.cssText = `
+                    text-align: center;
+                    color: var(--brand-purple-light);
+                    margin-top: 20px;
+                    font-size: 14px;
+                `;
+                message.textContent = '已显示全部案例';
+                
+                this.parentNode.appendChild(message);
+                
+                // 3秒后隐藏按钮
+                setTimeout(() => {
+                    this.style.display = 'none';
+                }, 3000);
+            }, 1500);
+        });
+    }
+}
+
+// 平滑滚动到筛选器位置
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const filterSection = document.querySelector('.case-filter');
+        if (filterSection && window.innerWidth <= 768) {
+            // 在移动端点击筛选后，平滑滚动到筛选器位置
+            setTimeout(() => {
+                filterSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300);
+        }
+    });
+});
