@@ -4,10 +4,726 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>我们的服务 | PurpleWall 上海紫墙</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础变量定义 */
+        :root {
+            /* 品牌色系 */
+            --brand-purple: #7756A0;
+            --brand-purple-light: #9D7BCB;
+            --brand-purple-dark: #120b1a;
+            --brand-accent: #9333ea;
+            
+            /* 文本色系 */
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-dark: #333333;
+            --text-light: #666666;
+            
+            /* 背景色系 */
+            --bg-dark: #120b1a;
+            --bg-card: #ffffff;
+            --bg-section: #120b1a;
+            --bg-footer: #111111;
+            
+            /* 边框和阴影 */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.2);
+            
+            /* 间距和尺寸 */
+            --radius: 12px;
+            --maxw: 1280px;
+            --pad-x: 80px;
+            
+            /* 过渡效果 */
+            --transition: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans CJK SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-section);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.subpage {
+            background: #ffffff;
+            color: var(--text-dark);
+        }
+
+        /* 通用容器 */
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            width: 100%;
+        }
+
+        /* 通用工具类 */
+        .text-center {
+            text-align: center;
+        }
+
+        /* 按钮样式 */
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--brand-purple);
+        }
+
+        .btn-primary:hover {
+            background: var(--brand-purple-light);
+            color: var(--text-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--brand-purple-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--brand-purple);
+            color: var(--text-primary);
+            transform: translateY(-3px);
+        }
+
+        /* 子页面按钮 */
+        .subpage .btn-primary, .subpage .btn-secondary {
+            color: var(--brand-purple);
+            border: 1px solid var(--brand-purple);
+        }
+
+        .subpage .btn-primary {
+            background: transparent;
+        }
+
+        .subpage .btn-secondary {
+            background: var(--brand-purple);
+            color: var(--text-primary);
+        }
+
+        .subpage .btn-primary:hover {
+            background: var(--brand-purple);
+            color: var(--text-primary);
+        }
+
+        .subpage .btn-secondary:hover {
+            background: var(--brand-purple-light);
+            border-color: var(--brand-purple-light);
+        }
+
+        /* 标题样式 */
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: 6px;
+        }
+
+        .section-title2 {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            letter-spacing: 2px;
+        }
+
+        /* 导航栏 - 优化后的样式 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            transition: var(--transition-slow);
+            padding: 18px 0;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand img {
+            height: 32px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .brand:hover img {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-purple-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 移动端导航优化 */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 30px;
+                gap: 18px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-btn {
+                display: flex;
+            }
+            
+            .nav-link {
+                font-size: 18px;
+                padding: 15px 0;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* 为所有子页面导航栏设置黑色背景 */
+        body.subpage .header {
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+        }
+
+        /* 确保即使在未滚动状态下，子页面导航栏也是黑色背景 */
+        body.subpage .header:not(.scrolled) {
+            background: rgba(0, 0, 0, 0.95);
+        }
+    
+        /* 移动端菜单的黑色背景保持不变 */
+        @media (max-width: 992px){
+            body.subpage .nav-links{
+                background: rgba(0, 0, 0, 0.98) !important
+            }
+        }
+
+        /* 子页面Hero区域 - 使用contact页面的样式和动效 */
+        .sub-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 400px;
+            overflow: hidden;
+            margin-top: 50px;
+            background: var(--bg-dark);
+        }
+
+        .sub-hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sub-hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: brightness(0.7) contrast(1.1);
+        }
+
+        .sub-hero-shade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.4) 0%,
+                rgba(18, 11, 26, 0.6) 50%,
+                rgba(18, 11, 26, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .sub-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .sub-hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+        }
+
+        .sub-hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 内容区域样式 */
+        .section {
+            padding: 100px 0;
+            background: var(--bg-section);
+        }
+
+        .subpage .section {
+            background: #ffffff;
+            color: var(--text-dark);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .subpage .card {
+            background: #f8f8f8;
+            color: var(--text-dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--brand-purple-light);
+            box-shadow: 0 15px 40px rgba(119, 86, 160, 0.2);
+        }
+
+        .subpage .card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card .h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .subpage .card .h3 {
+            color: var(--text-dark);
+        }
+
+        .card .small {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .subpage .card .small {
+            color: var(--text-dark);
+        }
+
+        /* 图片卡片样式 */
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: calc(var(--radius) - 4px);
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 两列布局 */
+        .cards[data-cols="2"] {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 三列布局 */
+        .cards[data-cols="3"] {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* 服务页面样式 */
+        .services-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(22, 22, 22, 0.08);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--brand-purple);
+            transition: var(--transition);
+        }
+
+        .subpage .service-item {
+            background: #f8f8f8;
+            border-left: 4px solid var(--brand-purple);
+        }
+
+        .service-item:hover {
+            background: rgba(22, 22, 22, 0.08);
+            transform: translateX(10px);
+        }
+
+        .subpage .service-item:hover {
+            background: #f0f0f0;
+        }
+
+        .service-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--brand-purple-light);
+            min-width: 80px;
+            opacity: 0.7;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-content h3 {
+            font-size: 24px;
+            color: var(--brand-purple-light);
+            margin-bottom: 10px;
+        }
+
+        .subpage .service-content h3 {
+            color: var(--brand-purple);
+        }
+
+        .service-content p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .subpage .service-content p {
+            color: var(--text-dark);
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--bg-footer);
+            padding: 80px 0 40px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .footer-brand {
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 32px;
+            width: auto;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .footer-slogan {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            color: var(--brand-purple-light);
+            text-decoration: none;
+            font-size: 16px;
+            transition: var(--transition);
+            padding: 5px 0;
+        }
+
+        .footer-link:hover,
+        .footer-link.active {
+            color: var(--text-primary);
+        }
+
+        .footer-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            :root {
+                --pad-x: 40px;
+            }
+            
+            .sub-hero-title {
+                font-size: 42px;
+            }
+            
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            :root {
+                --pad-x: 20px;
+            }
+            
+            .sub-hero {
+                height: 40vh;
+                min-height: 350px;
+            }
+            
+            .sub-hero-title {
+                font-size: 36px;
+            }
+            
+            .sub-hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer .row {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .fnav {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sub-hero {
+                height: 35vh;
+                min-height: 300px;
+                margin-top: 70px;
+            }
+            
+            .sub-hero-title {
+                font-size: 28px;
+            }
+            
+            .sub-hero-subtitle {
+                font-size: 15px;
+            }
+            
+            .service-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .service-number {
+                margin-bottom: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sub-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            
+            .sub-hero-title {
+                font-size: 24px;
+            }
+            
+            .sub-hero-subtitle {
+                font-size: 14px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="subpage">
     <!-- 导航栏 - 与主页统一 -->
     <header class="header" id="header">
         <div class="container">
@@ -29,15 +745,15 @@
         </div>
     </header>
     
-    <body class="subpage"></body>
-    <!-- 子页面Hero区域 -->
+    <!-- 子页面Hero区域 - 使用contact页面的样式和动效 -->
     <section class="sub-hero">
-        <div class="img">
+        <div class="sub-hero-img">
             <img src="assets/1803.jpg" alt="我们的服务">
         </div>
-        <div class="shade"></div>
-        <div class="copy">
-            <h1 class="h1">我们的服务</h1>
+        <div class="sub-hero-shade"></div>
+        <div class="sub-hero-content container">
+            <h1 class="sub-hero-title">我们的服务</h1>
+            <p class="sub-hero-subtitle">提供从概念创意到施工落地的全流程解决方案</p>
         </div>
     </section>
 
@@ -111,19 +827,19 @@
         </div>
     </main>
 
-    <!-- 页脚 - 与主页统一 -->
+    <!-- 页脚 - 使用contact页面的页脚代码 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
-                    <p class="footer-slogan">您见未来，我执匠心</p>
+                    <p class="footer-slogan">我执匠心 · 您见未来</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html" class="footer-link">首页</a>
-                    <a href="services.html" class="footer-link active">我们的服务</a>
+                    <a href="services.html" class="footer-link active">服务</a>
                     <a href="cases.html" class="footer-link">案例</a>
-                    <a href="about.html" class="footer-link">关于我们</a>
+                    <a href="about.html" class="footer-link">关于</a>
                     <a href="contact.html" class="footer-link">联系</a>
                 </div>
                 <div class="footer-info">
@@ -134,7 +850,154 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 导航栏滚动效果
+            const header = document.getElementById('header');
+            const setScroll = () => {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            };
+            
+            setScroll();
+            window.addEventListener('scroll', setScroll);
+            
+            // 2. 移动端导航菜单
+            const menuBtn = document.getElementById('menuBtn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuBtn.classList.toggle('active');
+                    
+                    // 切换菜单图标
+                    const icon = menuBtn.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // 点击导航链接后关闭菜单（移动端）
+                const navLinksItems = navLinks.querySelectorAll('a');
+                navLinksItems.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 992) {
+                            navLinks.classList.remove('active');
+                            const icon = menuBtn.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+            
+            // 3. 当前页面导航链接高亮
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinkElements = document.querySelectorAll('.nav-link');
+            
+            navLinkElements.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === 'index.html' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 4. 页脚链接高亮
+            const footerLinks = document.querySelectorAll('.footer-link');
+            footerLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === 'index.html' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 5. 窗口大小变化处理
+            window.addEventListener('resize', () => {
+                // 如果窗口变大，隐藏移动端菜单
+                if (window.innerWidth > 992 && navLinks) {
+                    navLinks.classList.remove('active');
+                    if (menuBtn) {
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+            
+            // 6. 页面元素动画
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.service-item');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateX(0)';
+                    }
+                });
+            }
+            
+            // 设置初始状态
+            const animatedElements = document.querySelectorAll('.service-item');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateX(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // 监听滚动
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // 初始化检查
+            setTimeout(animateOnScroll, 100);
+        });
 
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
 </body>
 </html>
