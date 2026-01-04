@@ -230,7 +230,7 @@
         .nav-link {
             color: var(--brand-purple-light);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 16px;
             padding: 8px 0;
             position: relative;
@@ -242,7 +242,7 @@
         .nav-link:hover,
         .nav-link.active {
             color: var(--text-primary);
-            font-weight: 300;
+            font-weight: 700;
             font-size: 16px;
         }
 
@@ -343,9 +343,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(18, 11, 26, 0.6) 50%,
-                rgba(18, 11, 26, 0.8) 100%);
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(18, 11, 26, 0.25) 50%,
+                rgba(18, 11, 26, 0.4) 100%);
             z-index: 1;
         }
 
@@ -360,7 +360,7 @@
         }
 
         .hero-title {
-            font-size: 72px;
+            font-size: 88px;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 24px;
@@ -395,30 +395,6 @@
             animation: fadeInUp 1s ease 0.5s forwards;
         }
 
-        .hero-button {
-            display: inline-block;
-            padding: 16px 40px;
-            background: rgba(192, 192, 192, 0.192);
-            backdrop-filter: blur(10px);
-            color: var(--brand-purple-light);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 16px;
-            border: 1px solid transparent;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease 0.7s forwards;
-        }
-
-        .hero-button:hover {
-            background: transparent;
-            border-color: var(--text-secondary);
-            color: var(--text-secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
-        }
 
         @keyframes fadeInUp {
             to {
@@ -678,7 +654,7 @@
         }
 
         /* 响应式设计 - 修改跑马灯响应式 */
-        @media (max-width: 1024px) {
+        @media (max-width: 996px) {
             :root {
                 --pad-x: 40px;
             }
@@ -913,7 +889,6 @@
                 <h1 class="hero-title">全案展陈・匠作于心</h1>
                 <div class="hero-divider"></div>
                 <p class="hero-subtitle">从创想落地  以匠心赴您所期</p>
-                <a href="cases.html" class="hero-button">查看案例</a>
             </div>
         </div>
     </section>
