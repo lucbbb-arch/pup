@@ -278,7 +278,7 @@
         }
 
         /* 移动端导航优化 */
-        @media (max-width: 992px) {
+        @media (max-width: 420px) {
             .nav-links {
                 display: none;
                 position: fixed;
@@ -288,7 +288,7 @@
                 background: rgba(0, 0, 0, 0.98);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
-                padding: 30px;
+                padding: 25px 20px;
                 gap: 18px;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 z-index: 999;
@@ -352,7 +352,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.4;
+            opacity: 0.8;
             filter: brightness(0.7) contrast(1.1);
         }
 
@@ -363,9 +363,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(18, 11, 26, 0.6) 50%,
-                rgba(18, 11, 26, 0.8) 100%);
+                rgba(0, 0, 0, 0.05) 0%,
+                rgba(18, 11, 26, 0.2) 50%,
+                rgba(18, 11, 26, 0.3) 100%);
             z-index: 1;
         }
 
@@ -421,6 +421,7 @@
 
         .cards {
             display: grid;
+            padding: 60px;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 60px;
@@ -454,7 +455,7 @@
 
         .card .h3 {
             font-size: 24px;
-            font-weight: 600;
+            font-weight: 200;
             color: var(--text-primary);
             margin-bottom: 15px;
             letter-spacing: 2px;
@@ -498,62 +499,6 @@
         /* 三列布局 */
         .cards[data-cols="3"] {
             grid-template-columns: repeat(3, 1fr);
-        }
-
-        /* 案例详情页样式 */
-        .case-detail {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .case-meta-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .subpage .case-meta-details {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .meta-item {
-            text-align: center;
-            flex: 1;
-        }
-
-        .meta-item .label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .subpage .meta-item .label {
-            color: var(--text-dark);
-        }
-
-        .meta-item .value {
-            font-size: 18px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .subpage .meta-item .value {
-            color: var(--text-dark);
-        }
-
-        .case-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 60px;
-        }
-
-        .subpage .case-description {
-            color: var(--text-dark);
         }
 
         /* 页脚 */
@@ -653,7 +598,7 @@
             }
             
             .cards {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .footer .row {
@@ -671,6 +616,10 @@
                 height: 35vh;
                 min-height: 300px;
                 margin-top: 70px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
             }
             
             .sub-hero-title {
@@ -754,6 +703,20 @@
     <!-- 主要内容区域 -->
     <main class="section">
         <div class="container">
+            <div class="case-detail">
+                <div class="case-description">
+                    <p>PurpleWall 上海紫墙成立于2015年，专注于高端品牌展示道具的全案服务。我们汇聚了来自设计、工程、制造和项目管理领域的专业人才，致力于为全球奢侈品牌提供从创意概念到最终落地的完整解决方案。</p>
+                    
+                    <p>我们的核心优势在于全链条服务能力。不同于传统供应商只负责单一环节，我们能够整合设计、打样、生产、物流、安装和维护各个环节，确保项目的高品质和一致性。这种一体化服务模式使我们能够更深入地理解品牌需求，更高效地响应市场变化。</p>
+                    
+                    <p>多年来，我们与众多国际知名品牌建立了长期合作关系，服务网络覆盖亚洲、欧洲和北美主要市场。每个项目对我们来说都是一次全新的挑战和创作，我们以匠人精神对待每一个细节，致力于为客户创造卓越的品牌体验空间。</p>
+                </div>
+                
+                <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <img src="assets/wechat_2025-08-11_125908_245.jpg" alt="PurpleWall团队" style="width:100%;height:auto;display:block;">
+                </div>
+            </div>
+
             <div class="cards">
                 <div class="card">
                     <div class="h3">创意到落地</div>
@@ -766,20 +729,6 @@
                 <div class="card">
                     <div class="h3">全球协同</div>
                     <div class="small">我们在全球范围内建立高效协作网络，实现跨区域物流与安装的无缝对接，确保项目无论在世界何处都能完美落地。</div>
-                </div>
-            </div>
-            
-            <div class="case-detail">
-                <div class="case-description">
-                    <p>PurpleWall 上海紫墙成立于2015年，专注于高端品牌展示道具的全案服务。我们汇聚了来自设计、工程、制造和项目管理领域的专业人才，致力于为全球奢侈品牌提供从创意概念到最终落地的完整解决方案。</p>
-                    
-                    <p>我们的核心优势在于全链条服务能力。不同于传统供应商只负责单一环节，我们能够整合设计、打样、生产、物流、安装和维护各个环节，确保项目的高品质和一致性。这种一体化服务模式使我们能够更深入地理解品牌需求，更高效地响应市场变化。</p>
-                    
-                    <p>多年来，我们与众多国际知名品牌建立了长期合作关系，服务网络覆盖亚洲、欧洲和北美主要市场。每个项目对我们来说都是一次全新的挑战和创作，我们以匠人精神对待每一个细节，致力于为客户创造卓越的品牌体验空间。</p>
-                </div>
-                
-                <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-                    <img src="assets/wechat_2025-08-11_125908_245.jpg" alt="PurpleWall团队" style="width:100%;height:auto;display:block;">
                 </div>
             </div>
         </div>
