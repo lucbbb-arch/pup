@@ -269,18 +269,18 @@
         }
 
         /* 移动端导航优化 */
-        @media (max-width: 992px) {
+        @media (max-width: 420px) {
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 80px;
-                left: 0;
+                left: 80;
                 right: 0;
                 background: rgba(0, 0, 0, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 30px;
-                gap: 18px;
+                backdrop-filter: blur(1px);
+                flex-direction: row;
+                padding: 10px;
+                gap: 8px;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 z-index: 999;
             }
@@ -315,13 +315,13 @@
         }
     
         /* 移动端菜单的黑色背景保持不变 */
-        @media (max-width: 992px){
+        @media (max-width: 420px){
             body.subpage .nav-links{
                 background: rgba(0, 0, 0, 0.98) !important
             }
         }
 
-        /* 子页面Hero区域 - 与contact统一 */
+        /* 子页面Hero区域  */
         .sub-hero {
             position: relative;
             height: 50vh;
@@ -410,7 +410,7 @@
         }
 
         .bg-light {
-            background: #f8f8f8;
+            background:  #ffffff;
         }
 
         /* 案例统计数据 */
@@ -632,7 +632,7 @@
         .footer-links {
             display: flex;
             gap: 28px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
         }
 
@@ -675,7 +675,7 @@
         }
 
         .testimonial-card {
-            background: #f8f8f8;
+            background:  #f7f7f7;
             border-radius: var(--radius);
             padding: 40px 30px;
             text-align: center;
@@ -712,7 +712,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--brand-purple);
+            background: var(--brand-purple-dark);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -738,7 +738,7 @@
         }
 
         /* 响应式设计 */
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
             :root {
                 --pad-x: 40px;
             }
@@ -752,11 +752,11 @@
             }
             
             .testimonials {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .sub-hero {
                 height: 35vh;
                 min-height: 250px;
@@ -789,7 +789,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 420px) {
             :root {
                 --pad-x: 20px;
             }
@@ -840,40 +840,9 @@
                 align-items: center;
             }
         }
-
-        @media (max-width: 480px) {
-            .sub-hero {
-                height: 25vh;
-                min-height: 180px;
-            }
-            
-            .sub-hero-title {
-                font-size: 24px;
-            }
-            
-            .sub-hero-subtitle {
-                font-size: 14px;
-            }
-            
-            .case-image {
-                height: 220px;
-            }
-            
-            .case-stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .stat-item {
-                min-width: 100%;
-            }
-            
-            .case-info {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
+
 <body class="subpage">
     <!-- 导航栏 -->
     <header class="header" id="header">
@@ -1183,7 +1152,7 @@
                 const navLinksItems = navLinks.querySelectorAll('a');
                 navLinksItems.forEach(link => {
                     link.addEventListener('click', () => {
-                        if (window.innerWidth <= 992) {
+                        if (window.innerWidth <= 420) {
                             navLinks.classList.remove('active');
                             const icon = menuBtn.querySelector('i');
                             icon.classList.remove('fa-times');
@@ -1222,7 +1191,7 @@
             // 5. 窗口大小变化处理
             window.addEventListener('resize', () => {
                 // 如果窗口变大，隐藏移动端菜单
-                if (window.innerWidth > 992 && navLinks) {
+                if (window.innerWidth > 420 && navLinks) {
                     navLinks.classList.remove('active');
                     if (menuBtn) {
                         const icon = menuBtn.querySelector('i');

@@ -282,18 +282,18 @@
         }
 
         /* 移动端导航优化 */
-        @media (max-width: 992px) {
+        @media (max-width: 420px) {
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 80px;
-                left: 0;
+                left: 80;
                 right: 0;
                 background: rgba(0, 0, 0, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 30px;
-                gap: 18px;
+                backdrop-filter: blur(1px);
+                flex-direction: row;
+                padding: 10px;
+                gap: 8px;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 z-index: 999;
             }
@@ -354,13 +354,13 @@
             z-index: 2;
             text-align: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         .hero-title {
-            font-size: 64px;
+            font-size: 72px;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 24px;
@@ -437,7 +437,7 @@
         /* 服务区域 - 白色卡片样式 */
         .services-section {
             padding: 160px 0;
-            background: var(--bg-card);
+            background: var(--bg-dark);
         }
 
         .services-grid {
@@ -457,10 +457,6 @@
             border: 1px solid var(--border-light);
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
 
         .service-icon {
             width: 70px;
@@ -471,15 +467,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 500;
             margin: 0 auto 25px;
             transition: var(--transition);
-        }
-
-        .service-card:hover .service-icon {
-            background: var(--brand-purple-light);
-            transform: scale(1.1);
         }
 
         .service-description {
@@ -491,28 +482,36 @@
         /* 精选案例区域 */
         .cases-section {
             padding: 100px 0;
-            background: var(--bg-section);
+            background: var(--bg-dark);
         }
 
-        /* 案例跑马灯 */
+        /* 案例跑马灯 - 修改后样式 */
         .marquee-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            margin: 100px 0;
+            margin: 60px 0;
         }
 
         .marquee-track {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             width: max-content;
             animation: marqueeScroll 30s linear infinite;
         }
 
         .marquee-item {
             flex: 0 0 400px;
-            height: 280px;
+            height: 320px; /* 增加高度以容纳标题 */
             border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .marquee-img-container {
+            height: 240px; /* 图片区域高度 */
             overflow: hidden;
             position: relative;
         }
@@ -556,6 +555,21 @@
             opacity: 1;
         }
 
+        /* 新增：案例标题样式 */
+        .case-title {
+            height: 40px; /* 标题区域高度 */
+            padding: 8px 30px;
+            background: var(--bg-dark);
+            color: var(--text-secondary); /* 灰色文字 */
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
         @keyframes marqueeScroll {
             0% {
                 transform: translateX(0);
@@ -567,8 +581,7 @@
 
         /* Logo墙区域 */
         .logo-wall-section {
-            padding: 80px 0;
-            background: var(--bg-section);
+            padding: 60px 0;
             margin-top: 60px;
         }
 
@@ -581,10 +594,10 @@
         }
 
         .logo-wall-subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-secondary);
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .logo-wall {
@@ -605,7 +618,7 @@
         /* 页脚 */
         .footer {
             background: var(--bg-footer);
-            padding: 80px 0 40px;
+            padding: 60px 0 40px;
             margin-top: 100px;
         }
 
@@ -664,559 +677,8 @@
             line-height: 1.6;
         }
 
-        /* 子页面Hero区域 */
-        .sub-hero {
-            position: relative;
-            height: 60vh;
-            min-height: 500px;
-            overflow: hidden;
-            margin-top: 50px;
-            background: var(--bg-dark);
-        }
-
-        .sub-hero .img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .sub-hero .img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            filter: brightness(0.7) contrast(1.1);
-        }
-
-        .sub-hero .shade {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0.6) 0%,
-                rgba(18, 11, 26, 0.8) 50%,
-                rgba(18, 11, 26, 0.95) 100%);
-            z-index: 1;
-        }
-
-        .sub-hero .copy {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .sub-hero .h1 {
-            font-size: 64px;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease 0.3s forwards;
-            letter-spacing: 4px;
-        }
-
-        /* 内容区域样式 */
-        .section {
-            padding: 100px 0;
-            background: var(--bg-section);
-        }
-
-        .subpage .section {
-            background: #ffffff;
-            color: var(--text-dark);
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
-
-        .subpage .card {
-            background: #f8f8f8;
-            color: var(--text-dark);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--brand-purple-light);
-            box-shadow: 0 15px 40px rgba(119, 86, 160, 0.2);
-        }
-
-        .subpage .card:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .card .h3 {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .subpage .card .h3 {
-            color: var(--text-dark);
-        }
-
-        .card .small {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .subpage .card .small {
-            color: var(--text-dark);
-        }
-
-        /* 图片卡片样式 */
-        .card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: calc(var(--radius) - 4px);
-            transition: transform 0.5s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.03);
-        }
-
-        /* 两列布局 */
-        .cards[data-cols="2"] {
-            grid-template-columns: repeat(2, 1fr);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* 三列布局 */
-        .cards[data-cols="3"] {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        /* 案例统计数据 */
-        .case-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 30px;
-            min-width: 180px;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--brand-purple-light);
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* 案例筛选器 */
-        .case-filter {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .filter-btn {
-            padding: 10px 25px;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-secondary);
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--brand-purple);
-            border-color: var(--brand-purple);
-            color: var(--text-primary);
-        }
-
-        /* 案例网格布局 */
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .case-item {
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .subpage .case-item {
-            background: #f8f8f8;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .case-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--brand-purple-light);
-            box-shadow: 0 20px 60px rgba(119, 86, 160, 0.3);
-        }
-
-        .subpage .case-item:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .case-image {
-            width: 100%;
-            height: 280px;
-            overflow: hidden;
-        }
-
-        .case-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .case-item:hover .case-image img {
-            transform: scale(1.05);
-        }
-
-        .case-info {
-            padding: 25px;
-        }
-
-        .case-category {
-            display: inline-block;
-            padding: 6px 15px;
-            background: rgba(119, 86, 160, 0.2);
-            color: var(--brand-purple-light);
-            font-size: 12px;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .subpage .case-category {
-            background: rgba(119, 86, 160, 0.1);
-            color: var(--brand-purple);
-        }
-
-        .case-title {
-            font-size: 22px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .subpage .case-title {
-            color: var(--text-dark);
-        }
-
-        .case-desc {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .subpage .case-desc {
-            color: var(--text-dark);
-        }
-
-        .case-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .subpage .case-meta {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .case-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .subpage .case-date {
-            color: var(--text-dark);
-        }
-
-        .case-link {
-            color: var(--brand-purple-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .subpage .case-link {
-            color: var(--brand-purple);
-        }
-
-        .case-link:hover {
-            color: var(--text-primary);
-            gap: 12px;
-        }
-
-        .subpage .case-link:hover {
-            color: var(--brand-purple-light);
-        }
-
-        /* 加载更多按钮 */
-        .load-more {
-            text-align: center;
-            margin: 60px 0 40px;
-        }
-
-        /* 案例详情页样式 */
-        .case-detail {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .case-meta-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .subpage .case-meta-details {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .meta-item {
-            text-align: center;
-            flex: 1;
-        }
-
-        .meta-item .label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .subpage .meta-item .label {
-            color: var(--text-dark);
-        }
-
-        .meta-item .value {
-            font-size: 18px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .subpage .meta-item .value {
-            color: var(--text-dark);
-        }
-
-        .case-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 60px;
-        }
-
-        .subpage .case-description {
-            color: var(--text-dark);
-        }
-
-        /* 服务页面样式 */
-        .services-list {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .service-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 50px;
-            padding: 30px;
-            background: rgba(22, 22, 22, 0.08);
-            border-radius: var(--radius);
-            border-left: 4px solid var(--brand-purple);
-            transition: var(--transition);
-        }
-
-        .subpage .service-item {
-            background: #f8f8f8;
-            border-left: 4px solid var(--brand-purple);
-        }
-
-        .service-item:hover {
-            background: rgba(22, 22, 22, 0.08);
-            transform: translateX(10px);
-        }
-
-        .subpage .service-item:hover {
-            background: #f0f0f0;
-        }
-
-        .service-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--brand-purple-light);
-            min-width: 80px;
-            opacity: 0.7;
-        }
-
-        .service-content {
-            flex: 1;
-        }
-
-        .service-content h3 {
-            font-size: 24px;
-            color: var(--brand-purple-light);
-            margin-bottom: 10px;
-        }
-
-        .subpage .service-content h3 {
-            color: var(--brand-purple);
-        }
-
-        .service-content p {
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        .subpage .service-content p {
-            color: var(--text-dark);
-        }
-
-        /* 联系表单样式 */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .subpage .contact-form {
-            background: #f8f8f8;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--brand-purple-light);
-            font-weight: 500;
-        }
-
-        .subpage .form-group label {
-            color: var(--brand-purple);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: var(--brand-purple-light);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .subpage .form-group input,
-        .subpage .form-group textarea,
-        .subpage .form-group select {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            color: var(--text-dark);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--brand-purple-light);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .subpage .form-group input:focus,
-        .subpage .form-group textarea:focus,
-        .subpage .form-group select:focus {
-            border-color: var(--brand-purple);
-            background: #ffffff;
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .form-submit {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 1200px) {
+        /* 响应式设计 - 修改跑马灯响应式 */
+        @media (max-width: 1024px) {
             :root {
                 --pad-x: 40px;
             }
@@ -1232,9 +694,25 @@
             .case-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            /* 跑马灯响应式 */
+            .marquee-item {
+                flex: 0 0 400px;
+                height: 300px;
+            }
+            
+            .marquee-img-container {
+                height: 300px;
+            }
+            
+            .case-title {
+                height: 60px;
+                padding: 12px 15px;
+                font-size: 15px;
+            }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             :root {
                 --pad-x: 20px;
             }
@@ -1252,13 +730,24 @@
             }
             
             .services-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 2fr 2fr;
                 gap: 12px;
             }
             
+            /* 跑马灯响应式 */
             .marquee-item {
                 flex: 0 0 300px;
-                height: 200px;
+                height: 240px;
+            }
+            
+            .marquee-img-container {
+                height: 180px;
+            }
+            
+            .case-title {
+                height: 50px;
+                padding: 10px 12px;
+                font-size: 14px;
             }
             
             .footer-links {
@@ -1299,11 +788,11 @@
             
             .filter-btn {
                 padding: 8px 20px;
-                font-size: 14px;
+                font-size: 15px;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 420px) {
             .hero-title {
                 font-size: 36px;
             }
@@ -1313,9 +802,20 @@
                 font-size: 14px;
             }
             
+            /* 跑马灯响应式 */
             .marquee-item {
-                flex: 0 0 250px;
-                height: 180px;
+                flex: 0 0 280px;
+                height: 220px;
+            }
+            
+            .marquee-img-container {
+                height: 170px;
+            }
+            
+            .case-title {
+                height: 40px;
+                padding: 8px 10px;
+                font-size: 13px;
             }
             
             .nav-link {
@@ -1375,64 +875,9 @@
                 font-size: 36px;
             }
         }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 32px;
-            }
-            
-            .marquee-item {
-                flex: 0 0 220px;
-                height: 160px;
-            }
-            
-            .nav-link {
-                font-size: 16px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .sub-hero {
-                height: 35vh;
-                min-height: 250px;
-            }
-            
-            .sub-hero .h1 {
-                font-size: 28px;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .contact-form {
-                padding: 30px 20px;
-            }
-            
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                padding: 12px;
-            }
-            
-            .case-image {
-                height: 220px;
-            }
-            
-            .case-stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .stat-item {
-                min-width: 100%;
-            }
-        }
     </style>
 </head>
+
 <body class="home">
 
     <!-- 导航栏 -->
@@ -1518,44 +963,62 @@
             </div>
         </div>
 
-        <!-- 案例跑马灯 -->
+        <!-- 案例跑马灯 - 修改后的版本 -->
         <div class="marquee-container">
             <div class="marquee-track">
                 <div class="marquee-item">
-                    <a href="case-a.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-a.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">高端零售展具 · 品牌空间重塑</div>
                 </div>
                 <div class="marquee-item">
-                    <a href="case-b.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-b.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
                 </div>
                 <div class="marquee-item">
-                    <a href="case-c.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-c.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">智能展台系统 · 可复用模块化设计</div>
                 </div>
                 <div class="marquee-item">
-                    <a href="case-d.html" class="case-link">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-d.html" class="case-link">
+                            <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
                 </div>
                 <div class="marquee-item">
-                    <a href="case-e.html" class="case-link">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-e.html" class="case-link">
+                            <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
                 </div>
                 <div class="marquee-item">
-                    <a href="case-f.html" class="case-link">
-                        <img src="assets/1803.jpg" alt="案例 F">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
+                    <div class="marquee-img-container">
+                        <a href="case-f.html" class="case-link">
+                            <img src="assets/1803.jpg" alt="案例 F">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">概念店设计 · 品牌文化深度传达</div>
                 </div>
             </div>
         </div>
@@ -1635,7 +1098,7 @@
                 const navLinksItems = navLinks.querySelectorAll('a');
                 navLinksItems.forEach(link => {
                     link.addEventListener('click', () => {
-                        if (window.innerWidth <= 480) {
+                        if (window.innerWidth <= 420) {
                             navLinks.classList.remove('active');
                             const icon = menuBtn.querySelector('i');
                             icon.classList.remove('fa-times');
@@ -1690,7 +1153,7 @@
             
             // 5. 页面元素动画
             function animateOnScroll() {
-                const elements = document.querySelectorAll('.service-card, .case-link');
+                const elements = document.querySelectorAll('.service-card, .marquee-item');
                 
                 elements.forEach(element => {
                     const elementPosition = element.getBoundingClientRect().top;
@@ -1704,7 +1167,7 @@
             }
             
             // 设置初始状态
-            const animatedElements = document.querySelectorAll('.service-card, .case-link');
+            const animatedElements = document.querySelectorAll('.service-card, .marquee-item');
             animatedElements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(20px)';
@@ -1717,22 +1180,11 @@
             // 初始化检查
             setTimeout(animateOnScroll, 100);
             
-            // 6. Logo墙悬停效果
-            const logoWall = document.querySelector('.logo-wall');
-            if (logoWall) {
-                logoWall.addEventListener('mouseenter', () => {
-                    logoWall.style.transform = 'scale(1)';
-                });
-                
-                logoWall.addEventListener('mouseleave', () => {
-                    logoWall.style.transform = 'scale(1)';
-                });
-            }
             
             // 7. 窗口大小变化处理
             window.addEventListener('resize', () => {
                 // 如果窗口变大，隐藏移动端菜单
-                if (window.innerWidth > 480 && navLinks) {
+                if (window.innerWidth > 420 && navLinks) {
                     navLinks.classList.remove('active');
                     if (menuBtn) {
                         const icon = menuBtn.querySelector('i');
