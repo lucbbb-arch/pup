@@ -441,7 +441,7 @@
         .footer {
             background: var(--bg-footer);
             padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(40px, 5vw, 50px);
+            margin-top: clamp(60px, 5vw, 50px);
         }
         .footer-content {
             display: flex;
@@ -464,14 +464,14 @@
         }
         .footer-links {
             display: flex;
-            gap: clamp(15px, 2vw, 28px);
+            gap: clamp(40px, 2vw, 30px);
             flex-wrap: nowrap;
             justify-content: center;
         }
         .footer-link {
             color: var(--brand-purple-light);
             text-decoration: none;
-            font-size: clamp(14px, 1.5vw, 16px);
+            font-size: clamp(16px, 1.5vw, 16px);
             transition: var(--transition);
             padding: 5px 0;
         }
@@ -512,7 +512,7 @@
                 flex: 0 0 clamp(200px, 40vw, 250px);
                 height: clamp(220px, 45vw, 280px);
             }
-            .footer-links { flex-direction: row; }
+            .footer-links { flex-direction: row;gap: 30px; }
         }
         
         /* 小手机 */
@@ -520,7 +520,7 @@
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 80px; left: 0; right: 0;
+                top: 80px; left: 20; right: 0;
                 background: rgba(0, 0, 0, 0.98);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
@@ -540,7 +540,29 @@
             }
             .nav-link:last-child { border-bottom: none; }
             .services-grid { grid-template-columns: 1fr; }
-            .footer-links { flex-direction: row; gap: 15px; }
+            .footer-links { flex-direction: row; gap: 12px; }
+            /* 服务区域 - 改为2列 */
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-top: 30px;
+            }
+            
+            .service-card {
+                padding: 25px 15px;
+            }
+            
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .service-description {
+                font-size: 14px;
+                line-height: 1.5;
+            }
         }
 
         /* 横屏手机/小平板优化 */
