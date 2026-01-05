@@ -2,104 +2,58 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 增强的视口设置，解决华为Pad显示问题 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5, user-scalable=yes, viewport-fit=cover">
-    <!-- 针对华为浏览器优化 -->
+    <!-- 优化视口设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="format-detection" content="telephone=no">
     <title>PurpleWall 上海紫墙</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 基础变量定义 */
+        /* ========== 基础定义 ========== */
         :root {
-            /* 品牌色系 */
             --brand-purple: #7756A0;
             --brand-purple-light: #9D7BCB;
             --brand-purple-dark: #120b1a;
-            --brand-accent: #9333ea;
-            
-            /* 文本色系 */
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
             --text-dark: #333333;
             --text-light: #666666;
-            
-            /* 背景色系 */
             --bg-dark: #120b1a;
             --bg-card: #ffffff;
-            --bg-section: #120b1a;
             --bg-footer: #111111;
-            
-            /* 边框和阴影 */
-            --border-color: rgba(255, 255, 255, 0.1);
             --border-light: rgba(0, 0, 0, 0.1);
             --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.12);
             --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.2);
-            
-            /* 间距和尺寸 */
             --radius: 12px;
             --maxw: 1280px;
-            --pad-x: 80px;
-            
-            /* 过渡效果 */
             --transition: all 0.3s ease;
             --transition-slow: all 0.5s ease;
         }
 
-        /* 基础样式重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* ========== 重置与基础 ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        html, body { width: 100%; overflow-x: hidden; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans CJK SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--text-primary);
-            background: var(--bg-section);
+            background: var(--bg-dark);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* 针对华为Pad字体大小优化 */
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
         }
 
-        body.home {
-            background: var(--bg-section);
-        }
-
-        body.subpage {
-            background: #ffffff;
-            color: var(--text-dark);
-        }
-
-        /* 通用容器 */
+        /* ========== 通用样式 ========== */
         .container {
             max-width: var(--maxw);
             margin: 0 auto;
-            padding: 0 var(--pad-x);
-            width: 100%;
+            padding: 0 clamp(20px, 5vw, 80px);
         }
-
-        /* 通用工具类 */
-        .text-center {
-            text-align: center;
-        }
-
-        /* 按钮样式 - 优化触摸区域 */
+        
+        .text-center { text-align: center; }
+        
+        /* 按钮 */
         .btn-primary, .btn-secondary {
             display: inline-flex;
             align-items: center;
@@ -107,232 +61,126 @@
             padding: 14px 32px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: clamp(14px, 1.6vw, 16px);
             text-decoration: none;
             transition: var(--transition);
             cursor: pointer;
             border: none;
             outline: none;
-            /* 增加触摸区域，防止误触 */
             min-height: 48px;
             min-width: 120px;
         }
-
         .btn-primary {
             background: var(--text-primary);
             color: var(--brand-purple);
         }
-
         .btn-primary:hover {
             background: var(--brand-purple-light);
             color: var(--text-primary);
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
         }
-
         .btn-secondary {
             background: transparent;
             color: var(--text-primary);
             border: 1px solid var(--brand-purple-light);
         }
-
         .btn-secondary:hover {
             background: var(--brand-purple);
             color: var(--text-primary);
             transform: translateY(-3px);
         }
 
-        /* 子页面按钮 */
-        .subpage .btn-primary, .subpage .btn-secondary {
-            color: var(--brand-purple);
-            border: 1px solid var(--brand-purple);
-        }
-
-        .subpage .btn-primary {
-            background: transparent;
-        }
-
-        .subpage .btn-secondary {
-            background: var(--brand-purple);
-            color: var(--text-primary);
-        }
-
-        .subpage .btn-primary:hover {
-            background: var(--brand-purple);
-            color: var(--text-primary);
-        }
-
-        .subpage .btn-secondary:hover {
-            background: var(--brand-purple-light);
-            border-color: var(--brand-purple-light);
-        }
-
-        /* 标题样式 */
-        .section-title {
-            font-size: 40px;
+        /* 标题 */
+        .section-title, .section-title2 {
+            font-size: clamp(24px, 4vw, 40px);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2vw, 24px);
             color: var(--text-primary);
-            letter-spacing: 6px;
+            letter-spacing: clamp(3px, 1vw, 6px);
         }
-
-        .section-title2 {
-            font-size: 40px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-            letter-spacing: 6px;
-        }
-
         .section-subtitle {
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             font-weight: 300;
             line-height: 1.8;
             color: var(--text-secondary);
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 40px;
-            letter-spacing: 2px;
+            margin: 0 auto clamp(20px, 3vw, 40px);
+            letter-spacing: clamp(1px, 0.5vw, 2px);
         }
 
-        /* 导航栏 - 优化后的样式 */
+        /* ========== 导航栏 ========== */
         .header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             background: transparent;
             transition: var(--transition-slow);
             padding: 18px 0;
         }
-
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
         }
-
         .nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
         .brand img {
             height: 32px;
             width: auto;
             transition: var(--transition);
         }
-
-        .brand:hover img {
-            opacity: 0.8;
-        }
-
+        .brand:hover img { opacity: 0.8; }
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: clamp(20px, 3vw, 40px);
             align-items: center;
         }
-
         .nav-link {
             color: var(--brand-purple-light);
             text-decoration: none;
             font-weight: 700;
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            /* 增加触摸区域 */
             min-height: 40px;
         }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 16px;
-        }
-
+        .nav-link:hover, .nav-link.active { color: var(--text-primary); }
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
             background: var(--text-primary);
             transition: width 0.3s ease;
         }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-primary);
             font-size: 24px;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
         }
+        .menu-btn:hover { background: rgba(255, 255, 255, 0.1); }
 
-        .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* 移动端导航优化 */
-        @media (max-width: 420px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                z-index: 999;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .menu-btn {
-                display: flex;
-            }
-            
-            .nav-link {
-                font-size: 18px;
-                padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .nav-link:last-child {
-                border-bottom: none;
-            }
-        }
-
-        /* Hero 区域 - 居中布局 */
+        /* ========== Hero区域 ========== */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -341,32 +189,25 @@
             overflow: hidden;
             background: var(--bg-dark);
         }
-
         .hero video {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: center;
             opacity: 1;
             filter: brightness(0.7) contrast(1.1);
         }
-
         .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: linear-gradient(to bottom, 
                 rgba(0, 0, 0, 0.1) 0%,
                 rgba(18, 11, 26, 0.2) 50%,
                 rgba(18, 11, 26, 0.3) 100%);
             z-index: 1;
         }
-
         .hero-content {
             position: relative;
             z-index: 2;
@@ -376,9 +217,8 @@
             margin: 0 auto;
             padding: 0 10px;
         }
-
         .hero-title {
-            font-size: 88px;
+            font-size: clamp(36px, 8vw, 88px);
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 24px;
@@ -388,10 +228,8 @@
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards;
         }
-
         .hero-divider {
-            width: 180px;
-            height: 1px;
+            width: 180px; height: 1px;
             background: var(--brand-purple-light);
             margin: 0 auto 30px;
             border-radius: 1px;
@@ -399,9 +237,8 @@
             transform: scaleX(0);
             animation: scaleIn 0.8s ease 0.3s forwards;
         }
-
         .hero-subtitle {
-            font-size: 16px;
+            font-size: clamp(16px, 1.8vw, 18px);
             line-height: 1.6;
             color: var(--text-secondary);
             margin-bottom: 40px;
@@ -413,625 +250,308 @@
             animation: fadeInUp 1s ease 0.5s forwards;
         }
 
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            to {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-        }
-
-        /* 服务区域 - 白色卡片样式 */
+        /* ========== 服务区域 ========== */
         .services-section {
-            padding: 100px 0;
+            padding: clamp(60px, 10vw, 100px) 0;
             background: var(--bg-dark);
         }
-
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(15px, 2vw, 30px);
+            margin-top: clamp(30px, 4vw, 50px);
         }
-
         .service-card {
             background: var(--bg-card);
             border-radius: var(--radius);
-            padding: 40px 30px;
+            padding: clamp(25px, 3vw, 40px) clamp(20px, 2.5vw, 30px);
             text-align: center;
             box-shadow: var(--shadow-card);
             transition: var(--transition);
             border: 1px solid var(--border-light);
         }
-
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
         }
-
         .service-icon {
-            width: 70px;
-            height: 70px;
+            width: clamp(60px, 5vw, 70px);
+            height: clamp(60px, 5vw, 70px);
             background: var(--brand-purple);
             color: var(--text-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: clamp(24px, 2.5vw, 28px);
             font-weight: 500;
-            margin: 0 auto 25px;
+            margin: 0 auto clamp(15px, 2vw, 25px);
             transition: var(--transition);
         }
-
         .service-card:hover .service-icon {
             background: var(--brand-purple-light);
             transform: rotate(10deg) scale(1.1);
         }
-
-        .service-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
         .service-description {
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             line-height: 1.6;
             color: var(--text-light);
         }
 
-        /* 精选案例区域 */
+        /* ========== 案例区域 ========== */
         .cases-section {
-            padding: 30px 0;
+            padding: clamp(40px, 5vw, 50px) 0;
             background: var(--bg-dark);
         }
+        
+        /* 无缝跑马灯 */
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: clamp(30px, 4vw, 60px) 0;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            gap: clamp(20px, 2.5vw, 30px);
+            width: max-content;
+            animation: marqueeScroll 30s linear infinite;
+            will-change: transform;
+        }
+        .marquee-container:hover .marquee-track { animation-play-state: paused; }
+        
+        .marquee-item {
+            flex: 0 0 clamp(250px, 25vw, 400px);
+            height: clamp(280px, 30vw, 320px);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .marquee-img-container {
+            height: 75%;
+            overflow: hidden;
+            position: relative;
+        }
+        .case-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .case-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .case-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(18, 11, 26, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: clamp(16px, 1.8vw, 18px);
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .case-link:hover img { transform: scale(1.05); }
+        .case-link:hover .case-overlay { opacity: 1; }
+        .case-title {
+            height: 25%;
+            padding: clamp(10px, 1.5vw, 15px) clamp(15px, 2vw, 20px);
+            background: var(--bg-dark);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: clamp(14px, 1.5vw, 16px);
+            font-weight: 300;
+            line-height: 1.4;
+        }
 
-        /* 案例跑马灯 - 无缝循环样式 */
-.marquee-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin: 60px 0;
-    mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-    );
-}
-
-.marquee-track {
-    display: flex;
-    gap: 30px;
-    width: max-content;
-    animation: marqueeScroll 30s linear infinite;
-    will-change: transform;
-}
-
-/* 添加暂停效果 */
-.marquee-container:hover .marquee-track {
-    animation-play-state: paused;
-}
-
-.marquee-item {
-    flex: 0 0 400px;
-    height: 320px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.marquee-img-container {
-    height: 240px;
-    overflow: hidden;
-    position: relative;
-}
-
-.case-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.case-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.case-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(18, 11, 26, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-primary);
-    font-size: 18px;
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.case-link:hover img {
-    transform: scale(1.05);
-}
-
-.case-link:hover .case-overlay {
-    opacity: 1;
-}
-
-.case-title {
-    height: 80px;
-    padding: 15px 20px;
-    background: var(--bg-dark);
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.4;
-}
-
-/* 无缝滚动动画 */
-@keyframes marqueeScroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%); /* 移动到复制内容的一半位置 */
-    }
-}
-
-        /* Logo墙区域 - 网格化设计 */
+        /* ========== Logo墙 ========== */
         .logo-wall-section {
-            padding: 50px 0;
+            padding: clamp(40px, 5vw, 50px) 0;
             background: var(--bg-dark);
         }
-        /* Logo墙区域间距调整 */
-        .logo-wall-subtitle {margin-bottom: 10px;}
-
         .logo-wall-title {
-            font-size: 32px;
+            font-size: clamp(24px, 3vw, 32px);
             font-weight: 700;
             text-align: center;
             margin-bottom: 16px;
             color: var(--text-primary);
         }
-
         .logo-wall-subtitle {
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             color: var(--text-secondary);
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: clamp(20px, 3vw, 30px);
         }
-
-        /* Logo网格容器 */
         .logo-grid {
             display: grid;
+            gap: clamp(10px, 1.5vw, 20px);
             margin: 0 auto;
             max-width: 1200px;
         }
-
-        /* 桌面端：6×5网格 */
         .logo-grid-desktop {
             grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(5, 1fr);
         }
-
-        /* 平板/手机端：3×10网格 */
         .logo-grid-mobile {
             display: none;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(10, 1fr);
         }
-
-        /* Logo网格项 */
         .logo-grid-item {
             background: var(--brand-purple);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: clamp(12px, 1.5vw, 20px);
             transition: var(--transition);
             border: 1px solid var(--brand-purple);
         }
-
         .logo-grid-item:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
             border-color: var(--brand-purple-light);
         }
-
         .logo-grid-item img {
             max-width: 100%;
-            max-height: 60px;
-            width: auto;
-            height: auto;
+            max-height: clamp(40px, 5vw, 60px);
+            width: auto; height: auto;
             filter: brightness(0) invert(0.9);
             transition: var(--transition);
         }
-
         .logo-grid-item:hover img {
             filter: brightness(0) invert(1);
             transform: scale(1.05);
         }
 
-        /* 页脚 */
+        /* ========== 页脚 ========== */
         .footer {
             background: var(--bg-footer);
-            padding: 60px 0 40px;
-            margin-top: 50px;
+            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
+            margin-top: clamp(40px, 5vw, 50px);
         }
-
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: clamp(30px, 4vw, 40px);
         }
-
-        .footer-brand {
-            text-align: center;
-        }
-
+        .footer-brand { text-align: center; }
         .footer-logo {
             height: 32px;
             width: auto;
             margin-bottom: 20px;
             opacity: 0.9;
         }
-
         .footer-slogan {
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             color: var(--text-secondary);
             font-style: italic;
             letter-spacing: 1px;
         }
-
         .footer-links {
             display: flex;
-            gap: 28px;
+            gap: clamp(15px, 2vw, 28px);
             flex-wrap: nowrap;
             justify-content: center;
         }
-
         .footer-link {
             color: var(--brand-purple-light);
             text-decoration: none;
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             transition: var(--transition);
             padding: 5px 0;
         }
-
-        .footer-link:hover {
-            color: var(--text-secondary);
-        }
-
+        .footer-link:hover { color: var(--text-secondary); }
         .footer-info {
             text-align: center;
             margin-top: 20px;
         }
-
         .footer-info p {
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        /* ========== 响应式设计优化 ========== */
-        
-        /* 平板设备优化 */
-@media (min-width: 421px) and (max-width: 996px) {
-    /* ... 其他样式 ... */
-    
-    /* 案例区域优化 - 调整为竖版3:4 */
-    .marquee-item {
-        flex: 0 0 280px;
-        height: 373px; /* 3:4比例，280 * 4/3 ≈ 373 */
-    }
-    /* 减少section-title的底部边距 */
-    .section-title, .section-title2 {margin-bottom: 16px;}
-    /* 减少section-subtitle的底部边距 */
-    .section-subtitle {margin-bottom: 30px;}
-    
-    .marquee-img-container {
-        height: 280px; /* 图片区域高度 */
-    }
-    
-    .case-title {
-        height: 93px; /* 剩余高度 */
-        padding: 20px 15px;
-        font-size: 18px;
-    }
-    /* 服务区域间距调整 */
-    .services-section {padding: 100px 0;} /*平板*/
-    .services-grid {margin-top: 20px;  /*服务网格间隙*/
-        gap: 15px;}
-    /* 案例区域间距调整 */
-    .cases-section {padding: 30px 0;}
-    /* 跑马灯容器间距调整 */
-    .marquee-container {margin: 30px 0;}
-    /* Logo墙区域间距调整 */
-    .logo-wall-section {padding: 60px 0;}
-    .logo-wall-subtitle {margin-bottom: 20px;}
-}
-
-/* 小屏平板/大屏手机 */
-@media (max-width: 768px) {
-    /* ... 其他样式 ... */
-    
-    /* 案例区域进一步优化 */
-    .marquee-item {
-        flex: 0 0 250px;
-        height: 333px; /* 3:4比例，250 * 4/3 ≈ 333 */
-    }
-    
-    .marquee-img-container {
-        height: 250px;
-    }
-    
-    .case-title {
-        height: 83px;
-        font-size: 16px;
-    }
-}
-
-/* 手机设备 */
-@media (max-width: 420px) {
-    /* ... 其他样式 ... */
-    
-    /* 案例区域手机优化 - 竖版3:4 */
-    .marquee-item {
-        flex: 0 0 200px;
-        height: 267px; /* 3:4比例，200 * 4/3 ≈ 267 */
-    }
-    .section-title, .section-title2 {margin-bottom: 12px;font-size: 24px;}
-    .section-subtitle {margin-bottom: 20px;font-size: 14px;letter-spacing: 1px;}
-    
-    .marquee-img-container {
-        height: 200px;
-    }
-    
-    .case-title {
-        height: 67px;
-        padding: 12px 10px;
-        font-size: 14px;
-    }
-}
-            
-            /* 显示移动端logo网格，隐藏桌面端 */
-            .logo-grid-desktop {
-                display: none;
-            }
-            
-            .logo-grid-mobile {
-                display: grid;
-            }
-            
-            .logo-grid-item {
-                padding: 15px;
-            }
-            
-            .logo-grid-item img {
-                max-height: 50px;
-            }
-            
-            /* 页脚优化 */
-            .footer-links {
-                gap: 40px;
-            }
-            
-            .footer-link {
-                font-size: 16px;
-                padding: 2px 0;
-            }
-
-        /* 小屏平板/大屏手机 (768px以下) */
-        @media (max-width: 768px) {
-            :root {
-                --pad-x: 30px;
-            }
-            
-            .hero-title {
-                font-size: 48px;
-            }
-            
-            .hero-subtitle {
-                font-size: 18px;
-                margin-bottom: 40px;
-            }
-            
-            .section-title, .section-title2 {
-                font-size: 36px;
-                letter-spacing: 4px;
-            }
-            
-            .section-subtitle {
-                font-size: 18px;
-            }
-            
-            /* 案例区域进一步优化 */
-            .marquee-item {
-                flex: 0 0 250px;
-                height: 333px; /* 3:4比例，250 * 4/3 ≈ 333 */
-            }
-            
-            .marquee-img-container {
-                height: 250px;
-            }
-            
-            .case-title {
-                height: 83px;
-                font-size: 16px;
-            }
-            /*页脚强制横版*/
-            .footer-links {
-                flex-direction: row-reverse;
-                gap: 30px;
-                align-items: center;
-            }
-            
-            .footer-link {
-                font-size: 16px;
-            }
+        /* ========== 动画 ========== */
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            to { opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        /* 手机设备 (420px以下) */
-        @media (max-width: 420px) {
-            :root {
-                --pad-x: 20px;
-            }
-            
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .hero-subtitle {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-            
-            .section-title, .section-title2 {
-                font-size: 28px;
-                letter-spacing: 3px;
-                margin-bottom: 20px;
-            }
-            
-            .section-subtitle {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-            
-            /* 服务区域 - 改为2列 */
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                margin-top: 30px;
-            }
-            
-            .service-card {
-                padding: 25px 15px;
-            }
-            
-            .service-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-                margin-bottom: 15px;
-            }
-            
-            .service-description {
-                font-size: 14px;
-                line-height: 1.5;
-            }
-            /* 服务区域间距调整 */
-            .services-section {padding: 60px 0; /* ← 手机版：进一步减少 */}
-            .services-grid { margin-top: 20px; gap: 10px;}
-            
-            /* 案例区域手机优化 - 竖版3:4 */
+        /* ========== 响应式设计 ========== */
+        /* 平板及以下 */
+        @media (max-width: 996px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .logo-grid-desktop { display: none; }
+            .logo-grid-mobile { display: grid; }
+        }
+        
+        /* 手机 */
+        @media (max-width: 768px) {
             .marquee-item {
-                flex: 0 0 200px;
-                height: 267px; /* 3:4比例，200 * 4/3 ≈ 267 */
+                flex: 0 0 clamp(200px, 40vw, 250px);
+                height: clamp(220px, 45vw, 280px);
             }
-            
-            .marquee-img-container {
-                height: 200px;
-            }
-            
-            .case-title {
-                height: 67px;
-                padding: 12px 10px;
-                font-size: 14px;
-            }
-            
-            .case-overlay {
-                font-size: 16px;
-            }
-            /* 案例区域间距调整 */
-            .cases-section {padding: 30px 0;}
-            .marquee-container {margin: 30px 0;}
-            
-            /* Logo网格手机优化 */
-            .logo-grid-desktop {
+            .footer-links { flex-direction: row; }
+        }
+        
+        /* 小手机 */
+        @media (max-width: 420px) {
+            .nav-links {
                 display: none;
+                position: fixed;
+                top: 80px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 999;
             }
-            
-            .logo-grid-mobile {
-                display: grid;
-                gap: 0px;
+            .nav-links.active { display: flex; }
+            .menu-btn { display: flex; }
+            .nav-link {
+                font-size: 18px;
+                padding: 15px 0;
+                width: 100%;
+                justify-content: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
-            
-            .logo-grid-item {
-                padding: 15%;
-            }
-            
-            .logo-grid-item img {
-                max-height: 40px;
-            }
-            /* Logo墙区域间距调整 */
-            .logo-wall-section {padding: 40px 0;}
-            .logo-wall-subtitle {margin-bottom: 30px;}
-            /* Logo网格间隙调整 */
-            .logo-grid-mobile {gap: 10px;}
-            
-            /* 按钮手机优化 */
-            .btn-primary, .btn-secondary {
-                padding: 16px 28px;
-                font-size: 16px;
-                min-height: 48px;
-                min-width: 140px;
-            }
-            
-            /* 页脚手机优化 */
-            .footer-links {
-                flex-direction: row-reverse;
-                gap: 15px;
-                align-items: center;
-            }
-            
-            .footer-link {
-                font-size: 16px;
-            }
-            
-            .footer-slogan {
-                font-size: 14px;
-            }
-            /* 页脚上边距调整 */
-            .footer {margin-top: 40px;padding: 40px 0 20px;}
-            .footer-content {gap: 30px;}
+            .nav-link:last-child { border-bottom: none; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-links { flex-direction: row; gap: 15px; }
+        }
+
+        /* 横屏手机/小平板优化 */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero { min-height: 80vh; }
+            .hero-title { font-size: clamp(36px, 6vw, 48px); }
         }
     </style>
 </head>
 
 <body class="home">
-
     <!-- 导航栏 -->
     <header class="header" id="header">
         <div class="container">
@@ -1053,9 +573,9 @@
         </div>
     </header>
 
-    <!-- 主视觉区域 (Hero) -->
+    <!-- 主视觉区域 -->
     <section class="hero">
-        <video id="heroVideo" playsinline webkit-playsinline muted autoplay loop preload="auto" poster="assets/index01.jpg">
+        <video id="heroVideo" playsinline muted autoplay loop preload="auto" poster="assets/index01.jpg">
             <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
             <source src="assets/2024.mp4" type="video/mp4">
         </video>
@@ -1103,135 +623,135 @@
     </section>
 
     <!-- 精选案例区域 -->
-<section class="section cases-section">
-    <div class="container">
-        <h2 class="section-title2">精选案例</h2>
-        <p class="section-subtitle">
-            服务全球高端品牌，以全链路展具方案，让创想落地。每一案，都是品牌与空间的质感对话。
-        </p>
-        <div class="text-center">
-            <a href="cases.html" class="btn-secondary">更多…</a>
-        </div>
-    </div>
-
-    <!-- 案例跑马灯 - 无缝循环版本 -->
-    <div class="marquee-container">
-        <div class="marquee-track">
-            <!-- 第一组案例 -->
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-a.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">高端零售展具 · 品牌空间重塑</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-b.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-c.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">智能展台系统 · 可复用模块化设计</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-d.html" class="case-link">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-e.html" class="case-link">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-f.html" class="case-link">
-                        <img src="assets/1803.jpg" alt="案例 F">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">概念店设计 · 品牌文化深度传达</div>
-            </div>
-            
-            <!-- 第二组案例（重复第一组，用于无缝衔接） -->
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-a.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">高端零售展具 · 品牌空间重塑</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-b.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-c.html" class="case-link">
-                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">智能展台系统 · 可复用模块化设计</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-d.html" class="case-link">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-e.html" class="case-link">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
-            </div>
-            <div class="marquee-item">
-                <div class="marquee-img-container">
-                    <a href="case-f.html" class="case-link">
-                        <img src="assets/1803.jpg" alt="案例 F">
-                        <div class="case-overlay">查看详情</div>
-                    </a>
-                </div>
-                <div class="case-title">概念店设计 · 品牌文化深度传达</div>
+    <section class="section cases-section">
+        <div class="container">
+            <h2 class="section-title2">精选案例</h2>
+            <p class="section-subtitle">
+                服务全球高端品牌，以全链路展具方案，让创想落地。每一案，都是品牌与空间的质感对话。
+            </p>
+            <div class="text-center">
+                <a href="cases.html" class="btn-secondary">更多…</a>
             </div>
         </div>
-    </div>
 
-        <!-- 品牌Logo墙 - 网格化版本 -->
+        <!-- 案例跑马灯 -->
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- 第一组案例 -->
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-a.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">高端零售展具 · 品牌空间重塑</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-b.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-c.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">智能展台系统 · 可复用模块化设计</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-d.html" class="case-link">
+                            <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-e.html" class="case-link">
+                            <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-f.html" class="case-link">
+                            <img src="assets/1803.jpg" alt="案例 F">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">概念店设计 · 品牌文化深度传达</div>
+                </div>
+                
+                <!-- 第二组案例（用于无缝衔接） -->
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-a.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">高端零售展具 · 品牌空间重塑</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-b.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-c.html" class="case-link">
+                            <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">智能展台系统 · 可复用模块化设计</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-d.html" class="case-link">
+                            <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-e.html" class="case-link">
+                            <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
+                </div>
+                <div class="marquee-item">
+                    <div class="marquee-img-container">
+                        <a href="case-f.html" class="case-link">
+                            <img src="assets/1803.jpg" alt="案例 F">
+                            <div class="case-overlay">查看详情</div>
+                        </a>
+                    </div>
+                    <div class="case-title">概念店设计 · 品牌文化深度传达</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo墙 -->
         <div class="logo-wall-section">
             <div class="container">
                 <h3 class="logo-wall-title">服务客户</h3>
@@ -1239,7 +759,7 @@
                 
                 <!-- 桌面端Logo网格 (6×5) -->
                 <div class="logo-grid logo-grid-desktop">
-                    <!-- 30个logo格子 - 实际使用时替换为真实logo -->
+                    <!-- 30个logo格子 -->
                     <div class="logo-grid-item"><img src="assets/logo01.png" alt="客户 Logo 1"></div>
                     <div class="logo-grid-item"><img src="assets/logo02.png" alt="客户 Logo 2"></div>
                     <div class="logo-grid-item"><img src="assets/logo03.png" alt="客户 Logo 3"></div>
@@ -1274,7 +794,6 @@
                 
                 <!-- 移动端Logo网格 (3×10) -->
                 <div class="logo-grid logo-grid-mobile">
-                    <!-- 30个logo格子 - 与桌面端相同，只是布局不同 -->
                     <div class="logo-grid-item"><img src="assets/logo01.png" alt="客户 Logo 1"></div>
                     <div class="logo-grid-item"><img src="assets/logo02.png" alt="客户 Logo 2"></div>
                     <div class="logo-grid-item"><img src="assets/logo03.png" alt="客户 Logo 3"></div>
@@ -1334,20 +853,15 @@
     </footer>
 
     <script>
-        // DOM加载完成后执行
-        document.addEventListener('DOMContentLoaded', () => {
+        // ========== 精简的JavaScript代码 ==========
+        (function() {
             // 1. 导航栏滚动效果
             const header = document.getElementById('header');
-            const setScroll = () => {
-                if (window.scrollY > 40) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            };
-            
-            setScroll();
-            window.addEventListener('scroll', setScroll);
+            function updateHeader() {
+                header.classList.toggle('scrolled', window.scrollY > 40);
+            }
+            updateHeader();
+            window.addEventListener('scroll', updateHeader);
             
             // 2. 移动端导航菜单
             const menuBtn = document.getElementById('menuBtn');
@@ -1355,23 +869,14 @@
             
             if (menuBtn && navLinks) {
                 menuBtn.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    menuBtn.classList.toggle('active');
-                    
-                    // 切换菜单图标
+                    const isActive = navLinks.classList.toggle('active');
                     const icon = menuBtn.querySelector('i');
-                    if (navLinks.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
+                    icon.classList.toggle('fa-bars', !isActive);
+                    icon.classList.toggle('fa-times', isActive);
                 });
                 
-                // 点击导航链接后关闭菜单（移动端）
-                const navLinksItems = navLinks.querySelectorAll('a');
-                navLinksItems.forEach(link => {
+                // 点击链接关闭菜单（移动端）
+                navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         if (window.innerWidth <= 420) {
                             navLinks.classList.remove('active');
@@ -1383,100 +888,56 @@
                 });
             }
             
-            // 3. 视频播放逻辑
+            // 3. 视频播放优化
             const heroVideo = document.getElementById('heroVideo');
             if (heroVideo) {
-                // 设置视频播放属性
                 heroVideo.setAttribute('muted', 'true');
                 heroVideo.setAttribute('playsinline', 'true');
-                heroVideo.setAttribute('webkit-playsinline', 'true');
                 
-                // 尝试自动播放
                 const playPromise = heroVideo.play();
-                
                 if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log('视频自动播放被阻止:', error);
-                        // 添加用户交互后播放
-                        document.addEventListener('click', function playVideo() {
+                    playPromise.catch(() => {
+                        // 用户交互后播放
+                        const playOnInteraction = () => {
                             heroVideo.play();
-                            document.removeEventListener('click', playVideo);
-                        }, { once: true });
+                            document.removeEventListener('click', playOnInteraction);
+                            document.removeEventListener('touchstart', playOnInteraction);
+                        };
+                        document.addEventListener('click', playOnInteraction);
+                        document.addEventListener('touchstart', playOnInteraction);
                     });
                 }
-                
-                // 调试模式
-                const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('debug') === '1') {
-                    heroVideo.setAttribute('controls', 'true');
-                }
             }
             
-            // 4. 当前页面导航链接高亮
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinkElements = document.querySelectorAll('.nav-link');
-            
-            navLinkElements.forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (linkHref === currentPage || 
-                    (currentPage === 'index.html' && linkHref === 'index.html')) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
+            // 4. 当前页面导航高亮
+            const currentPage = location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === currentPage);
             });
             
-            // 5. 页面元素动画
-            function animateOnScroll() {
-                const elements = document.querySelectorAll('.service-card, .marquee-item');
-                
-                elements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.2;
-                    
-                    if (elementPosition < screenPosition) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
+            // 5. 滚动动画
+            const animateElements = () => {
+                document.querySelectorAll('.service-card, .marquee-item').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.8) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
                     }
                 });
-            }
+            };
             
             // 设置初始状态
-            const animatedElements = document.querySelectorAll('.service-card, .marquee-item');
-            animatedElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            document.querySelectorAll('.service-card, .marquee-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             });
             
-            // 监听滚动
-            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('scroll', animateElements);
+            setTimeout(animateElements, 100);
             
-            // 初始化检查
-            setTimeout(animateOnScroll, 100);
-            
-            // 6. 华为Pad触摸优化 - 增加触摸区域检测
-            function isHuaweiBrowser() {
-                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                return /Huawei|Honor/i.test(userAgent) || /HBPC/i.test(userAgent);
-            }
-            
-            if (isHuaweiBrowser()) {
-                // 为华为浏览器增加额外的触摸优化
-                document.querySelectorAll('button, a, .btn-primary, .btn-secondary').forEach(element => {
-                    element.style.minHeight = '44px';
-                    element.style.minWidth = '44px';
-                });
-                
-                // 增加字体大小
-                if (window.innerWidth >= 421 && window.innerWidth <= 996) {
-                    document.body.style.fontSize = '18px';
-                }
-            }
-            
-            // 7. 窗口大小变化处理
+            // 6. 窗口调整处理
             window.addEventListener('resize', () => {
-                // 如果窗口变大，隐藏移动端菜单
                 if (window.innerWidth > 420 && navLinks) {
                     navLinks.classList.remove('active');
                     if (menuBtn) {
@@ -1486,165 +947,41 @@
                     }
                 }
             });
-
-// 8. 优化跑马灯效果
-function optimizeMarquee() {
-    const marqueeTrack = document.querySelector('.marquee-track');
-    if (!marqueeTrack) return;
-    
-    // 复制跑马灯项目到末尾（确保无缝）
-    const marqueeItems = marqueeTrack.querySelectorAll('.marquee-item');
-    
-    // 如果已经复制过，就不再复制
-    if (marqueeItems.length > 6) return;
-    
-    // 克隆并添加所有项目到末尾
-    marqueeItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        marqueeTrack.appendChild(clone);
-    });
-}
-
-// 在DOM加载完成后调用
-document.addEventListener('DOMContentLoaded', () => {
-    // ... 现有的代码 ...
-    
-    // 8. 优化跑马灯
-    optimizeMarquee();
-    
-    // ... 现有的代码 ...
-});
-
             
-        });
-
+            // 7. 华为浏览器优化
+            if (/Huawei|Honor|HBPC/i.test(navigator.userAgent)) {
+                document.querySelectorAll('button, a').forEach(el => {
+                    el.style.minHeight = '44px';
+                    el.style.minWidth = '44px';
+                });
+            }
+        })();
+        
         // 全局辅助函数
         function debounce(func, wait) {
             let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
+            return function(...args) {
                 clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
+                timeout = setTimeout(() => func.apply(this, args), wait);
             };
         }
-
-        // 平滑滚动到锚点
+        
+        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
+                const target = document.querySelector(targetId);
+                if (target) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: target.offsetTop - 80,
                         behavior: 'smooth'
                     });
                 }
             });
         });
-
-        // 案例页面特定功能
-        if (window.location.pathname.includes('cases.html')) {
-            // 案例筛选功能
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const caseItems = document.querySelectorAll('.case-item');
-            
-            if (filterBtns.length > 0 && caseItems.length > 0) {
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 移除所有按钮的active类
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        
-                        // 为当前按钮添加active类
-                        this.classList.add('active');
-                        
-                        const filterValue = this.getAttribute('data-filter');
-                        
-                        // 筛选案例
-                        caseItems.forEach(item => {
-                            const categories = item.getAttribute('data-category');
-                            
-                            if (filterValue === 'all' || categories.includes(filterValue)) {
-                                item.style.display = 'block';
-                                // 添加淡入动画
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                    item.style.transform = 'translateY(0)';
-                                }, 50);
-                            } else {
-                                // 添加淡出动画
-                                item.style.opacity = '0';
-                                item.style.transform = 'translateY(20px)';
-                                setTimeout(() => {
-                                    item.style.display = 'none';
-                                }, 300);
-                            }
-                        });
-                    });
-                });
-            }
-            
-            // 加载更多功能
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', function() {
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 加载中...';
-                    this.disabled = true;
-                    
-                    // 模拟加载延迟
-                    setTimeout(() => {
-                        // 这里可以添加AJAX请求来加载更多案例
-                        // 暂时显示提示信息
-                        this.innerHTML = '<i class="fas fa-check"></i> 已加载全部案例';
-                        this.style.opacity = '0.5';
-                        this.style.cursor = 'default';
-                        
-                        // 显示加载完成的消息
-                        const message = document.createElement('div');
-                        message.className = 'load-complete';
-                        message.style.cssText = `
-                            text-align: center;
-                            color: var(--brand-purple-light);
-                            margin-top: 20px;
-                            font-size: 14px;
-                        `;
-                        message.textContent = '已显示全部案例';
-                        
-                        this.parentNode.appendChild(message);
-                        
-                        // 3秒后隐藏按钮
-                        setTimeout(() => {
-                            this.style.display = 'none';
-                        }, 3000);
-                    }, 1500);
-                });
-            }
-        }
-
-        // 联系表单处理
-        if (document.getElementById('contactForm')) {
-            document.getElementById('contactForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // 获取表单数据
-                const formData = new FormData(document.getElementById('contactForm'));
-                const data = Object.fromEntries(formData);
-                
-                // 这里可以添加表单提交逻辑，比如发送到服务器
-                console.log('表单数据:', data);
-                
-                // 显示成功消息
-                alert('感谢您的咨询！我们会尽快与您联系。');
-                document.getElementById('contactForm').reset();
-            });
-        }
     </script>
 </body>
 </html>
-
-
