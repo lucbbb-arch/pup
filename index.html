@@ -430,7 +430,7 @@
 
         /* 服务区域 - 白色卡片样式 */
         .services-section {
-            padding: 160px 0;
+            padding: 100px 0;
             background: var(--bg-dark);
         }
 
@@ -491,7 +491,7 @@
 
         /* 精选案例区域 */
         .cases-section {
-            padding: 100px 0;
+            padding: 30px 0;
             background: var(--bg-dark);
         }
 
@@ -611,9 +611,11 @@
 
         /* Logo墙区域 - 网格化设计 */
         .logo-wall-section {
-            padding: 100px 0;
+            padding: 50px 0;
             background: var(--bg-dark);
         }
+        /* Logo墙区域间距调整 */
+        .logo-wall-subtitle {margin-bottom: 10px;}
 
         .logo-wall-title {
             font-size: 32px;
@@ -685,7 +687,7 @@
         .footer {
             background: var(--bg-footer);
             padding: 60px 0 40px;
-            margin-top: 100px;
+            margin-top: 50px;
         }
 
         .footer-content {
@@ -754,6 +756,10 @@
         flex: 0 0 280px;
         height: 373px; /* 3:4比例，280 * 4/3 ≈ 373 */
     }
+    /* 减少section-title的底部边距 */
+    .section-title, .section-title2 {margin-bottom: 16px;}
+    /* 减少section-subtitle的底部边距 */
+    .section-subtitle {margin-bottom: 30px;}
     
     .marquee-img-container {
         height: 280px; /* 图片区域高度 */
@@ -764,6 +770,17 @@
         padding: 20px 15px;
         font-size: 18px;
     }
+    /* 服务区域间距调整 */
+    .services-section {padding: 100px 0;} /*平板*/
+    .services-grid {margin-top: 20px;  /*服务网格间隙*/
+        gap: 15px;}
+    /* 案例区域间距调整 */
+    .cases-section {padding: 30px 0;}
+    /* 跑马灯容器间距调整 */
+    .marquee-container {margin: 30px 0;}
+    /* Logo墙区域间距调整 */
+    .logo-wall-section {padding: 60px 0;}
+    .logo-wall-subtitle {margin-bottom: 20px;}
 }
 
 /* 小屏平板/大屏手机 */
@@ -795,6 +812,8 @@
         flex: 0 0 200px;
         height: 267px; /* 3:4比例，200 * 4/3 ≈ 267 */
     }
+    .section-title, .section-title2 {margin-bottom: 12px;font-size: 24px;}
+    .section-subtitle {margin-bottom: 20px;font-size: 14px;letter-spacing: 1px;}
     
     .marquee-img-container {
         height: 200px;
@@ -932,6 +951,9 @@
                 font-size: 14px;
                 line-height: 1.5;
             }
+            /* 服务区域间距调整 */
+            .services-section {padding: 60px 0; /* ← 手机版：进一步减少 */}
+            .services-grid { margin-top: 20px; gap: 10px;}
             
             /* 案例区域手机优化 - 竖版3:4 */
             .marquee-item {
@@ -952,6 +974,9 @@
             .case-overlay {
                 font-size: 16px;
             }
+            /* 案例区域间距调整 */
+            .cases-section {padding: 30px 0;}
+            .marquee-container {margin: 30px 0;}
             
             /* Logo网格手机优化 */
             .logo-grid-desktop {
@@ -970,6 +995,11 @@
             .logo-grid-item img {
                 max-height: 40px;
             }
+            /* Logo墙区域间距调整 */
+            .logo-wall-section {padding: 40px 0;}
+            .logo-wall-subtitle {margin-bottom: 30px;}
+            /* Logo网格间隙调整 */
+            .logo-grid-mobile {gap: 10px;}
             
             /* 按钮手机优化 */
             .btn-primary, .btn-secondary {
@@ -993,6 +1023,9 @@
             .footer-slogan {
                 font-size: 14px;
             }
+            /* 页脚上边距调整 */
+            .footer {margin-top: 40px;padding: 40px 0 20px;}
+            .footer-content {gap: 30px;}
         }
     </style>
 </head>
@@ -1022,7 +1055,7 @@
 
     <!-- 主视觉区域 (Hero) -->
     <section class="hero">
-        <video id="heroVideo" playsinline webkit-playsinline muted autoplay loop preload="auto" poster="assets/0250613105122.jpg">
+        <video id="heroVideo" playsinline webkit-playsinline muted autoplay loop preload="auto" poster="assets/index01.jpg">
             <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
             <source src="assets/2024.mp4" type="video/mp4">
         </video>
