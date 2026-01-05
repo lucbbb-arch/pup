@@ -495,99 +495,119 @@
             background: var(--bg-dark);
         }
 
-        /* 案例跑马灯 - 修改后样式 */
-        .marquee-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            margin: 60px 0;
-        }
+        /* 案例跑马灯 - 无缝循环样式 */
+.marquee-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 60px 0;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
 
-        .marquee-track {
-            display: flex;
-            gap: 30px;
-            width: max-content;
-            animation: marqueeScroll 30s linear infinite;
-        }
+.marquee-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: marqueeScroll 30s linear infinite;
+    will-change: transform;
+}
 
-        .marquee-item {
-            flex: 0 0 400px;
-            height: 320px;
-            border-radius: var(--radius);
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+/* 添加暂停效果 */
+.marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+}
 
-        .marquee-img-container {
-            height: 240px;
-            overflow: hidden;
-            position: relative;
-        }
+.marquee-item {
+    flex: 0 0 400px;
+    height: 320px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 
-        .case-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
+.marquee-img-container {
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
 
-        .case-link img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
+.case-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
-        .case-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(18, 11, 26, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-size: 18px;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+.case-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
 
-        .case-link:hover img {
-            transform: scale(1.05);
-        }
+.case-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 11, 26, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-        .case-link:hover .case-overlay {
-            opacity: 1;
-        }
+.case-link:hover img {
+    transform: scale(1.05);
+}
 
-        /* 新增：案例标题样式 */
-        .case-title {
-            height: 80px;
-            padding: 15px 20px;
-            background: var(--bg-dark);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.4;
-        }
+.case-link:hover .case-overlay {
+    opacity: 1;
+}
 
-        @keyframes marqueeScroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
+.case-title {
+    height: 80px;
+    padding: 15px 20px;
+    background: var(--bg-dark);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+/* 无缝滚动动画 */
+@keyframes marqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* 移动到复制内容的一半位置 */
+    }
+}
 
         /* Logo墙区域 - 网格化设计 */
         .logo-wall-section {
@@ -725,79 +745,67 @@
 
         /* ========== 响应式设计优化 ========== */
         
-        /* 平板设备优化 (421px - 996px) */
-        @media (min-width: 421px) and (max-width: 996px) {
-            :root {
-                --pad-x: 40px;
-            }
-            
-            /* 针对平板优化字体大小 */
-            body {
-                font-size: 18px;
-            }
-            
-            /* 导航栏优化 */
-            .nav-links {
-                gap: 25px;
-            }
-            
-            .nav-link {
-                font-size: 18px;
-                padding: 10px 0;
-                min-height: 44px;
-            }
-            
-            /* Hero区域优化 */
-            .hero-title {
-                font-size: 64px;
-            }
-            
-            .hero-subtitle {
-                font-size: 20px;
-                margin-bottom: 50px;
-            }
-            
-            /* 按钮优化 - 增加触摸区域 */
-            .btn-primary, .btn-secondary {
-                padding: 18px 40px;
-                font-size: 18px;
-                min-height: 56px;
-                min-width: 160px;
-            }
-            
-            /* 服务区域优化 */
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .service-card {
-                padding: 35px 25px;
-            }
-            
-            .service-title {
-                font-size: 24px;
-            }
-            
-            .service-description {
-                font-size: 18px;
-            }
-            
-            /* 案例区域优化 - 调整为竖版3:4 */
-            .marquee-item {
-                flex: 0 0 280px;
-                height: 373px; /* 3:4比例，280 * 4/3 ≈ 373 */
-            }
-            
-            .marquee-img-container {
-                height: 280px; /* 图片区域高度 */
-            }
-            
-            .case-title {
-                height: 93px; /* 剩余高度 */
-                padding: 20px 15px;
-                font-size: 18px;
-            }
+        /* 平板设备优化 */
+@media (min-width: 421px) and (max-width: 996px) {
+    /* ... 其他样式 ... */
+    
+    /* 案例区域优化 - 调整为竖版3:4 */
+    .marquee-item {
+        flex: 0 0 280px;
+        height: 373px; /* 3:4比例，280 * 4/3 ≈ 373 */
+    }
+    
+    .marquee-img-container {
+        height: 280px; /* 图片区域高度 */
+    }
+    
+    .case-title {
+        height: 93px; /* 剩余高度 */
+        padding: 20px 15px;
+        font-size: 18px;
+    }
+}
+
+/* 小屏平板/大屏手机 */
+@media (max-width: 768px) {
+    /* ... 其他样式 ... */
+    
+    /* 案例区域进一步优化 */
+    .marquee-item {
+        flex: 0 0 250px;
+        height: 333px; /* 3:4比例，250 * 4/3 ≈ 333 */
+    }
+    
+    .marquee-img-container {
+        height: 250px;
+    }
+    
+    .case-title {
+        height: 83px;
+        font-size: 16px;
+    }
+}
+
+/* 手机设备 */
+@media (max-width: 420px) {
+    /* ... 其他样式 ... */
+    
+    /* 案例区域手机优化 - 竖版3:4 */
+    .marquee-item {
+        flex: 0 0 200px;
+        height: 267px; /* 3:4比例，200 * 4/3 ≈ 267 */
+    }
+    
+    .marquee-img-container {
+        height: 200px;
+    }
+    
+    .case-title {
+        height: 67px;
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+}
             
             /* 显示移动端logo网格，隐藏桌面端 */
             .logo-grid-desktop {
@@ -808,10 +816,7 @@
                 display: grid;
             }
             
-            .logo-grid-item {
-                padding: 15px;
-            }
-            
+
             .logo-grid-item img {
                 max-height: 50px;
             }
@@ -825,7 +830,6 @@
                 font-size: 18px;
                 padding: 8px 0;
             }
-        }
 
         /* 小屏平板/大屏手机 (768px以下) */
         @media (max-width: 768px) {
@@ -1053,76 +1057,133 @@
     </section>
 
     <!-- 精选案例区域 -->
-    <section class="section cases-section">
-        <div class="container">
-            <h2 class="section-title2">精选案例</h2>
-            <p class="section-subtitle">
-                服务全球高端品牌，以全链路展具方案，让创想落地。每一案，都是品牌与空间的质感对话。
-            </p>
-            <div class="text-center">
-                <a href="cases.html" class="btn-secondary">更多…</a>
-            </div>
+<section class="section cases-section">
+    <div class="container">
+        <h2 class="section-title2">精选案例</h2>
+        <p class="section-subtitle">
+            服务全球高端品牌，以全链路展具方案，让创想落地。每一案，都是品牌与空间的质感对话。
+        </p>
+        <div class="text-center">
+            <a href="cases.html" class="btn-secondary">更多…</a>
         </div>
+    </div>
 
-        <!-- 案例跑马灯 -->
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-a.html" class="case-link">
-                            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">高端零售展具 · 品牌空间重塑</div>
+    <!-- 案例跑马灯 - 无缝循环版本 -->
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <!-- 第一组案例 -->
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-a.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-b.html" class="case-link">
-                            <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
+                <div class="case-title">高端零售展具 · 品牌空间重塑</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-b.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-c.html" class="case-link">
-                            <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">智能展台系统 · 可复用模块化设计</div>
+                <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-c.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-d.html" class="case-link">
-                            <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
+                <div class="case-title">智能展台系统 · 可复用模块化设计</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-d.html" class="case-link">
+                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-e.html" class="case-link">
-                            <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
+                <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-e.html" class="case-link">
+                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
-                <div class="marquee-item">
-                    <div class="marquee-img-container">
-                        <a href="case-f.html" class="case-link">
-                            <img src="assets/1803.jpg" alt="案例 F">
-                            <div class="case-overlay">查看详情</div>
-                        </a>
-                    </div>
-                    <div class="case-title">概念店设计 · 品牌文化深度传达</div>
+                <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-f.html" class="case-link">
+                        <img src="assets/1803.jpg" alt="案例 F">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
                 </div>
+                <div class="case-title">概念店设计 · 品牌文化深度传达</div>
+            </div>
+            
+            <!-- 第二组案例（重复第一组，用于无缝衔接） -->
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-a.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="案例 A">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">高端零售展具 · 品牌空间重塑</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-b.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="案例 B">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">艺术装置展陈 · 沉浸式体验空间</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-c.html" class="case-link">
+                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="案例 C">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">智能展台系统 · 可复用模块化设计</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-d.html" class="case-link">
+                        <img src="assets/微信图片_20250417121620.jpg" alt="案例 D">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">国际展厅设计 · 全球品牌巡展</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-e.html" class="case-link">
+                        <img src="assets/微信图片_20250417121703.jpg" alt="案例 E">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">商业空间优化 · 动线规划与视觉导引</div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-img-container">
+                    <a href="case-f.html" class="case-link">
+                        <img src="assets/1803.jpg" alt="案例 F">
+                        <div class="case-overlay">查看详情</div>
+                    </a>
+                </div>
+                <div class="case-title">概念店设计 · 品牌文化深度传达</div>
             </div>
         </div>
+    </div>
 
         <!-- 品牌Logo墙 - 网格化版本 -->
         <div class="logo-wall-section">
@@ -1379,6 +1440,36 @@
                     }
                 }
             });
+
+// 8. 优化跑马灯效果
+function optimizeMarquee() {
+    const marqueeTrack = document.querySelector('.marquee-track');
+    if (!marqueeTrack) return;
+    
+    // 复制跑马灯项目到末尾（确保无缝）
+    const marqueeItems = marqueeTrack.querySelectorAll('.marquee-item');
+    
+    // 如果已经复制过，就不再复制
+    if (marqueeItems.length > 6) return;
+    
+    // 克隆并添加所有项目到末尾
+    marqueeItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        marqueeTrack.appendChild(clone);
+    });
+}
+
+// 在DOM加载完成后调用
+document.addEventListener('DOMContentLoaded', () => {
+    // ... 现有的代码 ...
+    
+    // 8. 优化跑马灯
+    optimizeMarquee();
+    
+    // ... 现有的代码 ...
+});
+
+            
         });
 
         // 全局辅助函数
