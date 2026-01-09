@@ -176,22 +176,21 @@
             letter-spacing: 2px;
         }
 
-        /* 导航栏 */
+        /* ========== 导航栏 - 参考cases页面样式 ========== */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: transparent;
-            transition: var(--transition-slow);
+            background: rgba(0, 0, 0, 1);
+            transition: var(--transition);
             padding: 18px 0;
         }
 
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
         }
 
@@ -217,37 +216,87 @@
             align-items: center;
         }
 
+        /* 导航链接样式 - 参考cases页面 */
         .nav-link {
-            color: var(--brand-purple-light);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 16px;
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
+            color: #7756A0; /* 与cases页面一致的颜色 */
         }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-            font-weight: 300;
-        }
-
+        
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--text-primary);
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
             transition: width 0.3s ease;
         }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
+        
+        /* 首页 - 白色 */
+        .nav-link[href="index.html"]::after {
+            background: var(--text-primary);
+        }
+        .nav-link[href="index.html"]:hover,
+        .nav-link[href="index.html"].active {
+            color: var(--text-primary);
+        }
+        .nav-link[href="index.html"]:hover::after,
+        .nav-link[href="index.html"].active::after {
+            width: 100%;
+        }
+        
+        /* 服务 - 橙色 */
+        .nav-link[href="services.html"]::after {
+            background: #ff8f1c; /* 橙色 */
+        }
+        .nav-link[href="services.html"]:hover,
+        .nav-link[href="services.html"].active {
+            color: #ff8f1c; /* 橙色 */
+        }
+        .nav-link[href="services.html"]:hover::after,
+        .nav-link[href="services.html"].active::after {
+            width: 100%;
+        }
+        
+        /* 案例 - 浅紫色 */
+        .nav-link[href="cases.html"]::after {
+            background: #9D7BCB; /* 浅紫色 */
+        }
+        .nav-link[href="cases.html"]:hover,
+        .nav-link[href="cases.html"].active {
+            color: #9D7BCB; /* 浅紫色 */
+        }
+        .nav-link[href="cases.html"]:hover::after,
+        .nav-link[href="cases.html"].active::after {
+            width: 100%;
+        }
+        
+        /* 关于 - 绿色 */
+        .nav-link[href="about.html"]::after {
+            background: #d0df00; /* 绿色 */
+        }
+        .nav-link[href="about.html"]:hover,
+        .nav-link[href="about.html"].active {
+            color: #d0df00; /* 绿色 */
+        }
+        .nav-link[href="about.html"]:hover::after,
+        .nav-link[href="about.html"].active::after {
+            width: 100%;
+        }
+        
+        /* 联系 - 红色 */
+        .nav-link[href="contact.html"]::after {
+            background: #c82272; /* 红色 */
+        }
+        .nav-link[href="contact.html"]:hover,
+        .nav-link[href="contact.html"].active {
+            color: #c82272; /* 红色 */
+        }
+        .nav-link[href="contact.html"]:hover::after,
+        .nav-link[href="contact.html"].active::after {
             width: 100%;
         }
 
@@ -303,27 +352,7 @@
             }
         }
 
-        /* 为所有子页面导航栏设置黑色背景 */
-        body.subpage .header {
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-                padding: 15px 0;
-        }
-
-        /* 确保即使在未滚动状态下，子页面导航栏也是黑色背景 */
-        body.subpage .header:not(.scrolled) {
-            background: rgba(0, 0, 0, 0.95);
-        }
-    
-        /* 移动端菜单的黑色背景保持不变 */
-        @media (max-width: 992px){
-            body.subpage .nav-links{
-                background: rgba(0, 0, 0, 0.98) !important
-            }
-        }
-
-        /* 子页面Hero区域 - 重新设计 */
+        /* 子页面Hero区域 - 保留原有风格 */
         .sub-hero {
             position: relative;
             height: 60vh;
@@ -426,9 +455,10 @@
             padding: 5px;
         }
 
+        /* 元数据 - 电脑端和Pad端横版1行显示，删除工期 */
         .case-meta-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(4, 1fr); /* 删除工期后改为4列 */
             gap: 10px;
             margin-bottom: 30px;
             padding-bottom: 30px;
@@ -649,125 +679,149 @@
             margin: 80px 0 60px;
         }
 
-        /* 项目成果卡片 - 浅灰色底，深色文字 */
-        .result-card {
-            background: var(--bg-light-gray);
-            color: var(--text-dark);
-            border-radius: 20px;
-            padding: 70px 50px;
-            text-align: center;
-            margin-top: 80px;
-            border-left: 5px solid var(--brand-purple);
-        }
-
-        .result-card-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            color: var(--bg-footer);
-        }
-
-        .result-card-content {
-            font-size: 16px;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto 10px;
-            color: var(--text-dark-gray);
-        }
-
-        .result-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 50px;
-        }
-
-        .result-stat {
-            text-align: center;
-            padding: 8px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .result-stat-number {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--text-dark-gray);
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .result-stat-label {
-            font-size: 16px;
-            color: var(--text-gray);
-            letter-spacing: 1px;
-        }
-
-        /* 页脚 - 与contact页面保持一致 */
+        /* ========== 页脚 - 参考cases页面样式 ========== */
         .footer {
-            background: var(--bg-footer);
-            padding: 80px 0 40px;
+            background: #111;
+            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
+            margin-top: clamp(60px, 5vw, 50px);
         }
-
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: clamp(30px, 4vw, 40px);
         }
-
+        
         .footer-brand {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
-
-        .footer-logo {
-            height: 32px;
-            width: auto;
-            margin-bottom: 20px;
-            opacity: 0.9;
+        
+        .footer-logo { 
+            height: 32px; 
+            margin-bottom: 0;
         }
 
         .footer-slogan {
             font-size: 16px;
-            color: var(--text-secondary);
+            color: #d0d3d4; /* 与cases页面一致 */
             font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        .footer-links {
             display: flex;
-            gap: 28px;
+            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
         }
-
-        .footer-link {
-            color: var(--brand-purple-light);
-            text-decoration: none;
-            font-size: 16px;
-            transition: var(--transition);
-            padding: 5px 0;
+        
+        /* 社交媒体图标 */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-left: 10px;
         }
-
-        .footer-link:hover,
-        .footer-link.active {
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-size: 18px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: #9D7BCB; /* 浅紫色 */
+            transform: translateY(-3px);
+        }
+        
+        /* 页脚链接 - 小手机端1行横版居中显示 */
+        .footer-links {
+            display: flex;
+            gap: clamp(20px, 2vw, 40px);
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* 页脚链接颜色设置 - 参考cases页面 */
+        .footer-link {
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(14px, 1.5vw, 16px);
+            padding: 5px 0;
+            position: relative;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        
+        /* 页脚链接基础颜色 - 参考cases页面 */
+        .footer-link[href="index.html"] {
             color: var(--text-primary);
         }
-
+        
+        .footer-link[href="services.html"] {
+            color: #ff8f1c; /* 橙色 */
+        }
+        
+        .footer-link[href="cases.html"] {
+            color: #9D7BCB; /* 浅紫色 */
+        }
+        
+        .footer-link[href="about.html"] {
+            color: #d0df00; /* 绿色 */
+        }
+        
+        .footer-link[href="contact.html"] {
+            color: #c82272; /* 红色 */
+        }
+        
+        /* 页脚链接悬停效果 */
+        .footer-link[href="index.html"]:hover {
+            color: var(--text-primary);
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="services.html"]:hover {
+            color: #ff8f1c;
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="cases.html"]:hover {
+            color: #9D7BCB;
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="about.html"]:hover {
+            color: #d0df00;
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="contact.html"]:hover {
+            color: #c82272;
+            opacity: 0.8;
+        }
+        
         .footer-info {
             text-align: center;
             margin-top: 20px;
         }
-
+        
         .footer-info p {
             font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            color: #a2aaad; /* 与cases页面一致 */
         }
 
-        /* 响应式设计 */
+        /* ========== 响应式设计 ========== */
         @media (max-width: 1200px) {
             :root {
                 --pad-x: 40px;
@@ -832,16 +886,13 @@
                 font-size: 20px;
             }
             
+            /* Pad端元数据显示和电脑端一样，横版1行显示 */
             .case-meta-details {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
             
             .case-intro-section {
                 padding: 40px 30px;
-            }
-            
-            .result-stats {
-                grid-template-columns: repeat(2, 1fr);
             }
             
             .fullscreen-viewer .nav-btn {
@@ -855,16 +906,11 @@
                 right: 20px;
                 font-size: 30px;
             }
-            
-            /* 页脚响应式调整 */
-            .footer-links {
-                gap: 20px;
-            }
         }
 
         @media (max-width: 768px) {
             :root {
-                --pad-x: 20px;
+                --pad-x: 20px; /* 手机端增加边距 */
             }
             
             .sub-hero {
@@ -898,32 +944,16 @@
                 font-size: 15px;
             }
             
+            /* 小手机端元数据两行显示，减少行距 */
             .case-meta-details {
-                grid-template-columns: 1fr;
-                gap: 25px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                row-gap: 10px; /* 减少行距 */
             }
             
             .case-intro-section {
                 padding: 30px 20px;
                 border-radius: 15px;
-            }
-            
-            .result-card {
-                padding: 50px 30px;
-                border-radius: 15px;
-            }
-            
-            .result-card-title {
-                font-size: 28px;
-            }
-            
-            .result-card-content {
-                font-size: 16px;
-            }
-            
-            .result-stats {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
             
             .fullscreen-viewer .image-caption {
@@ -990,6 +1020,22 @@
                 gap: 70px;
             }
             
+            /* 小手机端元数据进一步调整 */
+            .case-meta-details {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                row-gap: 8px; /* 进一步减少行距 */
+            }
+            
+            .meta-item .label {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+            
+            .meta-item .value {
+                font-size: 11px;
+            }
+            
             .fullscreen-viewer .nav-btn {
                 width: 50px;
                 height: 50px;
@@ -1017,11 +1063,15 @@
                 padding: 50px 0 20px;
             }
             .footer-content {
-                gap: 25px;   /* 进一步调整 */
+                gap: 25px;
             }
 
             .footer-links {
                 gap: 8px;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
             }
      
             .footer-slogan {
@@ -1097,10 +1147,7 @@
                         <div class="label">类别</div>
                         <div class="value">零售 / 橱窗 / 活动</div>
                     </div>
-                    <div class="meta-item">
-                        <div class="label">工期</div>
-                        <div class="value">45天</div>
-                    </div>
+                    <!-- 删除工期 -->
                 </div>
                 
                 <div class="case-description">
@@ -1179,28 +1226,7 @@
                 </a>
             </div>
             
-            <!-- 项目成果 -->
-            <div class="result-card">
-                <div class="result-card-title">项目成果</div>
-                <div class="result-card-content">
-                    本项目成功在品牌三大旗舰店落地，展示系统投入使用后，获得了客户的高度认可。模块化设计不仅提升了展示效果，更大大提高了门店运营效率，为品牌创造了显著价值。
-                </div>
-                
-                <div class="result-stats">
-                    <div class="result-stat">
-                        <div class="result-stat-number">40%</div>
-                        <div class="result-stat-label">珠宝展示效果提升</div>
-                    </div>
-                    <div class="result-stat">
-                        <div class="result-stat-number">25%</div>
-                        <div class="result-stat-label">顾客停留时间增加</div>
-                    </div>
-                    <div class="result-stat">
-                        <div class="result-stat-number">18%</div>
-                        <div class="result-stat-label">销售转化率提高</div>
-                    </div>
-                </div>
-            </div>
+            <!-- 删除项目成果栏 -->
         </div>
     </main>
 
@@ -1225,13 +1251,23 @@
         </div>
     </div>
 
-    <!-- 页脚 - 与contact页面保持一致 -->
+    <!-- 页脚 - 参考cases页面样式 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
-                    <p class="footer-slogan">我执匠心 · 您见未来</p>
+                    <div class="footer-slogan">
+                        <span>我执匠心 · 您见未来</span>
+                        <div class="social-icons">
+                            <a href="javascript:void(0)" class="social-icon" id="wechatBtn">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="https://www.facebook.com/" target="_blank" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <a href="index.html" class="footer-link">首页</a>
@@ -1312,7 +1348,7 @@
                 }
             });
             
-            // 4. 页脚链接高亮（与contact页面保持一致）
+            // 4. 页脚链接高亮
             const footerLinks = document.querySelectorAll('.footer-link');
             footerLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');

@@ -364,7 +364,7 @@
             white-space: nowrap;
         }
 
-        /* 案例筛选器 - 5个按钮，小手机端两排，其余单排 */
+        /* 案例筛选器 - 5个按钮，pad端居中对齐，小手机端两排 */
         .case-filter {
             width: 100%;
             margin: 0 auto clamp(30px, 5vw, 50px);
@@ -424,8 +424,8 @@
 
         .case-item:hover {
             transform: translateY(-10px);
-            border-color: var(--brand);
-            box-shadow: 0 20px 60px rgba(119, 86, 160, 0.3);
+            border-color: var(--brand-light);
+            box-shadow: 0 10px 30px rgba(119, 86, 160, 0.3);
         }
 
         .case-image {
@@ -613,15 +613,12 @@
             transform: translateY(-3px);
         }
         
-        /* 页脚链接 - 强制单排居中对齐 */
+        /* 页脚链接 - 小手机端1行横版居中显示 */
         .footer-links {
             display: flex;
             gap: clamp(20px, 2vw, 40px);
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             justify-content: center;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 10px;
             width: 100%;
             max-width: 100%;
         }
@@ -739,8 +736,21 @@
         }
 
         /* ========== 响应式设计 ========== */
-        @media (max-width: 992px) {
-            /* 平板端和大手机端也显示两栏 */
+        /* Pad端 (769px-1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* 案例筛选器在Pad端居中对齐 */
+            .case-filter {
+                justify-content: center;
+                flex-wrap: nowrap;
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 12px 20px;
+                font-size: 15px;
+                min-width: auto;
+            }
+            
             .case-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
@@ -750,7 +760,7 @@
                 height: 240px;
             }
             
-            /* 分页布局：pad和大手机端水平对齐，返回按钮在左边 */
+            /* 分页布局：pad端水平对齐，返回按钮在左边 */
             .pagination-container {
                 flex-direction: row;
                 align-items: center;
@@ -784,22 +794,18 @@
                 font-size: 11px;
             }
             
-            /* 案例筛选器在大手机端单排显示，左右边距与案例选项卡对齐 */
+            /* 案例筛选器在大手机端单排显示 */
             .case-filter {
                 flex-wrap: nowrap;
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding: 0;
-                margin-left: -10px;
-                margin-right: -10px;
-                padding-left: 10px;
-                padding-right: 10px;
+                justify-content: center;
+                gap: 8px;
             }
             
             .filter-btn {
                 min-width: auto;
                 flex-shrink: 0;
-                padding: 10px 20px;
+                padding: 10px 18px;
+                font-size: 14px;
             }
         }
         
@@ -861,36 +867,29 @@
                 letter-spacing: 0;
             }
             
-            /* 案例筛选器在小手机端分两行显示 */
+            /* 案例筛选器在小手机端：5个按钮保持同样大小和间距，居中对齐 */
             .case-filter {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 10px;
-                padding: 0 15px; /* 两侧留边距 */
-                margin: 0;
-            }
-            
-            /* 第一行：前3个按钮 */
-            .filter-btn:nth-child(-n+3) {
-                order: 1;
-                flex-basis: calc(33.333% - 7px);
-                margin: 0;
-            }
-            
-            /* 第二行：后2个按钮 */
-            .filter-btn:nth-child(4),
-            .filter-btn:nth-child(5) {
-                order: 2;
-                flex-basis: calc(50% - 5px);
-                margin: 0;
+                gap: 8px;
+                margin: 0 auto 30px;
             }
             
             .filter-btn {
+                flex: 0 0 calc(33.333% - 8px); /* 前三个按钮每行三个 */
+                max-width: calc(33.333% - 8px);
                 padding: 10px 5px;
                 font-size: 13px;
-                min-height: 36px;
+                min-height: 40px;
                 text-align: center;
-                width: auto;
+                margin: 0;
+            }
+            
+            /* 第四和第五个按钮在第二行，居中显示 */
+            .filter-btn:nth-child(4),
+            .filter-btn:nth-child(5) {
+                flex: 0 0 calc(50% - 8px); /* 第二行两个按钮 */
+                max-width: calc(50% - 8px);
             }
             
             /* 小手机端：分页容器垂直居中对齐 */
@@ -907,10 +906,17 @@
                 width: 100%;
             }
             
-            /* 页脚在小手机端保持单排但允许滚动 */
+            /* 页脚在小手机端保持单排居中显示 */
             .footer-links {
                 gap: 15px;
-                padding: 0 10px 15px;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .footer-link {
+                font-size: 14px;
             }
             
             .footer-slogan {
@@ -919,21 +925,11 @@
             }
         }
         
-        /* 确保在中等屏幕以上筛选器单排居中 */
+        /* 在中等屏幕以上筛选器单排居中 */
         @media (min-width: 769px) {
             .case-filter {
                 flex-wrap: nowrap;
                 justify-content: center;
-            }
-        }
-        
-        /* 在420-768px之间，筛选器单排显示，左右与案例选项卡边距对齐 */
-        @media (min-width: 421px) and (max-width: 768px) {
-            .case-filter {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-left: 0;
-                padding-right: 0;
             }
         }
     </style>
