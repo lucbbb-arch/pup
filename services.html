@@ -326,23 +326,14 @@
             display: grid;
             gap: 30px;
             margin: 0 auto;
+            max-width: 1000px;
         }
 
-        /* 电脑端和Pad端：2x3网格 */
-        @media (min-width: 769px) {
-            .services-cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, 1fr);
-                max-width: 1000px;
-            }
-        }
-
-        /* 手机端：2x3网格 */
-        @media (max-width: 768px) and (min-width: 481px) {
+        /* 电脑端、Pad端、手机端：2x3网格 */
+        @media (min-width: 481px) {
             .services-cards-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(3, 1fr);
-                gap: 20px;
             }
         }
 
@@ -355,7 +346,7 @@
             }
         }
 
-        /* 服务卡片样式 - 小红书风格 */
+        /* 服务卡片样式 - 1:1方形框布局 */
         .service-card-item {
             background: var(--light);
             border-radius: var(--radius);
@@ -365,6 +356,7 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            aspect-ratio: 1 / 1; /* 1:1方形框 */
         }
 
         .service-card-item:hover {
@@ -374,7 +366,7 @@
 
         .service-card-img {
             width: 100%;
-            height: 200px;
+            height: 70%; /* 图片占70%高度 */
             overflow: hidden;
             position: relative;
         }
@@ -392,48 +384,25 @@
 
         .service-card-content {
             padding: 20px;
-            flex-grow: 1;
+            height: 30%; /* 内容占30%高度 */
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .service-card-title {
             font-size: 18px;
             font-weight: 600;
-            color: var(--gray4);
-            margin-bottom: 10px;
-            order: 2; /* 标题在内容之后 */
+            color: var(--brand);
+            margin-bottom: 8px;
+            text-align: center;
         }
 
         .service-card-description {
             font-size: 14px;
             color: var(--gray3);
-            line-height: 1.6;
-            margin-bottom: 15px;
-            order: 1; /* 内容在标题之前 */
-        }
-
-        .service-card-features {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            order: 3;
-        }
-
-        .service-card-features li {
-            font-size: 13px;
-            color: var(--gray3);
-            padding: 4px 0;
-            position: relative;
-            padding-left: 18px;
-        }
-
-        .service-card-features li:before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--brand);
-            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
         }
 
         /* ========== 全屏图片浏览样式 ========== */
@@ -740,7 +709,7 @@
             opacity: 0.8;
         }
         
-        /* 页脚底部文字区域 - 修改为完全居中 */
+        /* 页脚底部文字区域 */
         .footer-info {
             text-align: center;
             width: 100%;
@@ -808,7 +777,6 @@
                 display: flex;
             }
             
-            /* 隐藏移动端指示点 */
             .fullscreen-dots {
                 display: none;
             }
@@ -843,16 +811,16 @@
                 padding: 20px;
                 gap: 0;
                 z-index: 999;
-                align-items: center; /* 改为居中 */
+                align-items: center;
             }
             .nav-links.active { display: flex; }
             .menu-btn { display: flex; }
             .nav-link {
                 padding: 15px 0;
-                width: 100%; /* 改为100%宽度 */
-                justify-content: center; /* 改为居中 */
+                width: 100%;
+                justify-content: center;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center; /* 改为居中 */
+                text-align: center;
             }
             .nav-link:last-child { border-bottom: none; }
             
@@ -860,10 +828,6 @@
                 height: 30vh;
                 min-height: 250px;
                 margin-top: 70px;
-            }
-            
-            .service-card-img {
-                height: 180px;
             }
             
             .service-card-content {
@@ -910,7 +874,6 @@
                 gap: 15px;
             }
             
-            /* 确保小手机端底部文字也居中 */
             .footer-info {
                 text-align: center;
                 padding: 0 20px;
@@ -920,7 +883,12 @@
         /* 极小手机端 (<=360px) */
         @media (max-width: 360px) {
             .service-card-img {
-                height: 160px;
+                height: 65%;
+            }
+            
+            .service-card-content {
+                height: 35%;
+                padding: 12px;
             }
             
             .fullscreen-slider {
@@ -1021,13 +989,7 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">设计服务</h3>
-                        <p class="service-card-description">我们提供从概念创意到施工图的全流程设计服务。我们的设计团队深谙品牌美学与空间逻辑，能够将品牌理念转化为可落地的展示方案。</p>
-                        <ul class="service-card-features">
-                            <li>品牌空间分析与策略规划</li>
-                            <li>概念方案设计与创意呈现</li>
-                            <li>3D效果图与虚拟现实展示</li>
-                            <li>施工图绘制与技术规范</li>
-                        </ul>
+                        <p class="service-card-description">概念规划・效果精效・工程拆解</p>
                     </div>
                 </div>
                 
@@ -1038,13 +1000,7 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">打样服务</h3>
-                        <p class="service-card-description">在批量生产前，我们提供专业的打样服务，通过实物样件验证设计的可行性与效果。我们的打样中心配备先进的数字化制造设备。</p>
-                        <ul class="service-card-features">
-                            <li>材料实验与性能测试</li>
-                            <li>结构验证与强度分析</li>
-                            <li>表面处理效果测试</li>
-                            <li>功能测试与用户体验验证</li>
-                        </ul>
+                        <p class="service-card-description">材料实测・结构严验</p>
                     </div>
                 </div>
                 
@@ -1055,13 +1011,7 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">生产服务</h3>
-                        <p class="service-card-description">我们拥有自建工厂和严格的质量控制体系，能够实现从单件定制到批量生产的柔性制造。采用数字化生产管理系统，确保每个环节的可追溯性。</p>
-                        <ul class="service-card-features">
-                            <li>精密加工与数控制造</li>
-                            <li>表面处理（喷涂、电镀、木纹）</li>
-                            <li>组装调试与功能测试</li>
-                            <li>质量检验与品控管理</li>
-                        </ul>
+                        <p class="service-card-description">柔性智造・按需精定</p>
                     </div>
                 </div>
                 
@@ -1072,13 +1022,7 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">配送服务</h3>
-                        <p class="service-card-description">我们建立了全球物流网络，能够提供安全、高效的配送服务。针对高端展示道具，我们提供专业的包装方案和运输监控，确保产品完好送达。</p>
-                        <ul class="service-card-features">
-                            <li>专业包装设计与定制</li>
-                            <li>国内国际运输（空运/海运）</li>
-                            <li>报关清关与文件处理</li>
-                            <li>保险服务与风险管控</li>
-                        </ul>
+                        <p class="service-card-description">专业包装・报关速通・航线优配</p>
                     </div>
                 </div>
                 
@@ -1089,13 +1033,7 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">安装服务</h3>
-                        <p class="service-card-description">我们拥有专业的安装团队，能够在全球范围内提供标准化安装服务。特别注重安装过程对门店运营的影响，采用分阶段、错峰作业方式。</p>
-                        <ul class="service-card-features">
-                            <li>现场勘查与方案制定</li>
-                            <li>专业安装施工团队</li>
-                            <li>现场调试与功能测试</li>
-                            <li>客户培训与使用指导</li>
-                        </ul>
+                        <p class="service-card-description">门店零扰式施作</p>
                     </div>
                 </div>
                 
@@ -1106,18 +1044,12 @@
                     </div>
                     <div class="service-card-content">
                         <h3 class="service-card-title">维护服务</h3>
-                        <p class="service-card-description">我们提供全生命周期的维护服务，确保展示系统长期稳定运行。采用模块化设计理念，使维护和升级更加便捷高效。</p>
-                        <ul class="service-card-features">
-                            <li>定期巡检与预防性维护</li>
-                            <li>快速响应维修服务</li>
-                            <li>部件更换与系统升级</li>
-                            <li>生命周期管理与优化</li>
-                        </ul>
+                        <p class="service-card-description">快拆复用・全周期智管</p>
                     </div>
                 </div>
             </div>
             
-            <!-- 服务流程 - 改为图片 -->
+            <!-- 服务流程 -->
             <div class="service-process">
                 <h2 class="section-title" style="margin-top: 0;">全案服务流程</h2>
                 <p class="section-subtitle">标准化流程，专业团队，全程可视化管理</p>
@@ -1176,7 +1108,7 @@
                     { src: "assets/微信图片_20250417121703.jpg", caption: "概念方案设计与创意呈现" },
                     { src: "assets/1803.jpg", caption: "3D效果图与虚拟现实展示" }
                 ],
-                description: "我们提供从概念创意到施工图的全流程设计服务。我们的设计团队深谙品牌美学与空间逻辑，能够将品牌理念转化为可落地的展示方案。"
+                description: "概念规划・效果精效・工程拆解"
             },
             prototype: {
                 title: "打样服务",
@@ -1185,7 +1117,7 @@
                     { src: "assets/微信图片_20250417121620.jpg", caption: "结构验证与强度分析" },
                     { src: "assets/1803.jpg", caption: "表面处理效果测试" }
                 ],
-                description: "在批量生产前，我们提供专业的打样服务，通过实物样件验证设计的可行性与效果。我们的打样中心配备先进的数字化制造设备。"
+                description: "材料实测・结构严验"
             },
             production: {
                 title: "生产服务",
@@ -1194,7 +1126,7 @@
                     { src: "assets/微信图片_20250417121620.jpg", caption: "表面处理（喷涂、电镀、木纹）" },
                     { src: "assets/微信图片_20250417121703.jpg", caption: "组装调试与功能测试" }
                 ],
-                description: "我们拥有自建工厂和严格的质量控制体系，能够实现从单件定制到批量生产的柔性制造。采用数字化生产管理系统，确保每个环节的可追溯性。"
+                description: "柔性智造・按需精定"
             },
             delivery: {
                 title: "配送服务",
@@ -1203,7 +1135,7 @@
                     { src: "assets/微信图片_20250417121620.jpg", caption: "国内国际运输（空运/海运）" },
                     { src: "assets/微信图片_20250417121703.jpg", caption: "报关清关与文件处理" }
                 ],
-                description: "我们建立了全球物流网络，能够提供安全、高效的配送服务。针对高端展示道具，我们提供专业的包装方案和运输监控，确保产品完好送达。"
+                description: "专业包装・报关速通・航线优配"
             },
             installation: {
                 title: "安装服务",
@@ -1212,7 +1144,7 @@
                     { src: "assets/微信图片_20250417121620.jpg", caption: "专业安装施工团队" },
                     { src: "assets/微信图片_20250417121703.jpg", caption: "现场调试与功能测试" }
                 ],
-                description: "我们拥有专业的安装团队，能够在全球范围内提供标准化安装服务。特别注重安装过程对门店运营的影响，采用分阶段、错峰作业方式。"
+                description: "门店零扰式施作"
             },
             maintenance: {
                 title: "维护服务",
@@ -1221,7 +1153,7 @@
                     { src: "assets/微信图片_20250417121620.jpg", caption: "快速响应维修服务" },
                     { src: "assets/微信图片_20250417121703.jpg", caption: "部件更换与系统升级" }
                 ],
-                description: "我们提供全生命周期的维护服务，确保展示系统长期稳定运行。采用模块化设计理念，使维护和升级更加便捷高效。"
+                description: "快拆复用・全周期智管"
             }
         };
 
