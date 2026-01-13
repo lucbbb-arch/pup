@@ -86,6 +86,35 @@
             transform: translateY(-3px);
         }
 
+        /* 服务更多按钮 - 新增样式 */
+        .btn-service-more {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: clamp(14px, 1.6vw, 16px);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            min-height: 42px;
+            min-width: 120px;
+            background: var(--light);
+            color: var(--brand);
+            border: 1px solid var(--brand);
+            margin-top: 10px; /* 与服务卡片的间距 */
+            margin-bottom: 10px;
+        }
+        .btn-service-more:hover {
+            background: var(--brand-or); /* 橙黄色背景 */
+            color: var(--light); /* 白色文字 */
+            border-color: var(--brand-or);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 143, 28, 0.3); /* 橙黄色阴影 */
+        }
+
         /* 标题 */
         .section-title {
             font-size: clamp(24px, 4vw, 40px);
@@ -110,7 +139,7 @@
             text-align: center;
             max-width: 600px;
             margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         /* ========== 布局模块 ========== */
@@ -296,35 +325,24 @@
             animation: fadeInUp 1s ease 0.5s forwards;
         }
 
-        /* 服务区域 - 新增公仔图像布局 */
+        /* 服务区域 */
         .services-section {
             position: relative;
             padding: clamp(40px, 5vw, 80px) 0;
         }
-        
-        /* 服务标题容器 - 包含标题、副标题和公仔 */
-        .services-title-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: clamp(30px, 4vw, 40px);
-            position: relative;
-        }
-        
-        /* 服务标题包装器 */
-        .services-title-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
         
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: clamp(15px, 2vw, 30px);
             margin-top: clamp(10px, 4vw, 30px);
+        }
+
+        /* 服务更多按钮容器 - 确保与精选案例区域一致 */
+        .service-more-container {
+            text-align: center;
+            margin-top: 1px;
+            margin-bottom: 20px;
         }
         
         /* 服务卡片链接样式 */
@@ -385,11 +403,9 @@
             margin: clamp(30px, 4vw, 60px) 0;
             margin-top: 10px;
             padding: 20px 0;
-            /* 移除之前的mask-image，使用内边距来防止切割 */
             position: relative;
         }
         
-        /* 为跑马灯容器添加渐变遮罩，但保留投影 */
         .marquee-container::before {
             content: '';
             position: absolute;
@@ -423,7 +439,6 @@
             position: relative;
             box-shadow: 0 10px 25px rgba(119, 86, 160, 0.3);
             background: var(--light);
-            /* 确保投影不会被切割 */
             margin: 10px 0;
         }
         .marquee-img-container {
@@ -682,6 +697,161 @@
             color: var(--gray3);
         }
 
+        /* 全屏图片浏览样式 */
+        .fullscreen-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-viewer.active {
+            display: flex;
+        }
+
+        .fullscreen-header {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .fullscreen-title {
+            color: var(--light);
+            font-size: 20px;
+            font-weight: 600;
+            max-width: 70%;
+            text-align: center;
+        }
+
+        .fullscreen-close {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 30px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .fullscreen-close:hover {
+            color: var(--brand-light);
+        }
+
+        .fullscreen-slider {
+            position: relative;
+            width: 90%;
+            height: 70%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-track {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .fullscreen-slide {
+            flex: 0 0 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .fullscreen-caption {
+            color: var(--light);
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            max-width: 80%;
+            padding: 0 20px;
+        }
+
+        /* 电脑端导航按钮 */
+        .fullscreen-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 24px;
+        }
+
+        .fullscreen-nav:hover {
+            background: var(--brand);
+        }
+
+        .fullscreen-prev {
+            left: 20px;
+        }
+
+        .fullscreen-next {
+            right: 20px;
+        }
+
+        /* 移动端指示点 */
+        .fullscreen-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .fullscreen-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .fullscreen-dot.active {
+            background: var(--brand);
+            transform: scale(1.2);
+        }
+
         /* ========== 动画 ========== */
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -703,40 +873,15 @@
         }
         
         @media (max-width: 996px) {
-    .services-grid { 
-        grid-template-columns: repeat(3, 1fr); 
-    }
-    
-    /* 平板设备调整服务标题布局 */
-    .services-header {
-        flex-direction: column;
-        gap: 15px
-    }
-    
-    .services-doll {
-        margin-right: 0;
-        margin-bottom: 10px;
-        order: -1; /* 将公仔放在标题上方 */
-        width: 60px;
-        height: 60px;
-    }
-}
+            .services-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            }
+        }
         
         @media (max-width: 768px) {
             .marquee-item {
                 flex: 0 0 clamp(200px, 40vw, 250px);
                 height: clamp(220px, 45vw, 280px);
-            }
-            
-            /* 手机设备调整服务标题布局 */
-            .services-header {
-                gap: 10px;
-            }
-            
-            .services-doll {
-                width: 50px;
-                height: 50px;
-                margin-bottom: 5px;
             }
             
             .footer-slogan {
@@ -754,7 +899,7 @@
             }
             /* Pad端显示移动端Logo墙 */
             .logo-grid-desktop { display: none; }
-            .logo-grid-mobile { display: grid; gap: 0; /* 移除网格间距 */}
+            .logo-grid-mobile { display: grid; gap: 0; }
             
             /* 手机端页脚链接水平显示 */
             .footer-links {
@@ -799,7 +944,6 @@
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .service-card { 
                 padding: 15px 15px; 
-                /* 减少小手机端服务卡片高度 */
                 min-height: 150px;
             }
             .service-icon { 
@@ -809,15 +953,12 @@
                 margin-bottom: 10px;
             }
             
-            /* 小手机设备调整服务标题布局 */
-            .services-header {
-                margin-bottom: 20px;
-            }
-            
-            .services-doll {
-                width: 40px;
-                height: 40px;
-                margin-bottom: 0;
+            /* 小手机端调整服务更多按钮 */
+            .btn-service-more {
+                padding: 12px 24px;
+                min-height: 38px;
+                min-width: 110px;
+                font-size: 14px;
             }
             
             .footer-links {
@@ -858,12 +999,39 @@
                 justify-items: center;
                 max-width: 100%;
                 margin: 0 auto;
-                gap: 0; /* 确保没有间隙 */
+                gap: 0;
             }
             
             .logo-grid-item {
                 width: 80px;
                 justify-content: center;
+            }
+        }
+        
+        /* 电脑端全屏导航按钮显示 */
+        @media (min-width: 1025px) {
+            .fullscreen-nav {
+                display: flex;
+            }
+            
+            .fullscreen-dots {
+                display: none;
+            }
+        }
+        
+        /* Pad端和手机端隐藏导航按钮，显示指示点 */
+        @media (max-width: 1024px) {
+            .fullscreen-nav {
+                display: none;
+            }
+            
+            .fullscreen-dots {
+                display: flex;
+            }
+            
+            .fullscreen-slider {
+                width: 95%;
+                height: 65%;
             }
         }
     </style>
@@ -877,6 +1045,38 @@
             <h3>关注PurpleWall微信</h3>
             <img src="assets/640.png" alt="微信公众号二维码">
             <p>扫描二维码关注我们</p>
+        </div>
+    </div>
+
+    <!-- 全屏图片浏览 -->
+    <div id="fullscreenViewer" class="fullscreen-viewer">
+        <div class="fullscreen-header">
+            <div class="fullscreen-title" id="fullscreenTitle">设计服务</div>
+            <button class="fullscreen-close" id="fullscreenClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="fullscreen-slider">
+            <button class="fullscreen-nav fullscreen-prev" id="fullscreenPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="fullscreen-track" id="fullscreenTrack">
+                <!-- 图片将由JavaScript动态生成 -->
+            </div>
+            
+            <button class="fullscreen-nav fullscreen-next" id="fullscreenNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="fullscreen-dots" id="fullscreenDots">
+                <!-- 指示点将由JavaScript动态生成 -->
+            </div>
+        </div>
+        
+        <div class="fullscreen-caption" id="fullscreenCaption">
+            <!-- 图片说明将由JavaScript动态生成 -->
         </div>
     </div>
 
@@ -917,64 +1117,70 @@
     </section>
 
     <!-- 服务区域 -->
-    <section class="section services-section">
+    <section class="section services-section" id="services-section">
         <div class="container">
             <div class="services-header">
                 <div class="services-title-wrapper">
                     <h2 class="section-title">我们的服务</h2>
                     <p class="section-subtitle">提供从概念创意到施工落地的全流程解决方案</p>
                 </div>
+
             </div>
-            
+            <!-- 服务更多按钮 - 新增 -->
+            <div class="service-more-container">
+                <a href="services.html" class="btn-service-more">更多…</a>
+            </div>
+
             <div class="services-grid">
                 <!-- 设计服务卡片 -->
-                <a href="services.html#design" class="service-card-link">
+                <div class="service-card-link" data-service="design">
                     <div class="service-card">
                         <div class="service-icon">设计</div>
                         <p class="service-description">概念规划・效果精效・工程拆解</p>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 打样服务卡片 -->
-                <a href="services.html#prototype" class="service-card-link">
+                <div class="service-card-link" data-service="prototype">
                     <div class="service-card">
                         <div class="service-icon">打样</div>
                         <p class="service-description">材料实测・结构严验</p>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 生产服务卡片 -->
-                <a href="services.html#production" class="service-card-link">
+                <div class="service-card-link" data-service="production">
                     <div class="service-card">
                         <div class="service-icon">生产</div>
                         <p class="service-description">柔性智造・按需精定</p>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 配送服务卡片 -->
-                <a href="services.html#delivery" class="service-card-link">
+                <div class="service-card-link" data-service="delivery">
                     <div class="service-card">
                         <div class="service-icon">配送</div>
                         <p class="service-description">专业包装・报关速通・航线优配</p>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 安装服务卡片 -->
-                <a href="services.html#installation" class="service-card-link">
+                <div class="service-card-link" data-service="installation">
                     <div class="service-card">
                         <div class="service-icon">安装</div>
                         <p class="service-description">门店零扰式施作</p>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 维护服务卡片 -->
-                <a href="services.html#maintenance" class="service-card-link">
+                <div class="service-card-link" data-service="maintenance">
                     <div class="service-card">
                         <div class="service-icon">维护</div>
                         <p class="service-description">快拆复用・全周期智管</p>
                     </div>
-                </a>
+                </div>
             </div>
+            
         </div>
     </section>
 
@@ -989,7 +1195,7 @@
             </div>
         </div>
 
-        <!-- 跑马灯 - 使用JavaScript动态生成 -->
+        <!-- 跑马灯 -->
         <div class="marquee-container" id="marqueeContainer">
             <div class="marquee-track" id="marqueeTrack">
                 <!-- 案例将由JavaScript生成 -->
@@ -1056,7 +1262,63 @@
                 {img: 'assets/微信图片_20250417121703.jpg', title: '商业空间优化 · 动线规划与视觉导引', link: 'case-e.html'},
                 {img: 'assets/1803.jpg', title: '概念店设计 · 品牌文化深度传达', link: 'case-f.html'}
             ],
-            logos: 36 // Logo数量从30改为36
+            logos: 36, // Logo数量
+            services: {
+                design: {
+                    title: "设计服务",
+                    images: [
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "品牌空间分析与策略规划" },
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "概念方案设计与创意呈现" },
+                        { src: "assets/1803.jpg", caption: "3D效果图与虚拟现实展示" }
+                    ],
+                    description: "概念规划・效果精效・工程拆解"
+                },
+                prototype: {
+                    title: "打样服务",
+                    images: [
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "材料实验与性能测试" },
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "结构验证与强度分析" },
+                        { src: "assets/1803.jpg", caption: "表面处理效果测试" }
+                    ],
+                    description: "材料实测・结构严验"
+                },
+                production: {
+                    title: "生产服务",
+                    images: [
+                        { src: "assets/1803.jpg", caption: "精密加工与数控制造" },
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "表面处理（喷涂、电镀、木纹）" },
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "组装调试与功能测试" }
+                    ],
+                    description: "柔性智造・按需精定"
+                },
+                delivery: {
+                    title: "配送服务",
+                    images: [
+                        { src: "assets/配送服务-placeholder.jpg", caption: "专业包装设计与定制" },
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "国内国际运输（空运/海运）" },
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "报关清关与文件处理" }
+                    ],
+                    description: "专业包装・报关速通・航线优配"
+                },
+                installation: {
+                    title: "安装服务",
+                    images: [
+                        { src: "assets/安装服务-placeholder.jpg", caption: "现场勘查与方案制定" },
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "专业安装施工团队" },
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "现场调试与功能测试" }
+                    ],
+                    description: "门店零扰式施作"
+                },
+                maintenance: {
+                    title: "维护服务",
+                    images: [
+                        { src: "assets/维护服务-placeholder.jpg", caption: "定期巡检与预防性维护" },
+                        { src: "assets/微信图片_20250417121620.jpg", caption: "快速响应维修服务" },
+                        { src: "assets/微信图片_20250417121703.jpg", caption: "部件更换与系统升级" }
+                    ],
+                    description: "快拆复用・全周期智管"
+                }
+            }
         };
 
         // ========== 核心功能类 ==========
@@ -1070,6 +1332,8 @@
                 this.setupVideo();
                 this.generateMarquee();
                 this.generateLogos();
+                this.setupServiceCards();
+                this.setupFullscreenViewer();
                 this.setupAnimations();
                 this.setupResize();
                 this.setupSocialMedia();
@@ -1178,6 +1442,215 @@
                 if (mobileLogos) mobileLogos.innerHTML = generateLogoHTML(config.logos);
             }
             
+            // 服务卡片点击事件
+            setupServiceCards() {
+                const serviceCards = document.querySelectorAll('.service-card-link');
+                
+                serviceCards.forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const serviceId = card.getAttribute('data-service');
+                        this.openFullscreenViewer(serviceId);
+                    });
+                });
+            }
+            
+            // 全屏浏览功能
+            setupFullscreenViewer() {
+                this.fullscreenViewer = document.getElementById('fullscreenViewer');
+                this.fullscreenTrack = document.getElementById('fullscreenTrack');
+                this.fullscreenTitle = document.getElementById('fullscreenTitle');
+                this.fullscreenCaption = document.getElementById('fullscreenCaption');
+                this.fullscreenClose = document.getElementById('fullscreenClose');
+                this.fullscreenPrev = document.getElementById('fullscreenPrev');
+                this.fullscreenNext = document.getElementById('fullscreenNext');
+                this.fullscreenDots = document.getElementById('fullscreenDots');
+                
+                this.currentService = null;
+                this.currentSlide = 0;
+                
+                // 关闭全屏
+                this.fullscreenClose.addEventListener('click', () => {
+                    this.closeFullscreenViewer();
+                });
+                
+                // 上一张
+                this.fullscreenPrev.addEventListener('click', () => {
+                    this.prevSlide();
+                });
+                
+                // 下一张
+                this.fullscreenNext.addEventListener('click', () => {
+                    this.nextSlide();
+                });
+                
+                // ESC键关闭
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.fullscreenViewer.classList.contains('active')) {
+                        this.closeFullscreenViewer();
+                    }
+                    
+                    // 左右箭头切换
+                    if (this.fullscreenViewer.classList.contains('active')) {
+                        if (e.key === 'ArrowLeft') {
+                            this.prevSlide();
+                        } else if (e.key === 'ArrowRight') {
+                            this.nextSlide();
+                        }
+                    }
+                });
+                
+                // 触摸滑动支持
+                let startX = 0;
+                let endX = 0;
+                
+                this.fullscreenViewer.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                
+                this.fullscreenViewer.addEventListener('touchmove', (e) => {
+                    endX = e.touches[0].clientX;
+                });
+                
+                this.fullscreenViewer.addEventListener('touchend', () => {
+                    const diffX = startX - endX;
+                    
+                    // 如果滑动距离超过50px，则切换图片
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0 && this.currentSlide < config.services[this.currentService].images.length - 1) {
+                            // 向左滑动，显示下一张
+                            this.nextSlide();
+                        } else if (diffX < 0 && this.currentSlide > 0) {
+                            // 向右滑动，显示上一张
+                            this.prevSlide();
+                        } else if (Math.abs(diffX) > 100) {
+                            // 大幅度滑动退出全屏
+                            this.closeFullscreenViewer();
+                        }
+                    }
+                });
+            }
+            
+            // 打开全屏浏览
+            openFullscreenViewer(serviceId) {
+                this.currentService = serviceId;
+                this.currentSlide = 0;
+                
+                const service = config.services[serviceId];
+                
+                // 更新标题
+                this.fullscreenTitle.textContent = service.title;
+                
+                // 清空并重新生成图片
+                this.fullscreenTrack.innerHTML = '';
+                service.images.forEach((image, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'fullscreen-slide';
+                    
+                    const img = document.createElement('img');
+                    img.src = image.src;
+                    img.alt = service.title;
+                    
+                    slide.appendChild(img);
+                    this.fullscreenTrack.appendChild(slide);
+                });
+                
+                // 清空并重新生成指示点
+                this.fullscreenDots.innerHTML = '';
+                service.images.forEach((image, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'fullscreen-dot';
+                    if (index === 0) dot.classList.add('active');
+                    dot.setAttribute('data-slide', index);
+                    
+                    dot.addEventListener('click', () => {
+                        this.goToSlide(index);
+                    });
+                    
+                    this.fullscreenDots.appendChild(dot);
+                });
+                
+                // 更新说明
+                this.fullscreenCaption.textContent = service.images[0].caption;
+                
+                // 显示全屏浏览
+                this.fullscreenViewer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // 重置位置
+                this.fullscreenTrack.style.transform = 'translateX(0)';
+                
+                // 更新按钮状态
+                this.updateNavButtons();
+            }
+            
+            // 关闭全屏浏览
+            closeFullscreenViewer() {
+                this.fullscreenViewer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // 上一张
+            prevSlide() {
+                if (this.currentSlide > 0) {
+                    this.currentSlide--;
+                    this.updateSlider();
+                }
+            }
+            
+            // 下一张
+            nextSlide() {
+                const service = config.services[this.currentService];
+                if (this.currentSlide < service.images.length - 1) {
+                    this.currentSlide++;
+                    this.updateSlider();
+                }
+            }
+            
+            // 跳转到指定幻灯片
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateSlider();
+            }
+            
+            // 更新滑动器
+            updateSlider() {
+                this.fullscreenTrack.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+                
+                // 更新指示点
+                const dots = this.fullscreenDots.querySelectorAll('.fullscreen-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+                
+                // 更新说明
+                const service = config.services[this.currentService];
+                this.fullscreenCaption.textContent = service.images[this.currentSlide].caption;
+                
+                // 更新按钮状态
+                this.updateNavButtons();
+            }
+            
+            // 更新导航按钮状态
+            updateNavButtons() {
+                const service = config.services[this.currentService];
+                
+                // 电脑端显示/隐藏按钮
+                if (window.innerWidth >= 1025) {
+                    if (this.currentSlide === 0) {
+                        this.fullscreenPrev.style.display = 'none';
+                    } else {
+                        this.fullscreenPrev.style.display = 'flex';
+                    }
+                    
+                    if (this.currentSlide === service.images.length - 1) {
+                        this.fullscreenNext.style.display = 'none';
+                    } else {
+                        this.fullscreenNext.style.display = 'flex';
+                    }
+                }
+            }
+            
             // 滚动动画
             setupAnimations() {
                 const animateOnScroll = () => {
@@ -1210,6 +1683,11 @@
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }
+                    
+                    // 更新全屏浏览导航按钮
+                    if (this.currentService) {
+                        this.updateNavButtons();
+                    }
                 });
             }
             
@@ -1222,8 +1700,6 @@
                         this.showQrcodeModal();
                     });
                 }
-                
-                // Facebook按钮已在HTML中直接链接
             }
             
             // 二维码弹窗功能
@@ -1258,7 +1734,7 @@
                 const modal = document.getElementById('qrcodeModal');
                 if (modal) {
                     modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // 防止背景滚动
+                    document.body.style.overflow = 'hidden';
                 }
             }
             
@@ -1267,7 +1743,7 @@
                 const modal = document.getElementById('qrcodeModal');
                 if (modal) {
                     modal.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // 恢复背景滚动
+                    document.body.style.overflow = 'auto';
                 }
             }
         }

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>案例展示 | PurpleWall 上海紫墙</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,6 +24,7 @@
             --gray3:#323232;
             --gray4:#1d1d1f;
             --gray-427c: #d0d3d4;
+            --gray-428c: #c1c6c8;
             --gray-429c: #a2aaad;
         }
 
@@ -105,8 +106,7 @@
             margin-bottom: 10px;
         }
 
-        /* ========== 布局模块 - 与主页统一 ========== */
-        /* 导航 */
+        /* ========== 导航 - 与主页完全统一 ========== */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -231,6 +231,8 @@
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
+            align-items: center;
+            justify-content: center;
         }
 
         /* 子页面Hero区域 */
@@ -549,7 +551,7 @@
             padding: 0 5px;
         }
 
-        /* 页脚 - 与主页统一 */
+        /* ========== 页脚 - 与主页完全统一 ========== */
         .footer {
             background: #111;
             padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
@@ -623,7 +625,7 @@
             max-width: 100%;
         }
         
-        /* 页脚链接颜色设置 */
+        /* 页脚链接颜色设置 - 与主页统一 */
         .footer-link {
             text-decoration: none;
             transition: var(--transition);
@@ -691,7 +693,7 @@
             color: var(--gray-429c);
         }
 
-        /* 二维码弹窗 */
+        /* 二维码弹窗 - 与主页统一 */
         .qrcode-modal {
             display: none;
             position: fixed;
@@ -777,6 +779,33 @@
         }
         
         @media (max-width: 768px) {
+            /* 导航响应式 - 与主页统一 */
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+                z-index: 999;
+            }
+            .nav-links.active { display: flex; }
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+            }
+            .nav-link {
+                padding: 15px 0;
+                width: 100%;
+                justify-content: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                text-align: center;
+            }
+            .nav-link:last-child { border-bottom: none; }
+            
             /* 案例统计数据在大手机端缩小显示 */
             .case-stats {
                 gap: 10px;
@@ -792,6 +821,10 @@
             
             .stat-label {
                 font-size: 11px;
+            }
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
             }
             
             /* 案例筛选器在大手机端单排显示 */
@@ -810,27 +843,6 @@
         }
         
         @media (max-width: 420px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-            }
-            .nav-links.active { display: flex; }
-            .menu-btn { display: flex; }
-            .nav-link {
-                padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            .nav-link:last-child { border-bottom: none; }
-            
             .sub-hero {
                 height: 30vh;
                 min-height: 250px;
@@ -941,7 +953,7 @@
         <div class="qrcode-content">
             <span class="close-qrcode">&times;</span>
             <h3>关注PurpleWall微信</h3>
-            <img src="assets/qrcode-placeholder.jpg" alt="微信公众号二维码">
+            <img src="assets/640.png" alt="微信公众号二维码">
             <p>扫描二维码关注我们</p>
         </div>
     </div>
@@ -1142,7 +1154,7 @@
     </footer>
 
     <script>
-        // ========== 核心功能类 ==========
+        // ========== 核心功能类 - 与主页统一 ==========
         class PurpleWall {
             constructor() {
                 this.caseItems = document.querySelectorAll('.case-item');
@@ -1168,7 +1180,7 @@
                 this.updateDisplay();
             }
             
-            // 导航功能
+            // 导航功能 - 与主页统一
             setupNav() {
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
@@ -1404,7 +1416,7 @@
                 setTimeout(animateOnScroll, 100);
             }
             
-            // 响应式处理
+            // 响应式处理 - 与主页统一
             setupResize() {
                 window.addEventListener('resize', () => {
                     const navLinks = document.querySelector('.nav-links');
@@ -1417,7 +1429,7 @@
                 });
             }
             
-            // 社交媒体功能
+            // 社交媒体功能 - 与主页统一
             setupSocialMedia() {
                 // 微信按钮点击事件
                 const wechatBtn = document.getElementById('wechatBtn');
@@ -1428,7 +1440,7 @@
                 }
             }
             
-            // 二维码弹窗功能
+            // 二维码弹窗功能 - 与主页统一
             setupQrcodeModal() {
                 const modal = document.getElementById('qrcodeModal');
                 const closeBtn = document.querySelector('.close-qrcode');

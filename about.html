@@ -106,7 +106,7 @@
         }
 
         /* ========== 布局模块 - 与主页统一 ========== */
-        /* 导航 */
+        /* 导航 - 与服务页面完全统一 */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -136,7 +136,7 @@
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 */
+        /* 导航链接基础样式 - 与服务页面完全统一 */
         .nav-link {
             text-decoration: none;
             font-weight: 700;
@@ -147,7 +147,7 @@
             color: var(--brand);
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
+        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 - 与服务页面完全统一 */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -231,6 +231,8 @@
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
+            align-items: center;
+            justify-content: center;
         }
 
         /* 子页面Hero区域 */
@@ -547,7 +549,7 @@
             line-height: 1.6;
         }
 
-        /* 页脚 - 与主页统一 */
+        /* ========== 页脚 - 与服务页面完全统一 ========== */
         .footer {
             background: #111;
             padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
@@ -616,7 +618,7 @@
             gap: clamp(30px, 2vw, 40px);
         }
         
-        /* 页脚链接颜色设置 */
+        /* 页脚链接颜色设置 - 与服务页面完全统一 */
         .footer-link {
             text-decoration: none;
             transition: var(--transition);
@@ -672,12 +674,23 @@
             opacity: 0.8;
         }
         
+        /* 页脚底部文字区域 */
+        .footer-info {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
         .footer-info p {
             font-size: 14px;
             color: var(--gray-429c);
+            text-align: center;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 二维码弹窗 */
+        /* 二维码弹窗 - 与服务页面完全统一 */
         .qrcode-modal {
             display: none;
             position: fixed;
@@ -721,7 +734,7 @@
             color: var(--gray3);
         }
 
-        /* ========== 响应式设计 ========== */
+        /* ========== 响应式设计优化 ========== */
         @media (max-width: 992px) {
             .history-item,
             .history-item.reverse {
@@ -771,17 +784,20 @@
             }
         }
         
-        @media (max-width: 420px) {
+        /* 小手机端响应式 - 与服务页面统一 */
+        @media (max-width: 480px) {
+            /* 导航栏响应式 */
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.98);
+                background: rgba(0, 0, 0, 0.8);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 padding: 20px;
                 gap: 0;
                 z-index: 999;
+                align-items: center;
             }
             .nav-links.active { display: flex; }
             .menu-btn { display: flex; }
@@ -790,6 +806,7 @@
                 width: 100%;
                 justify-content: center;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                text-align: center;
             }
             .nav-link:last-child { border-bottom: none; }
             
@@ -804,26 +821,51 @@
             }
             
             .footer-links {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 15px;
                 text-align: center;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            
+            .footer-link {
+                font-size: 14px;
+                white-space: nowrap;
+            }
+            
+            .footer-slogan {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-info {
+                text-align: center;
+                padding: 0 20px;
+            }
+        }
+        
+        /* 极小手机端 */
+        @media (max-width: 360px) {
+            .footer-link {
+                font-size: 13px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- 二维码弹窗 -->
+    <!-- 二维码弹窗 - 与服务页面完全统一 -->
     <div id="qrcodeModal" class="qrcode-modal">
         <div class="qrcode-content">
             <span class="close-qrcode">&times;</span>
             <h3>关注PurpleWall微信</h3>
-            <img src="assets/qrcode-placeholder.jpg" alt="微信公众号二维码">
+            <img src="assets/640.png" alt="微信公众号二维码">
             <p>扫描二维码关注我们</p>
         </div>
     </div>
 
-    <!-- 导航栏 - 与主页统一 -->
+    <!-- 导航栏 - 与服务页面完全统一 -->
     <header class="header" id="header">
         <div class="container">
             <div class="nav">
@@ -1037,7 +1079,7 @@
         </div>
     </main>
 
-    <!-- 页脚 - 与主页统一 -->
+    <!-- 页脚 - 与服务页面完全统一 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1071,7 +1113,7 @@
     </footer>
 
     <script>
-        // ========== 核心功能类 - 与主页统一 ==========
+        // ========== 核心功能类 - 与服务页面统一 ==========
         class PurpleWall {
             constructor() {
                 this.init();
@@ -1085,7 +1127,7 @@
                 this.setupQrcodeModal();
             }
             
-            // 导航功能
+            // 导航功能 - 与服务页面统一
             setupNav() {
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
@@ -1106,7 +1148,7 @@
                     // 点击链接关闭菜单
                     navLinks.querySelectorAll('a').forEach(link => {
                         link.addEventListener('click', () => {
-                            if (window.innerWidth <= 420) {
+                            if (window.innerWidth <= 480) {
                                 navLinks.classList.remove('active');
                                 menuBtn.querySelector('i').className = 'fas fa-bars';
                             }
@@ -1117,6 +1159,11 @@
                 // 当前页面高亮
                 const currentPage = location.pathname.split('/').pop() || 'index.html';
                 document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+                
+                // 页脚链接当前页面高亮
+                document.querySelectorAll('.footer-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
                 });
             }
@@ -1143,20 +1190,20 @@
                 setTimeout(animateOnScroll, 100);
             }
             
-            // 响应式处理
+            // 响应式处理 - 与服务页面统一
             setupResize() {
                 window.addEventListener('resize', () => {
                     const navLinks = document.querySelector('.nav-links');
                     const menuBtn = document.getElementById('menuBtn');
                     
-                    if (window.innerWidth > 420 && navLinks && menuBtn) {
+                    if (window.innerWidth > 480 && navLinks && menuBtn) {
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }
                 });
             }
             
-            // 社交媒体功能
+            // 社交媒体功能 - 与服务页面统一
             setupSocialMedia() {
                 // 微信按钮点击事件
                 const wechatBtn = document.getElementById('wechatBtn');
@@ -1165,11 +1212,9 @@
                         this.showQrcodeModal();
                     });
                 }
-                
-                // Facebook按钮已在HTML中直接链接
             }
             
-            // 二维码弹窗功能
+            // 二维码弹窗功能 - 与服务页面统一
             setupQrcodeModal() {
                 const modal = document.getElementById('qrcodeModal');
                 const closeBtn = document.querySelector('.close-qrcode');
