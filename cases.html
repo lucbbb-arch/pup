@@ -106,7 +106,7 @@
             margin-bottom: 10px;
         }
 
-        /* ========== 导航 - 与主页完全统一 ========== */
+        /* ========== 导航栏样式 - 与services.html完全统一 ========== */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -738,58 +738,19 @@
         }
 
         /* ========== 响应式设计 ========== */
-        /* Pad端 (769px-1024px) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            /* 案例筛选器在Pad端居中对齐 */
-            .case-filter {
-                justify-content: center;
-                flex-wrap: nowrap;
-                gap: 10px;
-            }
-            
-            .filter-btn {
-                padding: 12px 20px;
-                font-size: 15px;
-                min-width: auto;
-            }
-            
-            .case-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .case-image {
-                height: 240px;
-            }
-            
-            /* 分页布局：pad端水平对齐，返回按钮在左边 */
-            .pagination-container {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
-            
-            .return-btn-container {
-                justify-content: flex-start;
-            }
-            
-            .pagination-controls {
-                justify-content: flex-end;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            /* 导航响应式 - 与主页统一 */
+        /* 小手机端 (<=480px) - 导航栏响应式 */
+        @media (max-width: 480px) {
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.98);
+                background: rgba(0, 0, 0, 0.8);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 padding: 20px;
                 gap: 0;
                 z-index: 999;
+                align-items: center;
             }
             .nav-links.active { display: flex; }
             .menu-btn { 
@@ -806,57 +767,10 @@
             }
             .nav-link:last-child { border-bottom: none; }
             
-            /* 案例统计数据在大手机端缩小显示 */
-            .case-stats {
-                gap: 10px;
-            }
-            
-            .stat-item {
-                padding: 15px 10px;
-            }
-            
-            .stat-number {
-                font-size: clamp(20px, 2.5vw, 32px);
-            }
-            
-            .stat-label {
-                font-size: 11px;
-            }
-            .case-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            /* 案例筛选器在大手机端单排显示 */
-            .case-filter {
-                flex-wrap: nowrap;
-                justify-content: center;
-                gap: 8px;
-            }
-            
-            .filter-btn {
-                min-width: auto;
-                flex-shrink: 0;
-                padding: 10px 18px;
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 420px) {
             .sub-hero {
                 height: 30vh;
                 min-height: 250px;
                 margin-top: 70px;
-            }
-            
-            /* 小手机端显示一栏 */
-            .case-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .case-image {
-                height: 280px;
             }
             
             /* 案例统计数据在小手机端进一步缩小但保持一行 */
@@ -877,6 +791,16 @@
             .stat-label {
                 font-size: 10px;
                 letter-spacing: 0;
+            }
+            
+            /* 小手机端显示一栏 */
+            .case-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .case-image {
+                height: 280px;
             }
             
             /* 案例筛选器在小手机端：5个按钮保持同样大小和间距，居中对齐 */
@@ -937,6 +861,84 @@
             }
         }
         
+        /* Pad端 (769px-1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* 案例筛选器在Pad端居中对齐 */
+            .case-filter {
+                justify-content: center;
+                flex-wrap: nowrap;
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 12px 20px;
+                font-size: 15px;
+                min-width: auto;
+            }
+            
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .case-image {
+                height: 240px;
+            }
+            
+            /* 分页布局：pad端水平对齐，返回按钮在左边 */
+            .pagination-container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .return-btn-container {
+                justify-content: flex-start;
+            }
+            
+            .pagination-controls {
+                justify-content: flex-end;
+            }
+        }
+        
+        /* 大手机端 (481px-768px) */
+        @media (max-width: 768px) and (min-width: 481px) {
+            /* 案例统计数据在大手机端缩小显示 */
+            .case-stats {
+                gap: 10px;
+            }
+            
+            .stat-item {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: clamp(20px, 2.5vw, 32px);
+            }
+            
+            .stat-label {
+                font-size: 11px;
+            }
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            /* 案例筛选器在大手机端单排显示 */
+            .case-filter {
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .filter-btn {
+                min-width: auto;
+                flex-shrink: 0;
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+        
         /* 在中等屏幕以上筛选器单排居中 */
         @media (min-width: 769px) {
             .case-filter {
@@ -958,7 +960,7 @@
         </div>
     </div>
 
-    <!-- 导航栏 - 与主页统一 -->
+    <!-- 导航栏 - 与services.html完全统一 -->
     <header class="header" id="header">
         <div class="container">
             <div class="nav">
@@ -1154,13 +1156,13 @@
     </footer>
 
     <script>
-        // ========== 核心功能类 - 与主页统一 ==========
+        // ========== 核心功能类 - 与services.html统一 ==========
         class PurpleWall {
             constructor() {
                 this.caseItems = document.querySelectorAll('.case-item');
                 this.totalCases = this.caseItems.length;
-                this.casesPerPageInitial = 6; // 初始每页显示6个
-                this.casesPerPageLoadMore = 10; // 点击加载更多后每页显示10个
+                this.casesPerPageInitial = 6;
+                this.casesPerPageLoadMore = 10;
                 this.currentPage = 1;
                 this.casesPerPage = this.casesPerPageInitial;
                 this.totalPages = Math.ceil(this.totalCases / this.casesPerPageInitial);
@@ -1180,7 +1182,7 @@
                 this.updateDisplay();
             }
             
-            // 导航功能 - 与主页统一
+            // 导航功能 - 与services.html完全一致
             setupNav() {
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
@@ -1201,7 +1203,7 @@
                     // 点击链接关闭菜单
                     navLinks.querySelectorAll('a').forEach(link => {
                         link.addEventListener('click', () => {
-                            if (window.innerWidth <= 420) {
+                            if (window.innerWidth <= 480) {
                                 navLinks.classList.remove('active');
                                 menuBtn.querySelector('i').className = 'fas fa-bars';
                             }
@@ -1416,20 +1418,20 @@
                 setTimeout(animateOnScroll, 100);
             }
             
-            // 响应式处理 - 与主页统一
+            // 响应式处理 - 与services.html统一
             setupResize() {
                 window.addEventListener('resize', () => {
                     const navLinks = document.querySelector('.nav-links');
                     const menuBtn = document.getElementById('menuBtn');
                     
-                    if (window.innerWidth > 420 && navLinks && menuBtn) {
+                    if (window.innerWidth > 480 && navLinks && menuBtn) {
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }
                 });
             }
             
-            // 社交媒体功能 - 与主页统一
+            // 社交媒体功能 - 与services.html统一
             setupSocialMedia() {
                 // 微信按钮点击事件
                 const wechatBtn = document.getElementById('wechatBtn');
@@ -1440,7 +1442,7 @@
                 }
             }
             
-            // 二维码弹窗功能 - 与主页统一
+            // 二维码弹窗功能 - 与services.html统一
             setupQrcodeModal() {
                 const modal = document.getElementById('qrcodeModal');
                 const closeBtn = document.querySelector('.close-qrcode');
