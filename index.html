@@ -474,12 +474,12 @@
         }
         .logo-grid-desktop {
             grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(5, 1fr);
+            grid-template-rows: repeat(6, 1fr);
         }
         .logo-grid-mobile {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(10, 1fr);
+            grid-template-rows: repeat(12, 1fr);
             background-color: var(--brand-light);
         }
         .logo-grid-item {
@@ -710,7 +710,7 @@
     /* 平板设备调整服务标题布局 */
     .services-header {
         flex-direction: column;
-        gap: 15px;
+        gap: 15px
     }
     
     .services-doll {
@@ -797,8 +797,17 @@
             }
             .nav-link:last-child { border-bottom: none; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .service-card { padding: 25px 15px; }
-            .service-icon { width: 60px; height: 60px; }
+            .service-card { 
+                padding: 15px 15px; 
+                /* 减少小手机端服务卡片高度 */
+                min-height: 150px;
+            }
+            .service-icon { 
+                width: 40px; 
+                height: 40px; 
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
             
             /* 小手机设备调整服务标题布局 */
             .services-header {
@@ -853,7 +862,7 @@
             }
             
             .logo-grid-item {
-                width: 90px;
+                width: 80px;
                 justify-content: center;
             }
         }
@@ -1047,7 +1056,7 @@
                 {img: 'assets/微信图片_20250417121703.jpg', title: '商业空间优化 · 动线规划与视觉导引', link: 'case-e.html'},
                 {img: 'assets/1803.jpg', title: '概念店设计 · 品牌文化深度传达', link: 'case-f.html'}
             ],
-            logos: 30 // Logo数量
+            logos: 36 // Logo数量从30改为36
         };
 
         // ========== 核心功能类 ==========
