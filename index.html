@@ -3,185 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>PurpleWall 上海紫墙</title>
+    <title>PurpleWall | 案例精选</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ========== 精简CSS变量 ========== */
+        /* ====== CSS变量 ====== */
         :root {
             --brand: #7756A0;
             --brand-light: #9D7BCB;
-            --brand-pu: #4e008e;
-            --brand-gr: #d0df00;
             --brand-or: #ff8f1c;
+            --brand-gr: #d0df00;
             --brand-re: #c82272;
-            --dark: #1d252d;
-            --light: #ffffff;
-            --radius: 12px;
-            --shadow: 0 8px 30px rgba(0,0,0,0.12);
             --transition: all 0.3s ease;
-            --gray-427c: #d0d3d4;
-            --gray-428c: #c1c6c8;
-            --gray-429c: #a2aaad;
-            --gray1:#fafafc;
-            --gray2:#f5f5f7;
-            --gray3:#323232;
-            --gray4:#1d1d1f;
+            --spacing-logo: 60px; /* logo间距基准 */
         }
 
-        /* ========== 基础样式 ========== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--gray4);
-            background: var(--gray1);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+        /* ====== 基础重置 ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
-        }
-        .text-center { text-align: center; }
-
-        /* ========== 组件样式 ========== */
-        /* 按钮 */
-        .btn-primary, .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: clamp(14px, 1.6vw, 16px);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            min-height: 42px;
-            min-width: 120px;
-        }
-        .btn-primary {
-            background: var(--light);
-            color: var(--brand);
-            border: 1px solid var(--brand);
-            margin-bottom: 10px;
-        }
-        .btn-primary:hover {
-            background: var(--brand);
-            color: var(--light);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(119, 86, 160, 0.3);
-        }
-        .btn-secondary {
-            background: transparent;           
-            color: var(--light);
-            border: 1px solid var(--brand-light);
-        }
-        .btn-secondary:hover {
-            background: var(--brand);
-            transform: translateY(-3px);
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
         }
 
-        /* 服务更多按钮 - 新增样式 */
-        .btn-service-more {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: clamp(14px, 1.6vw, 16px);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            min-height: 42px;
-            min-width: 120px;
-            background: var(--light);
-            color: var(--brand);
-            border: 1px solid var(--brand);
-            margin-top: 10px; /* 与服务卡片的间距 */
-            margin-bottom: 10px;
-        }
-        .btn-service-more:hover {
-            background: var(--brand-or); /* 橙黄色背景 */
-            color: var(--light); /* 白色文字 */
-            border-color: var(--brand-or);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(255, 143, 28, 0.3); /* 橙黄色阴影 */
-        }
-
-        /* 标题 */
-        .section-title {
-            font-size: clamp(24px, 4vw, 40px);
-            color: var(--gray4);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: clamp(12px, 2vw, 24px);
-            letter-spacing: clamp(3px, 1vw, 6px);
-            margin-top: 80px;
-        }
-        .section-subtitle {
-            font-size: clamp(14px, 1.5vw, 16px);
-            color: var(--gray3);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
-        }
-        .section-subtitle-1 {
-            font-size: clamp(14px, 1.5vw, 16px);
-            color: var(--gray3);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
-        }
-
-        /* ========== 布局模块 ========== */
-        /* 导航 */
+        /* ====== 多端适配导航栏 ====== */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: transparent;
+            padding: 20px 0;
             transition: var(--transition);
-            padding: 18px 0;
         }
-        .header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-        }
-        .nav {
+        
+        /* 导航栏内容容器 - 自适应宽度 */
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 var(--spacing-logo);
+            width: 100%;
         }
-        .brand img { height: 32px; transition: var(--transition); }
-        .brand:hover img { opacity: 0.8; }
         
+        /* 深色背景时导航栏文字白色 */
+        .header.dark-nav {
+            color: #fff;
+        }
+        
+        /* 浅色背景时导航栏文字深色 */
+        .header.light-nav {
+            color: #1d1d1f;
+        }
+        
+        /* Logo左对齐，与左边距保持1个logo距离 */
+        .brand {
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+        
+        .brand img {
+            height: 32px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .brand:hover img {
+            opacity: 0.8;
+        }
+        
+        /* 深色背景时logo白色 */
+        .header.dark-nav .brand img {
+            filter: brightness(0) invert(1);
+        }
+        
+        /* 浅色背景时logo深色 */
+        .header.light-nav .brand img {
+            filter: brightness(0);
+        }
+        
+        /* 导航链接和语言切换右对齐 */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: clamp(20px, 3vw, 40px);
+        }
+        
+        /* 桌面端导航链接 */
         .nav-links {
             display: flex;
-            gap: clamp(20px, 3vw, 40px);
+            align-items: center;
+            gap: clamp(20px, 2vw, 30px);
         }
         
         /* 导航链接基础样式 */
         .nav-link {
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--brand);
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
+        /* 深色背景时链接白色 */
+        .header.dark-nav .nav-link {
+            color: #fff;
+        }
+        
+        /* 浅色背景时链接深色 */
+        .header.light-nav .nav-link {
+            color: #1d1d1f;
+        }
+        
+        /* 导航链接下划线效果 - 悬停或激活时显示 */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -190,910 +127,771 @@
             transition: width 0.3s ease;
         }
         
-        /* 首页 - 白色 */
-        .nav-link[href="index.html"]::after {
-            background: var(--light);
-        }
-        .nav-link[href="index.html"]:hover,
-        .nav-link[href="index.html"].active {
-            color: var(--light);
-        }
-        .nav-link[href="index.html"]:hover::after,
-        .nav-link[href="index.html"].active::after {
-            width: 100%;
-        }
-        
         /* 服务 - 橙色 */
         .nav-link[href="services.html"]::after {
             background: var(--brand-or);
         }
-        .nav-link[href="services.html"]:hover,
-        .nav-link[href="services.html"].active {
-            color: var(--brand-or);
-        }
         .nav-link[href="services.html"]:hover::after,
         .nav-link[href="services.html"].active::after {
             width: 100%;
+        }
+        .nav-link[href="services.html"]:hover,
+        .nav-link[href="services.html"].active {
+            color: var(--brand-or);
         }
         
         /* 案例 - 浅紫色 */
         .nav-link[href="cases.html"]::after {
             background: var(--brand-light);
         }
-        .nav-link[href="cases.html"]:hover,
-        .nav-link[href="cases.html"].active {
-            color: var(--brand-light);
-        }
         .nav-link[href="cases.html"]:hover::after,
         .nav-link[href="cases.html"].active::after {
             width: 100%;
+        }
+        .nav-link[href="cases.html"]:hover,
+        .nav-link[href="cases.html"].active {
+            color: var(--brand-light);
         }
         
         /* 关于 - 绿色 */
         .nav-link[href="about.html"]::after {
             background: var(--brand-gr);
         }
-        .nav-link[href="about.html"]:hover,
-        .nav-link[href="about.html"].active {
-            color: var(--brand-gr);
-        }
         .nav-link[href="about.html"]:hover::after,
         .nav-link[href="about.html"].active::after {
             width: 100%;
+        }
+        .nav-link[href="about.html"]:hover,
+        .nav-link[href="about.html"].active {
+            color: var(--brand-gr);
         }
         
         /* 联系 - 红色 */
         .nav-link[href="contact.html"]::after {
             background: var(--brand-re);
         }
-        .nav-link[href="contact.html"]:hover,
-        .nav-link[href="contact.html"].active {
-            color: var(--brand-re);
-        }
         .nav-link[href="contact.html"]:hover::after,
         .nav-link[href="contact.html"].active::after {
             width: 100%;
         }
+        .nav-link[href="contact.html"]:hover,
+        .nav-link[href="contact.html"].active {
+            color: var(--brand-re);
+        }
         
+        /* 语言切换器 - 右对齐 */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: inherit;
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .header.light-nav .language-btn {
+            border-color: rgba(29, 29, 31, 0.2);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-light);
+        }
+        
+        .header.light-nav .language-btn:hover {
+            background: rgba(29, 29, 31, 0.05);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 移动端菜单按钮 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--light);
-            font-size: 24px;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: var(--transition);
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Hero区域 */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-        .hero video {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
-        }
-        .hero-overlay {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, 
-                rgba(0,0,0,0.1) 0%,
-                rgba(18,11,26,0.2) 50%,
-                rgba(18,11,26,0.3) 100%);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .hero-title {
-            font-size: clamp(36px, 8vw, 88px);
-            font-weight: 700;
-            color: var(--light);
-            line-height: 1.2;
-            margin-bottom: 24px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease forwards;
-        }
-        .hero-divider {
-            width: 180px; height: 1px;
-            background: var(--brand-light);
-            margin: 0 auto 30px;
-            animation: scaleIn 0.8s ease 0.3s forwards;
-        }
-        .hero-subtitle {
-            font-size: clamp(16px, 1.8vw, 18px);
-            color: var(--gray2);
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease 0.5s forwards;
-        }
-
-        /* 服务区域 */
-        .services-section {
-            position: relative;
-            padding: clamp(40px, 5vw, 80px) 0;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: clamp(15px, 2vw, 30px);
-            margin-top: clamp(10px, 4vw, 30px);
-        }
-
-        /* 服务更多按钮容器 - 确保与精选案例区域一致 */
-        .service-more-container {
-            text-align: center;
-            margin-top: 1px;
-            margin-bottom: 20px;
-        }
-        
-        /* 服务卡片链接样式 */
-        .service-card-link {
-            text-decoration: none;
-            display: block;
-            transition: var(--transition);
-        }
-        
-        .service-card-link:hover {
-            transform: translateY(-5px);
-        }
-        
-        .service-card {
-            background: var(--light);
-            border-radius: var(--radius);
-            padding: clamp(25px, 3vw, 40px) clamp(20px, 2.5vw, 30px);
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        .service-icon {
-            width: clamp(60px, 5vw, 70px);
-            height: clamp(60px, 5vw, 70px);
-            background: var(--brand);
-            color: var(--light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(24px, 2.5vw, 28px);
-            margin: 0 auto clamp(15px, 2vw, 25px);
-            transition: var(--transition);
-        }
-        .service-card:hover .service-icon {
-            background: var(--brand-or);
-            transform: rotate(10deg) scale(1.1);
-        }
-        .service-description {
-            font-size: clamp(14px, 1.5vw, 16px);
-            color: #666;
-        }
-
-        /* 案例跑马灯 */
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            margin: clamp(30px, 4vw, 60px) 0;
-            margin-top: 10px;
-            padding: 20px 0;
-            position: relative;
-        }
-        
-        .marquee-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, 
-                rgba(250, 250, 252, 1) 0%, 
-                rgba(250, 250, 252, 0) 10%, 
-                rgba(250, 250, 252, 0) 90%, 
-                rgba(250, 250, 252, 1) 100%);
-            pointer-events: none;
-            z-index: 2;
-        }
-        
-        .marquee-track {
-            display: flex;
-            gap: clamp(20px, 2.5vw, 30px);
-            width: max-content;
-            animation: marqueeScroll 30s linear infinite;
-            padding: 10px 0;
-        }
-        .marquee-container:hover .marquee-track { animation-play-state: paused; }
-        
-        .marquee-item {
-            flex: 0 0 clamp(250px, 25vw, 400px);
-            height: clamp(280px, 30vw, 380px);
-            border-radius: var(--radius);
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(119, 86, 160, 0.3);
-            background: var(--light);
-            margin: 10px 0;
-        }
-        .marquee-img-container {
-            height: 80%;
-            overflow: hidden;
-        }
-        .case-link img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        .case-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(157, 123, 203, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .case-link:hover img { transform: scale(1.05); }
-        .case-link:hover .case-overlay { opacity: 1; }
-        .case-title {
-            height: 20%;
-            padding: clamp(5px, 1.5vw, 10px);
-            background: var(--light);
-            color: var(--gray3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: clamp(14px, 1.5vw, 16px);
-        }
-
-        /* Logo墙 */
-        .logo-wall-title {
-            text-align: center;
-        }
-
-        .logo-grid {
-            display: grid;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-        .logo-grid-desktop {
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(6, 1fr);
-        }
-        .logo-grid-mobile {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(12, 1fr);
-            background-color: var(--brand-light);
-        }
-        .logo-grid-item {
-            background: var(--brand-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: clamp(12px, 1.5vw, 20px);
-            transition: var(--transition);
-            border: none;
-        }
-        
-        .logo-grid-item img {
-            max-height: clamp(40px, 5vw, 60px);
-            filter: brightness(0) invert(1);
-            transition: var(--transition);
-        }
-
-        /* 页脚 */
-        .footer {
-            background: #111;
-            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(60px, 5vw, 50px);
-        }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(30px, 4vw, 40px);
-        }
-        
-        .footer-brand {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .footer-logo { 
-            height: 32px; 
-            margin-bottom: 0;
-        }
-
-        .footer-slogan {
-            font-size: 16px;
-            color: var(--gray-427c);
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        /* 社交媒体图标 */
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-left: 10px;
-        }
-        
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-            font-size: 18px;
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        
-        .social-icon:hover {
-            background: var(--brand-light);
-            transform: translateY(-3px);
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: clamp(30px, 2vw, 40px);
-        }
-        
-        /* 页脚链接颜色设置 */
-        .footer-link {
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: clamp(14px, 1.5vw, 16px);
-            padding: 5px 0;
-            position: relative;
-        }
-        
-        /* 页脚链接基础颜色 */
-        .footer-link[href="index.html"] {
-            color: var(--light);
-        }
-        
-        .footer-link[href="services.html"] {
-            color: var(--brand-or);
-        }
-        
-        .footer-link[href="cases.html"] {
-            color: var(--brand-light);
-        }
-        
-        .footer-link[href="about.html"] {
-            color: var(--brand-gr);
-        }
-        
-        .footer-link[href="contact.html"] {
-            color: var(--brand-re);
-        }
-        
-        /* 页脚链接悬停效果 */
-        .footer-link[href="index.html"]:hover {
-            color: var(--light);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="services.html"]:hover {
-            color: var(--brand-or);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="cases.html"]:hover {
-            color: var(--brand-light);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="about.html"]:hover {
-            color: var(--brand-gr);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="contact.html"]:hover {
-            color: var(--brand-re);
-            opacity: 0.8;
-        }
-        
-        .footer-info {
-            text-align: center; 
-            width: 100%;
-            margin-top: 20px;
-        }
-     
-        .footer-info p {
-            font-size: 14px;
-            color: var(--gray-429c);
-            text-align: center;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* 二维码弹窗 */
-        .qrcode-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .qrcode-content {
-            background: var(--light);
-            padding: 30px;
-            border-radius: var(--radius);
-            text-align: center;
-            max-width: 300px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .qrcode-content h3 {
-            margin-bottom: 15px;
-            color: var(--brand);
-        }
-        
-        .qrcode-content img {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 15px;
-        }
-        
-        .close-qrcode {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray3);
-        }
-
-        /* 全屏图片浏览样式 */
-        .fullscreen-viewer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 3000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fullscreen-viewer.active {
-            display: flex;
-        }
-
-        .fullscreen-header {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 10;
-        }
-
-        .fullscreen-title {
-            color: var(--light);
+            color: inherit;
             font-size: 20px;
-            font-weight: 600;
-            max-width: 70%;
-            text-align: center;
-        }
-
-        .fullscreen-close {
-            background: transparent;
-            border: none;
-            color: var(--light);
-            font-size: 30px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: var(--transition);
-        }
-
-        .fullscreen-close:hover {
-            color: var(--brand-light);
-        }
-
-        .fullscreen-slider {
-            position: relative;
-            width: 90%;
-            height: 70%;
-            max-width: 900px;
-            display: flex;
             align-items: center;
             justify-content: center;
         }
+        
+        .header.light-nav .menu-btn {
+            border-color: rgba(29, 29, 31, 0.2);
+        }
 
-        .fullscreen-track {
+        /* ====== 全屏案例滑块 ====== */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .slider-track {
             display: flex;
             height: 100%;
             width: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
         }
-
-        .fullscreen-slide {
+        
+        .case-slide {
             flex: 0 0 100%;
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ====== 6个精选案例版式 ====== */
+        
+        /* 版式1：满版底图（视频） */
+        .layout-full-video {
+            background: #000;
+        }
+        
+        .layout-full-video .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        /* 版式2：白底 + 竖版图片居中 */
+        .layout-white-vertical {
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px;
+        }
+        
+        .layout-white-vertical .image-container {
+            max-width: 400px;
+            width: 100%;
+            height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .fullscreen-slide img {
-            max-width: 100%;
-            max-height: 100%;
+        
+        .layout-white-vertical .vertical-img {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
         }
-
-        .fullscreen-caption {
-            color: var(--light);
-            font-size: 16px;
-            text-align: center;
-            margin-top: 20px;
-            max-width: 80%;
-            padding: 0 20px;
+        
+        /* 版式3：满版底图（图片） */
+        .layout-full-image {
+            position: relative;
+            background: #000;
         }
-
-        /* 电脑端导航按钮 */
-        .fullscreen-nav {
+        
+        .layout-full-image .full-img {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        /* 版式4：黑底 + 横版图片居中 */
+        .layout-black-horizontal {
+            background: #000000;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            font-size: 24px;
+            padding: 60px;
         }
-
-        .fullscreen-nav:hover {
-            background: var(--brand);
+        
+        .layout-black-horizontal .image-container {
+            max-width: 90%;
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .fullscreen-prev {
-            left: 20px;
+        
+        .layout-black-horizontal .horizontal-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-
-        .fullscreen-next {
-            right: 20px;
+        
+        /* 版式5：满版底图（图片） */
+        .layout-full-image-2 {
+            position: relative;
+            background: #000;
         }
-
-        /* 移动端指示点 */
-        .fullscreen-dots {
+        
+        .layout-full-image-2 .full-img {
             position: absolute;
-            bottom: 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        /* 版式6：灰底 + 居中内容 */
+        .layout-gray-center {
+            background: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+        
+        .layout-gray-center .content-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .layout-gray-center .gray-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            margin-bottom: 40px;
+        }
+        
+        /* 案例文字内容 - 根据不同版式调整 */
+        .case-content {
+            position: absolute;
+            z-index: 20;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s ease 0.3s;
+        }
+        
+        .case-slide.active .case-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 常规位置：左下角 */
+        .content-position-default {
+            bottom: 15%;
+            left: var(--spacing-logo);
+            max-width: 800px;
+        }
+        
+        /* 位置：居中 */
+        .content-position-center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(40px);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+        
+        .case-slide.active .content-position-center {
+            transform: translate(-50%, -50%) translateY(0);
+        }
+        
+        /* 大标题 - 和原首页一样 */
+        .case-title {
+            font-size: clamp(36px, 8vw, 88px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        
+        /* 深色背景标题 */
+        .dark-title {
+            color: #fff;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* 浅色背景标题 */
+        .light-title {
+            color: #1d1d1f;
+            text-shadow: none;
+        }
+        
+        /* 灰色背景标题 */
+        .gray-title {
+            color: #fff;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* 副标题 - 和原首页一样 */
+        .case-subtitle {
+            font-size: clamp(16px, 1.8vw, 18px);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+        
+        /* 深色背景副标题 */
+        .dark-subtitle {
+            color: #f5f5f7;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* 浅色背景副标题 */
+        .light-subtitle {
+            color: #666;
+            text-shadow: none;
+        }
+        
+        /* 灰色背景副标题 */
+        .gray-subtitle {
+            color: #ccc;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* 原首页的分隔线样式 */
+        .case-divider {
+            width: 180px; height: 1px;
+            margin: 0 0 30px;
+        }
+        
+        .dark-divider {
+            background: var(--brand-light);
+        }
+        
+        .light-divider {
+            background: #666;
+        }
+        
+        .gray-divider {
+            background: #999;
+        }
+
+        /* ====== 左右热区交互 ====== */
+        .left-hotzone,
+        .right-hotzone {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            z-index: 50;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,5 5,12 12,19" fill="white" opacity="0.7"/></svg>') 12 12, auto;
+        }
+        
+        .left-hotzone {
+            left: 0;
+        }
+        
+        .right-hotzone {
+            right: 0;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,5 19,12 12,19" fill="white" opacity="0.7"/></svg>') 12 12, auto;
+        }
+
+        /* ====== 角落功能按钮 ====== */
+        .corner-btn {
+            position: fixed;
+            bottom: 3rem;
+            z-index: 100;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+        
+        /* 左下角：只保留文字 */
+        .corner-btn.left {
+            left: var(--spacing-logo);
+            font-size: 1.1rem;
+        }
+        
+        /* 右下角：只保留文字 */
+        .corner-btn.right {
+            right: var(--spacing-logo);
+            font-size: 1rem;
+        }
+        
+        /* 深色背景时角落按钮文字白色 */
+        .corner-btn.dark-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .corner-btn.dark-text:hover {
+            color: #fff;
+        }
+        
+        /* 浅色背景时角落按钮文字深色 */
+        .corner-btn.light-text {
+            color: rgba(29, 29, 31, 0.9);
+        }
+        
+        .corner-btn.light-text:hover {
+            color: #1d1d1f;
+        }
+
+        /* ====== 案例进度指示器 ====== */
+        .progress-indicator {
+            position: fixed;
+            bottom: 2rem;
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            z-index: 10;
+            gap: 8px;
+            z-index: 100;
         }
-
-        .fullscreen-dot {
-            width: 10px;
-            height: 10px;
+        
+        .progress-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .fullscreen-dot.active {
-            background: var(--brand);
-            transform: scale(1.2);
-        }
-
-        /* ========== 动画 ========== */
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-            to { opacity: 1; transform: scaleX(1); }
-        }
-        @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ========== 响应式 ========== */
-        @media (max-width: 1200px) {
-            .services-doll {
-                width: 70px;
-                height: 70px;
-            }
         }
         
-        @media (max-width: 996px) {
-            .services-grid { 
-                grid-template-columns: repeat(3, 1fr); 
-            }
+        .progress-dot.active {
+            background: #ffffff;
+            transform: scale(1.3);
         }
         
+        /* ====== 响应式调整 ====== */
+        /* Pad端 (768px以下) */
         @media (max-width: 768px) {
-            .marquee-item {
-                flex: 0 0 clamp(200px, 40vw, 250px);
-                height: clamp(220px, 45vw, 280px);
+            :root {
+                --spacing-logo: 30px;
             }
             
-            .footer-slogan {
-                flex-direction: column;
-                gap: 15px;
+            .nav-container {
+                padding: 0 var(--spacing-logo);
             }
             
-            /* 调整跑马灯遮罩 */
-            .marquee-container::before {
-                background: linear-gradient(to right, 
-                    rgba(250, 250, 252, 1) 0%, 
-                    rgba(250, 250, 252, 0) 5%, 
-                    rgba(250, 250, 252, 0) 95%, 
-                    rgba(250, 250, 252, 1) 100%);
+            .layout-white-vertical,
+            .layout-black-horizontal,
+            .layout-gray-center {
+                padding: 40px;
             }
-            /* Pad端显示移动端Logo墙 */
-            .logo-grid-desktop { display: none; }
-            .logo-grid-mobile { display: grid; gap: 0; }
             
-            /* 手机端页脚链接水平显示 */
-            .footer-links {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-                width: 100%;
-                overflow-x: auto;
-                padding-bottom: 10px;
+            .layout-white-vertical .image-container,
+            .layout-black-horizontal .image-container {
+                height: 60vh;
+            }
+            
+            .layout-gray-center .content-container {
+                padding: 0 20px;
+            }
+            
+            .content-position-default {
+                left: var(--spacing-logo);
+                bottom: 20%;
+            }
+            
+            .content-position-center {
+                width: 95%;
+            }
+            
+            .case-title {
+                font-size: clamp(28px, 6vw, 48px);
+            }
+            
+            .corner-btn {
+                bottom: 2rem;
+            }
+            
+            .corner-btn.left {
+                left: var(--spacing-logo);
+                font-size: 1rem;
+            }
+            
+            .corner-btn.right {
+                right: var(--spacing-logo);
+            }
+            
+            .progress-indicator {
+                bottom: 5rem;
             }
         }
         
+        /* 手机端 (420px以下) */
         @media (max-width: 420px) {
+            :root {
+                --spacing-logo: 20px;
+            }
+            
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
+                background: rgba(0, 0, 0, 0.95);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 padding: 20px;
-                padding-right: 20px;
                 gap: 0;
                 z-index: 999;
                 align-items: center;
             }
-            .nav-links.active { display: flex; }
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
             .menu-btn { 
                 display: flex; 
                 align-items: center;
                 justify-content: center;
             }
-            .nav-link {
-                padding: 15px 0;
-                width: 100%;
+            
+            /* 移动端语言切换按钮 - 简洁适合手指操作 */
+            .mobile-language-btn {
+                display: flex;
+                align-items: center;
                 justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center;
-            }
-            .nav-link:last-child { border-bottom: none; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .service-card { 
-                padding: 15px 15px; 
-                min-height: 150px;
-            }
-            .service-icon { 
-                width: 40px; 
-                height: 40px; 
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
                 font-size: 18px;
-                margin-bottom: 10px;
+                margin-right: 10px;
             }
             
-            /* 小手机端调整服务更多按钮 */
-            .btn-service-more {
-                padding: 12px 24px;
-                min-height: 38px;
-                min-width: 110px;
-                font-size: 14px;
+            .layout-white-vertical,
+            .layout-black-horizontal,
+            .layout-gray-center {
+                padding: 20px;
             }
             
-            .footer-links {
-                flex-direction: row;
-                gap: 15px;
+            .layout-white-vertical .image-container,
+            .layout-black-horizontal .image-container {
+                height: 50vh;
+            }
+            
+            .content-position-default {
+                left: var(--spacing-logo);
+                bottom: 25%;
+                right: var(--spacing-logo);
                 text-align: center;
-                justify-content: center;
-                flex-wrap: nowrap;
-                overflow-x: auto;
             }
             
-            .footer-link {
-                font-size: 14px;
-                white-space: nowrap;
+            .content-position-center {
+                width: 100%;
+                padding: 0 15px;
             }
             
-            .footer-slogan {
+            .case-title {
+                font-size: clamp(24px, 8vw, 36px);
+            }
+            
+            .case-subtitle {
+                font-size: clamp(14px, 4vw, 16px);
+                margin-bottom: 20px;
+            }
+            
+            .corner-btn {
+                bottom: 1.5rem;
+            }
+            
+            .corner-btn.left {
+                left: var(--spacing-logo);
+                font-size: 0.9rem;
+            }
+            
+            .corner-btn.right {
+                right: var(--spacing-logo);
+                font-size: 0.9rem;
+            }
+            
+            .progress-indicator {
+                bottom: 6rem;
+            }
+            
+            /* 手机端隐藏桌面语言切换器 */
+            .language-switcher {
+                display: none;
+            }
+        }
+        
+        /* 大屏手机 (421px-767px) */
+        @media (min-width: 421px) and (max-width: 767px) {
+            :root {
+                --spacing-logo: 25px;
+            }
+            
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
-                gap: 15px;
-            }
-            .footer-info {
-                text-align: center;
-                padding: 0 20px;
-            }
-
-            /* 调整跑马灯遮罩 */
-            .marquee-container::before {
-                background: linear-gradient(to right, 
-                    rgba(250, 250, 252, 1) 0%, 
-                    rgba(250, 250, 252, 0) 2%, 
-                    rgba(250, 250, 252, 0) 98%, 
-                    rgba(250, 250, 252, 1) 100%);
-            }
-            
-            /* Logo墙小手机端水平居中 */
-            .logo-grid-mobile {
-                justify-content: center;
-                justify-items: center;
-                max-width: 100%;
-                margin: 0 auto;
+                padding: 20px;
                 gap: 0;
+                z-index: 999;
+                align-items: center;
             }
             
-            .logo-grid-item {
-                width: 80px;
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
                 justify-content: center;
             }
-        }
-        
-        /* 电脑端全屏导航按钮显示 */
-        @media (min-width: 1025px) {
-            .fullscreen-nav {
+            
+            /* 移动端语言切换按钮 */
+            .mobile-language-btn {
                 display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
+                font-size: 20px;
+                margin-right: 12px;
             }
             
-            .fullscreen-dots {
+            .content-position-default {
+                left: var(--spacing-logo);
+                bottom: 22%;
+            }
+            
+            .corner-btn.left {
+                left: var(--spacing-logo);
+            }
+            
+            .corner-btn.right {
+                right: var(--spacing-logo);
+            }
+            
+            /* 大屏手机也隐藏桌面语言切换器 */
+            .language-switcher {
                 display: none;
             }
         }
         
-        /* Pad端和手机端隐藏导航按钮，显示指示点 */
-        @media (max-width: 1024px) {
-            .fullscreen-nav {
+        /* 电脑端 (769px以上) */
+        @media (min-width: 769px) {
+            .menu-btn {
                 display: none;
             }
             
-            .fullscreen-dots {
-                display: flex;
+            .mobile-language-btn {
+                display: none;
             }
-            
-            .fullscreen-slider {
-                width: 95%;
-                height: 65%;
+        }
+        
+        /* 移动端菜单容器 */
+        .mobile-menu-container {
+            display: none;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-container {
+                display: flex;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- 二维码弹窗 -->
-    <div id="qrcodeModal" class="qrcode-modal">
-        <div class="qrcode-content">
-            <span class="close-qrcode">&times;</span>
-            <h3>关注PurpleWall微信</h3>
-            <img src="assets/640.png" alt="微信公众号二维码">
-            <p>扫描二维码关注我们</p>
-        </div>
-    </div>
-
-    <!-- 全屏图片浏览 -->
-    <div id="fullscreenViewer" class="fullscreen-viewer">
-        <div class="fullscreen-header">
-            <div class="fullscreen-title" id="fullscreenTitle">设计服务</div>
-            <button class="fullscreen-close" id="fullscreenClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="fullscreen-slider">
-            <button class="fullscreen-nav fullscreen-prev" id="fullscreenPrev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <div class="fullscreen-track" id="fullscreenTrack">
-                <!-- 图片将由JavaScript动态生成 -->
-            </div>
-            
-            <button class="fullscreen-nav fullscreen-next" id="fullscreenNext">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <div class="fullscreen-dots" id="fullscreenDots">
-                <!-- 指示点将由JavaScript动态生成 -->
-            </div>
-        </div>
-        
-        <div class="fullscreen-caption" id="fullscreenCaption">
-            <!-- 图片说明将由JavaScript动态生成 -->
-        </div>
-    </div>
-
     <!-- 导航栏 -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
-                </a>
+    <header class="header dark-nav" id="header">
+        <div class="nav-container">
+            <!-- Logo左对齐 -->
+            <a href="index.html" class="brand">
+                <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+            </a>
+            
+            <!-- 导航链接和语言切换右对齐 -->
+            <div class="nav-right">
+                <!-- 桌面端导航链接 -->
                 <nav class="nav-links">
-                    <a href="index.html" class="nav-link active">首页</a>
+                    <!-- 注意：已删除"首页"链接 -->
                     <a href="services.html" class="nav-link">服务</a>
                     <a href="cases.html" class="nav-link">案例</a>
                     <a href="about.html" class="nav-link">关于</a>
                     <a href="contact.html" class="nav-link">联系</a>
                 </nav>
+                
+                <!-- 桌面端语言切换器 -->
+                <div class="language-switcher">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>CHINESE</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active">CH</a>
+                        <a href="#" class="language-option">EN</a>
+                        <a href="#" class="language-option">FR</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单按钮和语言切换 -->
+            <div class="mobile-menu-container">
+                <button class="mobile-language-btn" id="mobileLanguageBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
                 <button class="menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1101,673 +899,461 @@
         </div>
     </header>
 
-    <!-- Hero区域 -->
-    <section class="hero">
-        <video id="heroVideo" playsinline muted autoplay loop>
-            <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">全案展陈・匠作于心</h1>
-                <div class="hero-divider"></div>
-                <p class="hero-subtitle">从创想落地  以匠心赴您所期</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 服务区域 -->
-    <section class="section services-section" id="services-section">
-        <div class="container">
-            <div class="services-header">
-                <div class="services-title-wrapper">
-                    <h2 class="section-title">我们的服务</h2>
-                    <p class="section-subtitle">提供从概念创意到施工落地的全流程解决方案</p>
-                </div>
-
-            </div>
-            <!-- 服务更多按钮 - 新增 -->
-            <div class="service-more-container">
-                <a href="services.html" class="btn-service-more">更多…</a>
-            </div>
-
-            <div class="services-grid">
-                <!-- 设计服务卡片 -->
-                <div class="service-card-link" data-service="design">
-                    <div class="service-card">
-                        <div class="service-icon">设计</div>
-                        <p class="service-description">概念规划・效果精效・工程拆解</p>
-                    </div>
-                </div>
-                
-                <!-- 打样服务卡片 -->
-                <div class="service-card-link" data-service="prototype">
-                    <div class="service-card">
-                        <div class="service-icon">打样</div>
-                        <p class="service-description">材料实测・结构严验</p>
-                    </div>
-                </div>
-                
-                <!-- 生产服务卡片 -->
-                <div class="service-card-link" data-service="production">
-                    <div class="service-card">
-                        <div class="service-icon">生产</div>
-                        <p class="service-description">柔性智造・按需精定</p>
-                    </div>
-                </div>
-                
-                <!-- 配送服务卡片 -->
-                <div class="service-card-link" data-service="delivery">
-                    <div class="service-card">
-                        <div class="service-icon">配送</div>
-                        <p class="service-description">专业包装・报关速通・航线优配</p>
-                    </div>
-                </div>
-                
-                <!-- 安装服务卡片 -->
-                <div class="service-card-link" data-service="installation">
-                    <div class="service-card">
-                        <div class="service-icon">安装</div>
-                        <p class="service-description">门店零扰式施作</p>
-                    </div>
-                </div>
-                
-                <!-- 维护服务卡片 -->
-                <div class="service-card-link" data-service="maintenance">
-                    <div class="service-card">
-                        <div class="service-icon">维护</div>
-                        <p class="service-description">快拆复用・全周期智管</p>
-                    </div>
+    <!-- 全屏案例滑块 -->
+    <div class="slider-container">
+        <!-- 左右热区 (无视觉分区，只有交互功能) -->
+        <div class="left-hotzone" id="leftHotzone"></div>
+        <div class="right-hotzone" id="rightHotzone"></div>
+        
+        <div class="slider-track" id="sliderTrack">
+            <!-- 案例1：满版底图（视频） -->
+            <div class="case-slide active layout-full-video" data-nav-color="dark">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
+                </video>
+                <div class="case-content content-position-default">
+                    <h1 class="case-title dark-title">全案展陈·匠作于心</h1>
+                    <div class="case-divider dark-divider"></div>
+                    <p class="case-subtitle dark-subtitle">从创意落地，以匠心筑您所期</p>
                 </div>
             </div>
             
-        </div>
-    </section>
-
-    <!-- 案例区域 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">精选案例</h2>
-            <p class="section-subtitle">服务全球高端品牌，以全链路展具方案，让创想落地</p>
-            <p class="section-subtitle-1">每一案，都是品牌与空间的质感对话</p>
-            <div class="text-center">
-                <a href="cases.html" class="btn-primary">更多…</a>
+            <!-- 案例2：白底 + 竖版图片居中 -->
+            <div class="case-slide layout-white-vertical" data-nav-color="light">
+                <div class="image-container">
+                    <img src="assets/2025-08-11_133845_823.jpg" alt="高端零售展具" class="vertical-img">
+                </div>
+                <div class="case-content content-position-center">
+                    <h1 class="case-title light-title">高端零售展具</h1>
+                    <div class="case-divider light-divider"></div>
+                    <p class="case-subtitle light-subtitle">品牌空间重塑与体验升级，融合匠心工艺与前瞻设计</p>
+                </div>
+            </div>
+            
+            <!-- 案例3：满版底图（图片） -->
+            <div class="case-slide layout-full-image" data-nav-color="dark">
+                <img src="assets/2025-08-11_133856_756.jpg" alt="艺术装置展陈" class="full-img">
+                <div class="case-content content-position-default">
+                    <h1 class="case-title dark-title">艺术装置展陈</h1>
+                    <div class="case-divider dark-divider"></div>
+                    <p class="case-subtitle dark-subtitle">沉浸式体验空间，讲述品牌故事，触动情感共鸣</p>
+                </div>
+            </div>
+            
+            <!-- 案例4：黑底 + 横版图片居中 -->
+            <div class="case-slide layout-black-horizontal" data-nav-color="dark">
+                <div class="image-container">
+                    <img src="assets/2025-08-11_133913_165.jpg" alt="智能展台系统" class="horizontal-img">
+                </div>
+                <div class="case-content content-position-center">
+                    <h1 class="case-title dark-title">智能展台系统</h1>
+                    <div class="case-divider dark-divider"></div>
+                    <p class="case-subtitle dark-subtitle">可复用模块化设计，智能互动，高效赋能品牌传播</p>
+                </div>
+            </div>
+            
+            <!-- 案例5：满版底图（图片） -->
+            <div class="case-slide layout-full-image-2" data-nav-color="dark">
+                <img src="assets/20250417121620.jpg" alt="国际展会设计" class="full-img">
+                <div class="case-content content-position-default">
+                    <h1 class="case-title dark-title">国际展会设计</h1>
+                    <div class="case-divider dark-divider"></div>
+                    <p class="case-subtitle dark-subtitle">全球品牌巡展，国际化视野与本土化执行完美结合</p>
+                </div>
+            </div>
+            
+            <!-- 案例6：灰底 + 居中内容 -->
+            <div class="case-slide layout-gray-center" data-nav-color="dark">
+                <div class="content-container">
+                    <img src="assets/20250417121703.jpg" alt="商业空间优化" class="gray-img">
+                    <h1 class="case-title gray-title">商业空间优化</h1>
+                    <div class="case-divider gray-divider"></div>
+                    <p class="case-subtitle gray-subtitle">动线规划与视觉引导，提升商业空间效率与体验</p>
+                </div>
             </div>
         </div>
 
-        <!-- 跑马灯 -->
-        <div class="marquee-container" id="marqueeContainer">
-            <div class="marquee-track" id="marqueeTrack">
-                <!-- 案例将由JavaScript生成 -->
-            </div>
+        <!-- 左下角案例信息按钮 -->
+        <div class="corner-btn left dark-text" id="leftCornerBtn">
+            <span id="caseInfo">MAC/主题道具</span>
         </div>
-
-        <!-- Logo墙 -->
-        <div class="logo-wall-section">
-            <div class="container">
-                <h3 class="logo-wall-title">服务客户</h3>
-                <p class="section-subtitle">与全球知名品牌共创价值</p>
-                
-                <div class="logo-grid logo-grid-desktop" id="desktopLogos">
-                    <!-- Logo将由JavaScript生成 -->
-                </div>
-                <div class="logo-grid logo-grid-mobile" id="mobileLogos">
-                    <!-- Logo将由JavaScript生成 -->
-                </div>
-            </div>
+        
+        <!-- 右下角案例详情链接 -->
+        <a href="case-a.html" class="corner-btn right dark-text" id="rightCornerBtn" target="_blank">
+            案例详情
+        </a>
+        
+        <!-- 案例进度指示器 -->
+        <div class="progress-indicator" id="progressIndicator">
+            <div class="progress-dot active" data-slide="0"></div>
+            <div class="progress-dot" data-slide="1"></div>
+            <div class="progress-dot" data-slide="2"></div>
+            <div class="progress-dot" data-slide="3"></div>
+            <div class="progress-dot" data-slide="4"></div>
+            <div class="progress-dot" data-slide="5"></div>
         </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall" class="footer-logo">
-                    <div class="footer-slogan">
-                        <span>我执匠心 · 您见未来</span>
-                        <div class="social-icons">
-                            <a href="javascript:void(0)" class="social-icon" id="wechatBtn">
-                                <i class="fab fa-weixin"></i>
-                            </a>
-                            <a href="https://www.facebook.com/" target="_blank" class="social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <a href="index.html" class="footer-link">首页</a>
-                    <a href="services.html" class="footer-link">服务</a>
-                    <a href="cases.html" class="footer-link">案例</a>
-                    <a href="about.html" class="footer-link">关于</a>
-                    <a href="contact.html" class="footer-link">联系</a>
-                </div>
-                <div class="footer-info">
-                    <p>© 2025 Shanghai Purple Wall Enterprise Marketing Consulting Co., Ltd.</p>
-                    <p>All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // ========== 数据配置 ==========
-        const config = {
-            cases: [
-                {img: 'assets/微信图片_2025-08-11_133845_823.jpg', title: '高端零售展具 · 品牌空间重塑', link: 'case-a.html'},
-                {img: 'assets/微信图片_2025-08-11_133856_756.jpg', title: '艺术装置展陈 · 沉浸式体验空间', link: 'case-b.html'},
-                {img: 'assets/微信图片_2025-08-11_133913_165.jpg', title: '智能展台系统 · 可复用模块化设计', link: 'case-c.html'},
-                {img: 'assets/微信图片_20250417121620.jpg', title: '国际展厅设计 · 全球品牌巡展', link: 'case-d.html'},
-                {img: 'assets/微信图片_20250417121703.jpg', title: '商业空间优化 · 动线规划与视觉导引', link: 'case-e.html'},
-                {img: 'assets/1803.jpg', title: '概念店设计 · 品牌文化深度传达', link: 'case-f.html'}
-            ],
-            logos: 36, // Logo数量
-            services: {
-                design: {
-                    title: "设计服务",
-                    images: [
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "品牌空间分析与策略规划" },
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "概念方案设计与创意呈现" },
-                        { src: "assets/1803.jpg", caption: "3D效果图与虚拟现实展示" }
-                    ],
-                    description: "概念规划・效果精效・工程拆解"
-                },
-                prototype: {
-                    title: "打样服务",
-                    images: [
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "材料实验与性能测试" },
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "结构验证与强度分析" },
-                        { src: "assets/1803.jpg", caption: "表面处理效果测试" }
-                    ],
-                    description: "材料实测・结构严验"
-                },
-                production: {
-                    title: "生产服务",
-                    images: [
-                        { src: "assets/1803.jpg", caption: "精密加工与数控制造" },
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "表面处理（喷涂、电镀、木纹）" },
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "组装调试与功能测试" }
-                    ],
-                    description: "柔性智造・按需精定"
-                },
-                delivery: {
-                    title: "配送服务",
-                    images: [
-                        { src: "assets/配送服务-placeholder.jpg", caption: "专业包装设计与定制" },
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "国内国际运输（空运/海运）" },
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "报关清关与文件处理" }
-                    ],
-                    description: "专业包装・报关速通・航线优配"
-                },
-                installation: {
-                    title: "安装服务",
-                    images: [
-                        { src: "assets/安装服务-placeholder.jpg", caption: "现场勘查与方案制定" },
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "专业安装施工团队" },
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "现场调试与功能测试" }
-                    ],
-                    description: "门店零扰式施作"
-                },
-                maintenance: {
-                    title: "维护服务",
-                    images: [
-                        { src: "assets/维护服务-placeholder.jpg", caption: "定期巡检与预防性维护" },
-                        { src: "assets/微信图片_20250417121620.jpg", caption: "快速响应维修服务" },
-                        { src: "assets/微信图片_20250417121703.jpg", caption: "部件更换与系统升级" }
-                    ],
-                    description: "快拆复用・全周期智管"
-                }
-            }
-        };
-
-        // ========== 核心功能类 ==========
-        class PurpleWall {
+        class InteractiveSlider {
             constructor() {
+                this.track = document.getElementById('sliderTrack');
+                this.slides = document.querySelectorAll('.case-slide');
+                this.dots = document.querySelectorAll('.progress-dot');
+                this.leftHotzone = document.getElementById('leftHotzone');
+                this.rightHotzone = document.getElementById('rightHotzone');
+                this.leftCornerBtn = document.getElementById('leftCornerBtn');
+                this.rightCornerBtn = document.getElementById('rightCornerBtn');
+                this.header = document.getElementById('header');
+                this.menuBtn = document.getElementById('menuBtn');
+                this.navLinks = document.querySelector('.nav-links');
+                this.caseInfo = document.getElementById('caseInfo');
+                this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+
+                this.currentIndex = 0;
+                this.totalSlides = this.slides.length;
+                this.isAnimating = false;
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 8000;
+
+                // 案例数据配置
+                this.casesData = [
+                    { 
+                        brand: "全案品牌", 
+                        type: "品牌展陈",
+                        detailUrl: "case-a.html",
+                        note: "全案展陈服务 - 视频介绍"
+                    },
+                    { 
+                        brand: "MAC", 
+                        type: "主题道具",
+                        detailUrl: "case-b.html",
+                        note: "高端零售展具 - 品牌空间重塑项目"
+                    },
+                    { 
+                        brand: "艺术装置", 
+                        type: "沉浸体验",
+                        detailUrl: "case-c.html",
+                        note: "艺术装置展陈 - 沉浸式体验空间项目"
+                    },
+                    { 
+                        brand: "智能科技", 
+                        type: "展台系统",
+                        detailUrl: "case-d.html",
+                        note: "智能展台系统 - 可复用模块化设计"
+                    },
+                    { 
+                        brand: "国际品牌", 
+                        type: "展会设计",
+                        detailUrl: "case-e.html",
+                        note: "国际展会设计 - 全球品牌巡展"
+                    },
+                    { 
+                        brand: "商业空间", 
+                        type: "优化设计",
+                        detailUrl: "case-f.html",
+                        note: "商业空间优化 - 动线规划与视觉引导"
+                    }
+                ];
+
                 this.init();
             }
-            
+
             init() {
-                this.setupNav();
-                this.setupVideo();
-                this.generateMarquee();
-                this.generateLogos();
-                this.setupServiceCards();
-                this.setupFullscreenViewer();
-                this.setupAnimations();
-                this.setupResize();
-                this.setupSocialMedia();
-                this.setupQrcodeModal();
-            }
-            
-            // 导航功能
-            setupNav() {
-                const header = document.getElementById('header');
-                const menuBtn = document.getElementById('menuBtn');
-                const navLinks = document.querySelector('.nav-links');
+                // 绑定热区点击事件
+                this.leftHotzone.addEventListener('click', () => this.prevSlide());
+                this.rightHotzone.addEventListener('click', () => this.nextSlide());
                 
-                // 滚动效果
-                const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
-                updateHeader();
-                window.addEventListener('scroll', updateHeader);
-                
-                // 移动菜单
-                if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', () => {
-                        const isActive = navLinks.classList.toggle('active');
-                        menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                    
-                    // 点击链接关闭菜单
-                    navLinks.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            if (window.innerWidth <= 420) {
-                                navLinks.classList.remove('active');
-                                menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
-                        });
-                    });
-                }
-                
-                // 当前页面高亮
-                const currentPage = location.pathname.split('/').pop() || 'index.html';
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === currentPage);
-                });
-            }
-            
-            // 视频优化
-            setupVideo() {
-                const video = document.getElementById('heroVideo');
-                if (!video) return;
-                
-                video.muted = true;
-                video.playsInline = true;
-                
-                video.play().catch(() => {
-                    const playOnInteraction = () => {
-                        video.play();
-                        document.removeEventListener('click', playOnInteraction);
-                        document.removeEventListener('touchstart', playOnInteraction);
-                    };
-                    document.addEventListener('click', playOnInteraction);
-                    document.addEventListener('touchstart', playOnInteraction);
-                });
-            }
-            
-            // 生成跑马灯内容
-            generateMarquee() {
-                const track = document.getElementById('marqueeTrack');
-                if (!track) return;
-                
-                // 生成两组实现无缝滚动
-                let html = '';
-                for (let i = 0; i < 2; i++) {
-                    config.cases.forEach(caseItem => {
-                        html += `
-                            <div class="marquee-item">
-                                <div class="marquee-img-container">
-                                    <a href="${caseItem.link}" class="case-link">
-                                        <img src="${caseItem.img}" alt="${caseItem.title}">
-                                        <div class="case-overlay">查看详情</div>
-                                    </a>
-                                </div>
-                                <div class="case-title">${caseItem.title}</div>
-                            </div>
-                        `;
-                    });
-                }
-                track.innerHTML = html;
-            }
-            
-            // 生成Logo墙
-            generateLogos() {
-                const desktopLogos = document.getElementById('desktopLogos');
-                const mobileLogos = document.getElementById('mobileLogos');
-                
-                const generateLogoHTML = (count) => {
-                    let html = '';
-                    for (let i = 1; i <= count; i++) {
-                        const num = i.toString().padStart(2, '0');
-                        html += `
-                            <div class="logo-grid-item">
-                                <img src="assets/logo${num}.png" alt="客户 Logo ${i}">
-                            </div>
-                        `;
-                    }
-                    return html;
-                };
-                
-                if (desktopLogos) desktopLogos.innerHTML = generateLogoHTML(config.logos);
-                if (mobileLogos) mobileLogos.innerHTML = generateLogoHTML(config.logos);
-            }
-            
-            // 服务卡片点击事件
-            setupServiceCards() {
-                const serviceCards = document.querySelectorAll('.service-card-link');
-                
-                serviceCards.forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const serviceId = card.getAttribute('data-service');
-                        this.openFullscreenViewer(serviceId);
-                    });
-                });
-            }
-            
-            // 全屏浏览功能
-            setupFullscreenViewer() {
-                this.fullscreenViewer = document.getElementById('fullscreenViewer');
-                this.fullscreenTrack = document.getElementById('fullscreenTrack');
-                this.fullscreenTitle = document.getElementById('fullscreenTitle');
-                this.fullscreenCaption = document.getElementById('fullscreenCaption');
-                this.fullscreenClose = document.getElementById('fullscreenClose');
-                this.fullscreenPrev = document.getElementById('fullscreenPrev');
-                this.fullscreenNext = document.getElementById('fullscreenNext');
-                this.fullscreenDots = document.getElementById('fullscreenDots');
-                
-                this.currentService = null;
-                this.currentSlide = 0;
-                
-                // 关闭全屏
-                this.fullscreenClose.addEventListener('click', () => {
-                    this.closeFullscreenViewer();
-                });
-                
-                // 上一张
-                this.fullscreenPrev.addEventListener('click', () => {
-                    this.prevSlide();
-                });
-                
-                // 下一张
-                this.fullscreenNext.addEventListener('click', () => {
-                    this.nextSlide();
-                });
-                
-                // ESC键关闭
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && this.fullscreenViewer.classList.contains('active')) {
-                        this.closeFullscreenViewer();
-                    }
-                    
-                    // 左右箭头切换
-                    if (this.fullscreenViewer.classList.contains('active')) {
-                        if (e.key === 'ArrowLeft') {
-                            this.prevSlide();
-                        } else if (e.key === 'ArrowRight') {
-                            this.nextSlide();
-                        }
-                    }
-                });
-                
-                // 触摸滑动支持
-                let startX = 0;
-                let endX = 0;
-                
-                this.fullscreenViewer.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                });
-                
-                this.fullscreenViewer.addEventListener('touchmove', (e) => {
-                    endX = e.touches[0].clientX;
-                });
-                
-                this.fullscreenViewer.addEventListener('touchend', () => {
-                    const diffX = startX - endX;
-                    
-                    // 如果滑动距离超过50px，则切换图片
-                    if (Math.abs(diffX) > 50) {
-                        if (diffX > 0 && this.currentSlide < config.services[this.currentService].images.length - 1) {
-                            // 向左滑动，显示下一张
-                            this.nextSlide();
-                        } else if (diffX < 0 && this.currentSlide > 0) {
-                            // 向右滑动，显示上一张
-                            this.prevSlide();
-                        } else if (Math.abs(diffX) > 100) {
-                            // 大幅度滑动退出全屏
-                            this.closeFullscreenViewer();
-                        }
-                    }
-                });
-            }
-            
-            // 打开全屏浏览
-            openFullscreenViewer(serviceId) {
-                this.currentService = serviceId;
-                this.currentSlide = 0;
-                
-                const service = config.services[serviceId];
-                
-                // 更新标题
-                this.fullscreenTitle.textContent = service.title;
-                
-                // 清空并重新生成图片
-                this.fullscreenTrack.innerHTML = '';
-                service.images.forEach((image, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = 'fullscreen-slide';
-                    
-                    const img = document.createElement('img');
-                    img.src = image.src;
-                    img.alt = service.title;
-                    
-                    slide.appendChild(img);
-                    this.fullscreenTrack.appendChild(slide);
-                });
-                
-                // 清空并重新生成指示点
-                this.fullscreenDots.innerHTML = '';
-                service.images.forEach((image, index) => {
-                    const dot = document.createElement('div');
-                    dot.className = 'fullscreen-dot';
-                    if (index === 0) dot.classList.add('active');
-                    dot.setAttribute('data-slide', index);
-                    
+                // 绑定进度指示器点击事件
+                this.dots.forEach(dot => {
                     dot.addEventListener('click', () => {
+                        const index = parseInt(dot.getAttribute('data-slide'));
                         this.goToSlide(index);
                     });
-                    
-                    this.fullscreenDots.appendChild(dot);
                 });
-                
-                // 更新说明
-                this.fullscreenCaption.textContent = service.images[0].caption;
-                
-                // 显示全屏浏览
-                this.fullscreenViewer.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                // 重置位置
-                this.fullscreenTrack.style.transform = 'translateX(0)';
-                
-                // 更新按钮状态
-                this.updateNavButtons();
-            }
-            
-            // 关闭全屏浏览
-            closeFullscreenViewer() {
-                this.fullscreenViewer.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            // 上一张
-            prevSlide() {
-                if (this.currentSlide > 0) {
-                    this.currentSlide--;
-                    this.updateSlider();
+
+                // 绑定移动端菜单按钮
+                if (this.menuBtn) {
+                    this.menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = this.navLinks.classList.toggle('active');
+                        this.menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
+                    });
                 }
-            }
-            
-            // 下一张
-            nextSlide() {
-                const service = config.services[this.currentService];
-                if (this.currentSlide < service.images.length - 1) {
-                    this.currentSlide++;
-                    this.updateSlider();
-                }
-            }
-            
-            // 跳转到指定幻灯片
-            goToSlide(index) {
-                this.currentSlide = index;
-                this.updateSlider();
-            }
-            
-            // 更新滑动器
-            updateSlider() {
-                this.fullscreenTrack.style.transform = `translateX(-${this.currentSlide * 100}%)`;
                 
-                // 更新指示点
-                const dots = this.fullscreenDots.querySelectorAll('.fullscreen-dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === this.currentSlide);
-                });
-                
-                // 更新说明
-                const service = config.services[this.currentService];
-                this.fullscreenCaption.textContent = service.images[this.currentSlide].caption;
-                
-                // 更新按钮状态
-                this.updateNavButtons();
-            }
-            
-            // 更新导航按钮状态
-            updateNavButtons() {
-                const service = config.services[this.currentService];
-                
-                // 电脑端显示/隐藏按钮
-                if (window.innerWidth >= 1025) {
-                    if (this.currentSlide === 0) {
-                        this.fullscreenPrev.style.display = 'none';
-                    } else {
-                        this.fullscreenPrev.style.display = 'flex';
-                    }
-                    
-                    if (this.currentSlide === service.images.length - 1) {
-                        this.fullscreenNext.style.display = 'none';
-                    } else {
-                        this.fullscreenNext.style.display = 'flex';
-                    }
-                }
-            }
-            
-            // 滚动动画
-            setupAnimations() {
-                const animateOnScroll = () => {
-                    document.querySelectorAll('.service-card, .marquee-item').forEach(el => {
-                        if (el.getBoundingClientRect().top < window.innerHeight * 0.8) {
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
+                // 点击页面其他区域关闭移动菜单
+                document.addEventListener('click', (e) => {
+                    if (this.navLinks && this.navLinks.classList.contains('active') && 
+                        !this.navLinks.contains(e.target) && 
+                        !this.menuBtn.contains(e.target)) {
+                        this.navLinks.classList.remove('active');
+                        if (this.menuBtn) {
+                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
                         }
-                    });
-                };
-                
-                // 设置初始状态
-                document.querySelectorAll('.service-card, .marquee-item').forEach(el => {
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                });
-                
-                window.addEventListener('scroll', animateOnScroll);
-                setTimeout(animateOnScroll, 100);
-            }
-            
-            // 响应式处理
-            setupResize() {
-                window.addEventListener('resize', () => {
-                    const navLinks = document.querySelector('.nav-links');
-                    const menuBtn = document.getElementById('menuBtn');
-                    
-                    if (window.innerWidth > 420 && navLinks && menuBtn) {
-                        navLinks.classList.remove('active');
-                        menuBtn.querySelector('i').className = 'fas fa-bars';
-                    }
-                    
-                    // 更新全屏浏览导航按钮
-                    if (this.currentService) {
-                        this.updateNavButtons();
-                    }
-                });
-            }
-            
-            // 社交媒体功能
-            setupSocialMedia() {
-                // 微信按钮点击事件
-                const wechatBtn = document.getElementById('wechatBtn');
-                if (wechatBtn) {
-                    wechatBtn.addEventListener('click', () => {
-                        this.showQrcodeModal();
-                    });
-                }
-            }
-            
-            // 二维码弹窗功能
-            setupQrcodeModal() {
-                const modal = document.getElementById('qrcodeModal');
-                const closeBtn = document.querySelector('.close-qrcode');
-                
-                // 点击弹窗外部关闭
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        this.hideQrcodeModal();
                     }
                 });
                 
-                // 点击关闭按钮
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => {
-                        this.hideQrcodeModal();
+                // 移动端语言切换按钮
+                if (this.mobileLanguageBtn) {
+                    this.mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggleMobileLanguageDropdown();
                     });
                 }
                 
-                // ESC键关闭
+                // 点击页面其他区域关闭移动语言菜单
+                document.addEventListener('click', (e) => {
+                    if (!this.mobileLanguageBtn.contains(e.target)) {
+                        this.closeMobileLanguageDropdown();
+                    }
+                });
+
+                // 键盘导航支持
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.hideQrcodeModal();
+                    if (e.key === 'ArrowLeft') this.prevSlide();
+                    if (e.key === 'ArrowRight') this.nextSlide();
+                    if (e.key === ' ') { e.preventDefault(); this.toggleAutoPlay(); }
+                });
+
+                // 更新左下角案例信息
+                this.updateCaseInfo();
+                
+                // 更新右下角详情链接
+                this.updateDetailLink();
+                
+                // 更新角落按钮颜色
+                this.updateCornerButtonsColor();
+
+                // 触摸滑动支持（移动端）
+                this.setupTouchEvents();
+
+                // 初始化自动播放
+                this.startAutoPlay();
+
+                // 初始化导航栏颜色
+                this.updateNavColor();
+            }
+
+            // 切换到指定索引的幻灯片
+            goToSlide(index) {
+                if (this.isAnimating) return;
+                this.isAnimating = true;
+
+                // 更新当前索引
+                this.currentIndex = (index + this.totalSlides) % this.totalSlides;
+
+                // 移动轨道
+                this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+
+                // 更新活动状态
+                this.slides.forEach(slide => slide.classList.remove('active'));
+                this.slides[this.currentIndex].classList.add('active');
+
+                // 更新进度指示器
+                this.dots.forEach(dot => dot.classList.remove('active'));
+                this.dots[this.currentIndex].classList.add('active');
+
+                // 更新视频播放状态
+                this.handleVideoPlayback();
+                
+                // 更新导航栏颜色
+                this.updateNavColor();
+                
+                // 更新角落按钮信息
+                this.updateCaseInfo();
+                this.updateDetailLink();
+                this.updateCornerButtonsColor();
+
+                // 动画结束后重置标志
+                setTimeout(() => {
+                    this.isAnimating = false;
+                }, 800);
+                
+                // 重置自动播放
+                this.resetAutoPlay();
+            }
+
+            prevSlide() {
+                this.goToSlide(this.currentIndex - 1);
+            }
+
+            nextSlide() {
+                this.goToSlide(this.currentIndex + 1);
+            }
+
+            // 处理视频播放
+            handleVideoPlayback() {
+                this.slides.forEach((slide, index) => {
+                    const video = slide.querySelector('video');
+                    if (video) {
+                        if (index === this.currentIndex) {
+                            video.play().catch(e => console.log('视频自动播放被阻止:', e));
+                        } else {
+                            video.pause();
+                        }
                     }
                 });
             }
-            
-            // 显示二维码弹窗
-            showQrcodeModal() {
-                const modal = document.getElementById('qrcodeModal');
-                if (modal) {
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+
+            // 更新导航栏颜色
+            updateNavColor() {
+                const currentSlide = this.slides[this.currentIndex];
+                const navColor = currentSlide.getAttribute('data-nav-color');
+                
+                if (navColor === 'light') {
+                    this.header.classList.remove('dark-nav');
+                    this.header.classList.add('light-nav');
+                } else {
+                    this.header.classList.remove('light-nav');
+                    this.header.classList.add('dark-nav');
                 }
             }
             
-            // 隐藏二维码弹窗
-            hideQrcodeModal() {
-                const modal = document.getElementById('qrcodeModal');
-                if (modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
+            // 更新角落按钮颜色
+            updateCornerButtonsColor() {
+                const currentSlide = this.slides[this.currentIndex];
+                const navColor = currentSlide.getAttribute('data-nav-color');
+                
+                // 移除所有颜色类
+                this.leftCornerBtn.classList.remove('dark-text', 'light-text');
+                this.rightCornerBtn.classList.remove('dark-text', 'light-text');
+                
+                // 根据背景颜色添加对应的颜色类
+                if (navColor === 'light') {
+                    this.leftCornerBtn.classList.add('light-text');
+                    this.rightCornerBtn.classList.add('light-text');
+                } else {
+                    this.leftCornerBtn.classList.add('dark-text');
+                    this.rightCornerBtn.classList.add('dark-text');
+                }
+            }
+
+            // 更新左下角案例信息
+            updateCaseInfo() {
+                const caseData = this.casesData[this.currentIndex];
+                this.caseInfo.textContent = `${caseData.brand}/${caseData.type}`;
+                
+                // 更新左下角按钮的提示信息
+                this.leftCornerBtn.title = caseData.note;
+            }
+            
+            // 更新右下角详情链接
+            updateDetailLink() {
+                const caseData = this.casesData[this.currentIndex];
+                this.rightCornerBtn.href = caseData.detailUrl;
+            }
+
+            // 切换移动端语言下拉菜单
+            toggleMobileLanguageDropdown() {
+                // 移除现有的下拉菜单
+                const existingDropdown = document.querySelector('.mobile-dropdown');
+                if (existingDropdown) {
+                    existingDropdown.remove();
+                    return;
+                }
+                
+                // 创建新的下拉菜单
+                const dropdown = document.createElement('div');
+                dropdown.className = 'mobile-dropdown';
+                dropdown.innerHTML = `
+                    <a href="#" class="mobile-dropdown-option active">CH</a>
+                    <a href="#" class="mobile-dropdown-option">EN</a>
+                    <a href="#" class="mobile-dropdown-option">FR</a>
+                `;
+                
+                // 定位并添加
+                const rect = this.mobileLanguageBtn.getBoundingClientRect();
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = `${rect.bottom}px`;
+                dropdown.style.right = `${window.innerWidth - rect.right}px`;
+                
+                document.body.appendChild(dropdown);
+                
+                // 添加点击事件
+                dropdown.querySelectorAll('.mobile-dropdown-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
+                        this.closeMobileLanguageDropdown();
+                    });
+                });
+            }
+            
+            // 关闭移动端语言下拉菜单
+            closeMobileLanguageDropdown() {
+                const dropdown = document.querySelector('.mobile-dropdown');
+                if (dropdown) {
+                    dropdown.remove();
+                }
+            }
+
+            // 触摸滑动支持
+            setupTouchEvents() {
+                let startX = 0;
+                let endX = 0;
+                const slider = document.querySelector('.slider-container');
+
+                slider.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+
+                slider.addEventListener('touchmove', (e) => {
+                    endX = e.touches[0].clientX;
+                }, { passive: true });
+
+                slider.addEventListener('touchend', () => {
+                    const diffX = startX - endX;
+                    const threshold = 60;
+
+                    if (Math.abs(diffX) > threshold) {
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                });
+            }
+
+            // 自动播放控制
+            startAutoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoPlayDelay);
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                }
+            }
+
+            resetAutoPlay() {
+                this.stopAutoPlay();
+                this.startAutoPlay();
+            }
+
+            toggleAutoPlay() {
+                if (this.autoPlayInterval) {
+                    this.stopAutoPlay();
+                    alert("自动播放已暂停");
+                } else {
+                    this.startAutoPlay();
+                    alert("自动播放已开启");
                 }
             }
         }
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
-            new PurpleWall();
-        });
-
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+            const slider = new InteractiveSlider();
+            
+            // 将滑块实例暴露给全局，方便调试
+            window.slider = slider;
+            
+            // 初始视频播放
+            slider.handleVideoPlayback();
         });
     </script>
 </body>
