@@ -136,15 +136,15 @@
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 */
+        /* 导航链接基础样式 - 修改为白色文字 */
         .nav-link {
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--brand);
+            color: var(--light); /* 默认白色 */
         }
         
         /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
@@ -169,7 +169,7 @@
             width: 100%;
         }
         
-        /* 服务 - 橙色 */
+        /* 服务 - 橙色 - 修改悬停颜色 */
         .nav-link[href="services.html"]::after {
             background: var(--brand-or);
         }
@@ -182,7 +182,7 @@
             width: 100%;
         }
         
-        /* 案例 - 浅紫色 */
+        /* 案例 - 浅紫色 - 修改悬停颜色 */
         .nav-link[href="cases.html"]::after {
             background: var(--brand-light);
         }
@@ -195,7 +195,7 @@
             width: 100%;
         }
         
-        /* 关于 - 绿色 */
+        /* 关于 - 绿色 - 修改悬停颜色 */
         .nav-link[href="about.html"]::after {
             background: var(--brand-gr);
         }
@@ -208,7 +208,7 @@
             width: 100%;
         }
         
-        /* 联系 - 红色 */
+        /* 联系 - 红色 - 修改悬停颜色 */
         .nav-link[href="contact.html"]::after {
             background: var(--brand-re);
         }
@@ -405,6 +405,46 @@
             text-align: center;
         }
 
+        /* ========== 服务品牌Logo墙样式 ========== */
+        .logo-wall-section {
+            padding: clamp(40px, 5vw, 60px) 0;
+            background: var(--gray1);
+        }
+
+        .logo-grid {
+            display: grid;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .logo-grid-desktop {
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+        }
+        
+        .logo-grid-mobile {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            background-color: var(--brand-light);
+        }
+        
+        .logo-grid-item {
+            background: var(--brand-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(12px, 1.5vw, 20px);
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .logo-grid-item img {
+            max-height: clamp(40px, 5vw, 60px);
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+        }
+
         /* ========== 全屏图片浏览样式 ========== */
         .fullscreen-viewer {
             display: none;
@@ -575,7 +615,6 @@
             margin: 40px auto 0;
             border-radius: var(--radius);
             overflow: hidden;
-            
         }
 
         .process-image img {
@@ -588,8 +627,9 @@
         .footer {
             background: #111;
             padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(60px, 5vw, 50px);
+            margin-top: 0;
         }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
@@ -653,34 +693,14 @@
             gap: clamp(30px, 2vw, 40px);
         }
         
-        /* 页脚链接颜色设置 */
+        /* 页脚链接颜色设置 - 默认白色，悬停显示对应颜色 */
         .footer-link {
             text-decoration: none;
             transition: var(--transition);
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 5px 0;
             position: relative;
-        }
-        
-        /* 页脚链接基础颜色 */
-        .footer-link[href="index.html"] {
-            color: var(--light);
-        }
-        
-        .footer-link[href="services.html"] {
-            color: var(--brand-or);
-        }
-        
-        .footer-link[href="cases.html"] {
-            color: var(--brand-light);
-        }
-        
-        .footer-link[href="about.html"] {
-            color: var(--brand-gr);
-        }
-        
-        .footer-link[href="contact.html"] {
-            color: var(--brand-re);
+            color: var(--light); /* 默认白色 */
         }
         
         /* 页脚链接悬停效果 */
@@ -796,6 +816,13 @@
                 width: 95%;
                 height: 65%;
             }
+        }
+        
+        /* Pad端 (768px以下) */
+        @media (max-width: 768px) {
+            /* Pad端显示移动端Logo墙 */
+            .logo-grid-desktop { display: none; }
+            .logo-grid-mobile { display: grid; gap: 0; }
         }
         
         /* 小手机端 (<=480px) */
@@ -982,69 +1009,69 @@
     <main class="section">
         <div class="container">
             <div class="services-cards-grid">
-                <!-- 设计服务卡片 -->
-                <div class="service-card-item" data-service="design">
+                <!-- 印刷服务卡片 -->
+                <div class="service-card-item" data-service="printing">
                     <div class="service-card-img">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="设计服务">
+                        <img src="assets/20250417121620.jpg" alt="印刷服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">设计服务</h3>
-                        <p class="service-card-description">概念规划・效果精效・工程拆解</p>
+                        <h3 class="service-card-title">印刷</h3>
+                        <p class="service-card-description">有色印刷·效果打印·专业制回</p>
                     </div>
                 </div>
                 
-                <!-- 打样服务卡片 -->
-                <div class="service-card-item" data-service="prototype">
+                <!-- 亚克力服务卡片 -->
+                <div class="service-card-item" data-service="acrylic">
                     <div class="service-card-img">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="打样服务">
+                        <img src="assets/20250417121703.jpg" alt="亚克力服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">打样服务</h3>
-                        <p class="service-card-description">材料实测・结构严验</p>
+                        <h3 class="service-card-title">亚克力</h3>
+                        <p class="service-card-description">柔性软光·智能加工·制作工艺</p>
                     </div>
                 </div>
                 
-                <!-- 生产服务卡片 -->
-                <div class="service-card-item" data-service="production">
+                <!-- 纸艺服务卡片 -->
+                <div class="service-card-item" data-service="paper">
                     <div class="service-card-img">
-                        <img src="assets/1803.jpg" alt="生产服务">
+                        <img src="assets/1803.jpg" alt="纸艺服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">生产服务</h3>
-                        <p class="service-card-description">柔性智造・按需精定</p>
+                        <h3 class="service-card-title">纸艺</h3>
+                        <p class="service-card-description">制作工艺·片状纸·结构榫合</p>
                     </div>
                 </div>
                 
-                <!-- 配送服务卡片 -->
-                <div class="service-card-item" data-service="delivery">
+                <!-- 木工服务卡片 -->
+                <div class="service-card-item" data-service="wood">
                     <div class="service-card-img">
-                        <img src="assets/配送服务-placeholder.jpg" alt="配送服务">
+                        <img src="assets/69dc6a5be5d.jpg" alt="木工服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">配送服务</h3>
-                        <p class="service-card-description">专业包装・报关速通・航线优配</p>
+                        <h3 class="service-card-title">木工</h3>
+                        <p class="service-card-description">压力安装·放大拆掉·道具安装</p>
                     </div>
                 </div>
                 
-                <!-- 安装服务卡片 -->
-                <div class="service-card-item" data-service="installation">
+                <!-- 金属服务卡片 -->
+                <div class="service-card-item" data-service="metal">
                     <div class="service-card-img">
-                        <img src="assets/安装服务-placeholder.jpg" alt="安装服务">
+                        <img src="assets/20250417121620.jpg" alt="金属服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">安装服务</h3>
-                        <p class="service-card-description">门店零扰式施作</p>
+                        <h3 class="service-card-title">金属</h3>
+                        <p class="service-card-description">专业向透·可拉下式·精硬向</p>
                     </div>
                 </div>
                 
-                <!-- 维护服务卡片 -->
-                <div class="service-card-item" data-service="maintenance">
+                <!-- 数字技术服务卡片 -->
+                <div class="service-card-item" data-service="digital">
                     <div class="service-card-img">
-                        <img src="assets/维护服务-placeholder.jpg" alt="维护服务">
+                        <img src="assets/20250417121703.jpg" alt="数字技术服务">
                     </div>
                     <div class="service-card-content">
-                        <h3 class="service-card-title">维护服务</h3>
-                        <p class="service-card-description">快拆复用・全周期智管</p>
+                        <h3 class="service-card-title">数字技术</h3>
+                        <p class="service-card-description">智能机器人·新增有实·自动化工艺</p>
                     </div>
                 </div>
             </div>
@@ -1064,6 +1091,21 @@
             </div>
         </div>
     </main>
+
+    <!-- 服务品牌Logo墙 -->
+    <section class="logo-wall-section">
+        <div class="container">
+            <h3 class="section-title">服务品牌</h3>
+            <p class="section-subtitle">与全球知名品牌共创价值</p>
+            
+            <div class="logo-grid logo-grid-desktop" id="desktopLogos">
+                <!-- Logo将由JavaScript生成 -->
+            </div>
+            <div class="logo-grid logo-grid-mobile" id="mobileLogos">
+                <!-- Logo将由JavaScript生成 -->
+            </div>
+        </div>
+    </section>
 
     <!-- 页脚 - 与主页统一 -->
     <footer class="footer">
@@ -1101,61 +1143,64 @@
     <script>
         // ========== 服务数据配置 ==========
         const servicesData = {
-            design: {
-                title: "设计服务",
+            printing: {
+                title: "印刷",
                 images: [
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "品牌空间分析与策略规划" },
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "概念方案设计与创意呈现" },
-                    { src: "assets/1803.jpg", caption: "3D效果图与虚拟现实展示" }
+                    { src: "assets/20250417121620.jpg", caption: "有色印刷与效果打印" },
+                    { src: "assets/20250417121620.jpg", caption: "专业制回与高清印刷" },
+                    { src: "assets/20250417121620.jpg", caption: "多印刷方法与艺术印刷" }
                 ],
-                description: "概念规划・效果精效・工程拆解"
+                description: "有色印刷·效果打印·专业制回"
             },
-            prototype: {
-                title: "打样服务",
+            acrylic: {
+                title: "亚克力",
                 images: [
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "材料实验与性能测试" },
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "结构验证与强度分析" },
-                    { src: "assets/1803.jpg", caption: "表面处理效果测试" }
+                    { src: "assets/20250417121703.jpg", caption: "柔性软光印刷" },
+                    { src: "assets/20250417121703.jpg", caption: "智能加工与制作" },
+                    { src: "assets/20250417121703.jpg", caption: "可进入的工艺品牌装配" }
                 ],
-                description: "材料实测・结构严验"
+                description: "柔性软光·智能加工·制作工艺"
             },
-            production: {
-                title: "生产服务",
+            paper: {
+                title: "纸艺",
                 images: [
-                    { src: "assets/1803.jpg", caption: "精密加工与数控制造" },
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "表面处理（喷涂、电镀、木纹）" },
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "组装调试与功能测试" }
+                    { src: "assets/1803.jpg", caption: "纸艺工艺制作" },
+                    { src: "assets/1803.jpg", caption: "片状纸与艺术表现" },
+                    { src: "assets/1803.jpg", caption: "结构榫合与动态展示" }
                 ],
-                description: "柔性智造・按需精定"
+                description: "制作工艺·片状纸·结构榫合"
             },
-            delivery: {
-                title: "配送服务",
+            wood: {
+                title: "木工",
                 images: [
-                    { src: "assets/配送服务-placeholder.jpg", caption: "专业包装设计与定制" },
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "国内国际运输（空运/海运）" },
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "报关清关与文件处理" }
+                    { src: "assets/69dc6a5be5d.jpg", caption: "压力安装木工装置" },
+                    { src: "assets/69dc6a5be5d.jpg", caption: "放大拆掉模块化设计" },
+                    { src: "assets/69dc6a5be5d.jpg", caption: "道具安装与工程规划" }
                 ],
-                description: "专业包装・报关速通・航线优配"
+                description: "压力安装·放大拆掉·道具安装"
             },
-            installation: {
-                title: "安装服务",
+            metal: {
+                title: "金属",
                 images: [
-                    { src: "assets/安装服务-placeholder.jpg", caption: "现场勘查与方案制定" },
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "专业安装施工团队" },
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "现场调试与功能测试" }
+                    { src: "assets/20250417121620.jpg", caption: "专业向透金属装置" },
+                    { src: "assets/20250417121620.jpg", caption: "可拉下式设计与安装" },
+                    { src: "assets/20250417121620.jpg", caption: "精硬向金属工艺" }
                 ],
-                description: "门店零扰式施作"
+                description: "专业向透·可拉下式·精硬向"
             },
-            maintenance: {
-                title: "维护服务",
+            digital: {
+                title: "数字技术",
                 images: [
-                    { src: "assets/维护服务-placeholder.jpg", caption: "定期巡检与预防性维护" },
-                    { src: "assets/微信图片_20250417121620.jpg", caption: "快速响应维修服务" },
-                    { src: "assets/微信图片_20250417121703.jpg", caption: "部件更换与系统升级" }
+                    { src: "assets/20250417121703.jpg", caption: "智能机器人工艺制作" },
+                    { src: "assets/20250417121703.jpg", caption: "新增有实数字化技术" },
+                    { src: "assets/20250417121703.jpg", caption: "自动化工艺与数字制造" }
                 ],
-                description: "快拆复用・全周期智管"
+                description: "智能机器人·新增有实·自动化工艺"
             }
         };
+
+        // ========== Logo数据 ==========
+        const logoCount = 36; // Logo数量
 
         // ========== 核心功能类 ==========
         class PurpleWall {
@@ -1171,6 +1216,7 @@
                 this.setupResize();
                 this.setupSocialMedia();
                 this.setupQrcodeModal();
+                this.generateLogos(); // 生成Logo墙
             }
             
             // 导航功能
@@ -1207,6 +1253,33 @@
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
                 });
+                
+                // 页脚链接高亮
+                document.querySelectorAll('.footer-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+            }
+            
+            // 生成Logo墙
+            generateLogos() {
+                const desktopLogos = document.getElementById('desktopLogos');
+                const mobileLogos = document.getElementById('mobileLogos');
+                
+                const generateLogoHTML = (count) => {
+                    let html = '';
+                    for (let i = 1; i <= count; i++) {
+                        const num = i.toString().padStart(2, '0');
+                        html += `
+                            <div class="logo-grid-item">
+                                <img src="assets/logo${num}.png" alt="客户 Logo ${i}">
+                            </div>
+                        `;
+                    }
+                    return html;
+                };
+                
+                if (desktopLogos) desktopLogos.innerHTML = generateLogoHTML(logoCount);
+                if (mobileLogos) mobileLogos.innerHTML = generateLogoHTML(logoCount);
             }
             
             // 服务卡片点击事件

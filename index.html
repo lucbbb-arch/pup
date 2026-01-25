@@ -14,7 +14,7 @@
             --brand-gr: #d0df00;
             --brand-re: #c82272;
             --transition: all 0.3s ease;
-            --spacing-logo: 60px; /* logo间距基准 */
+            --spacing-logo: 120px; /* logo间距基准 - 已加大1倍 */
         }
 
         /* ====== 基础重置 ====== */
@@ -615,7 +615,7 @@
         /* Pad端 (768px以下) */
         @media (max-width: 768px) {
             :root {
-                --spacing-logo: 30px;
+                --spacing-logo: 60px;
             }
             
             .nav-container {
@@ -671,7 +671,7 @@
         /* 手机端 (420px以下) */
         @media (max-width: 420px) {
             :root {
-                --spacing-logo: 20px;
+                --spacing-logo: 40px;
             }
             
             .nav-links {
@@ -770,7 +770,7 @@
         /* 大屏手机 (421px-767px) */
         @media (min-width: 421px) and (max-width: 767px) {
             :root {
-                --spacing-logo: 25px;
+                --spacing-logo: 50px;
             }
             
             .nav-links {
@@ -1013,8 +1013,10 @@
                 this.currentIndex = 0;
                 this.totalSlides = this.slides.length;
                 this.isAnimating = false;
-                this.autoPlayInterval = null;
-                this.autoPlayDelay = 8000;
+                
+                // 移除自动播放相关变量
+                // this.autoPlayInterval = null;
+                // this.autoPlayDelay = 8000;
 
                 // 案例数据配置
                 this.casesData = [
@@ -1112,7 +1114,8 @@
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'ArrowLeft') this.prevSlide();
                     if (e.key === 'ArrowRight') this.nextSlide();
-                    if (e.key === ' ') { e.preventDefault(); this.toggleAutoPlay(); }
+                    // 移除空格键切换功能
+                    // if (e.key === ' ') { e.preventDefault(); this.toggleAutoPlay(); }
                 });
 
                 // 更新左下角案例信息
@@ -1127,8 +1130,8 @@
                 // 触摸滑动支持（移动端）
                 this.setupTouchEvents();
 
-                // 初始化自动播放
-                this.startAutoPlay();
+                // 注释掉自动播放初始化
+                // this.startAutoPlay();
 
                 // 初始化导航栏颜色
                 this.updateNavColor();
@@ -1169,8 +1172,8 @@
                     this.isAnimating = false;
                 }, 800);
                 
-                // 重置自动播放
-                this.resetAutoPlay();
+                // 移除重置自动播放
+                // this.resetAutoPlay();
             }
 
             prevSlide() {
@@ -1316,6 +1319,8 @@
                 });
             }
 
+            // 移除自动播放控制相关方法
+            /*
             // 自动播放控制
             startAutoPlay() {
                 this.autoPlayInterval = setInterval(() => {
@@ -1343,6 +1348,7 @@
                     alert("自动播放已开启");
                 }
             }
+            */
         }
 
         // 页面加载完成后初始化
