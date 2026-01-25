@@ -28,6 +28,17 @@
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* 隐藏默认滚动条 */
+        body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
         }
 
         /* ====== 多端适配导航栏 ====== */
@@ -278,6 +289,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
+            overflow: hidden;
         }
         
         .slider-track {
@@ -285,6 +297,7 @@
             height: 100%;
             width: 100%;
             transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
         }
         
         .case-slide {
@@ -296,7 +309,7 @@
         
         /* ====== 6个精选案例版式 ====== */
         
-        /* 版式1：满版底图（视频） */
+        /* 版式1：满版底图（视频） - 修改为文字居中 */
         .layout-full-video {
             background: #000;
         }
@@ -311,22 +324,24 @@
             z-index: 1;
         }
         
-        /* 版式2：白底 + 竖版图片居中 */
+        /* 版式2：白底 + 竖版图片居中 - 修改为图片在上，文字在下 */
         .layout-white-vertical {
             background: #ffffff;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 80px;
+            padding: 60px 80px;
         }
         
         .layout-white-vertical .image-container {
             max-width: 400px;
             width: 100%;
-            height: 80vh;
+            height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 40px;
         }
         
         .layout-white-vertical .vertical-img {
@@ -351,19 +366,18 @@
             z-index: 1;
         }
         
-        /* 版式4：黑底 + 横版图片居中 */
+        /* 版式4：黑底 + 横版图片居中 - 修改为图片在右，文字在左 */
         .layout-black-horizontal {
             background: #000000;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 60px;
+            justify-content: space-between;
+            padding: 0 80px;
         }
         
         .layout-black-horizontal .image-container {
-            max-width: 90%;
-            width: 100%;
-            height: 70vh;
+            flex: 0 0 60%;
+            height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -391,19 +405,19 @@
             z-index: 1;
         }
         
-        /* 版式6：灰底 + 居中内容 */
+        /* 版式6：灰底 + 居中内容 - 修改为左对齐 */
         .layout-gray-center {
             background: #2a2a2a;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 60px;
+            justify-content: flex-start;
+            padding: 60px 80px;
         }
         
         .layout-gray-center .content-container {
             max-width: 800px;
             width: 100%;
-            text-align: center;
+            text-align: left;
         }
         
         .layout-gray-center .gray-img {
@@ -415,7 +429,7 @@
         
         /* 案例文字内容 - 根据不同版式调整 */
         .case-content {
-            position: absolute;
+            position: relative;
             z-index: 20;
             opacity: 0;
             transform: translateY(40px);
@@ -427,15 +441,9 @@
             transform: translateY(0);
         }
         
-        /* 常规位置：左下角 */
-        .content-position-default {
-            bottom: 15%;
-            left: var(--spacing-logo);
-            max-width: 800px;
-        }
-        
-        /* 位置：居中 */
+        /* 位置1：居中（用于案例1） */
         .content-position-center {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) translateY(40px);
@@ -446,6 +454,33 @@
         
         .case-slide.active .content-position-center {
             transform: translate(-50%, -50%) translateY(0);
+        }
+        
+        /* 位置2：下方（用于案例2） */
+        .content-position-bottom {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 位置3：左下角（用于案例3和5） */
+        .content-position-default {
+            position: absolute;
+            bottom: 15%;
+            left: var(--spacing-logo);
+            max-width: 800px;
+        }
+        
+        /* 位置4：左侧（用于案例4） */
+        .content-position-left {
+            flex: 0 0 35%;
+            max-width: 500px;
+        }
+        
+        /* 位置5：左对齐（用于案例6） */
+        .content-position-left-align {
+            text-align: left;
+            width: 100%;
         }
         
         /* 大标题 - 和原首页一样 */
@@ -515,6 +550,12 @@
         
         .gray-divider {
             background: #999;
+        }
+        
+        /* 左对齐分割线 */
+        .case-divider.left-align {
+            margin-left: 0;
+            margin-right: auto;
         }
 
         /* ====== 左右热区交互 ====== */
@@ -622,19 +663,45 @@
                 padding: 0 var(--spacing-logo);
             }
             
-            .layout-white-vertical,
-            .layout-black-horizontal,
-            .layout-gray-center {
+            /* 案例2 - Pad端 */
+            .layout-white-vertical {
                 padding: 40px;
+                flex-direction: column;
             }
             
-            .layout-white-vertical .image-container,
+            .layout-white-vertical .image-container {
+                height: 50vh;
+                margin-bottom: 30px;
+            }
+            
+            /* 案例4 - Pad端 */
+            .layout-black-horizontal {
+                padding: 0 40px;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
             .layout-black-horizontal .image-container {
-                height: 60vh;
+                flex: 0 0 auto;
+                width: 100%;
+                height: 50vh;
+                margin-bottom: 40px;
+            }
+            
+            .content-position-left {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            /* 案例6 - Pad端 */
+            .layout-gray-center {
+                padding: 40px;
+                justify-content: center;
             }
             
             .layout-gray-center .content-container {
-                padding: 0 20px;
+                text-align: center;
             }
             
             .content-position-default {
@@ -671,7 +738,7 @@
         /* 手机端 (420px以下) */
         @media (max-width: 420px) {
             :root {
-                --spacing-logo: 40px;
+                --spacing-logo: 30px;
             }
             
             .nav-links {
@@ -711,15 +778,29 @@
                 margin-right: 10px;
             }
             
-            .layout-white-vertical,
-            .layout-black-horizontal,
-            .layout-gray-center {
+            /* 案例2 - 手机端 */
+            .layout-white-vertical {
                 padding: 20px;
             }
             
-            .layout-white-vertical .image-container,
+            .layout-white-vertical .image-container {
+                height: 40vh;
+                margin-bottom: 20px;
+            }
+            
+            /* 案例4 - 手机端 */
+            .layout-black-horizontal {
+                padding: 0 20px;
+            }
+            
             .layout-black-horizontal .image-container {
-                height: 50vh;
+                height: 40vh;
+                margin-bottom: 30px;
+            }
+            
+            /* 案例6 - 手机端 */
+            .layout-gray-center {
+                padding: 30px 20px;
             }
             
             .content-position-default {
@@ -765,12 +846,18 @@
             .language-switcher {
                 display: none;
             }
+            
+            /* 手机端隐藏热区 */
+            .left-hotzone,
+            .right-hotzone {
+                display: none;
+            }
         }
         
         /* 大屏手机 (421px-767px) */
         @media (min-width: 421px) and (max-width: 767px) {
             :root {
-                --spacing-logo: 50px;
+                --spacing-logo: 40px;
             }
             
             .nav-links {
@@ -810,6 +897,31 @@
                 margin-right: 12px;
             }
             
+            /* 案例2 - 大屏手机 */
+            .layout-white-vertical {
+                padding: 30px;
+            }
+            
+            .layout-white-vertical .image-container {
+                height: 45vh;
+                margin-bottom: 25px;
+            }
+            
+            /* 案例4 - 大屏手机 */
+            .layout-black-horizontal {
+                padding: 0 30px;
+            }
+            
+            .layout-black-horizontal .image-container {
+                height: 45vh;
+                margin-bottom: 35px;
+            }
+            
+            /* 案例6 - 大屏手机 */
+            .layout-gray-center {
+                padding: 40px 30px;
+            }
+            
             .content-position-default {
                 left: var(--spacing-logo);
                 bottom: 22%;
@@ -825,6 +937,12 @@
             
             /* 大屏手机也隐藏桌面语言切换器 */
             .language-switcher {
+                display: none;
+            }
+            
+            /* 大屏手机隐藏热区 */
+            .left-hotzone,
+            .right-hotzone {
                 display: none;
             }
         }
@@ -901,36 +1019,36 @@
 
     <!-- 全屏案例滑块 -->
     <div class="slider-container">
-        <!-- 左右热区 (无视觉分区，只有交互功能) -->
+        <!-- 左右热区 (只在电脑端显示) -->
         <div class="left-hotzone" id="leftHotzone"></div>
         <div class="right-hotzone" id="rightHotzone"></div>
         
         <div class="slider-track" id="sliderTrack">
-            <!-- 案例1：满版底图（视频） -->
+            <!-- 案例1：满版底图（视频） - 文字居中 -->
             <div class="case-slide active layout-full-video" data-nav-color="dark">
                 <video class="video-bg" autoplay muted loop playsinline>
                     <source src="assets/d4afdf4e0375efe6d1b5e70c18d4c4db.mp4" type="video/mp4">
                 </video>
-                <div class="case-content content-position-default">
+                <div class="case-content content-position-center">
                     <h1 class="case-title dark-title">全案展陈·匠作于心</h1>
                     <div class="case-divider dark-divider"></div>
                     <p class="case-subtitle dark-subtitle">从创意落地，以匠心筑您所期</p>
                 </div>
             </div>
             
-            <!-- 案例2：白底 + 竖版图片居中 -->
+            <!-- 案例2：白底 + 竖版图片 - 文字在图片下方 -->
             <div class="case-slide layout-white-vertical" data-nav-color="light">
                 <div class="image-container">
                     <img src="assets/2025-08-11_133845_823.jpg" alt="高端零售展具" class="vertical-img">
                 </div>
-                <div class="case-content content-position-center">
+                <div class="case-content content-position-bottom">
                     <h1 class="case-title light-title">高端零售展具</h1>
                     <div class="case-divider light-divider"></div>
                     <p class="case-subtitle light-subtitle">品牌空间重塑与体验升级，融合匠心工艺与前瞻设计</p>
                 </div>
             </div>
             
-            <!-- 案例3：满版底图（图片） -->
+            <!-- 案例3：满版底图（图片） - 文字左下角 -->
             <div class="case-slide layout-full-image" data-nav-color="dark">
                 <img src="assets/2025-08-11_133856_756.jpg" alt="艺术装置展陈" class="full-img">
                 <div class="case-content content-position-default">
@@ -940,19 +1058,19 @@
                 </div>
             </div>
             
-            <!-- 案例4：黑底 + 横版图片居中 -->
+            <!-- 案例4：黑底 + 横版图片 - 文字在图片左侧 -->
             <div class="case-slide layout-black-horizontal" data-nav-color="dark">
-                <div class="image-container">
-                    <img src="assets/2025-08-11_133913_165.jpg" alt="智能展台系统" class="horizontal-img">
-                </div>
-                <div class="case-content content-position-center">
+                <div class="case-content content-position-left">
                     <h1 class="case-title dark-title">智能展台系统</h1>
                     <div class="case-divider dark-divider"></div>
                     <p class="case-subtitle dark-subtitle">可复用模块化设计，智能互动，高效赋能品牌传播</p>
                 </div>
+                <div class="image-container">
+                    <img src="assets/2025-08-11_133913_165.jpg" alt="智能展台系统" class="horizontal-img">
+                </div>
             </div>
             
-            <!-- 案例5：满版底图（图片） -->
+            <!-- 案例5：满版底图（图片） - 文字左下角 -->
             <div class="case-slide layout-full-image-2" data-nav-color="dark">
                 <img src="assets/20250417121620.jpg" alt="国际展会设计" class="full-img">
                 <div class="case-content content-position-default">
@@ -962,20 +1080,22 @@
                 </div>
             </div>
             
-            <!-- 案例6：灰底 + 居中内容 -->
+            <!-- 案例6：灰底 + 内容 - 文字左对齐 -->
             <div class="case-slide layout-gray-center" data-nav-color="dark">
                 <div class="content-container">
                     <img src="assets/20250417121703.jpg" alt="商业空间优化" class="gray-img">
-                    <h1 class="case-title gray-title">商业空间优化</h1>
-                    <div class="case-divider gray-divider"></div>
-                    <p class="case-subtitle gray-subtitle">动线规划与视觉引导，提升商业空间效率与体验</p>
+                    <div class="case-content content-position-left-align">
+                        <h1 class="case-title gray-title">商业空间优化</h1>
+                        <div class="case-divider gray-divider left-align"></div>
+                        <p class="case-subtitle gray-subtitle">动线规划与视觉引导，提升商业空间效率与体验</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- 左下角案例信息按钮 -->
         <div class="corner-btn left dark-text" id="leftCornerBtn">
-            <span id="caseInfo">MAC/主题道具</span>
+            <span id="caseInfo">全案品牌/品牌展陈</span>
         </div>
         
         <!-- 右下角案例详情链接 -->
@@ -1009,14 +1129,13 @@
                 this.navLinks = document.querySelector('.nav-links');
                 this.caseInfo = document.getElementById('caseInfo');
                 this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                this.sliderContainer = document.querySelector('.slider-container');
 
                 this.currentIndex = 0;
                 this.totalSlides = this.slides.length;
                 this.isAnimating = false;
-                
-                // 移除自动播放相关变量
-                // this.autoPlayInterval = null;
-                // this.autoPlayDelay = 8000;
+                this.wheelTimeout = null;
+                this.wheelDelay = 800; // 滚轮防抖延迟
 
                 // 案例数据配置
                 this.casesData = [
@@ -1028,7 +1147,7 @@
                     },
                     { 
                         brand: "MAC", 
-                        type: "主题道具",
+                        type: "高端零售",
                         detailUrl: "case-b.html",
                         note: "高端零售展具 - 品牌空间重塑项目"
                     },
@@ -1062,7 +1181,7 @@
             }
 
             init() {
-                // 绑定热区点击事件
+                // 绑定热区点击事件（只在电脑端有效）
                 this.leftHotzone.addEventListener('click', () => this.prevSlide());
                 this.rightHotzone.addEventListener('click', () => this.nextSlide());
                 
@@ -1114,9 +1233,15 @@
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'ArrowLeft') this.prevSlide();
                     if (e.key === 'ArrowRight') this.nextSlide();
-                    // 移除空格键切换功能
-                    // if (e.key === ' ') { e.preventDefault(); this.toggleAutoPlay(); }
                 });
+
+                // 鼠标滚轮事件 - 电脑端专用
+                if (window.innerWidth >= 769) {
+                    this.setupWheelEvents();
+                }
+                
+                // 触摸滑动支持（移动端）
+                this.setupTouchEvents();
 
                 // 更新左下角案例信息
                 this.updateCaseInfo();
@@ -1127,14 +1252,106 @@
                 // 更新角落按钮颜色
                 this.updateCornerButtonsColor();
 
-                // 触摸滑动支持（移动端）
-                this.setupTouchEvents();
-
-                // 注释掉自动播放初始化
-                // this.startAutoPlay();
+                // 初始化视频播放
+                this.handleVideoPlayback();
 
                 // 初始化导航栏颜色
                 this.updateNavColor();
+                
+                // 窗口大小变化时重新绑定事件
+                window.addEventListener('resize', () => this.handleResize());
+            }
+
+            // 设置鼠标滚轮事件
+            setupWheelEvents() {
+                // 使用防抖函数防止滚轮滚动过快
+                const handleWheel = (e) => {
+                    if (this.isAnimating) return;
+                    
+                    if (this.wheelTimeout) {
+                        clearTimeout(this.wheelTimeout);
+                    }
+                    
+                    this.wheelTimeout = setTimeout(() => {
+                        // 向上滚动 - 向左切换
+                        if (e.deltaY < 0) {
+                            this.prevSlide();
+                        }
+                        // 向下滚动 - 向右切换
+                        else if (e.deltaY > 0) {
+                            this.nextSlide();
+                        }
+                    }, this.wheelDelay);
+                    
+                    // 阻止默认滚动行为
+                    e.preventDefault();
+                };
+                
+                // 使用 passive: false 以便可以调用 preventDefault
+                this.sliderContainer.addEventListener('wheel', handleWheel, { passive: false });
+            }
+
+            // 触摸滑动支持
+            setupTouchEvents() {
+                let startX = 0;
+                let endX = 0;
+                let startY = 0;
+                let isHorizontal = true;
+
+                this.sliderContainer.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    isHorizontal = true;
+                }, { passive: true });
+
+                this.sliderContainer.addEventListener('touchmove', (e) => {
+                    if (!isHorizontal) return;
+                    
+                    endX = e.touches[0].clientX;
+                    const diffY = Math.abs(e.touches[0].clientY - startY);
+                    const diffX = Math.abs(endX - startX);
+                    
+                    // 如果垂直移动距离大于水平移动距离，则认为是垂直滚动
+                    if (diffY > diffX) {
+                        isHorizontal = false;
+                    }
+                }, { passive: true });
+
+                this.sliderContainer.addEventListener('touchend', () => {
+                    if (!isHorizontal || this.isAnimating) return;
+                    
+                    const diffX = startX - endX;
+                    const threshold = 60;
+
+                    if (Math.abs(diffX) > threshold) {
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                });
+            }
+
+            // 处理窗口大小变化
+            handleResize() {
+                // 根据屏幕宽度决定是否启用滚轮事件
+                if (window.innerWidth >= 769) {
+                    // 电脑端启用滚轮事件
+                    if (!this.sliderContainer.hasWheelListener) {
+                        this.setupWheelEvents();
+                        this.sliderContainer.hasWheelListener = true;
+                    }
+                    // 显示热区
+                    this.leftHotzone.style.display = 'block';
+                    this.rightHotzone.style.display = 'block';
+                } else {
+                    // 移动端移除滚轮事件
+                    this.sliderContainer.hasWheelListener = false;
+                    // 隐藏热区
+                    this.leftHotzone.style.display = 'none';
+                    this.rightHotzone.style.display = 'none';
+                }
             }
 
             // 切换到指定索引的幻灯片
@@ -1171,9 +1388,6 @@
                 setTimeout(() => {
                     this.isAnimating = false;
                 }, 800);
-                
-                // 移除重置自动播放
-                // this.resetAutoPlay();
             }
 
             prevSlide() {
@@ -1290,65 +1504,6 @@
                     dropdown.remove();
                 }
             }
-
-            // 触摸滑动支持
-            setupTouchEvents() {
-                let startX = 0;
-                let endX = 0;
-                const slider = document.querySelector('.slider-container');
-
-                slider.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                }, { passive: true });
-
-                slider.addEventListener('touchmove', (e) => {
-                    endX = e.touches[0].clientX;
-                }, { passive: true });
-
-                slider.addEventListener('touchend', () => {
-                    const diffX = startX - endX;
-                    const threshold = 60;
-
-                    if (Math.abs(diffX) > threshold) {
-                        if (diffX > 0) {
-                            this.nextSlide();
-                        } else {
-                            this.prevSlide();
-                        }
-                    }
-                });
-            }
-
-            // 移除自动播放控制相关方法
-            /*
-            // 自动播放控制
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.nextSlide();
-                }, this.autoPlayDelay);
-            }
-
-            stopAutoPlay() {
-                if (this.autoPlayInterval) {
-                    clearInterval(this.autoPlayInterval);
-                }
-            }
-
-            resetAutoPlay() {
-                this.stopAutoPlay();
-                this.startAutoPlay();
-            }
-
-            toggleAutoPlay() {
-                if (this.autoPlayInterval) {
-                    this.stopAutoPlay();
-                    alert("自动播放已暂停");
-                } else {
-                    this.startAutoPlay();
-                    alert("自动播放已开启");
-                }
-            }
-            */
         }
 
         // 页面加载完成后初始化
@@ -1357,9 +1512,6 @@
             
             // 将滑块实例暴露给全局，方便调试
             window.slider = slider;
-            
-            // 初始视频播放
-            slider.handleVideoPlayback();
         });
     </script>
 </body>
