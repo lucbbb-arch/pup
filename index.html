@@ -666,17 +666,13 @@
         }
 
         /* ====== 响应式调整 ====== */
-        /* 修正媒体查询逻辑 - 确保769px以上完整显示 */
-        @media (min-width: 769px) {
+        /* 电脑端大屏幕 (1200px以上) - 完整导航栏 */
+        @media (min-width: 1200px) {
             .nav-links {
                 display: flex !important;
             }
             
             .menu-btn {
-                display: none !important;
-            }
-            
-            .mobile-language-btn {
                 display: none !important;
             }
             
@@ -700,7 +696,134 @@
             }
         }
 
-        /* 768px以下折叠显示 */
+        /* 电脑端中等屏幕 (1024px-1199px) - 完整导航栏 */
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .nav-links {
+                display: flex !important;
+                gap: 15px;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .language-switcher {
+                display: inline-block !important;
+            }
+            
+            .mobile-menu-container {
+                display: none !important;
+            }
+            
+            /* 确保电脑端热区显示 */
+            .left-hotzone,
+            .right-hotzone {
+                display: block !important;
+            }
+        }
+
+        /* 电脑端小屏幕 (769px-1023px) - 折叠导航栏，悬停交互 */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            :root {
+                --spacing-logo: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 折叠导航栏，显示菜单按钮 */
+            .nav-links {
+                display: none !important;
+            }
+            
+            .menu-btn {
+                display: flex !important;
+            }
+            
+            .language-switcher {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
+                display: flex !important;
+            }
+            
+            .mobile-menu-container {
+                display: flex !important;
+            }
+            
+            /* 确保电脑端热区显示 */
+            .left-hotzone,
+            .right-hotzone {
+                display: block !important;
+            }
+            
+            /* 案例2 - Pad端 */
+            .layout-white-vertical {
+                padding: 40px;
+                flex-direction: column;
+            }
+            
+            .layout-white-vertical .image-container {
+                height: 50vh;
+                margin-bottom: 30px;
+            }
+            
+            /* 案例4 - Pad端 */
+            .layout-black-horizontal {
+                padding: 0 40px;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .layout-black-horizontal .image-container {
+                flex: 0 0 auto;
+                width: 100%;
+                height: 50vh;
+                margin-bottom: 40px;
+            }
+            
+            .content-position-left {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            /* 案例6 - Pad端 */
+            .layout-gray-center {
+                padding: 40px;
+                justify-content: center;
+            }
+            
+            .layout-gray-center .content-container {
+                text-align: center;
+            }
+            
+            .content-position-default {
+                left: var(--spacing-logo);
+                bottom: 20%;
+            }
+            
+            .content-position-center {
+                width: 95%;
+            }
+            
+            .case-title {
+                font-size: clamp(28px, 6vw, 48px);
+            }
+            
+            .corner-btn.right {
+                right: var(--spacing-logo);
+            }
+            
+            .progress-indicator {
+                left: var(--spacing-logo);
+                bottom: 2rem;
+            }
+        }
+
+        /* 手机端 (768px以下) - 折叠导航栏，点击交互 */
         @media (max-width: 768px) {
             :root {
                 --spacing-logo: 30px;
@@ -710,6 +833,7 @@
                 padding: 0 var(--spacing-logo);
             }
             
+            /* 折叠导航栏，显示菜单按钮 */
             .nav-links {
                 display: none;
                 position: fixed;
@@ -857,98 +981,6 @@
             }
         }
         
-        /* Pad端 (769px-1023px) - 确保导航栏完整显示 */
-        @media (min-width: 769px) and (max-width: 1023px) {
-            :root {
-                --spacing-logo: 60px;
-            }
-            
-            .nav-container {
-                padding: 0 var(--spacing-logo);
-            }
-            
-            /* 确保导航栏完整显示 */
-            .nav-links {
-                display: flex !important;
-                gap: 15px;
-            }
-            
-            .menu-btn {
-                display: none !important;
-            }
-            
-            .language-switcher {
-                display: inline-block !important;
-            }
-            
-            .mobile-language-btn {
-                display: none !important;
-            }
-            
-            /* 案例2 - Pad端 */
-            .layout-white-vertical {
-                padding: 40px;
-                flex-direction: column;
-            }
-            
-            .layout-white-vertical .image-container {
-                height: 50vh;
-                margin-bottom: 30px;
-            }
-            
-            /* 案例4 - Pad端 */
-            .layout-black-horizontal {
-                padding: 0 40px;
-                flex-direction: column;
-                justify-content: center;
-            }
-            
-            .layout-black-horizontal .image-container {
-                flex: 0 0 auto;
-                width: 100%;
-                height: 50vh;
-                margin-bottom: 40px;
-            }
-            
-            .content-position-left {
-                flex: 0 0 auto;
-                width: 100%;
-                max-width: 100%;
-            }
-            
-            /* 案例6 - Pad端 */
-            .layout-gray-center {
-                padding: 40px;
-                justify-content: center;
-            }
-            
-            .layout-gray-center .content-container {
-                text-align: center;
-            }
-            
-            .content-position-default {
-                left: var(--spacing-logo);
-                bottom: 20%;
-            }
-            
-            .content-position-center {
-                width: 95%;
-            }
-            
-            .case-title {
-                font-size: clamp(28px, 6vw, 48px);
-            }
-            
-            .corner-btn.right {
-                right: var(--spacing-logo);
-            }
-            
-            .progress-indicator {
-                left: var(--spacing-logo);
-                bottom: 2rem;
-            }
-        }
-        
         /* 大屏手机 (421px-768px) */
         @media (min-width: 421px) and (max-width: 768px) {
             :root {
@@ -1063,34 +1095,13 @@
             }
         }
         
-        /* 电脑端 (1024px以上) */
-        @media (min-width: 1024px) {
-            .menu-btn {
-                display: none !important;
-            }
-            
-            .mobile-language-btn {
-                display: none !important;
-            }
-            
-            /* 确保在电脑端缩小宽度时导航栏不折叠 */
-            .nav-links {
-                display: flex !important;
-            }
-            
-            /* 确保语言切换器显示 */
-            .language-switcher {
-                display: inline-block !important;
-            }
-        }
-        
         /* 移动端菜单容器 */
         .mobile-menu-container {
             display: none;
             align-items: center;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 1023px) {
             .mobile-menu-container {
                 display: flex;
             }
@@ -1138,27 +1149,6 @@
         .mobile-language-option.active {
             color: var(--brand-light);
             font-weight: 600;
-        }
-        
-        /* 确保在769px-1024px之间也能正确显示 */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .nav-container {
-                padding: 0 60px;
-            }
-            
-            /* 保持导航栏完整显示 */
-            .nav-links {
-                display: flex !important;
-                gap: 15px;
-            }
-            
-            .menu-btn {
-                display: none !important;
-            }
-            
-            .language-switcher {
-                display: inline-block !important;
-            }
         }
     </style>
 </head>
@@ -1210,7 +1200,7 @@
 
     <!-- 全屏案例滑块 -->
     <div class="slider-container">
-        <!-- 左右热区 (只在电脑端显示) -->
+        <!-- 左右热区 (只在769px以上显示) -->
         <div class="left-hotzone" id="leftHotzone"></div>
         <div class="right-hotzone" id="rightHotzone"></div>
         
@@ -1341,6 +1331,10 @@
                 // 优先检测鼠标设备
                 this.isMouseDevice = this.hasMouse && !this.hasTouch;
                 this.isTouchDevice = this.hasTouch;
+                
+                // 菜单状态
+                this.isMenuFixed = false;
+                this.isLanguageFixed = false;
 
                 // 案例数据配置
                 this.casesData = [
@@ -1386,9 +1380,11 @@
             }
 
             init() {
-                // 绑定热区点击事件（只在电脑端有效）
-                this.leftHotzone.addEventListener('click', () => this.prevSlide());
-                this.rightHotzone.addEventListener('click', () => this.nextSlide());
+                // 绑定热区点击事件（只在769px以上有效）
+                if (window.innerWidth >= 769) {
+                    this.leftHotzone.addEventListener('click', () => this.prevSlide());
+                    this.rightHotzone.addEventListener('click', () => this.nextSlide());
+                }
                 
                 // 绑定进度指示器点击事件
                 this.dots.forEach(dot => {
@@ -1447,11 +1443,36 @@
                         
                         // 关闭下拉菜单
                         this.mobileLanguageDropdown.classList.remove('active');
+                        this.isLanguageFixed = false;
                     });
+                });
+                
+                // 点击页面其他地方关闭所有下拉菜单
+                document.addEventListener('click', (e) => {
+                    // 检查点击是否在菜单按钮、导航菜单或语言按钮内
+                    const isMenuBtn = this.menuBtn && this.menuBtn.contains(e.target);
+                    const isNavLinks = this.navLinks && this.navLinks.contains(e.target);
+                    const isLanguageBtn = this.mobileLanguageBtn && this.mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = this.mobileLanguageDropdown && this.mobileLanguageDropdown.contains(e.target);
+                    
+                    // 如果点击的不是菜单按钮或导航菜单，且菜单是固定打开的，则关闭它
+                    if (!isMenuBtn && !isNavLinks && this.navLinks && this.navLinks.classList.contains('active')) {
+                        this.navLinks.classList.remove('active');
+                        if (this.menuBtn) {
+                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                        this.isMenuFixed = false;
+                    }
+                    
+                    // 如果点击的不是语言按钮或语言下拉菜单，且语言菜单是固定打开的，则关闭它
+                    if (!isLanguageBtn && !isLanguageDropdown && this.mobileLanguageDropdown && this.mobileLanguageDropdown.classList.contains('active')) {
+                        this.mobileLanguageDropdown.classList.remove('active');
+                        this.isLanguageFixed = false;
+                    }
                 });
             }
 
-            // 绑定菜单事件（根据设备类型）
+            // 绑定菜单事件
             bindMenuEvents() {
                 // 移除现有的事件监听器
                 this.removeMenuEvents();
@@ -1460,35 +1481,32 @@
                 this.isMobile = window.innerWidth <= 768;
                 this.isDesktop = window.innerWidth >= 769;
                 
-                // 根据设备类型绑定事件
-                this.bindDeviceSpecificEvents();
-            }
-            
-            // 根据设备类型绑定事件
-            bindDeviceSpecificEvents() {
-                // 检测是否为鼠标设备
-                const isMouseDevice = this.hasMouse || !this.hasTouch;
+                // 重置菜单状态
+                this.isMenuFixed = false;
+                this.isLanguageFixed = false;
                 
-                if (isMouseDevice) {
-                    // 鼠标设备：使用悬停交互
-                    this.bindDesktopMenuEvents();
+                // 根据屏幕宽度绑定不同的事件
+                if (window.innerWidth >= 1024) {
+                    // 大屏幕：完整导航栏，语言切换器悬停交互
+                    this.bindLargeScreenEvents();
+                } else if (window.innerWidth >= 769) {
+                    // 中等屏幕（769px-1023px）：折叠导航栏，悬停+点击交互
+                    this.bindMediumScreenEvents();
                 } else {
-                    // 触摸设备：使用点击交互
-                    this.bindMobileMenuEvents();
+                    // 小屏幕（768px以下）：折叠导航栏，点击交互
+                    this.bindSmallScreenEvents();
                 }
             }
             
             // 移除菜单事件监听器
             removeMenuEvents() {
-                // 移除菜单按钮事件
+                // 克隆元素以移除所有事件监听器
                 if (this.menuBtn) {
-                    // 克隆节点以移除所有事件监听器
                     const newMenuBtn = this.menuBtn.cloneNode(true);
                     this.menuBtn.parentNode.replaceChild(newMenuBtn, this.menuBtn);
                     this.menuBtn = document.getElementById('menuBtn');
                 }
                 
-                // 移除语言按钮事件
                 if (this.mobileLanguageBtn) {
                     const newLanguageBtn = this.mobileLanguageBtn.cloneNode(true);
                     this.mobileLanguageBtn.parentNode.replaceChild(newLanguageBtn, this.mobileLanguageBtn);
@@ -1496,8 +1514,113 @@
                 }
             }
             
-            // 绑定移动设备菜单事件
-            bindMobileMenuEvents() {
+            // 大屏幕事件绑定（1024px以上）
+            bindLargeScreenEvents() {
+                // 完整导航栏，不需要菜单按钮事件
+                // 语言切换器悬停交互
+                if (this.languageSwitcher) {
+                    const dropdown = this.languageSwitcher.querySelector('.language-dropdown');
+                    
+                    this.languageSwitcher.addEventListener('mouseenter', () => {
+                        if (dropdown) {
+                            dropdown.style.opacity = '1';
+                            dropdown.style.visibility = 'visible';
+                            dropdown.style.transform = 'translateY(0)';
+                        }
+                    });
+                    
+                    this.languageSwitcher.addEventListener('mouseleave', () => {
+                        if (dropdown) {
+                            dropdown.style.opacity = '0';
+                            dropdown.style.visibility = 'hidden';
+                            dropdown.style.transform = 'translateY(10px)';
+                        }
+                    });
+                }
+            }
+            
+            // 中等屏幕事件绑定（769px-1023px）
+            bindMediumScreenEvents() {
+                // 菜单按钮悬停和点击事件
+                if (this.menuBtn && this.navLinks) {
+                    // 悬停显示菜单
+                    this.menuBtn.addEventListener('mouseenter', () => {
+                        if (!this.isMenuFixed) {
+                            this.navLinks.classList.add('active');
+                            this.menuBtn.querySelector('i').className = 'fas fa-times';
+                        }
+                    });
+                    
+                    // 菜单区域鼠标离开时隐藏（如果不是固定状态）
+                    this.navLinks.addEventListener('mouseleave', () => {
+                        if (!this.isMenuFixed) {
+                            this.navLinks.classList.remove('active');
+                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    });
+                    
+                    // 点击切换固定状态
+                    this.menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.isMenuFixed = !this.isMenuFixed;
+                        
+                        if (this.isMenuFixed) {
+                            this.navLinks.classList.add('active');
+                            this.menuBtn.querySelector('i').className = 'fas fa-times';
+                        } else {
+                            this.navLinks.classList.remove('active');
+                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (this.isMenuFixed) {
+                            this.mobileLanguageDropdown.classList.remove('active');
+                            this.isLanguageFixed = false;
+                        }
+                    });
+                }
+                
+                // 语言按钮悬停和点击事件
+                if (this.mobileLanguageBtn && this.mobileLanguageDropdown) {
+                    // 悬停显示语言下拉菜单
+                    this.mobileLanguageBtn.addEventListener('mouseenter', () => {
+                        if (!this.isLanguageFixed) {
+                            this.mobileLanguageDropdown.classList.add('active');
+                        }
+                    });
+                    
+                    // 语言下拉菜单鼠标离开时隐藏（如果不是固定状态）
+                    this.mobileLanguageDropdown.addEventListener('mouseleave', () => {
+                        if (!this.isLanguageFixed) {
+                            this.mobileLanguageDropdown.classList.remove('active');
+                        }
+                    });
+                    
+                    // 点击切换固定状态
+                    this.mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.isLanguageFixed = !this.isLanguageFixed;
+                        
+                        if (this.isLanguageFixed) {
+                            this.mobileLanguageDropdown.classList.add('active');
+                        } else {
+                            this.mobileLanguageDropdown.classList.remove('active');
+                        }
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (this.isLanguageFixed) {
+                            this.navLinks.classList.remove('active');
+                            if (this.menuBtn) {
+                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                            this.isMenuFixed = false;
+                        }
+                    });
+                }
+            }
+            
+            // 小屏幕事件绑定（768px以下）
+            bindSmallScreenEvents() {
                 // 菜单按钮点击事件
                 if (this.menuBtn && this.navLinks) {
                     this.menuBtn.addEventListener('click', (e) => {
@@ -1524,68 +1647,6 @@
                             if (this.menuBtn) {
                                 this.menuBtn.querySelector('i').className = 'fas fa-bars';
                             }
-                        }
-                    });
-                }
-                
-                // 点击页面其他区域关闭所有下拉菜单（移动设备）
-                document.addEventListener('click', (e) => {
-                    const isMenuBtn = this.menuBtn && this.menuBtn.contains(e.target);
-                    const isNavLinks = this.navLinks && this.navLinks.contains(e.target);
-                    const isLanguageBtn = this.mobileLanguageBtn && this.mobileLanguageBtn.contains(e.target);
-                    const isLanguageDropdown = this.mobileLanguageDropdown && this.mobileLanguageDropdown.contains(e.target);
-                    
-                    if (!isMenuBtn && !isNavLinks && this.navLinks && this.navLinks.classList.contains('active')) {
-                        this.navLinks.classList.remove('active');
-                        if (this.menuBtn) {
-                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                        }
-                    }
-                    
-                    if (!isLanguageBtn && !isLanguageDropdown && this.mobileLanguageDropdown && this.mobileLanguageDropdown.classList.contains('active')) {
-                        this.mobileLanguageDropdown.classList.remove('active');
-                    }
-                });
-            }
-            
-            // 绑定桌面设备菜单事件
-            bindDesktopMenuEvents() {
-                // 菜单按钮鼠标悬停事件 - 只在小屏幕时使用
-                if (window.innerWidth <= 1024 && window.innerWidth >= 769) {
-                    if (this.menuBtn && this.navLinks) {
-                        this.menuBtn.addEventListener('mouseenter', () => {
-                            this.navLinks.classList.add('active');
-                            if (this.menuBtn.querySelector('i')) {
-                                this.menuBtn.querySelector('i').className = 'fas fa-times';
-                            }
-                        });
-                        
-                        this.navLinks.addEventListener('mouseleave', () => {
-                            this.navLinks.classList.remove('active');
-                            if (this.menuBtn.querySelector('i')) {
-                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
-                        });
-                    }
-                }
-                
-                // 语言切换器悬停事件
-                if (this.languageSwitcher) {
-                    const dropdown = this.languageSwitcher.querySelector('.language-dropdown');
-                    
-                    this.languageSwitcher.addEventListener('mouseenter', () => {
-                        if (dropdown) {
-                            dropdown.style.opacity = '1';
-                            dropdown.style.visibility = 'visible';
-                            dropdown.style.transform = 'translateY(0)';
-                        }
-                    });
-                    
-                    this.languageSwitcher.addEventListener('mouseleave', () => {
-                        if (dropdown) {
-                            dropdown.style.opacity = '0';
-                            dropdown.style.visibility = 'hidden';
-                            dropdown.style.transform = 'translateY(10px)';
                         }
                     });
                 }
@@ -1681,10 +1742,20 @@
                     this.bindMenuEvents();
                 }
                 
-                // 热区显示逻辑
+                // 热区显示逻辑 - 769px以上显示
                 if (window.innerWidth >= 769) {
                     this.leftHotzone.style.display = 'block';
                     this.rightHotzone.style.display = 'block';
+                    
+                    // 确保热区事件绑定
+                    if (!this.leftHotzone.hasClickListener) {
+                        this.leftHotzone.addEventListener('click', () => this.prevSlide());
+                        this.leftHotzone.hasClickListener = true;
+                    }
+                    if (!this.rightHotzone.hasClickListener) {
+                        this.rightHotzone.addEventListener('click', () => this.nextSlide());
+                        this.rightHotzone.hasClickListener = true;
+                    }
                 } else {
                     this.leftHotzone.style.display = 'none';
                     this.rightHotzone.style.display = 'none';
@@ -1698,23 +1769,6 @@
                     }
                 } else {
                     this.sliderContainer.hasWheelListener = false;
-                }
-                
-                // 导航栏显示逻辑
-                if (window.innerWidth >= 769) {
-                    // 桌面端：确保导航栏完整显示
-                    if (this.navLinks) {
-                        this.navLinks.style.display = 'flex';
-                        this.navLinks.classList.remove('active');
-                    }
-                    if (this.menuBtn) {
-                        this.menuBtn.style.display = 'none';
-                    }
-                } else {
-                    // 移动端：显示菜单按钮
-                    if (this.menuBtn) {
-                        this.menuBtn.style.display = 'flex';
-                    }
                 }
             }
 
