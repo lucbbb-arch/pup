@@ -25,6 +25,7 @@
             --gray4:#1d1d1f;
             --gray-427c: #d0d3d4;
             --gray-429c: #a2aaad;
+            --spacing-logo: 120px; /* 与主页统一 */
         }
 
         /* ========== 基础样式 ========== */
@@ -42,7 +43,7 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
+            padding: 0 clamp(20px, 5vw, 120px); /* 响应式边距 */
         }
         .text-center { text-align: center; }
 
@@ -94,49 +95,80 @@
             text-align: center;
             margin-bottom: clamp(12px, 2vw, 24px);
             letter-spacing: clamp(3px, 1vw, 6px);
-            margin-top: 80px;
+            margin-top: 40px; /* 减少间距，增加紧凑度 */
         }
         .section-subtitle {
             font-size: clamp(14px, 1.5vw, 16px);
             color: var(--gray3);
             text-align: center;
             max-width: 600px;
-            margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
+            margin: 0 auto clamp(10px, 2vw, 30px); /* 减少间距，增加紧凑度 */
         }
 
         /* ========== 布局模块 - 与主页统一 ========== */
-        /* 导航 */
+        /* 导航 - 与主页统一样式，固定黑色背景 */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 1);
+            padding: 15px 0; /* 减少padding以降低高度 */
             transition: var(--transition);
-            padding: 18px 0;
+            background: rgba(0, 0, 0, 1); /* 固定黑色背景 */
+            color: var(--light); /* 固定白色文字 */
+            transform: translateY(0);
         }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 0;
+            padding: 12px 0; /* 滚动时进一步减少padding */
         }
-        .nav {
+        
+        /* 导航栏内容容器 - 与主页统一 */
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 var(--spacing-logo);
+            width: 100%;
         }
-        .brand img { 
-            height: 32px; 
-            transition: var(--transition);
-        }
-        .brand:hover img { opacity: 0.8; }
         
-        .nav-links {
+        /* Logo左对齐，与左边距保持1个logo距离 */
+        .brand {
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+        
+        .brand img {
+            height: 28px; /* 稍微减小logo大小 */
+            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(1); /* 白色logo */
+        }
+        
+        .brand:hover img {
+            opacity: 0.8;
+        }
+        
+        /* 导航链接和语言切换右对齐 */
+        .nav-right {
             display: flex;
+            align-items: center;
+            justify-content: flex-end;
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 - 修改为白色文字 */
+        /* 桌面端导航链接 */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(20px, 2vw, 30px);
+        }
+        
+        /* 导航链接基础样式 - 白色文字 */
         .nav-link {
             text-decoration: none;
             font-weight: 500;
@@ -144,10 +176,10 @@
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--light); /* 默认白色 */
+            color: var(--light); /* 固定白色 */
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
+        /* 导航链接下划线效果 - 悬停或激活时显示 */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -156,20 +188,7 @@
             transition: width 0.3s ease;
         }
         
-        /* 首页 - 白色 */
-        .nav-link[href="index.html"]::after {
-            background: var(--light);
-        }
-        .nav-link[href="index.html"]:hover,
-        .nav-link[href="index.html"].active {
-            color: var(--light);
-        }
-        .nav-link[href="index.html"]:hover::after,
-        .nav-link[href="index.html"].active::after {
-            width: 100%;
-        }
-        
-        /* 服务 - 橙色 - 修改悬停颜色 */
+        /* 服务 - 橙色 */
         .nav-link[href="services.html"]::after {
             background: var(--brand-or);
         }
@@ -182,7 +201,7 @@
             width: 100%;
         }
         
-        /* 案例 - 浅紫色 - 修改悬停颜色 */
+        /* 案例 - 浅紫色 */
         .nav-link[href="cases.html"]::after {
             background: var(--brand-light);
         }
@@ -195,7 +214,7 @@
             width: 100%;
         }
         
-        /* 关于 - 绿色 - 修改悬停颜色 */
+        /* 关于 - 绿色 */
         .nav-link[href="about.html"]::after {
             background: var(--brand-gr);
         }
@@ -208,7 +227,7 @@
             width: 100%;
         }
         
-        /* 联系 - 红色 - 修改悬停颜色 */
+        /* 联系 - 红色 */
         .nav-link[href="contact.html"]::after {
             background: var(--brand-re);
         }
@@ -221,18 +240,92 @@
             width: 100%;
         }
         
+        /* 语言切换器 - 右对齐 */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light); /* 白色文字 */
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-light);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 移动端菜单按钮 - 与主页统一 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--light);
-            font-size: 24px;
+            font-size: 20px;
             width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .menu-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
         }
 
         /* 子页面Hero区域 */
@@ -241,7 +334,7 @@
             height: 50vh;
             min-height: 400px;
             overflow: hidden;
-            margin-top: 70px;
+            margin-top: 70px; /* 因为导航栏高度降低了 */
             background: var(--dark);
         }
 
@@ -317,36 +410,44 @@
 
         /* 内容区域样式 */
         .section {
-            padding: clamp(60px, 8vw, 100px) 0;
-            background: var(--light);
+            padding: clamp(40px, 6vw, 80px) 0; /* 减少间距，增加紧凑度 */
+            background: var(--light); /* 统一背景色 */
         }
 
         /* ========== 服务卡片网格样式 ========== */
         .services-cards-grid {
             display: grid;
-            gap: 30px;
+            gap: 20px; /* 减少间距，增加紧凑度 */
             margin: 0 auto;
-            max-width: 1000px;
+            max-width: 1200px;
         }
 
-        /* 电脑端、Pad端、手机端：2x3网格 */
+        /* 电脑端和Pad端：2x3网格，16:9比例 */
         @media (min-width: 481px) {
             .services-cards-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(3, 1fr);
             }
-        }
-
-        /* 小手机端：1x6网格 */
-        @media (max-width: 480px) {
-            .services-cards-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(6, auto);
-                gap: 15px;
+            
+            .service-card-item {
+                aspect-ratio: 16 / 9; /* 16:9比例 */
             }
         }
 
-        /* 服务卡片样式 - 1:1方形框布局 */
+        /* 手机端：2x3网格，3:4比例 */
+        @media (max-width: 480px) {
+            .services-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, auto);
+                gap: 15px;
+            }
+            
+            .service-card-item {
+                aspect-ratio: 3 / 4; /* 3:4比例 */
+            }
+        }
+
+        /* 服务卡片样式 */
         .service-card-item {
             background: var(--light);
             border-radius: var(--radius);
@@ -356,7 +457,6 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            aspect-ratio: 1 / 1; /* 1:1方形框 */
         }
 
         .service-card-item:hover {
@@ -366,7 +466,7 @@
 
         .service-card-img {
             width: 100%;
-            height: 70%; /* 图片占70%高度 */
+            height: 70%;
             overflow: hidden;
             position: relative;
         }
@@ -383,31 +483,32 @@
         }
 
         .service-card-content {
-            padding: 20px;
-            height: 30%; /* 内容占30%高度 */
+            padding: 15px; /* 减少内边距，增加紧凑度 */
+            height: 30%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            flex-grow: 1;
         }
 
         .service-card-title {
-            font-size: 18px;
+            font-size: 16px; /* 减小字体大小 */
             font-weight: 600;
             color: var(--brand);
-            margin-bottom: 8px;
+            margin-bottom: 5px; /* 减少间距 */
             text-align: center;
         }
 
         .service-card-description {
-            font-size: 14px;
+            font-size: 12px; /* 减小字体大小 */
             color: var(--gray3);
-            line-height: 1.5;
+            line-height: 1.4;
             text-align: center;
         }
 
         /* ========== 服务品牌Logo墙样式 ========== */
         .logo-wall-section {
-            padding: clamp(40px, 5vw, 60px) 0;
+            padding: clamp(30px, 4vw, 50px) 0; /* 减少间距，增加紧凑度 */
             background: var(--gray1);
         }
 
@@ -434,13 +535,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: clamp(12px, 1.5vw, 20px);
+            padding: clamp(10px, 1.5vw, 15px); /* 减少内边距，增加紧凑度 */
             transition: var(--transition);
             border: none;
         }
         
         .logo-grid-item img {
-            max-height: clamp(40px, 5vw, 60px);
+            max-height: clamp(35px, 4vw, 50px); /* 减小logo大小 */
             filter: brightness(0) invert(1);
             transition: var(--transition);
         }
@@ -537,7 +638,7 @@
             color: var(--light);
             font-size: 16px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px; /* 减少间距 */
             max-width: 80%;
             padding: 0 20px;
         }
@@ -577,18 +678,18 @@
         /* 移动端指示点 */
         .fullscreen-dots {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px; /* 减少间距 */
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px; /* 减少间距 */
             z-index: 10;
         }
 
         .fullscreen-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px; /* 减小点大小 */
+            height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
@@ -604,15 +705,15 @@
         .service-process {
             background: linear-gradient(135deg, #f8f9fa 0%, #d0d3d4 100%);
             border-radius: var(--radius);
-            padding: clamp(40px, 5vw, 60px);
-            margin-top: 80px;
+            padding: clamp(30px, 4vw, 50px); /* 减少内边距 */
+            margin-top: 50px; /* 减少间距 */
             text-align: center;
         }
 
         .process-image {
             width: 100%;
             max-width: 900px;
-            margin: 40px auto 0;
+            margin: 30px auto 0; /* 减少间距 */
             border-radius: var(--radius);
             overflow: hidden;
         }
@@ -626,7 +727,7 @@
         /* 页脚 - 与主页统一 */
         .footer {
             background: #111;
-            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
+            padding: clamp(30px, 4vw, 50px) 0 clamp(15px, 2vw, 30px); /* 减少间距 */
             margin-top: 0;
         }
         
@@ -634,7 +735,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(30px, 4vw, 40px);
+            gap: clamp(20px, 3vw, 30px); /* 减少间距 */
         }
         
         .footer-brand {
@@ -642,7 +743,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px; /* 减少间距 */
         }
         
         .footer-logo { 
@@ -656,7 +757,7 @@
             font-style: italic;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px; /* 减少间距 */
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -664,7 +765,7 @@
         /* 社交媒体图标 */
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 10px; /* 减少间距 */
             margin-left: 10px;
         }
         
@@ -690,7 +791,7 @@
         
         .footer-links {
             display: flex;
-            gap: clamp(30px, 2vw, 40px);
+            gap: clamp(20px, 2vw, 30px); /* 减少间距 */
         }
         
         /* 页脚链接颜色设置 - 默认白色，悬停显示对应颜色 */
@@ -704,11 +805,6 @@
         }
         
         /* 页脚链接悬停效果 */
-        .footer-link[href="index.html"]:hover {
-            color: var(--light);
-            opacity: 0.8;
-        }
-        
         .footer-link[href="services.html"]:hover {
             color: var(--brand-or);
             opacity: 0.8;
@@ -733,7 +829,7 @@
         .footer-info {
             text-align: center;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 15px; /* 减少间距 */
         }
         
         .footer-info p {
@@ -818,6 +914,38 @@
             }
         }
         
+        /* Pad端 (769px-1024px) - 完整显示导航栏 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --spacing-logo: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 保持导航栏完整显示 */
+            .nav-links {
+                display: flex;
+            }
+            
+            .menu-btn {
+                display: none;
+            }
+            
+            .language-switcher {
+                display: inline-block;
+            }
+            
+            .mobile-language-btn {
+                display: none;
+            }
+            
+            .service-card-item {
+                aspect-ratio: 16 / 9; /* Pad端保持16:9 */
+            }
+        }
+        
         /* Pad端 (768px以下) */
         @media (max-width: 768px) {
             /* Pad端显示移动端Logo墙 */
@@ -825,31 +953,85 @@
             .logo-grid-mobile { display: grid; gap: 0; }
         }
         
-        /* 小手机端 (<=480px) */
-        @media (max-width: 480px) {
-            /* 导航栏响应式 */
+        /* 手机端 (<=768px) */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-logo: 30px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 手机端折叠导航栏 - 下拉菜单形式 */
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
+                top: 70px; /* 调整位置 */
+                right: var(--spacing-logo);
+                background: rgba(0, 0, 0, 0.95);
                 backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-                align-items: center;
-            }
-            .nav-links.active { display: flex; }
-            .menu-btn { display: flex; }
-            .nav-link {
+                border-radius: 8px;
                 padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center;
+                min-width: 180px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                flex-direction: column;
+                gap: 0;
             }
-            .nav-link:last-child { border-bottom: none; }
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            /* 移动端语言切换按钮 - 与主页统一 */
+            .mobile-language-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
+                font-size: 18px;
+                margin-right: 10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                -webkit-tap-highlight-color: transparent;
+                transition: var(--transition);
+            }
+            
+            .mobile-language-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+            
+            /* 折叠菜单中的导航链接样式 - 黑底白字 */
+            .nav-links .nav-link {
+                color: #fff !important; /* 强制白色文字 */
+                padding: 12px 25px;
+                font-size: 16px; /* 增加文字大小 */
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .language-switcher {
+                display: none;
+            }
             
             .sub-hero {
                 height: 30vh;
@@ -858,15 +1040,15 @@
             }
             
             .service-card-content {
-                padding: 15px;
+                padding: 12px; /* 手机端进一步减小内边距 */
             }
             
             .service-card-title {
-                font-size: 16px;
+                font-size: 14px; /* 手机端减小字体 */
             }
             
             .service-card-description {
-                font-size: 13px;
+                font-size: 11px; /* 手机端减小字体 */
             }
             
             .fullscreen-slider {
@@ -909,13 +1091,12 @@
         
         /* 极小手机端 (<=360px) */
         @media (max-width: 360px) {
-            .service-card-img {
-                height: 65%;
+            .service-card-item {
+                aspect-ratio: 3 / 4; /* 极小手机端保持3:4 */
             }
             
             .service-card-content {
-                height: 35%;
-                padding: 12px;
+                padding: 10px; /* 进一步减小内边距 */
             }
             
             .fullscreen-slider {
@@ -924,6 +1105,77 @@
             
             .footer-link {
                 font-size: 13px;
+            }
+        }
+        
+        /* 移动端菜单容器 */
+        .mobile-menu-container {
+            display: none;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-container {
+                display: flex;
+            }
+        }
+        
+        /* 移动端语言下拉菜单 */
+        .mobile-language-dropdown {
+            position: fixed;
+            top: 70px;
+            right: var(--spacing-logo);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 15px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .mobile-language-dropdown.active {
+            display: block;
+        }
+        
+        .mobile-language-option {
+            padding: 12px 25px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            font-size: 16px; /* 增加文字大小 */
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-language-option:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-language-option:hover,
+        .mobile-language-option:active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .mobile-language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 确保在电脑端缩小宽度时导航栏不折叠 */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
+                display: none !important;
             }
         }
     </style>
@@ -974,18 +1226,41 @@
 
     <!-- 导航栏 - 与主页统一 -->
     <header class="header" id="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
-                </a>
+        <div class="nav-container">
+            <!-- Logo左对齐 -->
+            <a href="index.html" class="brand">
+                <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+            </a>
+            
+            <!-- 导航链接和语言切换右对齐 -->
+            <div class="nav-right">
+                <!-- 桌面端导航链接 - 已删除"首页"链接 -->
                 <nav class="nav-links">
-                    <a href="index.html" class="nav-link">首页</a>
                     <a href="services.html" class="nav-link active">服务</a>
                     <a href="cases.html" class="nav-link">案例</a>
                     <a href="about.html" class="nav-link">关于</a>
                     <a href="contact.html" class="nav-link">联系</a>
                 </nav>
+                
+                <!-- 语言切换器 - 与主页统一 -->
+                <div class="language-switcher">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>CHINESE</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active">CH</a>
+                        <a href="#" class="language-option">EN</a>
+                        <a href="#" class="language-option">FR</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单按钮和语言切换 -->
+            <div class="mobile-menu-container">
+                <button class="mobile-language-btn" id="mobileLanguageBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
                 <button class="menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1085,7 +1360,7 @@
                     <img src="assets/services.png" alt="全案服务流程">
                 </div>
                 
-                <div style="margin-top: 40px;">
+                <div style="margin-top: 30px;"> <!-- 减少间距 -->
                     <a href="contact.html" class="btn-primary">开始您的项目</a>
                 </div>
             </div>
@@ -1126,7 +1401,6 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html" class="footer-link">首页</a>
                     <a href="services.html" class="footer-link active">服务</a>
                     <a href="cases.html" class="footer-link">案例</a>
                     <a href="about.html" class="footer-link">关于</a>
@@ -1139,6 +1413,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- 移动端语言下拉菜单 -->
+    <div class="mobile-language-dropdown" id="mobileLanguageDropdown">
+        <a href="#" class="mobile-language-option active">CH</a>
+        <a href="#" class="mobile-language-option">EN</a>
+        <a href="#" class="mobile-language-option">FR</a>
+    </div>
 
     <script>
         // ========== 服务数据配置 ==========
@@ -1210,6 +1491,7 @@
             
             init() {
                 this.setupNav();
+                this.setupScrollHideNav();
                 this.setupServiceCards();
                 this.setupFullscreenViewer();
                 this.setupAnimations();
@@ -1224,6 +1506,8 @@
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
                 const navLinks = document.querySelector('.nav-links');
+                const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                const mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 
                 // 滚动效果
                 const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
@@ -1232,21 +1516,54 @@
                 
                 // 移动菜单
                 if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', () => {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
                         const isActive = navLinks.classList.toggle('active');
                         menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                    
-                    // 点击链接关闭菜单
-                    navLinks.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            if (window.innerWidth <= 420) {
-                                navLinks.classList.remove('active');
-                                menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
-                        });
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (isActive) {
+                            mobileLanguageDropdown.classList.remove('active');
+                        }
                     });
                 }
+                
+                // 移动端语言切换按钮
+                if (mobileLanguageBtn && mobileLanguageDropdown) {
+                    mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = mobileLanguageDropdown.classList.toggle('active');
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (isActive) {
+                            if (navLinks) {
+                                navLinks.classList.remove('active');
+                            }
+                            if (menuBtn) {
+                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        }
+                    });
+                }
+                
+                // 点击页面其他区域关闭所有下拉菜单
+                document.addEventListener('click', (e) => {
+                    const isMenuBtn = menuBtn && menuBtn.contains(e.target);
+                    const isNavLinks = navLinks && navLinks.contains(e.target);
+                    const isLanguageBtn = mobileLanguageBtn && mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = mobileLanguageDropdown && mobileLanguageDropdown.contains(e.target);
+                    
+                    if (!isMenuBtn && !isNavLinks && navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        if (menuBtn) {
+                            menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                    
+                    if (!isLanguageBtn && !isLanguageDropdown && mobileLanguageDropdown && mobileLanguageDropdown.classList.contains('active')) {
+                        mobileLanguageDropdown.classList.remove('active');
+                    }
+                });
                 
                 // 当前页面高亮
                 const currentPage = location.pathname.split('/').pop() || 'index.html';
@@ -1257,6 +1574,44 @@
                 // 页脚链接高亮
                 document.querySelectorAll('.footer-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+                
+                // 点击语言下拉菜单选项
+                const languageOptions = mobileLanguageDropdown.querySelectorAll('.mobile-language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
+                        
+                        // 更新活动状态
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        mobileLanguageDropdown.classList.remove('active');
+                    });
+                });
+            }
+            
+            // 滚动时隐藏/显示导航栏
+            setupScrollHideNav() {
+                const header = document.getElementById('header');
+                let lastScrollTop = 0;
+                const scrollThreshold = 60; // 滚动阈值
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                        // 向下滚动，隐藏导航栏
+                        header.classList.add('hidden');
+                    } else {
+                        // 向上滚动，显示导航栏
+                        header.classList.remove('hidden');
+                    }
+                    
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 });
             }
             
@@ -1518,7 +1873,7 @@
                     const navLinks = document.querySelector('.nav-links');
                     const menuBtn = document.getElementById('menuBtn');
                     
-                    if (window.innerWidth > 420 && navLinks && menuBtn) {
+                    if (window.innerWidth > 768 && navLinks && menuBtn) {
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }

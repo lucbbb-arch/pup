@@ -46,7 +46,7 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            padding: 20px 0;
+            padding: 15px 0; /* 减少padding以降低高度 */
             transition: var(--transition);
         }
         
@@ -76,7 +76,7 @@
         }
         
         .brand img {
-            height: 32px;
+            height: 28px; /* 稍微减小logo大小 */
             transition: opacity 0.3s ease;
         }
         
@@ -265,23 +265,29 @@
             font-weight: 600;
         }
         
-        /* 移动端菜单按钮 */
+        /* 移动端菜单按钮 - 增加触控友好设计 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: inherit;
             font-size: 20px;
-            width: 44px; height: 44px;
+            width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .header.light-nav .menu-btn {
             border-color: rgba(29, 29, 31, 0.2);
+        }
+        
+        .menu-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
         }
 
         /* ====== 全屏案例滑块 ====== */
@@ -581,7 +587,7 @@
         /* ====== 角落功能按钮 ====== */
         .corner-btn {
             position: fixed;
-            bottom: 3rem;
+            bottom: 2rem; /* 缩小与浏览器底部的距离 */
             z-index: 100;
             cursor: pointer;
             display: flex;
@@ -594,12 +600,6 @@
             padding: 0;
             background: transparent;
             border: none;
-        }
-        
-        /* 左下角：只保留文字 */
-        .corner-btn.left {
-            left: var(--spacing-logo);
-            font-size: 1.1rem;
         }
         
         /* 右下角：只保留文字 */
@@ -626,14 +626,12 @@
             color: #1d1d1f;
         }
 
-        /* ====== 案例进度指示器 ====== */
+        /* ====== 案例进度指示器 - 修改为左下角 ====== */
         .progress-indicator {
             position: fixed;
-            bottom: 2rem;
-            left: 0;
-            right: 0;
+            bottom: 2rem; /* 与右下角按钮对齐 */
+            left: var(--spacing-logo);
             display: flex;
-            justify-content: center;
             gap: 8px;
             z-index: 100;
         }
@@ -647,20 +645,244 @@
             cursor: pointer;
         }
         
-        .progress-dot.active {
-            background: #ffffff;
+        /* 白底时的进度点样式 */
+        .light-progress-dot {
+            background: rgba(29, 29, 31, 0.3);
+        }
+        
+        .light-progress-dot.active {
+            background: rgba(29, 29, 31, 0.8);
             transform: scale(1.3);
         }
         
+        /* 深色背景时的进度点样式 */
+        .dark-progress-dot {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .dark-progress-dot.active {
+            background: #ffffff;
+            transform: scale(1.3);
+        }
+
         /* ====== 响应式调整 ====== */
-        /* Pad端 (768px以下) */
+        /* 修正媒体查询逻辑 - 确保769px以上完整显示 */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
+                display: none !important;
+            }
+            
+            .language-switcher {
+                display: inline-block !important;
+            }
+            
+            .mobile-menu-container {
+                display: none !important;
+            }
+            
+            /* 确保电脑端热区显示 */
+            .left-hotzone,
+            .right-hotzone {
+                display: block !important;
+            }
+            
+            /* 电脑端导航链接确保显示 */
+            .nav-links {
+                gap: clamp(15px, 2vw, 30px);
+            }
+        }
+
+        /* 768px以下折叠显示 */
         @media (max-width: 768px) {
+            :root {
+                --spacing-logo: 30px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                right: var(--spacing-logo);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 8px;
+                padding: 15px 0;
+                min-width: 180px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            /* 移动端语言切换按钮 */
+            .mobile-language-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
+                font-size: 18px;
+                margin-right: 10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                -webkit-tap-highlight-color: transparent;
+                transition: var(--transition);
+            }
+            
+            .mobile-language-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+            
+            /* 折叠菜单中的导航链接样式 */
+            .nav-links .nav-link {
+                color: #fff !important;
+                padding: 12px 25px;
+                font-size: 16px;
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            /* 浅色背景时按钮边框调整 */
+            .header.light-nav .menu-btn {
+                border-color: rgba(29, 29, 31, 0.3);
+            }
+            
+            .header.light-nav .mobile-language-btn {
+                border-color: rgba(29, 29, 31, 0.3);
+            }
+            
+            /* 案例2 - 手机端 */
+            .layout-white-vertical {
+                padding: 20px;
+            }
+            
+            .layout-white-vertical .image-container {
+                height: 40vh;
+                margin-bottom: 20px;
+            }
+            
+            /* 案例4 - 手机端 */
+            .layout-black-horizontal {
+                padding: 0 20px;
+            }
+            
+            .layout-black-horizontal .image-container {
+                height: 40vh;
+                margin-bottom: 30px;
+            }
+            
+            /* 案例6 - 手机端 */
+            .layout-gray-center {
+                padding: 30px 20px;
+            }
+            
+            .content-position-default {
+                left: var(--spacing-logo);
+                bottom: 25%;
+                right: var(--spacing-logo);
+                text-align: center;
+            }
+            
+            .content-position-center {
+                width: 100%;
+                padding: 0 15px;
+            }
+            
+            .case-title {
+                font-size: clamp(24px, 8vw, 36px);
+            }
+            
+            .case-subtitle {
+                font-size: clamp(14px, 4vw, 16px);
+                margin-bottom: 20px;
+            }
+            
+            .corner-btn.right {
+                right: var(--spacing-logo);
+                font-size: 0.9rem;
+                bottom: 1.5rem;
+            }
+            
+            .progress-indicator {
+                left: var(--spacing-logo);
+                bottom: 1.5rem;
+            }
+            
+            /* 手机端隐藏桌面语言切换器 */
+            .language-switcher {
+                display: none;
+            }
+            
+            /* 手机端隐藏热区 */
+            .left-hotzone,
+            .right-hotzone {
+                display: none;
+            }
+            
+            .mobile-menu-container {
+                display: flex;
+            }
+        }
+        
+        /* Pad端 (769px-1023px) - 确保导航栏完整显示 */
+        @media (min-width: 769px) and (max-width: 1023px) {
             :root {
                 --spacing-logo: 60px;
             }
             
             .nav-container {
                 padding: 0 var(--spacing-logo);
+            }
+            
+            /* 确保导航栏完整显示 */
+            .nav-links {
+                display: flex !important;
+                gap: 15px;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .language-switcher {
+                display: inline-block !important;
+            }
+            
+            .mobile-language-btn {
+                display: none !important;
             }
             
             /* 案例2 - Pad端 */
@@ -717,170 +939,33 @@
                 font-size: clamp(28px, 6vw, 48px);
             }
             
-            .corner-btn {
+            .corner-btn.right {
+                right: var(--spacing-logo);
+            }
+            
+            .progress-indicator {
+                left: var(--spacing-logo);
                 bottom: 2rem;
             }
-            
-            .corner-btn.left {
-                left: var(--spacing-logo);
-                font-size: 1rem;
-            }
-            
-            .corner-btn.right {
-                right: var(--spacing-logo);
-            }
-            
-            .progress-indicator {
-                bottom: 5rem;
-            }
         }
         
-        /* 手机端 (420px以下) */
-        @media (max-width: 420px) {
-            :root {
-                --spacing-logo: 30px;
-            }
-            
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-                align-items: center;
-            }
-            
-            .nav-links.active { 
-                display: flex; 
-            }
-            
-            .menu-btn { 
-                display: flex; 
-                align-items: center;
-                justify-content: center;
-            }
-            
-            /* 移动端语言切换按钮 - 简洁适合手指操作 */
-            .mobile-language-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.1);
-                color: inherit;
-                font-size: 18px;
-                margin-right: 10px;
-            }
-            
-            /* 案例2 - 手机端 */
-            .layout-white-vertical {
-                padding: 20px;
-            }
-            
-            .layout-white-vertical .image-container {
-                height: 40vh;
-                margin-bottom: 20px;
-            }
-            
-            /* 案例4 - 手机端 */
-            .layout-black-horizontal {
-                padding: 0 20px;
-            }
-            
-            .layout-black-horizontal .image-container {
-                height: 40vh;
-                margin-bottom: 30px;
-            }
-            
-            /* 案例6 - 手机端 */
-            .layout-gray-center {
-                padding: 30px 20px;
-            }
-            
-            .content-position-default {
-                left: var(--spacing-logo);
-                bottom: 25%;
-                right: var(--spacing-logo);
-                text-align: center;
-            }
-            
-            .content-position-center {
-                width: 100%;
-                padding: 0 15px;
-            }
-            
-            .case-title {
-                font-size: clamp(24px, 8vw, 36px);
-            }
-            
-            .case-subtitle {
-                font-size: clamp(14px, 4vw, 16px);
-                margin-bottom: 20px;
-            }
-            
-            .corner-btn {
-                bottom: 1.5rem;
-            }
-            
-            .corner-btn.left {
-                left: var(--spacing-logo);
-                font-size: 0.9rem;
-            }
-            
-            .corner-btn.right {
-                right: var(--spacing-logo);
-                font-size: 0.9rem;
-            }
-            
-            .progress-indicator {
-                bottom: 6rem;
-            }
-            
-            /* 手机端隐藏桌面语言切换器 */
-            .language-switcher {
-                display: none;
-            }
-            
-            /* 手机端隐藏热区 */
-            .left-hotzone,
-            .right-hotzone {
-                display: none;
-            }
-        }
-        
-        /* 大屏手机 (421px-767px) */
-        @media (min-width: 421px) and (max-width: 767px) {
+        /* 大屏手机 (421px-768px) */
+        @media (min-width: 421px) and (max-width: 768px) {
             :root {
                 --spacing-logo: 40px;
             }
             
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-                align-items: center;
-            }
-            
-            .nav-links.active { 
-                display: flex; 
+            .nav-container {
+                padding: 0 var(--spacing-logo);
             }
             
             .menu-btn { 
                 display: flex; 
                 align-items: center;
                 justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
             }
             
             /* 移动端语言切换按钮 */
@@ -895,6 +980,37 @@
                 color: inherit;
                 font-size: 20px;
                 margin-right: 12px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                -webkit-tap-highlight-color: transparent;
+                transition: var(--transition);
+            }
+            
+            .mobile-language-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+            
+            /* 折叠菜单中的导航链接样式 */
+            .nav-links .nav-link {
+                color: #fff !important;
+                padding: 12px 25px;
+                font-size: 16px;
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            /* 浅色背景时按钮边框调整 */
+            .header.light-nav .menu-btn {
+                border-color: rgba(29, 29, 31, 0.3);
+            }
+            
+            .header.light-nav .mobile-language-btn {
+                border-color: rgba(29, 29, 31, 0.3);
             }
             
             /* 案例2 - 大屏手机 */
@@ -927,12 +1043,12 @@
                 bottom: 22%;
             }
             
-            .corner-btn.left {
-                left: var(--spacing-logo);
-            }
-            
             .corner-btn.right {
                 right: var(--spacing-logo);
+            }
+            
+            .progress-indicator {
+                left: var(--spacing-logo);
             }
             
             /* 大屏手机也隐藏桌面语言切换器 */
@@ -947,14 +1063,24 @@
             }
         }
         
-        /* 电脑端 (769px以上) */
-        @media (min-width: 769px) {
+        /* 电脑端 (1024px以上) */
+        @media (min-width: 1024px) {
             .menu-btn {
-                display: none;
+                display: none !important;
             }
             
             .mobile-language-btn {
-                display: none;
+                display: none !important;
+            }
+            
+            /* 确保在电脑端缩小宽度时导航栏不折叠 */
+            .nav-links {
+                display: flex !important;
+            }
+            
+            /* 确保语言切换器显示 */
+            .language-switcher {
+                display: inline-block !important;
             }
         }
         
@@ -967,6 +1093,71 @@
         @media (max-width: 768px) {
             .mobile-menu-container {
                 display: flex;
+            }
+        }
+        
+        /* 移动端语言下拉菜单 */
+        .mobile-language-dropdown {
+            position: fixed;
+            top: 70px;
+            right: var(--spacing-logo);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 15px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .mobile-language-dropdown.active {
+            display: block;
+        }
+        
+        .mobile-language-option {
+            padding: 12px 25px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-language-option:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-language-option:hover,
+        .mobile-language-option:active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .mobile-language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 确保在769px-1024px之间也能正确显示 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-container {
+                padding: 0 60px;
+            }
+            
+            /* 保持导航栏完整显示 */
+            .nav-links {
+                display: flex !important;
+                gap: 15px;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .language-switcher {
+                display: inline-block !important;
             }
         }
     </style>
@@ -1092,26 +1283,28 @@
                 </div>
             </div>
         </div>
-
-        <!-- 左下角案例信息按钮 -->
-        <div class="corner-btn left dark-text" id="leftCornerBtn">
-            <span id="caseInfo">全案品牌/品牌展陈</span>
-        </div>
         
         <!-- 右下角案例详情链接 -->
         <a href="case-a.html" class="corner-btn right dark-text" id="rightCornerBtn" target="_blank">
             案例详情
         </a>
         
-        <!-- 案例进度指示器 -->
+        <!-- 案例进度指示器 - 移到左下角 -->
         <div class="progress-indicator" id="progressIndicator">
-            <div class="progress-dot active" data-slide="0"></div>
-            <div class="progress-dot" data-slide="1"></div>
-            <div class="progress-dot" data-slide="2"></div>
-            <div class="progress-dot" data-slide="3"></div>
-            <div class="progress-dot" data-slide="4"></div>
-            <div class="progress-dot" data-slide="5"></div>
+            <div class="progress-dot dark-progress-dot active" data-slide="0"></div>
+            <div class="progress-dot dark-progress-dot" data-slide="1"></div>
+            <div class="progress-dot dark-progress-dot" data-slide="2"></div>
+            <div class="progress-dot dark-progress-dot" data-slide="3"></div>
+            <div class="progress-dot dark-progress-dot" data-slide="4"></div>
+            <div class="progress-dot dark-progress-dot" data-slide="5"></div>
         </div>
+    </div>
+
+    <!-- 移动端语言下拉菜单 -->
+    <div class="mobile-language-dropdown" id="mobileLanguageDropdown">
+        <a href="#" class="mobile-language-option active">CH</a>
+        <a href="#" class="mobile-language-option">EN</a>
+        <a href="#" class="mobile-language-option">FR</a>
     </div>
 
     <script>
@@ -1122,20 +1315,32 @@
                 this.dots = document.querySelectorAll('.progress-dot');
                 this.leftHotzone = document.getElementById('leftHotzone');
                 this.rightHotzone = document.getElementById('rightHotzone');
-                this.leftCornerBtn = document.getElementById('leftCornerBtn');
                 this.rightCornerBtn = document.getElementById('rightCornerBtn');
                 this.header = document.getElementById('header');
                 this.menuBtn = document.getElementById('menuBtn');
                 this.navLinks = document.querySelector('.nav-links');
-                this.caseInfo = document.getElementById('caseInfo');
                 this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                this.mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 this.sliderContainer = document.querySelector('.slider-container');
+                this.languageSwitcher = document.querySelector('.language-switcher');
 
                 this.currentIndex = 0;
                 this.totalSlides = this.slides.length;
                 this.isAnimating = false;
                 this.wheelTimeout = null;
                 this.wheelDelay = 800; // 滚轮防抖延迟
+                this.lastScrollTime = Date.now();
+                this.scrollCooldown = 300; // 滚动冷却时间
+                this.isMobile = window.innerWidth <= 768;
+                this.isDesktop = window.innerWidth >= 769;
+                
+                // 检测是否为鼠标设备
+                this.hasMouse = window.matchMedia('(pointer: fine)').matches;
+                this.hasTouch = 'ontouchstart' in window;
+                
+                // 优先检测鼠标设备
+                this.isMouseDevice = this.hasMouse && !this.hasTouch;
+                this.isTouchDevice = this.hasTouch;
 
                 // 案例数据配置
                 this.casesData = [
@@ -1193,41 +1398,8 @@
                     });
                 });
 
-                // 绑定移动端菜单按钮
-                if (this.menuBtn) {
-                    this.menuBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isActive = this.navLinks.classList.toggle('active');
-                        this.menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                }
-                
-                // 点击页面其他区域关闭移动菜单
-                document.addEventListener('click', (e) => {
-                    if (this.navLinks && this.navLinks.classList.contains('active') && 
-                        !this.navLinks.contains(e.target) && 
-                        !this.menuBtn.contains(e.target)) {
-                        this.navLinks.classList.remove('active');
-                        if (this.menuBtn) {
-                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                        }
-                    }
-                });
-                
-                // 移动端语言切换按钮
-                if (this.mobileLanguageBtn) {
-                    this.mobileLanguageBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.toggleMobileLanguageDropdown();
-                    });
-                }
-                
-                // 点击页面其他区域关闭移动语言菜单
-                document.addEventListener('click', (e) => {
-                    if (!this.mobileLanguageBtn.contains(e.target)) {
-                        this.closeMobileLanguageDropdown();
-                    }
-                });
+                // 根据设备类型绑定不同的事件
+                this.bindMenuEvents();
 
                 // 键盘导航支持
                 document.addEventListener('keydown', (e) => {
@@ -1243,9 +1415,6 @@
                 // 触摸滑动支持（移动端）
                 this.setupTouchEvents();
 
-                // 更新左下角案例信息
-                this.updateCaseInfo();
-                
                 // 更新右下角详情链接
                 this.updateDetailLink();
                 
@@ -1258,8 +1427,168 @@
                 // 初始化导航栏颜色
                 this.updateNavColor();
                 
+                // 更新进度指示器颜色
+                this.updateProgressIndicatorColor();
+                
                 // 窗口大小变化时重新绑定事件
                 window.addEventListener('resize', () => this.handleResize());
+                
+                // 点击语言下拉菜单选项
+                const languageOptions = this.mobileLanguageDropdown.querySelectorAll('.mobile-language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
+                        
+                        // 更新活动状态
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        this.mobileLanguageDropdown.classList.remove('active');
+                    });
+                });
+            }
+
+            // 绑定菜单事件（根据设备类型）
+            bindMenuEvents() {
+                // 移除现有的事件监听器
+                this.removeMenuEvents();
+                
+                // 更新设备类型判断
+                this.isMobile = window.innerWidth <= 768;
+                this.isDesktop = window.innerWidth >= 769;
+                
+                // 根据设备类型绑定事件
+                this.bindDeviceSpecificEvents();
+            }
+            
+            // 根据设备类型绑定事件
+            bindDeviceSpecificEvents() {
+                // 检测是否为鼠标设备
+                const isMouseDevice = this.hasMouse || !this.hasTouch;
+                
+                if (isMouseDevice) {
+                    // 鼠标设备：使用悬停交互
+                    this.bindDesktopMenuEvents();
+                } else {
+                    // 触摸设备：使用点击交互
+                    this.bindMobileMenuEvents();
+                }
+            }
+            
+            // 移除菜单事件监听器
+            removeMenuEvents() {
+                // 移除菜单按钮事件
+                if (this.menuBtn) {
+                    // 克隆节点以移除所有事件监听器
+                    const newMenuBtn = this.menuBtn.cloneNode(true);
+                    this.menuBtn.parentNode.replaceChild(newMenuBtn, this.menuBtn);
+                    this.menuBtn = document.getElementById('menuBtn');
+                }
+                
+                // 移除语言按钮事件
+                if (this.mobileLanguageBtn) {
+                    const newLanguageBtn = this.mobileLanguageBtn.cloneNode(true);
+                    this.mobileLanguageBtn.parentNode.replaceChild(newLanguageBtn, this.mobileLanguageBtn);
+                    this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                }
+            }
+            
+            // 绑定移动设备菜单事件
+            bindMobileMenuEvents() {
+                // 菜单按钮点击事件
+                if (this.menuBtn && this.navLinks) {
+                    this.menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = this.navLinks.classList.toggle('active');
+                        this.menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (isActive) {
+                            this.mobileLanguageDropdown.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // 语言按钮点击事件
+                if (this.mobileLanguageBtn && this.mobileLanguageDropdown) {
+                    this.mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = this.mobileLanguageDropdown.classList.toggle('active');
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (isActive) {
+                            this.navLinks.classList.remove('active');
+                            if (this.menuBtn) {
+                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        }
+                    });
+                }
+                
+                // 点击页面其他区域关闭所有下拉菜单（移动设备）
+                document.addEventListener('click', (e) => {
+                    const isMenuBtn = this.menuBtn && this.menuBtn.contains(e.target);
+                    const isNavLinks = this.navLinks && this.navLinks.contains(e.target);
+                    const isLanguageBtn = this.mobileLanguageBtn && this.mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = this.mobileLanguageDropdown && this.mobileLanguageDropdown.contains(e.target);
+                    
+                    if (!isMenuBtn && !isNavLinks && this.navLinks && this.navLinks.classList.contains('active')) {
+                        this.navLinks.classList.remove('active');
+                        if (this.menuBtn) {
+                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                    
+                    if (!isLanguageBtn && !isLanguageDropdown && this.mobileLanguageDropdown && this.mobileLanguageDropdown.classList.contains('active')) {
+                        this.mobileLanguageDropdown.classList.remove('active');
+                    }
+                });
+            }
+            
+            // 绑定桌面设备菜单事件
+            bindDesktopMenuEvents() {
+                // 菜单按钮鼠标悬停事件 - 只在小屏幕时使用
+                if (window.innerWidth <= 1024 && window.innerWidth >= 769) {
+                    if (this.menuBtn && this.navLinks) {
+                        this.menuBtn.addEventListener('mouseenter', () => {
+                            this.navLinks.classList.add('active');
+                            if (this.menuBtn.querySelector('i')) {
+                                this.menuBtn.querySelector('i').className = 'fas fa-times';
+                            }
+                        });
+                        
+                        this.navLinks.addEventListener('mouseleave', () => {
+                            this.navLinks.classList.remove('active');
+                            if (this.menuBtn.querySelector('i')) {
+                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        });
+                    }
+                }
+                
+                // 语言切换器悬停事件
+                if (this.languageSwitcher) {
+                    const dropdown = this.languageSwitcher.querySelector('.language-dropdown');
+                    
+                    this.languageSwitcher.addEventListener('mouseenter', () => {
+                        if (dropdown) {
+                            dropdown.style.opacity = '1';
+                            dropdown.style.visibility = 'visible';
+                            dropdown.style.transform = 'translateY(0)';
+                        }
+                    });
+                    
+                    this.languageSwitcher.addEventListener('mouseleave', () => {
+                        if (dropdown) {
+                            dropdown.style.opacity = '0';
+                            dropdown.style.visibility = 'hidden';
+                            dropdown.style.transform = 'translateY(10px)';
+                        }
+                    });
+                }
             }
 
             // 设置鼠标滚轮事件
@@ -1267,6 +1596,10 @@
                 // 使用防抖函数防止滚轮滚动过快
                 const handleWheel = (e) => {
                     if (this.isAnimating) return;
+                    
+                    // 添加冷却时间
+                    const now = Date.now();
+                    if (now - this.lastScrollTime < this.scrollCooldown) return;
                     
                     if (this.wheelTimeout) {
                         clearTimeout(this.wheelTimeout);
@@ -1281,6 +1614,8 @@
                         else if (e.deltaY > 0) {
                             this.nextSlide();
                         }
+                        
+                        this.lastScrollTime = now;
                     }, this.wheelDelay);
                     
                     // 阻止默认滚动行为
@@ -1335,22 +1670,51 @@
 
             // 处理窗口大小变化
             handleResize() {
-                // 根据屏幕宽度决定是否启用滚轮事件
+                const oldIsMobile = this.isMobile;
+                const oldIsDesktop = this.isDesktop;
+                
+                this.isMobile = window.innerWidth <= 768;
+                this.isDesktop = window.innerWidth >= 769;
+                
+                // 只有在设备类型发生变化时才重新绑定
+                if (oldIsMobile !== this.isMobile || oldIsDesktop !== this.isDesktop) {
+                    this.bindMenuEvents();
+                }
+                
+                // 热区显示逻辑
                 if (window.innerWidth >= 769) {
-                    // 电脑端启用滚轮事件
+                    this.leftHotzone.style.display = 'block';
+                    this.rightHotzone.style.display = 'block';
+                } else {
+                    this.leftHotzone.style.display = 'none';
+                    this.rightHotzone.style.display = 'none';
+                }
+                
+                // 滚轮事件处理
+                if (window.innerWidth >= 769) {
                     if (!this.sliderContainer.hasWheelListener) {
                         this.setupWheelEvents();
                         this.sliderContainer.hasWheelListener = true;
                     }
-                    // 显示热区
-                    this.leftHotzone.style.display = 'block';
-                    this.rightHotzone.style.display = 'block';
                 } else {
-                    // 移动端移除滚轮事件
                     this.sliderContainer.hasWheelListener = false;
-                    // 隐藏热区
-                    this.leftHotzone.style.display = 'none';
-                    this.rightHotzone.style.display = 'none';
+                }
+                
+                // 导航栏显示逻辑
+                if (window.innerWidth >= 769) {
+                    // 桌面端：确保导航栏完整显示
+                    if (this.navLinks) {
+                        this.navLinks.style.display = 'flex';
+                        this.navLinks.classList.remove('active');
+                    }
+                    if (this.menuBtn) {
+                        this.menuBtn.style.display = 'none';
+                    }
+                } else {
+                    // 移动端：显示菜单按钮
+                    if (this.menuBtn) {
+                        this.menuBtn.style.display = 'flex';
+                    }
                 }
             }
 
@@ -1379,8 +1743,10 @@
                 // 更新导航栏颜色
                 this.updateNavColor();
                 
-                // 更新角落按钮信息
-                this.updateCaseInfo();
+                // 更新进度指示器颜色
+                this.updateProgressIndicatorColor();
+                
+                // 更新详情链接
                 this.updateDetailLink();
                 this.updateCornerButtonsColor();
 
@@ -1426,83 +1792,48 @@
                 }
             }
             
+            // 更新进度指示器颜色
+            updateProgressIndicatorColor() {
+                const currentSlide = this.slides[this.currentIndex];
+                const navColor = currentSlide.getAttribute('data-nav-color');
+                
+                // 移除所有颜色类
+                this.dots.forEach(dot => {
+                    dot.classList.remove('dark-progress-dot', 'light-progress-dot');
+                });
+                
+                // 根据背景颜色添加对应的颜色类
+                if (navColor === 'light') {
+                    this.dots.forEach(dot => {
+                        dot.classList.add('light-progress-dot');
+                    });
+                } else {
+                    this.dots.forEach(dot => {
+                        dot.classList.add('dark-progress-dot');
+                    });
+                }
+            }
+            
             // 更新角落按钮颜色
             updateCornerButtonsColor() {
                 const currentSlide = this.slides[this.currentIndex];
                 const navColor = currentSlide.getAttribute('data-nav-color');
                 
                 // 移除所有颜色类
-                this.leftCornerBtn.classList.remove('dark-text', 'light-text');
                 this.rightCornerBtn.classList.remove('dark-text', 'light-text');
                 
                 // 根据背景颜色添加对应的颜色类
                 if (navColor === 'light') {
-                    this.leftCornerBtn.classList.add('light-text');
                     this.rightCornerBtn.classList.add('light-text');
                 } else {
-                    this.leftCornerBtn.classList.add('dark-text');
                     this.rightCornerBtn.classList.add('dark-text');
                 }
-            }
-
-            // 更新左下角案例信息
-            updateCaseInfo() {
-                const caseData = this.casesData[this.currentIndex];
-                this.caseInfo.textContent = `${caseData.brand}/${caseData.type}`;
-                
-                // 更新左下角按钮的提示信息
-                this.leftCornerBtn.title = caseData.note;
             }
             
             // 更新右下角详情链接
             updateDetailLink() {
                 const caseData = this.casesData[this.currentIndex];
                 this.rightCornerBtn.href = caseData.detailUrl;
-            }
-
-            // 切换移动端语言下拉菜单
-            toggleMobileLanguageDropdown() {
-                // 移除现有的下拉菜单
-                const existingDropdown = document.querySelector('.mobile-dropdown');
-                if (existingDropdown) {
-                    existingDropdown.remove();
-                    return;
-                }
-                
-                // 创建新的下拉菜单
-                const dropdown = document.createElement('div');
-                dropdown.className = 'mobile-dropdown';
-                dropdown.innerHTML = `
-                    <a href="#" class="mobile-dropdown-option active">CH</a>
-                    <a href="#" class="mobile-dropdown-option">EN</a>
-                    <a href="#" class="mobile-dropdown-option">FR</a>
-                `;
-                
-                // 定位并添加
-                const rect = this.mobileLanguageBtn.getBoundingClientRect();
-                dropdown.style.position = 'fixed';
-                dropdown.style.top = `${rect.bottom}px`;
-                dropdown.style.right = `${window.innerWidth - rect.right}px`;
-                
-                document.body.appendChild(dropdown);
-                
-                // 添加点击事件
-                dropdown.querySelectorAll('.mobile-dropdown-option').forEach(option => {
-                    option.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const lang = option.textContent;
-                        alert(`切换到 ${lang}`);
-                        this.closeMobileLanguageDropdown();
-                    });
-                });
-            }
-            
-            // 关闭移动端语言下拉菜单
-            closeMobileLanguageDropdown() {
-                const dropdown = document.querySelector('.mobile-dropdown');
-                if (dropdown) {
-                    dropdown.remove();
-                }
             }
         }
 
