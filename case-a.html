@@ -355,21 +355,15 @@
             padding-left: 40px;
         }
 
-        .detail-meta-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        /* 宽版（>1024px）：项目信息内部4列网格 */
+        .detail-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
         }
 
         .detail-meta-item {
             text-align: left;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding-bottom: 15px;
-        }
-
-        .detail-meta-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
         }
 
         .detail-meta-label {
@@ -423,7 +417,7 @@
             padding: 0 clamp(20px, 5vw, 120px) 60px;
         }
 
-        /* 单张图片 - 满版宽度，4:3长宽比 */
+        /* 单张图片 - 满版宽度，16:9长宽比 */
         .gallery-item.wide {
             grid-column: span 2;
             position: relative;
@@ -434,7 +428,7 @@
         .gallery-item.wide .gallery-image-container {
             width: 100%;
             height: 0;
-            padding-bottom: 75%; /* 4:3长宽比 (3/4 = 0.75) */
+            padding-bottom: 56.25%; /* 16:9长宽比 (9/16 = 0.5625) */
             position: relative;
             overflow: hidden;
         }
@@ -449,7 +443,7 @@
             display: block;
         }
 
-        /* 两张图片 - 1:1长宽比 */
+        /* 两张图片 - 5:4长宽比 */
         .gallery-item.single {
             position: relative;
             overflow: hidden;
@@ -459,7 +453,7 @@
         .gallery-item.single .gallery-image-container {
             width: 100%;
             height: 0;
-            padding-bottom: 100%; /* 1:1长宽比 */
+            padding-bottom: 80%; /* 5:4长宽比 (4/5 = 0.8) */
             position: relative;
             overflow: hidden;
         }
@@ -759,7 +753,7 @@
             }
         }
         
-        /* 窄版、Pad和手机端 - 注释文字和项目信息上下排列 */
+        /* 窄版、Pad端 (≤1024px) */
         @media (max-width: 1024px) {
             .hero-main-row {
                 flex-direction: column;
@@ -776,19 +770,14 @@
                 padding-left: 0;
             }
             
-            .detail-meta-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
+            /* 窄版/Pad端：项目信息改为一栏4列网格 */
+            .detail-meta-grid {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 20px;
-            }
-            
-            .detail-meta-item {
-                border-bottom: none;
-                padding-bottom: 0;
             }
         }
         
-        /* 手机端 (<=768px) */
+        /* 手机端 (≤768px) */
         @media (max-width: 768px) {
             :root {
                 --spacing-logo: 20px;
@@ -877,8 +866,9 @@
                 padding: 30px var(--spacing-logo) 20px;
             }
             
-            .detail-meta-list {
-                grid-template-columns: 1fr;
+            /* 手机端：项目信息改为一栏4列网格 */
+            .detail-meta-grid {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 15px;
             }
             
@@ -924,13 +914,9 @@
                 height: 55vh;
                 min-height: 400px;
             }
-            
-            .detail-meta-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
         
-        /* 小手机端 (<=480px) */
+        /* 小手机端 (≤480px) */
         @media (max-width: 480px) {
             .detail-hero-image {
                 height: 45vh;
@@ -943,6 +929,11 @@
             
             .detail-hero-subtitle {
                 font-size: 14px;
+            }
+            
+            /* 在小手机端，项目信息改为2列网格 */
+            .detail-meta-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -1046,9 +1037,9 @@
                     <p class="detail-hero-subtitle">为国际奢侈珠宝品牌打造全新的旗舰店展示解决方案，采用模块化设计理念，集成智能照明与安全保障系统，完美呈现珠宝璀璨光彩。</p>
                 </div>
                 
-                <!-- 项目信息 - 宽版显示在右侧 -->
+                <!-- 项目信息 - 宽版显示在右侧，内部4列网格 -->
                 <div class="detail-meta-container">
-                    <div class="detail-meta-list">
+                    <div class="detail-meta-grid">
                         <div class="detail-meta-item">
                             <span class="detail-meta-label">客户</span>
                             <span class="detail-meta-value">国际奢侈珠宝品牌</span>
@@ -1081,7 +1072,7 @@
     <!-- 网页端/Pad端图片网格 -->
     <div class="case-gallery-desktop">
         <div class="gallery-grid">
-            <!-- 图片1 - 单张满版，4:3长宽比 -->
+            <!-- 图片1 - 单张满版，16:9长宽比 -->
             <div class="gallery-item wide">
                 <div class="gallery-image-container">
                     <img src="assets/2025-08-11_133845_823.jpg" alt="旗舰店主展示区" class="gallery-image">
@@ -1089,7 +1080,7 @@
                 <div class="gallery-caption">模块化设计理念，可根据不同珠宝系列快速调整展示布局</div>
             </div>
             
-            <!-- 图片2 - 左边，1:1长宽比 -->
+            <!-- 图片2 - 左边，5:4长宽比 -->
             <div class="gallery-item single">
                 <div class="gallery-image-container">
                     <img src="assets/2025-08-11_133856_756.jpg" alt="橱窗展示效果" class="gallery-image">
@@ -1097,7 +1088,7 @@
                 <div class="gallery-caption">橱窗展示系统采用动态机械装置</div>
             </div>
             
-            <!-- 图片3 - 右边，1:1长宽比 -->
+            <!-- 图片3 - 右边，5:4长宽比 -->
             <div class="gallery-item single">
                 <div class="gallery-image-container">
                     <img src="assets/20250417121703.jpg" alt="细节工艺展示" class="gallery-image">
@@ -1105,7 +1096,7 @@
                 <div class="gallery-caption">展示系统细节处体现匠心工艺</div>
             </div>
             
-            <!-- 图片4 - 单张满版，4:3长宽比 -->
+            <!-- 图片4 - 单张满版，16:9长宽比 -->
             <div class="gallery-item wide">
                 <div class="gallery-image-container">
                     <img src="assets/2025-08-11_133913_165.jpg" alt="智能照明系统" class="gallery-image">
@@ -1113,7 +1104,7 @@
                 <div class="gallery-caption">集成专业级LED光源，色温精确控制在5600K</div>
             </div>
             
-            <!-- 图片5 - 左边，1:1长宽比 -->
+            <!-- 图片5 - 左边，5:4长宽比 -->
             <div class="gallery-item single">
                 <div class="gallery-image-container">
                     <img src="assets/20250417121620.jpg" alt="模块化设计" class="gallery-image">
@@ -1121,7 +1112,7 @@
                 <div class="gallery-caption">展示单元采用标准化接口设计</div>
             </div>
             
-            <!-- 图片6 - 右边，1:1长宽比 -->
+            <!-- 图片6 - 右边，5:4长宽比 -->
             <div class="gallery-item single">
                 <div class="gallery-image-container">
                     <img src="assets/1803.jpg" alt="互动展示" class="gallery-image">
