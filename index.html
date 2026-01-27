@@ -573,6 +573,7 @@
             width: 50%;
             z-index: 50;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,5 5,12 12,19" fill="white" opacity="0.7"/></svg>') 12 12, auto;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .left-hotzone {
@@ -582,6 +583,40 @@
         .right-hotzone {
             right: 0;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,5 19,12 12,19" fill="white" opacity="0.7"/></svg>') 12 12, auto;
+        }
+
+        /* 移动端热区优化 - 增大触控区域 */
+        @media (max-width: 1024px) {
+            .left-hotzone,
+            .right-hotzone {
+                width: 25%;
+            }
+            
+            .left-hotzone {
+                left: 0;
+            }
+            
+            .right-hotzone {
+                right: 0;
+            }
+        }
+        
+        /* 手机端热区进一步优化 */
+        @media (max-width: 768px) {
+            .left-hotzone,
+            .right-hotzone {
+                width: 30%;
+                /* 添加轻微触控反馈背景 */
+                background: rgba(255, 255, 255, 0.01);
+            }
+            
+            .left-hotzone:active {
+                background: rgba(255, 255, 255, 0.05);
+            }
+            
+            .right-hotzone:active {
+                background: rgba(255, 255, 255, 0.05);
+            }
         }
 
         /* ====== 角落功能按钮 ====== */
@@ -666,13 +701,17 @@
         }
 
         /* ====== 响应式调整 ====== */
-        /* 电脑端大屏幕 (1200px以上) - 完整导航栏 */
-        @media (min-width: 1200px) {
+        /* 电脑端 (1025px以上) - 完整导航栏 */
+        @media (min-width: 1025px) {
             .nav-links {
                 display: flex !important;
             }
             
             .menu-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
                 display: none !important;
             }
             
@@ -683,21 +722,19 @@
             .mobile-menu-container {
                 display: none !important;
             }
-            
-            /* 确保电脑端热区显示 */
-            .left-hotzone,
-            .right-hotzone {
-                display: block !important;
-            }
-            
-            /* 电脑端导航链接确保显示 */
-            .nav-links {
-                gap: clamp(15px, 2vw, 30px);
-            }
         }
 
-        /* 电脑端中等屏幕 (1024px-1199px) - 完整导航栏 */
-        @media (min-width: 1024px) and (max-width: 1199px) {
+        /* Pad端 (769px-1024px) - 不折叠导航栏 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --spacing-logo: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 确保导航栏完整显示 */
             .nav-links {
                 display: flex !important;
                 gap: 15px;
@@ -711,52 +748,12 @@
                 display: inline-block !important;
             }
             
-            .mobile-menu-container {
-                display: none !important;
-            }
-            
-            /* 确保电脑端热区显示 */
-            .left-hotzone,
-            .right-hotzone {
-                display: block !important;
-            }
-        }
-
-        /* 电脑端小屏幕 (769px-1023px) - 折叠导航栏，悬停交互 */
-        @media (min-width: 769px) and (max-width: 1023px) {
-            :root {
-                --spacing-logo: 60px;
-            }
-            
-            .nav-container {
-                padding: 0 var(--spacing-logo);
-            }
-            
-            /* 折叠导航栏，显示菜单按钮 */
-            .nav-links {
-                display: none !important;
-            }
-            
-            .menu-btn {
-                display: flex !important;
-            }
-            
-            .language-switcher {
-                display: none !important;
-            }
-            
             .mobile-language-btn {
-                display: flex !important;
+                display: none !important;
             }
             
             .mobile-menu-container {
-                display: flex !important;
-            }
-            
-            /* 确保电脑端热区显示 */
-            .left-hotzone,
-            .right-hotzone {
-                display: block !important;
+                display: none !important;
             }
             
             /* 案例2 - Pad端 */
@@ -822,8 +819,8 @@
                 bottom: 2rem;
             }
         }
-
-        /* 手机端 (768px以下) - 折叠导航栏，点击交互 */
+        
+        /* 手机端 (768px以下) - 折叠导航栏 */
         @media (max-width: 768px) {
             :root {
                 --spacing-logo: 30px;
@@ -970,12 +967,6 @@
                 display: none;
             }
             
-            /* 手机端隐藏热区 */
-            .left-hotzone,
-            .right-hotzone {
-                display: none;
-            }
-            
             .mobile-menu-container {
                 display: flex;
             }
@@ -1087,12 +1078,6 @@
             .language-switcher {
                 display: none;
             }
-            
-            /* 大屏手机隐藏热区 */
-            .left-hotzone,
-            .right-hotzone {
-                display: none;
-            }
         }
         
         /* 移动端菜单容器 */
@@ -1101,7 +1086,7 @@
             align-items: center;
         }
         
-        @media (max-width: 1023px) {
+        @media (max-width: 768px) {
             .mobile-menu-container {
                 display: flex;
             }
@@ -1149,6 +1134,39 @@
         .mobile-language-option.active {
             color: var(--brand-light);
             font-weight: 600;
+        }
+        
+        /* 导航栏小屏幕适配 - 电脑端小屏幕时也保持完整导航栏 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links {
+                display: flex !important;
+                gap: 10px; /* 在小屏幕上减小间距 */
+            }
+            
+            .nav-link {
+                font-size: 14px; /* 减小字体大小 */
+            }
+            
+            .language-btn {
+                padding: 6px 12px; /* 减小按钮内边距 */
+                font-size: 12px; /* 减小字体大小 */
+            }
+        }
+        
+        /* 导航栏超小屏幕电脑端适配 */
+        @media (min-width: 769px) and (max-width: 850px) {
+            .nav-links {
+                gap: 8px;
+            }
+            
+            .nav-link {
+                font-size: 13px;
+            }
+            
+            .language-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -1200,7 +1218,7 @@
 
     <!-- 全屏案例滑块 -->
     <div class="slider-container">
-        <!-- 左右热区 (只在769px以上显示) -->
+        <!-- 左右热区 (所有终端都显示) -->
         <div class="left-hotzone" id="leftHotzone"></div>
         <div class="right-hotzone" id="rightHotzone"></div>
         
@@ -1322,19 +1340,13 @@
                 this.lastScrollTime = Date.now();
                 this.scrollCooldown = 300; // 滚动冷却时间
                 this.isMobile = window.innerWidth <= 768;
-                this.isDesktop = window.innerWidth >= 769;
+                this.isTablet = window.innerWidth >= 769 && window.innerWidth <= 1024;
+                this.isDesktop = window.innerWidth >= 1025;
                 
-                // 检测是否为鼠标设备
-                this.hasMouse = window.matchMedia('(pointer: fine)').matches;
-                this.hasTouch = 'ontouchstart' in window;
-                
-                // 优先检测鼠标设备
-                this.isMouseDevice = this.hasMouse && !this.hasTouch;
-                this.isTouchDevice = this.hasTouch;
-                
-                // 菜单状态
-                this.isMenuFixed = false;
-                this.isLanguageFixed = false;
+                // 触摸滑动参数
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.minSwipeDistance = 50; // 最小滑动距离
 
                 // 案例数据配置
                 this.casesData = [
@@ -1380,11 +1392,12 @@
             }
 
             init() {
-                // 绑定热区点击事件（只在769px以上有效）
-                if (window.innerWidth >= 769) {
-                    this.leftHotzone.addEventListener('click', () => this.prevSlide());
-                    this.rightHotzone.addEventListener('click', () => this.nextSlide());
-                }
+                // 更新设备类型判断
+                this.updateDeviceType();
+                
+                // 所有终端都绑定热区点击事件
+                this.leftHotzone.addEventListener('click', () => this.prevSlide());
+                this.rightHotzone.addEventListener('click', () => this.nextSlide());
                 
                 // 绑定进度指示器点击事件
                 this.dots.forEach(dot => {
@@ -1394,8 +1407,8 @@
                     });
                 });
 
-                // 根据设备类型绑定不同的事件
-                this.bindMenuEvents();
+                // 绑定导航栏事件
+                this.bindNavEvents();
 
                 // 键盘导航支持
                 document.addEventListener('keydown', (e) => {
@@ -1403,13 +1416,15 @@
                     if (e.key === 'ArrowRight') this.nextSlide();
                 });
 
-                // 鼠标滚轮事件 - 电脑端专用
-                if (window.innerWidth >= 769) {
+                // 鼠标滚轮事件 - 桌面端专用
+                if (this.isDesktop) {
                     this.setupWheelEvents();
                 }
                 
-                // 触摸滑动支持（移动端）
-                this.setupTouchEvents();
+                // 触摸滑动支持（手机端和Pad端）
+                if (this.isMobile || this.isTablet) {
+                    this.setupTouchEvents();
+                }
 
                 // 更新右下角详情链接
                 this.updateDetailLink();
@@ -1443,82 +1458,78 @@
                         
                         // 关闭下拉菜单
                         this.mobileLanguageDropdown.classList.remove('active');
-                        this.isLanguageFixed = false;
                     });
                 });
                 
-                // 点击页面其他地方关闭所有下拉菜单
-                document.addEventListener('click', (e) => {
-                    // 检查点击是否在菜单按钮、导航菜单或语言按钮内
-                    const isMenuBtn = this.menuBtn && this.menuBtn.contains(e.target);
-                    const isNavLinks = this.navLinks && this.navLinks.contains(e.target);
-                    const isLanguageBtn = this.mobileLanguageBtn && this.mobileLanguageBtn.contains(e.target);
-                    const isLanguageDropdown = this.mobileLanguageDropdown && this.mobileLanguageDropdown.contains(e.target);
-                    
-                    // 如果点击的不是菜单按钮或导航菜单，且菜单是固定打开的，则关闭它
-                    if (!isMenuBtn && !isNavLinks && this.navLinks && this.navLinks.classList.contains('active')) {
-                        this.navLinks.classList.remove('active');
-                        if (this.menuBtn) {
-                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                // 点击页面其他地方关闭所有下拉菜单（手机端）
+                if (this.isMobile) {
+                    document.addEventListener('click', (e) => {
+                        // 检查点击是否在菜单按钮、导航菜单或语言按钮内
+                        const isMenuBtn = this.menuBtn && this.menuBtn.contains(e.target);
+                        const isNavLinks = this.navLinks && this.navLinks.contains(e.target);
+                        const isLanguageBtn = this.mobileLanguageBtn && this.mobileLanguageBtn.contains(e.target);
+                        const isLanguageDropdown = this.mobileLanguageDropdown && this.mobileLanguageDropdown.contains(e.target);
+                        
+                        // 如果点击的不是菜单按钮或导航菜单，且菜单是打开的，则关闭它
+                        if (!isMenuBtn && !isNavLinks && this.navLinks && this.navLinks.classList.contains('active')) {
+                            this.navLinks.classList.remove('active');
+                            if (this.menuBtn) {
+                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
                         }
-                        this.isMenuFixed = false;
-                    }
-                    
-                    // 如果点击的不是语言按钮或语言下拉菜单，且语言菜单是固定打开的，则关闭它
-                    if (!isLanguageBtn && !isLanguageDropdown && this.mobileLanguageDropdown && this.mobileLanguageDropdown.classList.contains('active')) {
-                        this.mobileLanguageDropdown.classList.remove('active');
-                        this.isLanguageFixed = false;
-                    }
-                });
+                        
+                        // 如果点击的不是语言按钮或语言下拉菜单，且语言菜单是打开的，则关闭它
+                        if (!isLanguageBtn && !isLanguageDropdown && this.mobileLanguageDropdown && this.mobileLanguageDropdown.classList.contains('active')) {
+                            this.mobileLanguageDropdown.classList.remove('active');
+                        }
+                    });
+                }
+            }
+            
+            // 更新设备类型
+            updateDeviceType() {
+                const width = window.innerWidth;
+                this.isMobile = width <= 768;
+                this.isTablet = width >= 769 && width <= 1024;
+                this.isDesktop = width >= 1025;
             }
 
-            // 绑定菜单事件
-            bindMenuEvents() {
-                // 移除现有的事件监听器
-                this.removeMenuEvents();
-                
-                // 更新设备类型判断
-                this.isMobile = window.innerWidth <= 768;
-                this.isDesktop = window.innerWidth >= 769;
-                
-                // 重置菜单状态
-                this.isMenuFixed = false;
-                this.isLanguageFixed = false;
-                
-                // 根据屏幕宽度绑定不同的事件
-                if (window.innerWidth >= 1024) {
-                    // 大屏幕：完整导航栏，语言切换器悬停交互
-                    this.bindLargeScreenEvents();
-                } else if (window.innerWidth >= 769) {
-                    // 中等屏幕（769px-1023px）：折叠导航栏，悬停+点击交互
-                    this.bindMediumScreenEvents();
-                } else {
-                    // 小屏幕（768px以下）：折叠导航栏，点击交互
-                    this.bindSmallScreenEvents();
+            // 绑定导航栏事件
+            bindNavEvents() {
+                // 手机端：绑定菜单按钮点击事件
+                if (this.isMobile) {
+                    if (this.menuBtn && this.navLinks) {
+                        this.menuBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const isActive = this.navLinks.classList.toggle('active');
+                            this.menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
+                            
+                            // 如果打开菜单，关闭语言下拉菜单
+                            if (isActive) {
+                                this.mobileLanguageDropdown.classList.remove('active');
+                            }
+                        });
+                    }
+                    
+                    // 手机端语言按钮点击事件
+                    if (this.mobileLanguageBtn && this.mobileLanguageDropdown) {
+                        this.mobileLanguageBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const isActive = this.mobileLanguageDropdown.classList.toggle('active');
+                            
+                            // 如果打开语言下拉菜单，关闭导航菜单
+                            if (isActive) {
+                                this.navLinks.classList.remove('active');
+                                if (this.menuBtn) {
+                                    this.menuBtn.querySelector('i').className = 'fas fa-bars';
+                                }
+                            }
+                        });
+                    }
                 }
-            }
-            
-            // 移除菜单事件监听器
-            removeMenuEvents() {
-                // 克隆元素以移除所有事件监听器
-                if (this.menuBtn) {
-                    const newMenuBtn = this.menuBtn.cloneNode(true);
-                    this.menuBtn.parentNode.replaceChild(newMenuBtn, this.menuBtn);
-                    this.menuBtn = document.getElementById('menuBtn');
-                }
                 
-                if (this.mobileLanguageBtn) {
-                    const newLanguageBtn = this.mobileLanguageBtn.cloneNode(true);
-                    this.mobileLanguageBtn.parentNode.replaceChild(newLanguageBtn, this.mobileLanguageBtn);
-                    this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
-                }
-            }
-            
-            // 大屏幕事件绑定（1024px以上）
-            bindLargeScreenEvents() {
-                // 完整导航栏，不需要菜单按钮事件
-                // 语言切换器悬停交互
-                if (this.languageSwitcher) {
+                // 桌面端和Pad端：语言切换器悬停事件
+                if (this.languageSwitcher && (this.isDesktop || this.isTablet)) {
                     const dropdown = this.languageSwitcher.querySelector('.language-dropdown');
                     
                     this.languageSwitcher.addEventListener('mouseenter', () => {
@@ -1534,119 +1545,6 @@
                             dropdown.style.opacity = '0';
                             dropdown.style.visibility = 'hidden';
                             dropdown.style.transform = 'translateY(10px)';
-                        }
-                    });
-                }
-            }
-            
-            // 中等屏幕事件绑定（769px-1023px）
-            bindMediumScreenEvents() {
-                // 菜单按钮悬停和点击事件
-                if (this.menuBtn && this.navLinks) {
-                    // 悬停显示菜单
-                    this.menuBtn.addEventListener('mouseenter', () => {
-                        if (!this.isMenuFixed) {
-                            this.navLinks.classList.add('active');
-                            this.menuBtn.querySelector('i').className = 'fas fa-times';
-                        }
-                    });
-                    
-                    // 菜单区域鼠标离开时隐藏（如果不是固定状态）
-                    this.navLinks.addEventListener('mouseleave', () => {
-                        if (!this.isMenuFixed) {
-                            this.navLinks.classList.remove('active');
-                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                        }
-                    });
-                    
-                    // 点击切换固定状态
-                    this.menuBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.isMenuFixed = !this.isMenuFixed;
-                        
-                        if (this.isMenuFixed) {
-                            this.navLinks.classList.add('active');
-                            this.menuBtn.querySelector('i').className = 'fas fa-times';
-                        } else {
-                            this.navLinks.classList.remove('active');
-                            this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                        }
-                        
-                        // 如果打开菜单，关闭语言下拉菜单
-                        if (this.isMenuFixed) {
-                            this.mobileLanguageDropdown.classList.remove('active');
-                            this.isLanguageFixed = false;
-                        }
-                    });
-                }
-                
-                // 语言按钮悬停和点击事件
-                if (this.mobileLanguageBtn && this.mobileLanguageDropdown) {
-                    // 悬停显示语言下拉菜单
-                    this.mobileLanguageBtn.addEventListener('mouseenter', () => {
-                        if (!this.isLanguageFixed) {
-                            this.mobileLanguageDropdown.classList.add('active');
-                        }
-                    });
-                    
-                    // 语言下拉菜单鼠标离开时隐藏（如果不是固定状态）
-                    this.mobileLanguageDropdown.addEventListener('mouseleave', () => {
-                        if (!this.isLanguageFixed) {
-                            this.mobileLanguageDropdown.classList.remove('active');
-                        }
-                    });
-                    
-                    // 点击切换固定状态
-                    this.mobileLanguageBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.isLanguageFixed = !this.isLanguageFixed;
-                        
-                        if (this.isLanguageFixed) {
-                            this.mobileLanguageDropdown.classList.add('active');
-                        } else {
-                            this.mobileLanguageDropdown.classList.remove('active');
-                        }
-                        
-                        // 如果打开语言下拉菜单，关闭导航菜单
-                        if (this.isLanguageFixed) {
-                            this.navLinks.classList.remove('active');
-                            if (this.menuBtn) {
-                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
-                            this.isMenuFixed = false;
-                        }
-                    });
-                }
-            }
-            
-            // 小屏幕事件绑定（768px以下）
-            bindSmallScreenEvents() {
-                // 菜单按钮点击事件
-                if (this.menuBtn && this.navLinks) {
-                    this.menuBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isActive = this.navLinks.classList.toggle('active');
-                        this.menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                        
-                        // 如果打开菜单，关闭语言下拉菜单
-                        if (isActive) {
-                            this.mobileLanguageDropdown.classList.remove('active');
-                        }
-                    });
-                }
-                
-                // 语言按钮点击事件
-                if (this.mobileLanguageBtn && this.mobileLanguageDropdown) {
-                    this.mobileLanguageBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isActive = this.mobileLanguageDropdown.classList.toggle('active');
-                        
-                        // 如果打开语言下拉菜单，关闭导航菜单
-                        if (isActive) {
-                            this.navLinks.classList.remove('active');
-                            if (this.menuBtn) {
-                                this.menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
                         }
                     });
                 }
@@ -1690,22 +1588,24 @@
             // 触摸滑动支持
             setupTouchEvents() {
                 let startX = 0;
-                let endX = 0;
                 let startY = 0;
                 let isHorizontal = true;
 
                 this.sliderContainer.addEventListener('touchstart', (e) => {
+                    if (this.isAnimating) return;
+                    
                     startX = e.touches[0].clientX;
                     startY = e.touches[0].clientY;
                     isHorizontal = true;
                 }, { passive: true });
 
                 this.sliderContainer.addEventListener('touchmove', (e) => {
-                    if (!isHorizontal) return;
+                    if (!isHorizontal || this.isAnimating) return;
                     
-                    endX = e.touches[0].clientX;
-                    const diffY = Math.abs(e.touches[0].clientY - startY);
-                    const diffX = Math.abs(endX - startX);
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    const diffY = Math.abs(currentY - startY);
+                    const diffX = Math.abs(currentX - startX);
                     
                     // 如果垂直移动距离大于水平移动距离，则认为是垂直滚动
                     if (diffY > diffX) {
@@ -1713,13 +1613,13 @@
                     }
                 }, { passive: true });
 
-                this.sliderContainer.addEventListener('touchend', () => {
+                this.sliderContainer.addEventListener('touchend', (e) => {
                     if (!isHorizontal || this.isAnimating) return;
                     
+                    const endX = e.changedTouches[0].clientX;
                     const diffX = startX - endX;
-                    const threshold = 60;
 
-                    if (Math.abs(diffX) > threshold) {
+                    if (Math.abs(diffX) > this.minSwipeDistance) {
                         if (diffX > 0) {
                             this.nextSlide();
                         } else {
@@ -1732,43 +1632,62 @@
             // 处理窗口大小变化
             handleResize() {
                 const oldIsMobile = this.isMobile;
+                const oldIsTablet = this.isTablet;
                 const oldIsDesktop = this.isDesktop;
                 
-                this.isMobile = window.innerWidth <= 768;
-                this.isDesktop = window.innerWidth >= 769;
+                // 更新设备类型
+                this.updateDeviceType();
                 
                 // 只有在设备类型发生变化时才重新绑定
-                if (oldIsMobile !== this.isMobile || oldIsDesktop !== this.isDesktop) {
-                    this.bindMenuEvents();
+                if (oldIsMobile !== this.isMobile || oldIsTablet !== this.isTablet || oldIsDesktop !== this.isDesktop) {
+                    // 重新绑定导航栏事件
+                    this.bindNavEvents();
+                    
+                    // 重新绑定交互事件
+                    this.rebindInteractionEvents();
                 }
                 
-                // 热区显示逻辑 - 769px以上显示
-                if (window.innerWidth >= 769) {
-                    this.leftHotzone.style.display = 'block';
-                    this.rightHotzone.style.display = 'block';
-                    
-                    // 确保热区事件绑定
-                    if (!this.leftHotzone.hasClickListener) {
-                        this.leftHotzone.addEventListener('click', () => this.prevSlide());
-                        this.leftHotzone.hasClickListener = true;
-                    }
-                    if (!this.rightHotzone.hasClickListener) {
-                        this.rightHotzone.addEventListener('click', () => this.nextSlide());
-                        this.rightHotzone.hasClickListener = true;
-                    }
-                } else {
-                    this.leftHotzone.style.display = 'none';
-                    this.rightHotzone.style.display = 'none';
+                // 确保热区事件绑定
+                if (!this.leftHotzone.hasClickListener) {
+                    this.leftHotzone.addEventListener('click', () => this.prevSlide());
+                    this.leftHotzone.hasClickListener = true;
+                }
+                if (!this.rightHotzone.hasClickListener) {
+                    this.rightHotzone.addEventListener('click', () => this.nextSlide());
+                    this.rightHotzone.hasClickListener = true;
                 }
                 
                 // 滚轮事件处理
-                if (window.innerWidth >= 769) {
+                if (this.isDesktop) {
                     if (!this.sliderContainer.hasWheelListener) {
                         this.setupWheelEvents();
                         this.sliderContainer.hasWheelListener = true;
                     }
                 } else {
-                    this.sliderContainer.hasWheelListener = false;
+                    // 移除滚轮事件监听器
+                    if (this.sliderContainer.hasWheelListener) {
+                        this.sliderContainer.hasWheelListener = false;
+                    }
+                }
+            }
+            
+            // 重新绑定交互事件
+            rebindInteractionEvents() {
+                // 移除旧的触摸事件
+                this.sliderContainer.removeEventListener('touchstart', this.touchStartHandler);
+                this.sliderContainer.removeEventListener('touchmove', this.touchMoveHandler);
+                this.sliderContainer.removeEventListener('touchend', this.touchEndHandler);
+                
+                // 移除旧的滚轮事件
+                this.sliderContainer.removeEventListener('wheel', this.wheelHandler);
+                
+                // 重新绑定事件
+                if (this.isDesktop) {
+                    this.setupWheelEvents();
+                }
+                
+                if (this.isMobile || this.isTablet) {
+                    this.setupTouchEvents();
                 }
             }
 
