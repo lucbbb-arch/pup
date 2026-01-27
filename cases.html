@@ -26,6 +26,7 @@
             --gray-427c: #d0d3d4;
             --gray-428c: #c1c6c8;
             --gray-429c: #a2aaad;
+            --spacing-logo: 120px; /* 与主页统一 */
         }
 
         /* ========== 基础样式 ========== */
@@ -43,7 +44,7 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
+            padding: 0 clamp(20px, 5vw, 120px); /* 响应式边距 */
         }
         .text-center { text-align: center; }
 
@@ -95,78 +96,97 @@
             text-align: center;
             margin-bottom: clamp(12px, 2vw, 24px);
             letter-spacing: clamp(3px, 1vw, 6px);
-            margin-top: 80px;
+            margin-top: 40px; /* 减少间距，增加紧凑度 */
         }
         .section-subtitle {
             font-size: clamp(14px, 1.5vw, 16px);
             color: var(--gray3);
             text-align: center;
             max-width: 600px;
-            margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
+            margin: 0 auto clamp(10px, 2vw, 30px); /* 减少间距，增加紧凑度 */
         }
 
-        /* ========== 导航栏样式 - 与services.html完全统一 ========== */
+        /* ========== 布局模块 - 与主页统一 ========== */
+        /* 导航 - 与主页统一样式，固定黑色背景 */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 1);
+            padding: 15px 0; /* 减少padding以降低高度 */
             transition: var(--transition);
-            padding: 18px 0;
+            background: rgba(0, 0, 0, 1); /* 固定黑色背景 */
+            color: var(--light); /* 固定白色文字 */
+            transform: translateY(0);
         }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 0;
+            padding: 12px 0; /* 滚动时进一步减少padding */
         }
-        .nav {
+        
+        /* 导航栏内容容器 - 与主页统一 */
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 var(--spacing-logo);
+            width: 100%;
         }
-        .brand img { 
-            height: 32px; 
-            transition: var(--transition);
-        }
-        .brand:hover img { opacity: 0.8; }
         
-        .nav-links {
+        /* Logo左对齐，与左边距保持1个logo距离 */
+        .brand {
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+        
+        .brand img {
+            height: 28px; /* 稍微减小logo大小 */
+            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(1); /* 白色logo */
+        }
+        
+        .brand:hover img {
+            opacity: 0.8;
+        }
+        
+        /* 导航链接和语言切换右对齐 */
+        .nav-right {
             display: flex;
+            align-items: center;
+            justify-content: flex-end;
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 */
+        /* 桌面端导航链接 */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(20px, 2vw, 30px);
+        }
+        
+        /* 导航链接基础样式 - 白色文字 */
         .nav-link {
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--brand);
+            color: var(--light); /* 固定白色 */
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
+        /* 导航链接下划线效果 - 悬停或激活时显示 */
         .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0;
             width: 0; height: 2px;
             transition: width 0.3s ease;
-        }
-        
-        /* 首页 - 白色 */
-        .nav-link[href="index.html"]::after {
-            background: var(--light);
-        }
-        .nav-link[href="index.html"]:hover,
-        .nav-link[href="index.html"].active {
-            color: var(--light);
-        }
-        .nav-link[href="index.html"]:hover::after,
-        .nav-link[href="index.html"].active::after {
-            width: 100%;
         }
         
         /* 服务 - 橙色 */
@@ -221,27 +241,101 @@
             width: 100%;
         }
         
+        /* 语言切换器 - 右对齐 */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light); /* 白色文字 */
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-light);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 移动端菜单按钮 - 与主页统一 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--light);
-            font-size: 24px;
+            font-size: 20px;
             width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .menu-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
         }
 
-        /* 子页面Hero区域 */
+        /* ========== Hero区域 - 融合案例统计 ========== */
         .sub-hero {
             position: relative;
-            height: 50vh;
-            min-height: 400px;
+            height: 60vh; /* 增加高度以容纳统计信息 */
+            min-height: 500px;
             overflow: hidden;
-            margin-top: 70px;
+            margin-top: 60px; /* 减少margin-top，使紧贴导航栏 */
             background: var(--dark);
         }
 
@@ -284,6 +378,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 0 clamp(20px, 5vw, 40px); /* 增加左右内边距 */
         }
 
         .sub-hero-title {
@@ -295,7 +390,7 @@
             transform: translateY(30px);
             animation: fadeInUp 1s ease 0.3s forwards;
             letter-spacing: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 20px; /* 增加底部间距 */
         }
 
         .sub-hero-subtitle {
@@ -304,8 +399,63 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease 0.5s forwards;
-            max-width: 600px;
+            max-width: 700px; /* 增加最大宽度 */
             padding: 0 20px;
+            margin-bottom: 30px; /* 调整间距 */
+        }
+
+        /* 案例统计数据 - 融入Hero区域 */
+        .case-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: clamp(15px, 2vw, 40px);
+            margin: clamp(30px, 3vw, 50px) 0; /* 增加上下间距 */
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: clamp(15px, 2vw, 25px);
+            flex: 1;
+            min-width: 0; /* 允许缩小 */
+            max-width: 200px;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--brand-light);
+            box-shadow: 0 15px 40px rgba(119, 86, 160, 0.3);
+        }
+
+        .stat-number {
+            font-size: clamp(24px, 3vw, 48px);
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: clamp(5px, 1vw, 10px);
+            line-height: 1;
+            word-break: break-all;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: clamp(12px, 1.2vw, 16px);
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            word-break: keep-all;
+            white-space: nowrap;
+            opacity: 0.9;
         }
 
         @keyframes fadeInUp {
@@ -317,56 +467,11 @@
 
         /* 内容区域样式 */
         .section {
-            padding: clamp(60px, 8vw, 100px) 0;
-            background: var(--light);
+            padding: clamp(40px, 6vw, 80px) 0; /* 减少间距，增加紧凑度 */
+            background: var(--light); /* 统一背景色 */
         }
 
-        /* 案例统计数据 - 强制水平对齐不换行，完整显示 */
-        .case-stats {
-            display: flex;
-            justify-content: center;
-            flex-wrap: nowrap;
-            gap: clamp(10px, 2vw, 40px);
-            margin: clamp(40px, 5vw, 60px) 0;
-            width: 100%;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: clamp(15px, 2vw, 25px);
-            flex: 1;
-            min-width: 0; /* 允许缩小 */
-            max-width: 200px;
-            border-radius: var(--radius);
-            background: var(--light);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(119, 86, 160, 0.2);
-        }
-
-        .stat-number {
-            font-size: clamp(24px, 3vw, 48px);
-            font-weight: 700;
-            color: var(--brand);
-            margin-bottom: clamp(5px, 1vw, 10px);
-            line-height: 1;
-            word-break: break-all;
-        }
-
-        .stat-label {
-            font-size: clamp(12px, 1.2vw, 16px);
-            color: var(--gray3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            word-break: keep-all;
-            white-space: nowrap;
-        }
-
-        /* 案例筛选器 - 5个按钮，pad端居中对齐，小手机端两排 */
+        /* 案例筛选器 - 5个按钮 */
         .case-filter {
             width: 100%;
             margin: 0 auto clamp(30px, 5vw, 50px);
@@ -551,17 +656,18 @@
             padding: 0 5px;
         }
 
-        /* ========== 页脚 - 与主页完全统一 ========== */
+        /* ========== 页脚 - 与services.html统一 ========== */
         .footer {
             background: #111;
-            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(60px, 5vw, 50px);
+            padding: clamp(30px, 4vw, 50px) 0 clamp(15px, 2vw, 30px); /* 减少间距 */
+            margin-top: 0;
         }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(30px, 4vw, 40px);
+            gap: clamp(20px, 3vw, 30px); /* 减少间距 */
         }
         
         .footer-brand {
@@ -569,7 +675,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px; /* 减少间距 */
         }
         
         .footer-logo { 
@@ -583,7 +689,7 @@
             font-style: italic;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px; /* 减少间距 */
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -591,7 +697,7 @@
         /* 社交媒体图标 */
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 10px; /* 减少间距 */
             margin-left: 10px;
         }
         
@@ -615,46 +721,19 @@
             transform: translateY(-3px);
         }
         
-        /* 页脚链接 - 小手机端1行横版居中显示 */
+        /* 页脚链接 - 默认白色，悬停显示对应颜色 */
         .footer-links {
             display: flex;
-            gap: clamp(20px, 2vw, 40px);
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 100%;
+            gap: clamp(20px, 2vw, 30px); /* 减少间距 */
         }
         
-        /* 页脚链接颜色设置 - 与主页统一 */
         .footer-link {
             text-decoration: none;
             transition: var(--transition);
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 5px 0;
             position: relative;
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
-        
-        /* 页脚链接基础颜色 */
-        .footer-link[href="index.html"] {
-            color: var(--light);
-        }
-        
-        .footer-link[href="services.html"] {
-            color: var(--brand-or);
-        }
-        
-        .footer-link[href="cases.html"] {
-            color: var(--brand-light);
-        }
-        
-        .footer-link[href="about.html"] {
-            color: var(--brand-gr);
-        }
-        
-        .footer-link[href="contact.html"] {
-            color: var(--brand-re);
+            color: var(--light); /* 默认白色 */
         }
         
         /* 页脚链接悬停效果 */
@@ -683,17 +762,23 @@
             opacity: 0.8;
         }
         
+        /* 页脚底部文字区域 */
         .footer-info {
             text-align: center;
-            margin-top: 20px;
+            width: 100%;
+            margin-top: 15px; /* 减少间距 */
         }
         
         .footer-info p {
             font-size: 14px;
             color: var(--gray-429c);
+            text-align: center;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 二维码弹窗 - 与主页统一 */
+        /* 二维码弹窗 */
         .qrcode-modal {
             display: none;
             position: fixed;
@@ -738,131 +823,33 @@
         }
 
         /* ========== 响应式设计 ========== */
-        /* 小手机端 (<=480px) - 导航栏响应式 */
-        @media (max-width: 480px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-                align-items: center;
-            }
-            .nav-links.active { display: flex; }
-            .menu-btn { 
-                display: flex; 
-                align-items: center;
-                justify-content: center;
-            }
-            .nav-link {
-                padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center;
-            }
-            .nav-link:last-child { border-bottom: none; }
-            
-            .sub-hero {
-                height: 30vh;
-                min-height: 250px;
-                margin-top: 70px;
-            }
-            
-            /* 案例统计数据在小手机端进一步缩小但保持一行 */
-            .case-stats {
-                gap: 8px;
-                justify-content: space-between;
-            }
-            
-            .stat-item {
-                padding: 12px 8px;
-                flex: 1;
-            }
-            
-            .stat-number {
-                font-size: 18px;
-            }
-            
-            .stat-label {
-                font-size: 10px;
-                letter-spacing: 0;
-            }
-            
-            /* 小手机端显示一栏 */
-            .case-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .case-image {
-                height: 280px;
-            }
-            
-            /* 案例筛选器在小手机端：5个按钮保持同样大小和间距，居中对齐 */
-            .case-filter {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 8px;
-                margin: 0 auto 30px;
-            }
-            
-            .filter-btn {
-                flex: 0 0 calc(33.333% - 8px); /* 前三个按钮每行三个 */
-                max-width: calc(33.333% - 8px);
-                padding: 10px 5px;
-                font-size: 13px;
-                min-height: 40px;
-                text-align: center;
-                margin: 0;
-            }
-            
-            /* 第四和第五个按钮在第二行，居中显示 */
-            .filter-btn:nth-child(4),
-            .filter-btn:nth-child(5) {
-                flex: 0 0 calc(50% - 8px); /* 第二行两个按钮 */
-                max-width: calc(50% - 8px);
-            }
-            
-            /* 小手机端：分页容器垂直居中对齐 */
-            .pagination-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                justify-content: center;
-            }
-            
-            .return-btn-container,
-            .pagination-controls {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            /* 页脚在小手机端保持单排居中显示 */
-            .footer-links {
-                gap: 15px;
-                justify-content: center;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                padding-bottom: 10px;
-            }
-            
-            .footer-link {
-                font-size: 14px;
-            }
-            
-            .footer-slogan {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-        
-        /* Pad端 (769px-1024px) */
+        /* Pad端 (769px-1024px) - 完整显示导航栏 */
         @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --spacing-logo: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 保持导航栏完整显示 */
+            .nav-links {
+                display: flex;
+            }
+            
+            .menu-btn {
+                display: none;
+            }
+            
+            .language-switcher {
+                display: inline-block;
+            }
+            
+            .mobile-language-btn {
+                display: none;
+            }
+            
             /* 案例筛选器在Pad端居中对齐 */
             .case-filter {
                 justify-content: center;
@@ -901,6 +888,184 @@
             }
         }
         
+        /* 手机端 (<=768px) */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-logo: 30px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 手机端折叠导航栏 - 下拉菜单形式 */
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px; /* 调整位置 */
+                right: var(--spacing-logo);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 8px;
+                padding: 15px 0;
+                min-width: 180px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            /* 移动端语言切换按钮 - 与主页统一 */
+            .mobile-language-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
+                font-size: 18px;
+                margin-right: 10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                -webkit-tap-highlight-color: transparent;
+                transition: var(--transition);
+            }
+            
+            .mobile-language-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+            
+            /* 折叠菜单中的导航链接样式 - 黑底白字 */
+            .nav-links .nav-link {
+                color: #fff !important; /* 强制白色文字 */
+                padding: 12px 25px;
+                font-size: 16px; /* 增加文字大小 */
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .language-switcher {
+                display: none;
+            }
+            
+            /* Hero区域调整 */
+            .sub-hero {
+                height: 70vh; /* 手机端增加高度 */
+                min-height: 600px;
+                margin-top: 70px;
+            }
+            
+            /* 案例统计数据在小手机端进一步缩小但保持一行 */
+            .case-stats {
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: space-between;
+            }
+            
+            .stat-item {
+                flex: 0 0 calc(50% - 8px);
+                max-width: calc(50% - 8px);
+                padding: 12px 8px;
+                margin-bottom: 8px;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+                letter-spacing: 0;
+            }
+            
+            /* 案例筛选器在手机端单排显示 - 修复遮挡问题 */
+            .case-filter {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                justify-content: flex-start;
+                gap: 6px;
+                scrollbar-width: none; /* Firefox隐藏滚动条 */
+                -ms-overflow-style: none; /* IE和Edge隐藏滚动条 */
+            }
+            
+            .case-filter::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera隐藏滚动条 */
+            }
+            
+            .filter-btn {
+                flex: 0 0 auto;
+                padding: 8px 16px;
+                font-size: 13px;
+                min-height: 36px;
+                white-space: nowrap;
+            }
+            
+            /* 小手机端显示一栏 */
+            .case-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .case-image {
+                height: 280px;
+            }
+            
+            /* 小手机端：分页容器垂直居中对齐 */
+            .pagination-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                justify-content: center;
+            }
+            
+            .return-btn-container,
+            .pagination-controls {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            /* 页脚在小手机端保持单排居中显示 */
+            .footer-links {
+                gap: 15px;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .footer-link {
+                font-size: 14px;
+            }
+            
+            .footer-slogan {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
         /* 大手机端 (481px-768px) */
         @media (max-width: 768px) and (min-width: 481px) {
             /* 案例统计数据在大手机端缩小显示 */
@@ -909,6 +1074,8 @@
             }
             
             .stat-item {
+                flex: 0 0 calc(50% - 10px);
+                max-width: calc(50% - 10px);
                 padding: 15px 10px;
             }
             
@@ -919,6 +1086,7 @@
             .stat-label {
                 font-size: 11px;
             }
+            
             .case-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
@@ -946,6 +1114,77 @@
                 justify-content: center;
             }
         }
+        
+        /* 移动端菜单容器 */
+        .mobile-menu-container {
+            display: none;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-container {
+                display: flex;
+            }
+        }
+        
+        /* 移动端语言下拉菜单 */
+        .mobile-language-dropdown {
+            position: fixed;
+            top: 70px;
+            right: var(--spacing-logo);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 15px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .mobile-language-dropdown.active {
+            display: block;
+        }
+        
+        .mobile-language-option {
+            padding: 12px 25px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            font-size: 16px; /* 增加文字大小 */
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-language-option:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-language-option:hover,
+        .mobile-language-option:active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .mobile-language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 确保在电脑端缩小宽度时导航栏不折叠 */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -960,20 +1199,44 @@
         </div>
     </div>
 
-    <!-- 导航栏 - 与services.html完全统一 -->
+    <!-- 导航栏 - 与services.html统一 -->
     <header class="header" id="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
-                </a>
+        <div class="nav-container">
+            <!-- Logo左对齐 -->
+            <a href="index.html" class="brand">
+                <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+            </a>
+            
+            <!-- 导航链接和语言切换右对齐 -->
+            <div class="nav-right">
+                <!-- 桌面端导航链接 -->
                 <nav class="nav-links">
-                    <a href="index.html" class="nav-link">首页</a>
+                    <!-- 已删除首页按钮 -->
                     <a href="services.html" class="nav-link">服务</a>
                     <a href="cases.html" class="nav-link active">案例</a>
                     <a href="about.html" class="nav-link">关于</a>
                     <a href="contact.html" class="nav-link">联系</a>
                 </nav>
+                
+                <!-- 语言切换器 - 与services.html统一 -->
+                <div class="language-switcher">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>CHINESE</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active">CH</a>
+                        <a href="#" class="language-option">EN</a>
+                        <a href="#" class="language-option">FR</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单按钮和语言切换 -->
+            <div class="mobile-menu-container">
+                <button class="mobile-language-btn" id="mobileLanguageBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
                 <button class="menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -981,22 +1244,17 @@
         </div>
     </header>
     
-    <!-- 子页面Hero区域 -->
+    <!-- 子页面Hero区域 - 包含案例统计数据 -->
     <section class="sub-hero">
         <div class="sub-hero-img">
-            <img src="assets/微信图片_20250417121620.jpg" alt="案例展示">
+            <img src="assets/20250417121620.jpg" alt="案例展示">
         </div>
         <div class="sub-hero-shade"></div>
         <div class="sub-hero-content container">
             <h1 class="sub-hero-title">案例展示</h1>
             <p class="sub-hero-subtitle">探索我们为全球高端品牌打造的展示道具解决方案，每一个案例都是一次品牌与空间的深度对话</p>
-        </div>
-    </section>
-
-    <!-- 主要内容区域 -->
-    <main class="section">
-        <div class="container">
-            <!-- 案例统计数据 - 修改为2000+ -->
+            
+            <!-- 案例统计数据 - 融合到Hero区域 -->
             <div class="case-stats">
                 <div class="stat-item">
                     <div class="stat-number">2000+</div>
@@ -1015,7 +1273,12 @@
                     <div class="stat-label">合作品牌</div>
                 </div>
             </div>
-            
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <main class="section">
+        <div class="container">
             <!-- 案例筛选器 - 5个按钮 -->
             <div class="case-filter">
                 <button class="filter-btn active" data-filter="all">全部案例</button>
@@ -1030,7 +1293,7 @@
                 <!-- 案例 A - 常规小道具 -->
                 <a href="case-a.html" class="case-item" data-category="small">
                     <div class="case-image">
-                        <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="高级珠宝展示系统">
+                        <img src="assets/2025-08-11_133845_823.jpg" alt="高级珠宝展示系统">
                     </div>
                     <div class="case-info">
                         <span class="case-category">常规小道具</span>
@@ -1042,7 +1305,7 @@
                 <!-- 案例 B - 橱窗展示 -->
                 <a href="case-b.html" class="case-item" data-category="window">
                     <div class="case-image">
-                        <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="橱窗展示设计">
+                        <img src="assets/2025-08-11_133856_756.jpg" alt="橱窗展示设计">
                     </div>
                     <div class="case-info">
                         <span class="case-category">橱窗展示</span>
@@ -1054,7 +1317,7 @@
                 <!-- 案例 C - 节日氛围 -->
                 <a href="case-c.html" class="case-item" data-category="festival">
                     <div class="case-image">
-                        <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="节日主题道具">
+                        <img src="assets/2025-08-11_133913_165.jpg" alt="节日主题道具">
                     </div>
                     <div class="case-info">
                         <span class="case-category">节日氛围</span>
@@ -1066,7 +1329,7 @@
                 <!-- 案例 D - 主题道具 -->
                 <a href="case-d.html" class="case-item" data-category="theme">
                     <div class="case-image">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="主题展示道具">
+                        <img src="assets/20250417121620.jpg" alt="主题展示道具">
                     </div>
                     <div class="case-info">
                         <span class="case-category">主题道具</span>
@@ -1078,7 +1341,7 @@
                 <!-- 案例 E - 常规小道具 -->
                 <a href="case-e.html" class="case-item" data-category="small">
                     <div class="case-image">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="零售展示道具">
+                        <img src="assets/20250417121703.jpg" alt="零售展示道具">
                     </div>
                     <div class="case-info">
                         <span class="case-category">常规小道具</span>
@@ -1122,7 +1385,7 @@
         </div>
     </main>
 
-    <!-- 页脚 - 与主页统一 -->
+    <!-- 页脚 - 与services.html统一 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1155,6 +1418,13 @@
         </div>
     </footer>
 
+    <!-- 移动端语言下拉菜单 -->
+    <div class="mobile-language-dropdown" id="mobileLanguageDropdown">
+        <a href="#" class="mobile-language-option active">CH</a>
+        <a href="#" class="mobile-language-option">EN</a>
+        <a href="#" class="mobile-language-option">FR</a>
+    </div>
+
     <script>
         // ========== 核心功能类 - 与services.html统一 ==========
         class PurpleWall {
@@ -1172,6 +1442,7 @@
             
             init() {
                 this.setupNav();
+                this.setupScrollHideNav();
                 this.setupCaseFilter();
                 this.setupPagination();
                 this.setupReturnToTop();
@@ -1187,6 +1458,8 @@
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
                 const navLinks = document.querySelector('.nav-links');
+                const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                const mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 
                 // 滚动效果
                 const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
@@ -1195,26 +1468,106 @@
                 
                 // 移动菜单
                 if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', () => {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
                         const isActive = navLinks.classList.toggle('active');
                         menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                    
-                    // 点击链接关闭菜单
-                    navLinks.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            if (window.innerWidth <= 480) {
-                                navLinks.classList.remove('active');
-                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (isActive) {
+                            if (mobileLanguageDropdown) {
+                                mobileLanguageDropdown.classList.remove('active');
                             }
-                        });
+                        }
                     });
                 }
+                
+                // 移动端语言切换按钮
+                if (mobileLanguageBtn && mobileLanguageDropdown) {
+                    mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = mobileLanguageDropdown.classList.toggle('active');
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (isActive) {
+                            if (navLinks) {
+                                navLinks.classList.remove('active');
+                            }
+                            if (menuBtn) {
+                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        }
+                    });
+                }
+                
+                // 点击页面其他区域关闭所有下拉菜单
+                document.addEventListener('click', (e) => {
+                    const isMenuBtn = menuBtn && menuBtn.contains(e.target);
+                    const isNavLinks = navLinks && navLinks.contains(e.target);
+                    const isLanguageBtn = mobileLanguageBtn && mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = mobileLanguageDropdown && mobileLanguageDropdown.contains(e.target);
+                    
+                    if (!isMenuBtn && !isNavLinks && navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        if (menuBtn) {
+                            menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                    
+                    if (!isLanguageBtn && !isLanguageDropdown && mobileLanguageDropdown && mobileLanguageDropdown.classList.contains('active')) {
+                        mobileLanguageDropdown.classList.remove('active');
+                    }
+                });
                 
                 // 当前页面高亮
                 const currentPage = location.pathname.split('/').pop() || 'index.html';
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+                
+                // 页脚链接高亮
+                document.querySelectorAll('.footer-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+                
+                // 点击语言下拉菜单选项
+                const languageOptions = document.querySelectorAll('.language-option, .mobile-language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
+                        
+                        // 更新活动状态
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        if (mobileLanguageDropdown) {
+                            mobileLanguageDropdown.classList.remove('active');
+                        }
+                    });
+                });
+            }
+            
+            // 滚动时隐藏/显示导航栏
+            setupScrollHideNav() {
+                const header = document.getElementById('header');
+                let lastScrollTop = 0;
+                const scrollThreshold = 60; // 滚动阈值
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                        // 向下滚动，隐藏导航栏
+                        header.classList.add('hidden');
+                    } else {
+                        // 向上滚动，显示导航栏
+                        header.classList.remove('hidden');
+                    }
+                    
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 });
             }
             
@@ -1424,7 +1777,7 @@
                     const navLinks = document.querySelector('.nav-links');
                     const menuBtn = document.getElementById('menuBtn');
                     
-                    if (window.innerWidth > 480 && navLinks && menuBtn) {
+                    if (window.innerWidth > 768 && navLinks && menuBtn) {
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }

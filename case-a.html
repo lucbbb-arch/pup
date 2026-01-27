@@ -6,7 +6,7 @@
     <title>高级珠宝展 | PurpleWall</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ========== 精简CSS变量 - 与主页完全统一 ========== */
+        /* ========== 精简CSS变量 - 与案例页统一 ========== */
         :root {
             --brand: #7756A0;
             --brand-light: #9D7BCB;
@@ -26,6 +26,7 @@
             --gray-427c: #d0d3d4;
             --gray-428c: #c1c6c8;
             --gray-429c: #a2aaad;
+            --spacing-logo: 120px;
         }
 
         /* ========== 基础样式 ========== */
@@ -41,132 +42,93 @@
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
-        }
-        .text-center { text-align: center; }
-
-        /* ========== 组件样式 ========== */
-        /* 按钮 - 与主页统一 */
-        .btn-primary, .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: clamp(14px, 1.6vw, 16px);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            min-height: 42px;
-            min-width: 120px;
-        }
-        .btn-primary {
-            background: var(--light);
-            color: var(--brand);
-            border: 1px solid var(--brand);
-            margin-bottom: 10px;
-        }
-        .btn-primary:hover {
-            background: var(--brand);
-            color: var(--light);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(119, 86, 160, 0.3);
-        }
-        .btn-secondary {
-            background: transparent;           
-            color: var(--brand);
-            border: 1px solid var(--brand);
-        }
-        .btn-secondary:hover {
-            background: var(--brand);
-            color: var(--light);
-            transform: translateY(-3px);
+            padding: 0;
         }
 
-        /* 标题 - 与主页统一 */
-        .section-title {
-            font-size: clamp(24px, 4vw, 40px);
-            color: var(--gray4);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: clamp(12px, 2vw, 24px);
-            letter-spacing: clamp(3px, 1vw, 6px);
-            margin-top: 80px;
-        }
-        .section-subtitle {
-            font-size: clamp(14px, 1.5vw, 16px);
-            color: var(--gray3);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
-        }
-
-        /* ========== 导航 - 与主页完全统一 ========== */
+        /* ========== 导航栏 - 黑色背景 ========== */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 1);
+            padding: 15px 0;
             transition: var(--transition);
-            padding: 18px 0;
+            background: rgba(0, 0, 0, 1);
+            color: var(--light);
+            transform: translateY(0);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
+            backdrop-filter: blur(15px) saturate(200%);
+            -webkit-backdrop-filter: blur(15px) saturate(200%);
+            padding: 12px 0;
         }
-        .nav {
+        
+        /* 导航栏内容容器 */
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 var(--spacing-logo);
+            width: 100%;
         }
-        .brand img { 
-            height: 32px; 
-            transition: var(--transition);
-        }
-        .brand:hover img { opacity: 0.8; }
         
-        .nav-links {
+        /* Logo左对齐 */
+        .brand {
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+        
+        .brand img {
+            height: 28px;
+            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+        
+        .brand:hover img {
+            opacity: 0.8;
+        }
+        
+        /* 导航链接和语言切换右对齐 */
+        .nav-right {
             display: flex;
+            align-items: center;
+            justify-content: flex-end;
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 */
+        /* 桌面端导航链接 */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(20px, 2vw, 30px);
+        }
+        
+        /* 导航链接基础样式 - 白色文字 */
         .nav-link {
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--brand);
+            color: var(--light);
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 */
+        /* 导航链接下划线效果 */
         .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0;
             width: 0; height: 2px;
             transition: width 0.3s ease;
-        }
-        
-        /* 首页 - 白色 */
-        .nav-link[href="index.html"]::after {
-            background: var(--light);
-        }
-        .nav-link[href="index.html"]:hover,
-        .nav-link[href="index.html"].active {
-            color: var(--light);
-        }
-        .nav-link[href="index.html"]:hover::after,
-        .nav-link[href="index.html"].active::after {
-            width: 100%;
         }
         
         /* 服务 - 橙色 */
@@ -221,350 +183,390 @@
             width: 100%;
         }
         
+        /* 语言切换器 */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-light);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 移动端菜单按钮 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--light);
-            font-size: 24px;
+            font-size: 20px;
             width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .menu-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
+        }
+        
+        /* 移动端语言切换按钮 */
+        .mobile-language-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            font-size: 20px;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* 子页面Hero区域 - 保留原有风格但适配响应式 */
-        .sub-hero {
+        /* ========== Hero区域 ========== */
+        .detail-hero {
             position: relative;
-            height: 60vh;
+            width: 100%;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 满版底图 */
+        .detail-hero-image {
+            width: 100%;
+            height: 70vh;
             min-height: 500px;
-            margin-top: 70px;
             overflow: hidden;
         }
 
-        .sub-hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .sub-hero-bg img {
+        .detail-hero-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.7);
+            object-position: center;
         }
 
-        /* 白色区域 */
-        .hero-white-block {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1120px;
-            max-width: 100%;
-            height: 60%;
-            background: rgb(255, 255, 255);
-            border-radius: 3px 3px 0 0;
-            box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.15);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
+        /* 文字内容区域 */
+        .detail-hero-content {
             width: 100%;
-            max-width: 700px;
-            text-align: center;
-            padding: 60px 40px;
+            padding: 40px clamp(20px, 5vw, 120px) 30px;
+            background: var(--light);
+            position: relative;
         }
 
-        .sub-hero-title {
-            font-size: clamp(32px, 6vw, 48px);
+        /* 宽版显示：注释文字与项目信息并排 */
+        .hero-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        /* 注释文字区域 */
+        .hero-text-content {
+            flex: 1;
+            max-width: 65%;
+        }
+
+        .detail-hero-title {
+            font-size: clamp(28px, 4vw, 36px);
             font-weight: 700;
             color: var(--gray4);
-            margin-bottom: 20px;
-            letter-spacing: 4px;
+            margin-bottom: 15px;
+            line-height: 1.2;
         }
 
-        .sub-hero-subtitle {
-            font-size: clamp(16px, 2vw, 18px);
+        .detail-hero-subtitle {
+            font-size: clamp(14px, 1.8vw, 16px);
             color: var(--gray3);
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto;
+            line-height: 1.6;
+            max-width: 100%;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* 项目信息 - 宽版显示在右侧 */
+        .detail-meta-container {
+            flex: 0 0 30%;
+            max-width: 30%;
+            padding-left: 40px;
         }
 
-        /* 内容区域样式 */
-        .section {
-            padding: clamp(60px, 8vw, 100px) 0;
+        .detail-meta-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        /* 案例详情页样式 */
-        .case-detail {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* 合并元数据和案例简介 */
-        .case-intro-section {
-            margin: clamp(40px, 6vw, 60px) 0;
-            background: rgb(255, 255, 255);
-            border-radius: var(--radius);
-            padding: clamp(25px, 4vw, 40px);
-        }
-
-        /* 元数据 - 电脑端和Pad端横版1行显示，删除工期 */
-        .case-meta-details {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 删除工期后改为4列 */
-            gap: clamp(10px, 2vw, 20px);
-            margin-bottom: 30px;
-            padding-bottom: 30px;
+        .detail-meta-item {
+            text-align: left;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 15px;
         }
 
-        .meta-item {
-            text-align: center;
+        .detail-meta-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
-        .meta-item .label {
-            font-size: clamp(11px, 1.2vw, 12px);
+        .detail-meta-label {
+            font-size: 12px;
             color: var(--gray3);
-            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .meta-item .value {
-            font-size: clamp(12px, 1.3vw, 14px);
+        .detail-meta-value {
+            font-size: 14px;
             color: var(--gray4);
             font-weight: 500;
+        }
+
+        /* ========== 内容区域 ========== */
+        .case-detail-section {
+            width: 100%;
+            padding: 0;
+            background: var(--light);
         }
 
         /* 案例描述 */
         .case-description {
-            font-size: clamp(14px, 1.5vw, 16px);
-            line-height: 1.8;
-            color: var(--gray3);
+            width: 100%;
+            padding: 30px clamp(20px, 5vw, 120px);
+            background: var(--light);
         }
 
         .case-description p {
-            margin-bottom: 16px;
-        }
-
-        /* 项目展示区域 */
-        .case-gallery-container {
-            margin: clamp(60px, 8vw, 80px) 0 clamp(40px, 6vw, 60px);
-        }
-
-        .case-gallery-title {
-            font-size: clamp(28px, 4vw, 36px);
-            font-weight: 700;
-            color: var(--gray4);
-            text-align: center;
-            margin-bottom: clamp(40px, 6vw, 60px);
-            letter-spacing: clamp(2px, 1vw, 3px);
-        }
-
-        .case-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(40px, 6vw, 50px);
-        }
-
-        .gallery-item {
-            display: flex;
-            align-items: center;
-            gap: clamp(20px, 3vw, 30px);
-            margin-bottom: 30px;
-        }
-
-        .gallery-item.reverse {
-            flex-direction: row-reverse;
-        }
-
-        /* 图片区域 */
-        .gallery-image {
-            flex: 1.5;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .gallery-image:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .gallery-image img {
-            width: 100%;
-            height: clamp(300px, 40vw, 500px);
-            object-fit: cover;
-            display: block;
-        }
-
-        /* 文字区域 */
-        .gallery-content {
-            flex: 1;
-            padding: clamp(10px, 2vw, 20px);
-        }
-
-        .gallery-content-title {
-            font-size: clamp(18px, 2.5vw, 20px);
-            font-weight: 500;
-            color: var(--gray4);
-            margin-bottom: clamp(15px, 2vw, 25px);
-            letter-spacing: 1.5px;
-            line-height: 1.3;
-        }
-
-        .gallery-content-text {
-            font-size: clamp(14px, 1.5vw, 16px);
+            font-size: clamp(16px, 1.8vw, 18px);
             line-height: 1.8;
             color: var(--gray3);
+            margin-bottom: 24px;
+            max-width: 800px;
         }
 
-        /* 全屏图片查看器 */
-        .fullscreen-viewer {
-            position: fixed;
+        /* 图片网格 - 网页端/Pad端 */
+        .case-gallery-desktop {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            padding: 0 clamp(20px, 5vw, 120px) 60px;
+        }
+
+        /* 单张图片 - 满版宽度，4:3长宽比 */
+        .gallery-item.wide {
+            grid-column: span 2;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-item.wide .gallery-image-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3长宽比 (3/4 = 0.75) */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-item.wide .gallery-image {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.97);
-            z-index: 9999;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 两张图片 - 1:1长宽比 */
+        .gallery-item.single {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-item.single .gallery-image-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1长宽比 */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-item.single .gallery-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 图片说明文字 - 在图片底部，右对齐，黑色小字 */
+        .gallery-caption {
+            text-align: right;
+            padding: 10px 0 0 0;
+            font-size: 14px;
+            color: var(--gray3);
+            line-height: 1.5;
+        }
+
+        /* ========== 手机端 ========== */
+        .case-gallery-mobile {
             display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
+            padding: 0 clamp(20px, 5vw, 40px) 40px;
         }
 
-        .fullscreen-viewer.active {
-            display: flex;
+        .mobile-gallery-item {
+            margin-bottom: 30px;
+            width: 100%;
         }
 
-        .fullscreen-viewer .close-btn {
+        /* 手机端图片 - 3:4长宽比 */
+        .mobile-gallery-image-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 133.33%; /* 3:4长宽比 (4/3 = 1.3333) */
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .mobile-gallery-image {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: clamp(24px, 3vw, 36px);
-            cursor: pointer;
-            width: clamp(40px, 6vw, 60px);
-            height: clamp(40px, 6vw, 60px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
-            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .fullscreen-viewer .close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .fullscreen-viewer .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: clamp(20px, 2.5vw, 30px);
-            cursor: pointer;
-            width: clamp(50px, 7vw, 70px);
-            height: clamp(50px, 7vw, 70px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
-            z-index: 10000;
-        }
-
-        .fullscreen-viewer .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .fullscreen-viewer .prev-btn {
-            left: clamp(15px, 3vw, 30px);
-        }
-
-        .fullscreen-viewer .next-btn {
-            right: clamp(15px, 3vw, 30px);
-        }
-
-        .fullscreen-viewer .image-container {
-            max-width: 90%;
-            max-height: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .fullscreen-viewer .image-container img {
-            max-width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: var(--radius);
-        }
-
-        .fullscreen-viewer .image-caption {
-            color: white;
-            text-align: center;
-            margin-top: clamp(15px, 3vw, 30px);
-            font-size: clamp(16px, 2.2vw, 22px);
-            max-width: 800px;
-            line-height: 1.6;
-            font-weight: 300;
-            padding: 0 20px;
-        }
-
-        .fullscreen-viewer .image-counter {
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: clamp(10px, 2vw, 15px);
-            font-size: clamp(14px, 1.8vw, 18px);
-            font-weight: 300;
+        /* 手机端图片说明文字 */
+        .mobile-gallery-caption {
+            text-align: right;
+            padding: 10px 0 0 0;
+            font-size: 14px;
+            color: var(--gray3);
+            line-height: 1.5;
         }
 
         /* 返回按钮 */
         .back-to-cases {
             text-align: center;
-            margin: clamp(60px, 8vw, 80px) 0 clamp(40px, 6vw, 60px);
+            padding: 60px clamp(20px, 5vw, 120px);
+            background: var(--light);
         }
 
-        /* ========== 页脚 - 与主页完全统一 ========== */
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: clamp(14px, 1.6vw, 16px);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--brand);
+            background: transparent;           
+            color: var(--brand);
+            min-height: 42px;
+            min-width: 120px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--brand);
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+
+        /* ========== 页脚 ========== */
         .footer {
             background: #111;
-            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(60px, 5vw, 50px);
+            padding: clamp(30px, 4vw, 50px) clamp(20px, 5vw, 120px) clamp(15px, 2vw, 30px);
+            margin-top: 0;
         }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(30px, 4vw, 40px);
+            gap: clamp(20px, 3vw, 30px);
         }
         
         .footer-brand {
@@ -572,7 +574,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         .footer-logo { 
@@ -586,12 +588,95 @@
             font-style: italic;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
         }
         
-        /* 二维码弹窗 - 与主页统一 */
+        /* 社交媒体图标 */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-left: 10px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 18px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: var(--brand-light);
+            transform: translateY(-3px);
+        }
+        
+        /* 页脚链接 */
+        .footer-links {
+            display: flex;
+            gap: clamp(20px, 2vw, 30px);
+        }
+        
+        .footer-link {
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(14px, 1.5vw, 16px);
+            padding: 5px 0;
+            position: relative;
+            color: var(--light);
+        }
+        
+        /* 页脚链接悬停效果 */
+        .footer-link[href="index.html"]:hover {
+            color: var(--light);
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="services.html"]:hover {
+            color: var(--brand-or);
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="cases.html"]:hover {
+            color: var(--brand-light);
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="about.html"]:hover {
+            color: var(--brand-gr);
+            opacity: 0.8;
+        }
+        
+        .footer-link[href="contact.html"]:hover {
+            color: var(--brand-re);
+            opacity: 0.8;
+        }
+        
+        .footer-info {
+            text-align: center;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .footer-info p {
+            font-size: 14px;
+            color: var(--gray-429c);
+            text-align: center;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 二维码弹窗 */
         .qrcode-modal {
             display: none;
             position: fixed;
@@ -634,254 +719,259 @@
             cursor: pointer;
             color: var(--gray3);
         }
-        /* 社交媒体图标 */
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-left: 10px;
-        }
-        
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-            font-size: 18px;
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        
-        .social-icon:hover {
-            background: var(--brand-light);
-            transform: translateY(-3px);
-        }
-        
-        /* 页脚链接 */
-        .footer-links {
-            display: flex;
-            gap: clamp(20px, 2vw, 40px);
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* 页脚链接颜色设置 */
-        .footer-link {
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: clamp(14px, 1.5vw, 16px);
-            padding: 5px 0;
-            position: relative;
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
-        
-        /* 页脚链接基础颜色 */
-        .footer-link[href="index.html"] {
-            color: var(--light);
-        }
-        
-        .footer-link[href="services.html"] {
-            color: var(--brand-or);
-        }
-        
-        .footer-link[href="cases.html"] {
-            color: var(--brand-light);
-        }
-        
-        .footer-link[href="about.html"] {
-            color: var(--brand-gr);
-        }
-        
-        .footer-link[href="contact.html"] {
-            color: var(--brand-re);
-        }
-        
-        /* 页脚链接悬停效果 */
-        .footer-link[href="index.html"]:hover {
-            color: var(--light);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="services.html"]:hover {
-            color: var(--brand-or);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="cases.html"]:hover {
-            color: var(--brand-light);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="about.html"]:hover {
-            color: var(--brand-gr);
-            opacity: 0.8;
-        }
-        
-        .footer-link[href="contact.html"]:hover {
-            color: var(--brand-re);
-            opacity: 0.8;
-        }
-        
-        .footer-info {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        .footer-info p {
-            font-size: 14px;
-            color: var(--gray-429c);
-        }
 
         /* ========== 响应式设计 ========== */
-        @media (max-width: 1200px) {
-            .hero-white-block {
-                width: 100%;
-                border-radius: var(--radius) var(--radius) 0 0;
+        /* Pad端 (769px-1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --spacing-logo: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            .detail-hero-image {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
+            .detail-hero-content,
+            .case-description,
+            .gallery-grid {
+                padding: 40px var(--spacing-logo) 30px;
+            }
+            
+            .hero-text-content {
+                max-width: 60%;
+            }
+            
+            .detail-meta-container {
+                max-width: 35%;
+            }
+            
+            .gallery-grid {
+                gap: 30px;
+            }
+            
+            .footer {
+                padding: clamp(30px, 4vw, 50px) var(--spacing-logo) clamp(15px, 2vw, 30px);
             }
         }
-
-        @media (max-width: 992px) {
-            .sub-hero {
-                height: 55vh;
-                min-height: 450px;
-            }
-            
-            /* 平板设备布局 */
-            .gallery-item {
-                flex-direction: column;
-                gap: clamp(30px, 4vw, 40px);
-            }
-            
-            .gallery-item.reverse {
+        
+        /* 窄版、Pad和手机端 - 注释文字和项目信息上下排列 */
+        @media (max-width: 1024px) {
+            .hero-main-row {
                 flex-direction: column;
             }
             
-            .gallery-image {
-                flex: 1;
+            .hero-text-content {
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+            
+            .detail-meta-container {
+                max-width: 100%;
                 width: 100%;
+                padding-left: 0;
             }
             
-            .gallery-content {
-                padding: 0;
+            .detail-meta-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .detail-meta-item {
+                border-bottom: none;
+                padding-bottom: 0;
             }
         }
-
+        
+        /* 手机端 (<=768px) */
         @media (max-width: 768px) {
-            /* 导航响应式 - 与主页统一 */
+            :root {
+                --spacing-logo: 20px;
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-logo);
+            }
+            
+            /* 手机端折叠导航栏 */
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.98);
+                top: 70px;
+                right: var(--spacing-logo);
+                background: rgba(0, 0, 0, 0.95);
                 backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
+                border-radius: 8px;
+                padding: 15px 0;
+                min-width: 180px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
                 z-index: 999;
+                flex-direction: column;
+                gap: 0;
             }
-            .nav-links.active { display: flex; }
-            .menu-btn { 
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn,
+            .mobile-language-btn { 
                 display: flex; 
                 align-items: center;
                 justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
             }
-            .nav-link {
+            
+            .language-switcher {
+                display: none;
+            }
+            
+            /* 移动端语言下拉菜单 */
+            .mobile-language-dropdown {
+                position: fixed;
+                top: 70px;
+                right: calc(var(--spacing-logo) + 60px);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 8px;
                 padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center;
+                min-width: 120px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 1001;
+                display: none;
             }
-            .nav-link:last-child { border-bottom: none; }
             
-            .sub-hero {
+            .mobile-language-dropdown.active {
+                display: block;
+            }
+            
+            .mobile-language-option {
+                padding: 12px 25px;
+                color: #fff;
+                text-decoration: none;
+                display: block;
+                font-size: 16px;
+                transition: var(--transition);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .mobile-language-option:last-child {
+                border-bottom: none;
+            }
+            
+            /* 手机端Hero区域 */
+            .detail-hero-image {
                 height: 50vh;
-                min-height: 400px;
-                margin-top: 70px;
-            }
-            
-            .section {
-                padding: clamp(40px, 6vw, 60px) 0;
-            }
-            
-            /* 小手机端元数据两行显示，减少行距 */
-            .case-meta-details {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                row-gap: 10px; /* 减少行距 */
-            }
-            
-            .case-intro-section {
-                padding: clamp(20px, 3vw, 30px) clamp(15px, 2.5vw, 20px);
-                border-radius: var(--radius);
-            }
-            
-            /* 页脚移动端调整 */
-            .footer {
-                padding: clamp(40px, 6vw, 60px) 0 clamp(20px, 3vw, 30px);
-            }
-            
-            .footer-links {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sub-hero {
-                height: 45vh;
                 min-height: 350px;
             }
             
-            .hero-content {
-                padding: 40px 20px;
+            .detail-hero-content,
+            .case-description {
+                padding: 30px var(--spacing-logo) 20px;
             }
             
-            /* 小手机端元数据进一步调整 */
-            .case-meta-details {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                row-gap: 8px; /* 进一步减少行距 */
+            .detail-meta-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
             
-            .meta-item .label {
-                font-size: 11px;
-                margin-bottom: 5px;
+            /* 手机端显示单列图片，隐藏桌面端图片网格 */
+            .case-gallery-desktop {
+                display: none;
             }
             
-            .meta-item .value {
-                font-size: 11px;
+            .case-gallery-mobile {
+                display: block;
             }
             
-            /* 页脚小屏幕优化 */
+            .back-to-cases {
+                padding: 40px var(--spacing-logo);
+            }
+            
+            /* 页脚调整 */
+            .footer {
+                padding: 40px var(--spacing-logo) 30px;
+            }
+            
             .footer-links {
-                gap: 8px;
+                gap: 15px;
                 justify-content: center;
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 padding-bottom: 10px;
-            }
-     
-            .footer-slogan {
-                font-size: 14px;
             }
             
             .footer-link {
                 font-size: 14px;
             }
             
-            .footer-info p {
-                font-size: 13px;
+            .footer-slogan {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* 大手机端 (481px-768px) */
+        @media (max-width: 768px) and (min-width: 481px) {
+            .detail-hero-image {
+                height: 55vh;
+                min-height: 400px;
+            }
+            
+            .detail-meta-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 小手机端 (<=480px) */
+        @media (max-width: 480px) {
+            .detail-hero-image {
+                height: 45vh;
+                min-height: 300px;
+            }
+            
+            .detail-hero-title {
+                font-size: 24px;
+            }
+            
+            .detail-hero-subtitle {
+                font-size: 14px;
+            }
+        }
+        
+        /* 移动端菜单容器 */
+        .mobile-menu-container {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-container {
+                display: flex;
+            }
+        }
+        
+        /* 确保在电脑端缩小宽度时导航栏不折叠 */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            
+            .menu-btn,
+            .mobile-language-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-dropdown {
+                display: none !important;
             }
         }
     </style>
@@ -896,20 +986,44 @@
             <p>扫描二维码关注我们</p>
         </div>
     </div>
-    <!-- 导航栏 - 与主页统一 -->
+    
+    <!-- 导航栏 - 黑色背景 -->
     <header class="header" id="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
-                </a>
+        <div class="nav-container">
+            <!-- Logo左对齐 -->
+            <a href="index.html" class="brand">
+                <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+            </a>
+            
+            <!-- 导航链接和语言切换右对齐 -->
+            <div class="nav-right">
+                <!-- 桌面端导航链接 -->
                 <nav class="nav-links">
-                    <a href="index.html" class="nav-link">首页</a>
                     <a href="services.html" class="nav-link">服务</a>
                     <a href="cases.html" class="nav-link active">案例</a>
                     <a href="about.html" class="nav-link">关于</a>
                     <a href="contact.html" class="nav-link">联系</a>
                 </nav>
+                
+                <!-- 语言切换器 -->
+                <div class="language-switcher">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>CHINESE</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active">CH</a>
+                        <a href="#" class="language-option">EN</a>
+                        <a href="#" class="language-option">FR</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单按钮和语言切换 -->
+            <div class="mobile-menu-container">
+                <button class="mobile-language-btn" id="mobileLanguageBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
                 <button class="menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -917,146 +1031,172 @@
         </div>
     </header>
     
-    <!-- 子页面Hero区域 -->
-    <section class="sub-hero">
-        <div class="sub-hero-bg">
-            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="高级珠宝展示系统">
+    <!-- 详情页Hero区域 -->
+    <section class="detail-hero">
+        <!-- 满版底图 -->
+        <div class="detail-hero-image">
+            <img src="assets/2025-08-11_133845_823.jpg" alt="高级珠宝展示系统">
         </div>
-        <div class="hero-white-block">
-            <div class="hero-content">
-                <h1 class="sub-hero-title">高级珠宝展示系统</h1>
-                <p class="sub-hero-subtitle">为国际奢侈珠宝品牌打造全新的旗舰店展示解决方案，采用模块化设计理念，集成智能照明与安全保障系统，完美呈现珠宝璀璨光彩。</p>
+        
+        <!-- 文字内容区域 -->
+        <div class="detail-hero-content">
+            <div class="hero-main-row">
+                <div class="hero-text-content">
+                    <h1 class="detail-hero-title">高级珠宝展示系统</h1>
+                    <p class="detail-hero-subtitle">为国际奢侈珠宝品牌打造全新的旗舰店展示解决方案，采用模块化设计理念，集成智能照明与安全保障系统，完美呈现珠宝璀璨光彩。</p>
+                </div>
+                
+                <!-- 项目信息 - 宽版显示在右侧 -->
+                <div class="detail-meta-container">
+                    <div class="detail-meta-list">
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-label">客户</span>
+                            <span class="detail-meta-value">国际奢侈珠宝品牌</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-label">时间</span>
+                            <span class="detail-meta-value">2024年3月</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-label">地点</span>
+                            <span class="detail-meta-value">上海、北京、香港旗舰店</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-label">类别</span>
+                            <span class="detail-meta-value">零售 / 橱窗 / 活动</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 主要内容区域 -->
-    <main class="section">
-        <div class="container case-detail">
-            <!-- 合并元数据和案例简介 -->
-            <div class="case-intro-section">
-                <div class="case-meta-details">
-                    <div class="meta-item">
-                        <div class="label">客户</div>
-                        <div class="value">国际奢侈珠宝品牌</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="label">时间</div>
-                        <div class="value">2024年3月</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="label">地点</div>
-                        <div class="value">上海、北京、香港旗舰店</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="label">类别</div>
-                        <div class="value">零售 / 橱窗 / 活动</div>
-                    </div>
-                    <!-- 删除工期 -->
-                </div>
-                
-                <div class="case-description">
-                    <p>本项目为国际顶级珠宝品牌打造全新的旗舰店展示系统。客户需要一套既能展现珠宝奢华质感，又能确保安全性的展示解决方案，同时要求系统具备高度灵活性，能够适应不同门店的空间布局和产品系列变化。</p>
-                    <p>我们采用了先进的模块化设计理念，开发了一套可自由组合的展示单元系统。每个单元都配备了智能灯光系统和独立的安全装置，既能突出珠宝的璀璨光彩，又能提供最高级别的安全保障。材料方面，我们选用了航空级铝材作为主体结构，表面经过特殊阳极氧化处理，呈现哑光质感。展示台面采用进口超白玻璃，确保光线无失真穿透。</p>
-                    <p>内部照明系统采用专业级LED光源，色温精确控制在5600K，完美还原珠宝的真实色彩。系统支持快速拆装和重新配置，使门店能够根据季节主题或新品发布快速调整展示布局，极大提升了运营效率。</p>
-                </div>
-            </div>
-            
-            <!-- 项目展示区域 -->
-            <div class="case-gallery-container">
-                <h2 class="case-gallery-title">项目实景展示</h2>
-                
-                <div class="case-gallery">
-                    <!-- 项目1 -->
-                    <div class="gallery-item">
-                        <div class="gallery-image" data-index="0">
-                            <img src="assets/微信图片_2025-08-11_133845_823.jpg" alt="旗舰店主展示区">
-                        </div>
-                        <div class="gallery-content">
-                            <h3 class="gallery-content-title">旗舰店主展示区</h3>
-                            <p class="gallery-content-text">模块化设计理念，可根据不同珠宝系列快速调整展示布局。智能灯光系统确保珠宝在最佳光线下呈现璀璨光彩。安全锁扣设计提供最高级别的安全保障。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 项目2 -->
-                    <div class="gallery-item reverse">
-                        <div class="gallery-image" data-index="1">
-                            <img src="assets/微信图片_2025-08-11_133856_756.jpg" alt="橱窗展示效果">
-                        </div>
-                        <div class="gallery-content">
-                            <h3 class="gallery-content-title">橱窗展示效果</h3>
-                            <p class="gallery-content-text">橱窗展示系统采用动态机械装置，支持定时旋转和升降功能。超白玻璃确保光线无失真穿透，精准的色温控制完美还原珠宝的真实色彩，吸引顾客驻足欣赏。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 项目3 -->
-                    <div class="gallery-item">
-                        <div class="gallery-image" data-index="2">
-                            <img src="assets/微信图片_20250417121703.jpg" alt="细节工艺展示">
-                        </div>
-                        <div class="gallery-content">
-                            <h3 class="gallery-content-title">细节工艺展示</h3>
-                            <p class="gallery-content-text">展示系统细节处体现匠心工艺。航空级铝材经过特殊阳极氧化处理，呈现哑光质感。所有接缝处公差控制在±0.1mm，确保组件完美对接，彰显奢侈品级别工艺标准。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 项目4 -->
-                    <div class="gallery-item reverse">
-                        <div class="gallery-image" data-index="3">
-                            <img src="assets/微信图片_2025-08-11_133913_165.jpg" alt="智能照明系统">
-                        </div>
-                        <div class="gallery-content">
-                            <h3 class="gallery-content-title">智能照明系统</h3>
-                            <p class="gallery-content-text">集成专业级LED光源，色温精确控制在5600K，提供无影照明效果。支持远程控制和预设模式，可根据不同珠宝类型自动调整亮度和角度，确保最佳展示效果。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 项目5 -->
-                    <div class="gallery-item">
-                        <div class="gallery-image" data-index="4">
-                            <img src="assets/微信图片_20250417121620.jpg" alt="模块化设计">
-                        </div>
-                        <div class="gallery-content">
-                            <h3 class="gallery-content-title">模块化设计</h3>
-                            <p class="gallery-content-text">展示单元采用标准化接口设计，支持快速拆装和重新配置。单个模块更换时间不超过15分钟，使门店能够根据季节主题或新品发布快速调整展示布局，极大提升运营效率。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 返回按钮 -->
-            <div class="back-to-cases">
-                <a href="cases.html" class="btn-secondary">
-                    <i class="fas fa-arrow-left" style="margin-right:10px;"></i> 返回案例列表
-                </a>
-            </div>
-            
-            <!-- 删除项目成果栏 -->
-        </div>
-    </main>
+    <!-- 案例描述 -->
+    <div class="case-description">
+        <p>本项目为国际顶级珠宝品牌打造全新的旗舰店展示系统。客户需要一套既能展现珠宝奢华质感，又能确保安全性的展示解决方案，同时要求系统具备高度灵活性，能够适应不同门店的空间布局和产品系列变化。</p>
+        <p>我们采用了先进的模块化设计理念，开发了一套可自由组合的展示单元系统。每个单元都配备了智能灯光系统和独立的安全装置，既能突出珠宝的璀璨光彩，又能提供最高级别的安全保障。材料方面，我们选用了航空级铝材作为主体结构，表面经过特殊阳极氧化处理，呈现哑光质感。展示台面采用进口超白玻璃，确保光线无失真穿透。</p>
+        <p>内部照明系统采用专业级LED光源，色温精确控制在5600K，完美还原珠宝的真实色彩。系统支持快速拆装和重新配置，使门店能够根据季节主题或新品发布快速调整展示布局，极大提升了运营效率。</p>
+    </div>
 
-    <!-- 全屏图片查看器 -->
-    <div class="fullscreen-viewer" id="fullscreenViewer">
-        <button class="close-btn" id="closeViewer">
-            <i class="fas fa-times"></i>
-        </button>
+    <!-- 网页端/Pad端图片网格 -->
+    <div class="case-gallery-desktop">
+        <div class="gallery-grid">
+            <!-- 图片1 - 单张满版，4:3长宽比 -->
+            <div class="gallery-item wide">
+                <div class="gallery-image-container">
+                    <img src="assets/2025-08-11_133845_823.jpg" alt="旗舰店主展示区" class="gallery-image">
+                </div>
+                <div class="gallery-caption">模块化设计理念，可根据不同珠宝系列快速调整展示布局</div>
+            </div>
+            
+            <!-- 图片2 - 左边，1:1长宽比 -->
+            <div class="gallery-item single">
+                <div class="gallery-image-container">
+                    <img src="assets/2025-08-11_133856_756.jpg" alt="橱窗展示效果" class="gallery-image">
+                </div>
+                <div class="gallery-caption">橱窗展示系统采用动态机械装置</div>
+            </div>
+            
+            <!-- 图片3 - 右边，1:1长宽比 -->
+            <div class="gallery-item single">
+                <div class="gallery-image-container">
+                    <img src="assets/20250417121703.jpg" alt="细节工艺展示" class="gallery-image">
+                </div>
+                <div class="gallery-caption">展示系统细节处体现匠心工艺</div>
+            </div>
+            
+            <!-- 图片4 - 单张满版，4:3长宽比 -->
+            <div class="gallery-item wide">
+                <div class="gallery-image-container">
+                    <img src="assets/2025-08-11_133913_165.jpg" alt="智能照明系统" class="gallery-image">
+                </div>
+                <div class="gallery-caption">集成专业级LED光源，色温精确控制在5600K</div>
+            </div>
+            
+            <!-- 图片5 - 左边，1:1长宽比 -->
+            <div class="gallery-item single">
+                <div class="gallery-image-container">
+                    <img src="assets/20250417121620.jpg" alt="模块化设计" class="gallery-image">
+                </div>
+                <div class="gallery-caption">展示单元采用标准化接口设计</div>
+            </div>
+            
+            <!-- 图片6 - 右边，1:1长宽比 -->
+            <div class="gallery-item single">
+                <div class="gallery-image-container">
+                    <img src="assets/1803.jpg" alt="互动展示" class="gallery-image">
+                </div>
+                <div class="gallery-caption">结合触控技术与多媒体内容</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 手机端单列图片 -->
+    <div class="case-gallery-mobile">
+        <!-- 图片1 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/2025-08-11_133845_823.jpg" alt="旗舰店主展示区" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">模块化设计理念，可根据不同珠宝系列快速调整展示布局</div>
+        </div>
         
-        <button class="nav-btn prev-btn" id="prevImage">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+        <!-- 图片2 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/2025-08-11_133856_756.jpg" alt="橱窗展示效果" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">橱窗展示系统采用动态机械装置</div>
+        </div>
         
-        <button class="nav-btn next-btn" id="nextImage">
-            <i class="fas fa-chevron-right"></i>
-        </button>
+        <!-- 图片3 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/20250417121703.jpg" alt="细节工艺展示" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">展示系统细节处体现匠心工艺</div>
+        </div>
         
-        <div class="image-container">
-            <img id="fullscreenImage" src="" alt="">
-            <div class="image-caption" id="imageCaption"></div>
-            <div class="image-counter" id="imageCounter"></div>
+        <!-- 图片4 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/2025-08-11_133913_165.jpg" alt="智能照明系统" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">集成专业级LED光源，色温精确控制在5600K</div>
+        </div>
+        
+        <!-- 图片5 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/20250417121620.jpg" alt="模块化设计" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">展示单元采用标准化接口设计</div>
+        </div>
+        
+        <!-- 图片6 -->
+        <div class="mobile-gallery-item">
+            <div class="mobile-gallery-image-container">
+                <img src="assets/1803.jpg" alt="互动展示" class="mobile-gallery-image">
+            </div>
+            <div class="mobile-gallery-caption">结合触控技术与多媒体内容</div>
         </div>
     </div>
 
-    <!-- 页脚 - 与主页统一 -->
+    <!-- 返回按钮 -->
+    <div class="back-to-cases">
+        <a href="cases.html" class="btn-secondary">
+            <i class="fas fa-arrow-left" style="margin-right:10px;"></i> 返回案例列表
+        </a>
+    </div>
+
+    <!-- 移动端语言下拉菜单 -->
+    <div class="mobile-language-dropdown" id="mobileLanguageDropdown">
+        <a href="#" class="mobile-language-option active">CH</a>
+        <a href="#" class="mobile-language-option">EN</a>
+        <a href="#" class="mobile-language-option">FR</a>
+    </div>
+
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1090,26 +1230,26 @@
     </footer>
 
     <script>
-        // ========== 核心功能类 - 与主页统一 ==========
-        class PurpleWall {
+        // ========== 核心功能类 ==========
+        class CaseDetail {
             constructor() {
                 this.init();
             }
             
             init() {
                 this.setupNav();
-                this.setupFullscreenViewer();
-                this.setupAnimations();
-                this.setupResize();
+                this.setupScrollHideNav();
                 this.setupSocialMedia();
                 this.setupQrcodeModal();
             }
             
-            // 导航功能 - 与主页统一
+            // 导航功能
             setupNav() {
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
                 const navLinks = document.querySelector('.nav-links');
+                const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                const mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 
                 // 滚动效果
                 const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
@@ -1118,176 +1258,110 @@
                 
                 // 移动菜单
                 if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', () => {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
                         const isActive = navLinks.classList.toggle('active');
                         menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                    
-                    // 点击链接关闭菜单
-                    navLinks.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            if (window.innerWidth <= 420) {
-                                navLinks.classList.remove('active');
-                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (isActive) {
+                            if (mobileLanguageDropdown) {
+                                mobileLanguageDropdown.classList.remove('active');
                             }
-                        });
+                        }
                     });
                 }
+                
+                // 移动端语言切换按钮
+                if (mobileLanguageBtn && mobileLanguageDropdown) {
+                    mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = mobileLanguageDropdown.classList.toggle('active');
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (isActive) {
+                            if (navLinks) {
+                                navLinks.classList.remove('active');
+                            }
+                            if (menuBtn) {
+                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        }
+                    });
+                }
+                
+                // 点击页面其他区域关闭所有下拉菜单
+                document.addEventListener('click', (e) => {
+                    const isMenuBtn = menuBtn && menuBtn.contains(e.target);
+                    const isNavLinks = navLinks && navLinks.contains(e.target);
+                    const isLanguageBtn = mobileLanguageBtn && mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = mobileLanguageDropdown && mobileLanguageDropdown.contains(e.target);
+                    
+                    if (!isMenuBtn && !isNavLinks && navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        if (menuBtn) {
+                            menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                    
+                    if (!isLanguageBtn && !isLanguageDropdown && mobileLanguageDropdown && mobileLanguageDropdown.classList.contains('active')) {
+                        mobileLanguageDropdown.classList.remove('active');
+                    }
+                });
                 
                 // 当前页面高亮
                 const currentPage = location.pathname.split('/').pop() || 'index.html';
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
                 });
-            }
-            
-            // 全屏图片查看器功能
-            setupFullscreenViewer() {
-                const galleryImages = document.querySelectorAll('.gallery-image');
-                const fullscreenViewer = document.getElementById('fullscreenViewer');
-                const fullscreenImage = document.getElementById('fullscreenImage');
-                const imageCaption = document.getElementById('imageCaption');
-                const imageCounter = document.getElementById('imageCounter');
-                const closeViewer = document.getElementById('closeViewer');
-                const prevImageBtn = document.getElementById('prevImage');
-                const nextImageBtn = document.getElementById('nextImage');
                 
-                // 图片数据
-                const imageData = [
-                    {
-                        src: 'assets/微信图片_2025-08-11_133845_823.jpg',
-                        caption: '旗舰店主展示区 - 采用模块化设计理念，可根据不同珠宝系列快速调整展示布局'
-                    },
-                    {
-                        src: 'assets/微信图片_2025-08-11_133856_756.jpg',
-                        caption: '橱窗展示效果 - 动态机械装置支持定时旋转和升降功能，吸引顾客驻足欣赏'
-                    },
-                    {
-                        src: 'assets/微信图片_20250417121703.jpg',
-                        caption: '细节工艺展示 - 航空级铝材经过特殊阳极氧化处理，呈现哑光质感，公差控制在±0.1mm'
-                    },
-                    {
-                        src: 'assets/微信图片_2025-08-11_133913_165.jpg',
-                        caption: '智能照明系统 - 专业级LED光源，色温精确控制在5600K，提供无影照明效果'
-                    },
-                    {
-                        src: 'assets/微信图片_20250417121620.jpg',
-                        caption: '模块化设计 - 标准化接口设计，单个模块更换时间不超过15分钟'
-                    }
-                ];
-                
-                let currentImageIndex = 0;
-                
-                // 打开全屏查看器
-                function openFullscreenViewer(index) {
-                    currentImageIndex = index;
-                    updateFullscreenViewer();
-                    fullscreenViewer.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-                
-                // 更新全屏查看器内容
-                function updateFullscreenViewer() {
-                    const data = imageData[currentImageIndex];
-                    fullscreenImage.src = data.src;
-                    fullscreenImage.alt = data.caption;
-                    imageCaption.textContent = data.caption;
-                    imageCounter.textContent = `${currentImageIndex + 1} / ${imageData.length}`;
-                }
-                
-                // 绑定图片点击事件
-                galleryImages.forEach((image, index) => {
-                    image.addEventListener('click', () => {
-                        openFullscreenViewer(index);
-                    });
+                // 页脚链接高亮
+                document.querySelectorAll('.footer-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === currentPage);
                 });
                 
-                // 关闭查看器
-                function closeFullscreenViewer() {
-                    fullscreenViewer.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-                
-                closeViewer.addEventListener('click', closeFullscreenViewer);
-                
-                // 上一张图片
-                function showPrevImage() {
-                    currentImageIndex = (currentImageIndex - 1 + imageData.length) % imageData.length;
-                    updateFullscreenViewer();
-                }
-                
-                // 下一张图片
-                function showNextImage() {
-                    currentImageIndex = (currentImageIndex + 1) % imageData.length;
-                    updateFullscreenViewer();
-                }
-                
-                prevImageBtn.addEventListener('click', showPrevImage);
-                nextImageBtn.addEventListener('click', showNextImage);
-                
-                // 键盘控制
-                document.addEventListener('keydown', (e) => {
-                    if (!fullscreenViewer.classList.contains('active')) return;
-                    
-                    switch(e.key) {
-                        case 'Escape':
-                            closeFullscreenViewer();
-                            break;
-                        case 'ArrowLeft':
-                            showPrevImage();
-                            break;
-                        case 'ArrowRight':
-                            showNextImage();
-                            break;
-                    }
-                });
-            }
-            
-            // 滚动动画
-            setupAnimations() {
-                const animateOnScroll = () => {
-                    const elements = document.querySelectorAll('.gallery-item');
-                    
-                    elements.forEach(element => {
-                        const elementPosition = element.getBoundingClientRect().top;
-                        const screenPosition = window.innerHeight / 1.2;
+                // 点击语言下拉菜单选项
+                const languageOptions = document.querySelectorAll('.language-option, .mobile-language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
                         
-                        if (elementPosition < screenPosition) {
-                            element.style.opacity = '1';
-                            element.style.transform = 'translateY(0)';
+                        // 更新活动状态
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        if (mobileLanguageDropdown) {
+                            mobileLanguageDropdown.classList.remove('active');
                         }
                     });
-                };
-                
-                // 设置初始状态
-                const animatedElements = document.querySelectorAll('.gallery-item');
-                animatedElements.forEach(element => {
-                    element.style.opacity = '0';
-                    element.style.transform = 'translateY(30px)';
-                    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 });
-                
-                // 监听滚动
-                window.addEventListener('scroll', animateOnScroll);
-                
-                // 初始化检查
-                setTimeout(animateOnScroll, 100);
             }
             
-            // 响应式处理 - 与主页统一
-            setupResize() {
-                window.addEventListener('resize', () => {
-                    const navLinks = document.querySelector('.nav-links');
-                    const menuBtn = document.getElementById('menuBtn');
+            // 滚动时隐藏/显示导航栏
+            setupScrollHideNav() {
+                const header = document.getElementById('header');
+                let lastScrollTop = 0;
+                const scrollThreshold = 60;
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     
-                    if (window.innerWidth > 420 && navLinks && menuBtn) {
-                        navLinks.classList.remove('active');
-                        menuBtn.querySelector('i').className = 'fas fa-bars';
+                    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                        // 向下滚动，隐藏导航栏
+                        header.classList.add('hidden');
+                    } else {
+                        // 向上滚动，显示导航栏
+                        header.classList.remove('hidden');
                     }
+                    
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 });
             }
             
-            // 社交媒体功能 - 与主页统一
+            // 社交媒体功能
             setupSocialMedia() {
                 // 微信按钮点击事件
                 const wechatBtn = document.getElementById('wechatBtn');
@@ -1298,12 +1372,10 @@
                 }
             }
             
-            // 二维码弹窗功能 - 与主页统一
+            // 二维码弹窗功能
             setupQrcodeModal() {
                 const modal = document.getElementById('qrcodeModal');
-                if (!modal) return;
-                
-                const closeBtn = modal.querySelector('.close-qrcode');
+                const closeBtn = document.querySelector('.close-qrcode');
                 
                 // 点击弹窗外部关闭
                 modal.addEventListener('click', (e) => {
@@ -1348,7 +1420,7 @@
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
-            new PurpleWall();
+            new CaseDetail();
         });
 
         // 平滑滚动
