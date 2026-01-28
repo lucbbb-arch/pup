@@ -16,7 +16,7 @@
             --brand-re: #c82272;
             --dark: #1d252d;
             --light: #ffffff;
-            --radius: 12px;
+            --radius: 8px;
             --shadow: 0 8px 30px rgba(0,0,0,0.12);
             --transition: all 0.3s ease;
             --gray1:#fafafc;
@@ -25,16 +25,17 @@
             --gray4:#1d1d1f;
             --gray-427c: #d0d3d4;
             --gray-429c: #a2aaad;
+            --spacing-logo: 120px;
         }
 
         /* ========== 基础样式 ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--gray4);
             background: var(--light);
-            line-height: 1.6;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -42,9 +43,12 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
+            padding: 0 clamp(20px, 5vw, 120px);
         }
+        
         .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
 
         /* ========== 组件样式 ========== */
         /* 按钮 - 与主页统一 */
@@ -52,7 +56,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 30px;
             font-weight: 600;
             font-size: clamp(14px, 1.6vw, 16px);
@@ -60,8 +64,8 @@
             transition: var(--transition);
             cursor: pointer;
             border: none;
-            min-height: 42px;
-            min-width: 120px;
+            min-height: 48px;
+            min-width: 140px;
         }
         .btn-primary {
             background: var(--light);
@@ -88,85 +92,119 @@
 
         /* 标题 - 与主页统一 */
         .section-title {
-            font-size: clamp(24px, 4vw, 40px);
+            font-size: clamp(28px, 5vw, 44px);
             color: var(--gray4);
             font-weight: 700;
             text-align: center;
-            margin-bottom: clamp(12px, 2vw, 24px);
+            margin-bottom: clamp(16px, 2.5vw, 28px);
             letter-spacing: clamp(3px, 1vw, 6px);
-            margin-top: 80px;
+            position: relative;
+            padding-bottom: 20px;
         }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--brand-gr);
+            border-radius: 2px;
+        }
+        
         .section-subtitle {
-            font-size: clamp(14px, 1.5vw, 16px);
+            font-size: clamp(16px, 1.8vw, 18px);
             color: var(--gray3);
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto clamp(20px, 3vw, 40px);
-            margin-bottom: 10px;
+            font-weight: 400;
+            line-height: 1.6;
         }
 
         /* ========== 布局模块 - 与主页统一 ========== */
-        /* 导航 - 与服务页面完全统一 */
+        /* 导航 - 与服务页面统一样式，固定黑色背景 */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 1);
+            padding: 15px 0;
             transition: var(--transition);
-            padding: 18px 0;
+            background: rgba(0, 0, 0, 1);
+            color: var(--light);
+            transform: translateY(0);
         }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
         .header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 0;
+            padding: 12px 0;
         }
-        .nav {
+        
+        /* 导航栏内容容器 - 与主页统一 */
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 var(--spacing-logo);
+            width: 100%;
         }
-        .brand img { 
-            height: 32px; 
-            transition: var(--transition);
-        }
-        .brand:hover img { opacity: 0.8; }
         
-        .nav-links {
+        /* Logo左对齐，与左边距保持1个logo距离 */
+        .brand {
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+        
+        .brand img {
+            height: 28px;
+            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+        
+        .brand:hover img {
+            opacity: 0.8;
+        }
+        
+        /* 导航链接和语言切换右对齐 */
+        .nav-right {
             display: flex;
+            align-items: center;
+            justify-content: flex-end;
             gap: clamp(20px, 3vw, 40px);
         }
         
-        /* 导航链接基础样式 - 与服务页面完全统一 */
+        /* 桌面端导航链接 */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(20px, 2vw, 30px);
+        }
+        
+        /* 导航链接基础样式 - 白色文字 */
         .nav-link {
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             font-size: clamp(14px, 1.5vw, 16px);
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
-            color: var(--brand);
+            color: var(--light);
         }
         
-        /* 为每个导航链接设置不同的下划线颜色和悬停文字颜色 - 与服务页面完全统一 */
+        /* 导航链接下划线效果 - 悬停或激活时显示 */
         .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0;
             width: 0; height: 2px;
             transition: width 0.3s ease;
-        }
-        
-        /* 首页 - 白色 */
-        .nav-link[href="index.html"]::after {
-            background: var(--light);
-        }
-        .nav-link[href="index.html"]:hover,
-        .nav-link[href="index.html"].active {
-            color: var(--light);
-        }
-        .nav-link[href="index.html"]:hover::after,
-        .nav-link[href="index.html"].active::after {
-            width: 100%;
         }
         
         /* 服务 - 橙色 */
@@ -221,91 +259,143 @@
             width: 100%;
         }
         
+        /* 语言切换器 - 右对齐 */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-light);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 移动端菜单按钮 - 与主页统一 */
         .menu-btn {
             display: none;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--light);
-            font-size: 24px;
+            font-size: 20px;
             width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .menu-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
         }
 
         /* 子页面Hero区域 */
         .sub-hero {
             position: relative;
-            height: 50vh;
-            min-height: 400px;
+            height: 65vh;
+            min-height: 500px;
             overflow: hidden;
             margin-top: 70px;
-            background: var(--dark);
-        }
-
-        .sub-hero-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .sub-hero-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-            filter: brightness(0.7) contrast(1.1);
-        }
-
-        .sub-hero-shade {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0.05) 0%,
-                rgba(18, 11, 26, 0.2) 50%,
-                rgba(18, 11, 26, 0.3) 100%);
-            z-index: 1;
+            background: linear-gradient(135deg, #2c1b47 0%, #1d252d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .sub-hero-content {
             position: relative;
             z-index: 2;
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 0 20px;
         }
 
         .sub-hero-title {
-            font-size: clamp(32px, 6vw, 48px);
-            font-weight: 700;
+            font-size: clamp(36px, 7vw, 60px);
+            font-weight: 800;
             color: var(--light);
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease 0.3s forwards;
-            letter-spacing: 4px;
-            margin-bottom: 16px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .sub-hero-subtitle {
-            font-size: clamp(14px, 2vw, 18px);
+            font-size: clamp(16px, 2.5vw, 22px);
             color: var(--light);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease 0.5s forwards;
-            max-width: 600px;
+            max-width: 700px;
             padding: 0 20px;
+            font-weight: 300;
+            line-height: 1.5;
+            opacity: 0.9;
         }
 
         @keyframes fadeInUp {
@@ -320,98 +410,109 @@
             padding: clamp(60px, 8vw, 100px) 0;
             background: var(--light);
         }
-
-        /* 公司历史墙 - 新增环保可持续部分 */
-        .history-section {
-            max-width: 1000px;
-            margin: 0 auto;
+        
+        .section-light {
+            background: var(--gray1);
+        }
+        
+        .section-brand {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
-        .history-item {
-            display: flex;
+        /* ========== 关于页面特有样式 ========== */
+        
+        /* 公司简介区域 */
+        .company-intro {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            margin-bottom: 80px;
-            gap: 40px;
         }
-
-        .history-item.reverse {
-            flex-direction: row-reverse;
+        
+        .intro-text {
+            padding-right: 20px;
         }
-
-        .history-year {
-            font-size: clamp(36px, 4vw, 48px);
-            font-weight: 700;
+        
+        .intro-text h3 {
+            font-size: clamp(22px, 3vw, 32px);
             color: var(--brand);
-            min-width: 120px;
-            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 700;
+            line-height: 1.3;
         }
-
-        .history-content {
-            flex: 1;
-        }
-
-        .history-content h3 {
-            font-size: clamp(20px, 2.5vw, 24px);
-            color: var(--gray4);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .history-content p {
-            font-size: clamp(14px, 1.5vw, 16px);
+        
+        .intro-text p {
+            font-size: clamp(15px, 1.7vw, 17px);
             color: var(--gray3);
             line-height: 1.8;
             margin-bottom: 20px;
         }
-
-        .history-image {
-            flex: 1;
+        
+        .intro-text .highlight {
+            color: var(--brand);
+            font-weight: 600;
+        }
+        
+        .intro-image {
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
+            height: 400px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            position: relative;
         }
-
-        .history-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
+        
+        .intro-image::before {
+            content: '现代化办公环境';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
         }
-
-        .history-image:hover img {
-            transform: scale(1.05);
+        
+        /* 公司实力模块 */
+        .company-strength {
+            padding: clamp(50px, 6vw, 80px) 0;
+            margin-bottom: 80px;
         }
-
-        /* 环保可持续特色区域 */
-        .sustainability-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: var(--radius);
-            padding: clamp(40px, 5vw, 60px);
-            margin: 80px 0;
-            text-align: center;
-        }
-
-        .sustainability-grid {
+        
+        .strength-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
-
-        .sustainability-card {
+        
+        .strength-item {
+            text-align: center;
+            padding: 40px 30px;
             background: var(--light);
             border-radius: var(--radius);
-            padding: 30px;
-            text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border-top: 4px solid var(--brand);
         }
-
-        .sustainability-card:hover {
+        
+        .strength-item:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
-
-        .sustainability-icon {
+        
+        .strength-icon {
             width: 80px;
             height: 80px;
             background: var(--brand);
@@ -421,140 +522,301 @@
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             transition: var(--transition);
         }
-
-        .sustainability-card:hover .sustainability-icon {
+        
+        .strength-item:hover .strength-icon {
             background: var(--brand-gr);
-            transform: rotate(10deg);
+            transform: rotate(10deg) scale(1.1);
         }
-
-        .sustainability-card h4 {
-            font-size: 18px;
+        
+        .strength-item h4 {
+            font-size: 20px;
             color: var(--gray4);
             margin-bottom: 15px;
+            font-weight: 700;
         }
-
-        .sustainability-card p {
-            font-size: 14px;
+        
+        .strength-item p {
+            font-size: 15px;
             color: var(--gray3);
-            line-height: 1.6;
+            line-height: 1.7;
         }
-
-        /* 价值观卡片 */
-        .values-grid {
+        
+        /* 工厂实力展示 */
+        .factory-showcase {
+            margin-bottom: 80px;
+        }
+        
+        .factory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
-            margin: 60px 0;
+            margin-top: 40px;
         }
-
-        .value-card {
+        
+        .factory-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            height: 300px;
+        }
+        
+        .factory-item.large {
+            grid-column: span 2;
+            height: 350px;
+        }
+        
+        .factory-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .factory-1 {
+            background: linear-gradient(135deg, #8e9eab 0%, #eef2f3 100%);
+        }
+        
+        .factory-2 {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+        }
+        
+        .factory-3 {
+            background: linear-gradient(135deg, #f46b45 0%, #eea849 100%);
+        }
+        
+        .factory-4 {
+            background: linear-gradient(135deg, #134E5E 0%, #71B280 100%);
+        }
+        
+        .factory-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--light);
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 出口经验 */
+        .export-experience {
+            padding: clamp(50px, 6vw, 80px) 0;
+            margin-bottom: 80px;
+        }
+        
+        .export-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .export-text h3 {
+            font-size: clamp(22px, 3vw, 32px);
+            color: var(--brand);
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+        
+        .export-text p {
+            font-size: clamp(15px, 1.7vw, 17px);
+            color: var(--gray3);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .export-visual {
+            position: relative;
+            height: 400px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .export-visual::before {
+            content: '全球业务分布图';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        
+        .export-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
             background: var(--light);
             border-radius: var(--radius);
-            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--brand);
+            display: block;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: var(--gray3);
+            font-weight: 500;
+        }
+        
+        /* 环保公益模块 */
+        .environment-section {
+            padding: clamp(50px, 6vw, 80px) 0;
+            margin-bottom: 60px;
+        }
+        
+        .environment-header {
             text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .environment-header .section-title {
+            color: #2e7d32;
+        }
+        
+        .environment-header .section-title::after {
+            background: #4caf50;
+        }
+        
+        .environment-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .environment-text h3 {
+            font-size: clamp(22px, 3vw, 32px);
+            color: #2e7d32;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+        
+        .environment-text p {
+            font-size: clamp(15px, 1.7vw, 17px);
+            color: var(--gray3);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .environment-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .environment-image::before {
+            content: '环保生产车间';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        
+        .environment-initiatives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .initiative-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 35px 25px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.1);
+            border-top: 4px solid #4caf50;
         }
-
-        .value-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--brand);
+        
+        .initiative-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
-
-        .value-icon {
+        
+        .initiative-icon {
             width: 70px;
             height: 70px;
-            background: var(--brand);
+            background: #4caf50;
             color: var(--light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            margin: 0 auto 20px;
-            transition: var(--transition);
+            margin-bottom: 20px;
         }
-
-        .value-card:hover .value-icon {
-            background: var(--brand-light);
-        }
-
-        .value-card h3 {
+        
+        .initiative-card h4 {
             font-size: 20px;
-            color: var(--gray4);
+            color: #2e7d32;
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 700;
         }
-
-        .value-card p {
+        
+        .initiative-card p {
             font-size: 15px;
             color: var(--gray3);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* 团队展示 */
-        .team-section {
-            text-align: center;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .team-member {
-            background: var(--light);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-        }
-
-        .team-member img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .team-info {
-            padding: 25px;
-        }
-
-        .team-info h4 {
-            font-size: 18px;
-            color: var(--gray4);
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .team-info p {
-            font-size: 14px;
-            color: var(--brand);
-            margin-bottom: 15px;
-        }
-
-        .team-info .description {
-            color: var(--gray3);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* ========== 页脚 - 与服务页面完全统一 ========== */
+        /* ========== 页脚 - 与服务页面统一 ========== */
         .footer {
             background: #111;
-            padding: clamp(40px, 5vw, 60px) 0 clamp(20px, 3vw, 40px);
-            margin-top: clamp(60px, 5vw, 50px);
+            padding: clamp(50px, 6vw, 70px) 0 clamp(20px, 3vw, 40px);
+            margin-top: 0;
         }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
@@ -571,12 +833,12 @@
         }
         
         .footer-logo { 
-            height: 32px; 
+            height: 36px; 
             margin-bottom: 0;
         }
 
         .footer-slogan {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--gray-427c);
             font-style: italic;
             display: flex;
@@ -597,8 +859,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             color: var(--light);
@@ -615,63 +877,38 @@
         
         .footer-links {
             display: flex;
-            gap: clamp(30px, 2vw, 40px);
+            gap: clamp(25px, 3vw, 40px);
         }
         
-        /* 页脚链接颜色设置 - 与服务页面完全统一 */
+        /* 页脚链接颜色设置 - 默认白色，悬停显示对应颜色 */
         .footer-link {
             text-decoration: none;
             transition: var(--transition);
-            font-size: clamp(14px, 1.5vw, 16px);
+            font-size: clamp(15px, 1.6vw, 17px);
             padding: 5px 0;
             position: relative;
-        }
-        
-        /* 页脚链接基础颜色 */
-        .footer-link[href="index.html"] {
             color: var(--light);
-        }
-        
-        .footer-link[href="services.html"] {
-            color: var(--brand-or);
-        }
-        
-        .footer-link[href="cases.html"] {
-            color: var(--brand-light);
-        }
-        
-        .footer-link[href="about.html"] {
-            color: var(--brand-gr);
-        }
-        
-        .footer-link[href="contact.html"] {
-            color: var(--brand-re);
         }
         
         /* 页脚链接悬停效果 */
-        .footer-link[href="index.html"]:hover {
-            color: var(--light);
-            opacity: 0.8;
-        }
-        
         .footer-link[href="services.html"]:hover {
             color: var(--brand-or);
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         .footer-link[href="cases.html"]:hover {
             color: var(--brand-light);
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         .footer-link[href="about.html"]:hover {
             color: var(--brand-gr);
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         .footer-link[href="contact.html"]:hover {
             color: var(--brand-re);
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         /* 页脚底部文字区域 */
@@ -679,6 +916,8 @@
             text-align: center;
             width: 100%;
             margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .footer-info p {
@@ -686,11 +925,10 @@
             color: var(--gray-429c);
             text-align: center;
             line-height: 1.8;
-            margin: 0;
-            padding: 0;
+            margin: 5px 0;
         }
 
-        /* 二维码弹窗 - 与服务页面完全统一 */
+        /* 二维码弹窗 */
         .qrcode-modal {
             display: none;
             position: fixed;
@@ -698,7 +936,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -706,117 +944,182 @@
         
         .qrcode-content {
             background: var(--light);
-            padding: 30px;
-            border-radius: var(--radius);
+            padding: 40px;
+            border-radius: 12px;
             text-align: center;
-            max-width: 300px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             position: relative;
         }
         
         .qrcode-content h3 {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--brand);
+            font-size: 22px;
         }
         
         .qrcode-content img {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 15px;
+            width: 220px;
+            height: 220px;
+            margin-bottom: 20px;
         }
         
         .close-qrcode {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
             cursor: pointer;
             color: var(--gray3);
+            transition: var(--transition);
+        }
+        
+        .close-qrcode:hover {
+            color: var(--brand);
         }
 
         /* ========== 响应式设计优化 ========== */
-        @media (max-width: 992px) {
-            .history-item,
-            .history-item.reverse {
-                flex-direction: column;
-                text-align: center;
+        
+        /* Pad端 (769px-1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --spacing-logo: 60px;
             }
             
-            .history-year {
-                margin-bottom: 20px;
+            .nav-container {
+                padding: 0 var(--spacing-logo);
             }
             
-            .history-image {
-                order: -1;
-                margin-bottom: 20px;
+            .nav-links {
+                display: flex;
             }
             
-            .sustainability-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .menu-btn {
+                display: none;
             }
             
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .language-switcher {
+                display: inline-block;
+            }
+            
+            .mobile-language-btn {
+                display: none;
+            }
+            
+            .intro-grid,
+            .export-content,
+            .environment-content {
+                gap: 40px;
             }
         }
         
+        /* 手机端 (<=768px) */
         @media (max-width: 768px) {
-            .sub-hero {
-                height: 35vh;
-                min-height: 300px;
+            :root {
+                --spacing-logo: 30px;
             }
             
-            .sustainability-grid {
-                grid-template-columns: 1fr;
+            .nav-container {
+                padding: 0 var(--spacing-logo);
             }
             
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-slogan {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-        
-        /* 小手机端响应式 - 与服务页面统一 */
-        @media (max-width: 480px) {
-            /* 导航栏响应式 */
+            /* 手机端折叠导航栏 */
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 80px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
+                top: 70px;
+                right: var(--spacing-logo);
+                background: rgba(0, 0, 0, 0.95);
                 backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-                z-index: 999;
-                align-items: center;
-            }
-            .nav-links.active { display: flex; }
-            .menu-btn { display: flex; }
-            .nav-link {
+                border-radius: 8px;
                 padding: 15px 0;
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                text-align: center;
+                min-width: 180px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                flex-direction: column;
+                gap: 0;
             }
-            .nav-link:last-child { border-bottom: none; }
+            
+            .nav-links.active { 
+                display: flex; 
+            }
+            
+            .menu-btn { 
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            /* 移动端语言切换按钮 */
+            .mobile-language-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: inherit;
+                font-size: 18px;
+                margin-right: 10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                -webkit-tap-highlight-color: transparent;
+                transition: var(--transition);
+            }
+            
+            .mobile-language-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+            
+            /* 折叠菜单中的导航链接样式 */
+            .nav-links .nav-link {
+                color: #fff !important;
+                padding: 12px 25px;
+                font-size: 16px;
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .language-switcher {
+                display: none;
+            }
             
             .sub-hero {
-                height: 30vh;
-                min-height: 250px;
+                height: 50vh;
+                min-height: 400px;
                 margin-top: 70px;
             }
             
-            .team-grid {
+            /* 关于页面响应式调整 */
+            .intro-grid,
+            .export-content,
+            .environment-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .intro-text {
+                padding-right: 0;
+            }
+            
+            .factory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .factory-item.large {
+                grid-column: span 1;
+            }
+            
+            .export-stats {
                 grid-template-columns: 1fr;
             }
             
@@ -827,6 +1130,7 @@
                 justify-content: center;
                 flex-wrap: nowrap;
                 overflow-x: auto;
+                padding: 0 10px;
             }
             
             .footer-link {
@@ -845,17 +1149,102 @@
             }
         }
         
-        /* 极小手机端 */
-        @media (max-width: 360px) {
-            .footer-link {
-                font-size: 13px;
+        /* 小手机端 (<=480px) */
+        @media (max-width: 480px) {
+            .strength-grid,
+            .environment-initiatives {
+                grid-template-columns: 1fr;
+            }
+            
+            .sub-hero-title {
+                font-size: clamp(28px, 6vw, 36px);
+            }
+            
+            .sub-hero-subtitle {
+                font-size: clamp(14px, 2vw, 16px);
+            }
+            
+            .factory-item,
+            .factory-item.large {
+                height: 250px;
+            }
+        }
+        
+        /* 移动端菜单容器 */
+        .mobile-menu-container {
+            display: none;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-container {
+                display: flex;
+            }
+        }
+        
+        /* 移动端语言下拉菜单 */
+        .mobile-language-dropdown {
+            position: fixed;
+            top: 70px;
+            right: var(--spacing-logo);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 15px 0;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .mobile-language-dropdown.active {
+            display: block;
+        }
+        
+        .mobile-language-option {
+            padding: 12px 25px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-language-option:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-language-option:hover,
+        .mobile-language-option:active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-light);
+        }
+        
+        .mobile-language-option.active {
+            color: var(--brand-light);
+            font-weight: 600;
+        }
+        
+        /* 确保在电脑端缩小宽度时导航栏不折叠 */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            
+            .menu-btn {
+                display: none !important;
+            }
+            
+            .mobile-language-btn {
+                display: none !important;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- 二维码弹窗 - 与服务页面完全统一 -->
+    <!-- 二维码弹窗 -->
     <div id="qrcodeModal" class="qrcode-modal">
         <div class="qrcode-content">
             <span class="close-qrcode">&times;</span>
@@ -865,20 +1254,43 @@
         </div>
     </div>
 
-    <!-- 导航栏 - 与服务页面完全统一 -->
+    <!-- 导航栏 - 与服务页面统一 -->
     <header class="header" id="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="brand">
-                    <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
-                </a>
+        <div class="nav-container">
+            <!-- Logo左对齐 -->
+            <a href="index.html" class="brand">
+                <img src="assets/PURPLEWALL logo-bai-03.png" alt="PurpleWall">
+            </a>
+            
+            <!-- 导航链接和语言切换右对齐 -->
+            <div class="nav-right">
+                <!-- 桌面端导航链接 - 已删除"首页"链接 -->
                 <nav class="nav-links">
-                    <a href="index.html" class="nav-link">首页</a>
                     <a href="services.html" class="nav-link">服务</a>
                     <a href="cases.html" class="nav-link">案例</a>
                     <a href="about.html" class="nav-link active">关于</a>
                     <a href="contact.html" class="nav-link">联系</a>
                 </nav>
+                
+                <!-- 语言切换器 -->
+                <div class="language-switcher">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>CHINESE</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active">CH</a>
+                        <a href="#" class="language-option">EN</a>
+                        <a href="#" class="language-option">FR</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单按钮和语言切换 -->
+            <div class="mobile-menu-container">
+                <button class="mobile-language-btn" id="mobileLanguageBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
                 <button class="menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -888,198 +1300,225 @@
     
     <!-- 子页面Hero区域 -->
     <section class="sub-hero">
-        <div class="sub-hero-img">
-            <img src="assets/about-1.jpg" alt="关于我们">
-        </div>
-        <div class="sub-hero-shade"></div>
         <div class="sub-hero-content container">
-            <h1 class="sub-hero-title">关于我们</h1>
-            <p class="sub-hero-subtitle">专注高端品牌展示道具的全案服务，从创意到落地的完整解决方案</p>
+            <h1 class="sub-hero-title">匠心智造 · 品质传承</h1>
+            <p class="sub-hero-subtitle">自2008年创立以来，紫墙始终致力于高端品牌展示道具的全案服务，以匠心精神铸就每一件作品，为客户提供从创意到落地的完整解决方案。</p>
         </div>
     </section>
 
-    <!-- 主要内容区域 -->
-    <main class="section">
+    <!-- 公司简介 -->
+    <section class="section section-light">
         <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">PurpleWall 紫墙</h2>
-                <p class="section-subtitle">成立于2015年，专注于高端品牌展示道具的全案服务。我们汇聚了来自设计、工程、制造和项目管理领域的专业人才，致力于为全球奢侈品牌提供从创意概念到最终落地的完整解决方案。</p>
-            </div>
-
-            <!-- 公司历史墙 -->
-            <div class="history-section">
-                <div class="history-item">
-                    <div class="history-year">2015</div>
-                    <div class="history-content">
-                        <h3>创立之初</h3>
-                        <p>PurpleWall在上海成立，专注于高端品牌展示道具的设计与制造。创业团队由资深设计师和工程师组成，确立了"匠心制造，创新设计"的核心价值观。</p>
-                    </div>
-                    <div class="history-image">
-                        <img src="assets/微信图片_20250417121620.jpg" alt="创立初期">
-                    </div>
-                </div>
-
-                <div class="history-item reverse">
-                    <div class="history-year">2018</div>
-                    <div class="history-content">
-                        <h3>技术革新</h3>
-                        <p>引进德国先进制造设备，建立数字化生产线。开始与多个国际奢侈品牌建立合作关系，服务网络扩展到亚洲主要城市。</p>
-                    </div>
-                    <div class="history-image">
-                        <img src="assets/微信图片_20250417121703.jpg" alt="技术革新">
-                    </div>
-                </div>
-
-                <div class="history-item">
-                    <div class="history-year">2020</div>
-                    <div class="history-content">
-                        <h3>全球化布局</h3>
-                        <p>在苏州建立现代化生产基地，总面积达到10,000平方米。服务网络覆盖欧洲和北美市场，获得多项国际质量认证。</p>
-                    </div>
-                    <div class="history-image">
-                        <img src="assets/1803.jpg" alt="全球化布局">
-                    </div>
-                </div>
-
-                <div class="history-item reverse">
-                    <div class="history-year">2023</div>
-                    <div class="history-content">
-                        <h3>可持续发展</h3>
-                        <p>全面推行绿色制造理念，建立环保材料库和循环利用体系。获得ISO 14001环境管理体系认证，成为行业可持续发展标杆。</p>
-                    </div>
-                    <div class="history-image">
-                        <img src="assets/wechat_2025-08-11_125908_245.jpg" alt="可持续发展">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 环保可持续特色区域 -->
-            <div class="sustainability-section">
-                <h2 class="section-title" style="margin-top: 0;">环保可持续</h2>
-                <p class="section-subtitle">我们致力于通过创新设计和技术，减少环境足迹，创造可持续发展的展示解决方案</p>
+            <div class="company-intro">
+                <h2 class="section-title">关于紫墙</h2>
+                <p class="section-subtitle">我们不仅是制造商，更是品牌展示艺术的创造者，致力于将品牌理念转化为可触摸的空间体验</p>
                 
-                <div class="sustainability-grid">
-                    <div class="sustainability-card">
-                        <div class="sustainability-icon">
-                            <i class="fas fa-recycle"></i>
-                        </div>
-                        <h4>材料创新</h4>
-                        <p>使用可回收、可降解的环保材料，减少传统材料的环境影响。建立环保材料库，提供多种可持续材料选择。</p>
+                <div class="intro-grid">
+                    <div class="intro-text">
+                        <h3>专业成就卓越 · 创新引领未来</h3>
+                        <p>上海紫墙企业营销策划有限公司自<span class="highlight">2008年</span>创立以来，始终专注于高端品牌展示道具的全案服务。我们以<span class="highlight">专柜制作、有机玻璃陈列道具、纸艺陈列、金属陈列道具、橱窗陈列、柜台陈列和促销陈列搭台</span>为核心业务，构建了集创意、设计、打样、生产、发货、维修于一体的完整服务体系。</p>
+                        <p>公司汇聚了行业顶尖的设计师、工程师和技术专家，凭借国际化企业运作经验与全球优质原材料供应商的深度合作，我们始终将<span class="highlight">品质与创新</span>置于首位，为客户提供卓越的展示解决方案。</p>
+                        <p>我们深信，每一件展示道具都是品牌故事的延伸，是空间与消费者对话的媒介。因此，我们不仅关注产品的美学呈现，更注重其功能性与品牌价值的完美融合。</p>
                     </div>
-                    
-                    <div class="sustainability-card">
-                        <div class="sustainability-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <h4>绿色制造</h4>
-                        <p>采用节能生产工艺，减少能源消耗和废弃物产生。工厂废水处理率达100%，废气排放符合国际标准。</p>
-                    </div>
-                    
-                    <div class="sustainability-card">
-                        <div class="sustainability-icon">
-                            <i class="fas fa-cubes"></i>
-                        </div>
-                        <h4>模块化设计</h4>
-                        <p>90%以上的产品采用模块化设计，便于拆装、运输和重复使用，大幅减少材料浪费。</p>
-                    </div>
-                    
-                    <div class="sustainability-card">
-                        <div class="sustainability-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <h4>低碳物流</h4>
-                        <p>优化物流路线，采用环保包装材料，减少运输过程中的碳足迹。建立逆向物流体系，实现包装材料回收利用。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 核心价值观 -->
-            <div class="text-center">
-                <h2 class="section-title">核心价值观</h2>
-                <p class="section-subtitle">我们的成功建立在坚定的价值观基础上，这些价值观指导我们每一天的工作</p>
-            </div>
-
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3>品质至上</h3>
-                    <p>每一个细节都经过精心打磨，从材料选择到工艺执行，我们追求极致的品质标准，确保每一件产品都经得起时间的考验。</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>创新驱动</h3>
-                    <p>持续投入研发，探索新材料、新工艺、新技术。我们相信创新是推动行业进步的动力，也是为客户创造价值的源泉。</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <h3>合作共赢</h3>
-                    <p>我们视客户为合作伙伴，深入了解品牌需求，共同创造卓越的展示解决方案。建立长期稳定的合作关系，实现共赢发展。</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>专业专注</h3>
-                    <p>深耕展示道具领域，积累丰富的专业经验。我们的团队在各自领域都是专家，能够为客户提供最专业的建议和服务。</p>
-                </div>
-            </div>
-
-            <!-- 团队展示 -->
-            <div class="team-section">
-                <h2 class="section-title">核心团队</h2>
-                <p class="section-subtitle">汇聚行业精英，用专业与热情创造卓越</p>
-                
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="assets/team1-placeholder.jpg" alt="设计总监">
-                        <div class="team-info">
-                            <h4>张明</h4>
-                            <p>设计总监</p>
-                            <p class="description">15年高端品牌展示设计经验，曾服务于多个国际奢侈品牌，擅长将品牌故事转化为空间语言。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <img src="assets/team2-placeholder.jpg" alt="工程总监">
-                        <div class="team-info">
-                            <h4>李华</h4>
-                            <p>工程总监</p>
-                            <p class="description">德国留学背景，精通精密制造工艺，领导团队攻克多项技术难题，确保项目高质量落地。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <img src="assets/team3-placeholder.jpg" alt="生产总监">
-                        <div class="team-info">
-                            <h4>王强</h4>
-                            <p>生产总监</p>
-                            <p class="description">20年制造管理经验，建立现代化生产体系，擅长精益生产管理，提升效率同时确保品质。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <img src="assets/team4-placeholder.jpg" alt="项目经理">
-                        <div class="team-info">
-                            <h4>陈静</h4>
-                            <p>项目经理</p>
-                            <p class="description">PMP认证，精通跨国项目管理，确保全球项目按时交付，客户满意度超过98%。</p>
-                        </div>
+                    <div class="intro-image">
+                        <!-- 图片占位色块 -->
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- 页脚 - 与服务页面完全统一 -->
+    <!-- 公司实力 -->
+    <section class="section">
+        <div class="container">
+            <div class="company-strength">
+                <h2 class="section-title">核心实力</h2>
+                <p class="section-subtitle">雄厚的制造基础与专业团队的完美结合，铸就了紫墙在行业内的卓越地位</p>
+                
+                <div class="strength-grid">
+                    <div class="strength-item">
+                        <div class="strength-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>规模制造</h4>
+                        <p>拥有18,000平米的现代化生产基地，分为商超道具生产加工中心与木器专柜生产加工中心两大区域，具备大规模、高品质的生产制造能力。</p>
+                    </div>
+                    
+                    <div class="strength-item">
+                        <div class="strength-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>精英团队</h4>
+                        <p>200余名专业员工组成的精英团队，其中包含50余位高级技师。我们不仅拥有技术精湛的制作团队，更配备了富有创意的设计团队与专业的客户服务团队。</p>
+                    </div>
+                    
+                    <div class="strength-item">
+                        <div class="strength-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>先进管理</h4>
+                        <p>采用国际先进的生产管理模式，以人为本，注重环保与可持续发展。我们不断优化生产流程，创新产品结构，确保每一环节的高效与品质稳定。</p>
+                    </div>
+                    
+                    <div class="strength-item">
+                        <div class="strength-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>品质承诺</h4>
+                        <p>从原材料筛选到成品出厂，我们建立了严格的质量控制体系。每一件产品都经过多道检验工序，确保符合最高品质标准，为客户提供值得信赖的保障。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工厂实力展示 -->
+    <section class="section section-brand">
+        <div class="container">
+            <div class="factory-showcase">
+                <h2 class="section-title">制造实力</h2>
+                <p class="section-subtitle">现代化的生产基地与先进的生产设备，是品质保障的坚实基础</p>
+                
+                <div class="factory-grid">
+                    <div class="factory-item large">
+                        <div class="factory-image factory-1">
+                            工厂鸟瞰图
+                        </div>
+                        <div class="factory-caption">18,000平米现代化生产基地全景</div>
+                    </div>
+                    
+                    <div class="factory-item">
+                        <div class="factory-image factory-2">
+                            专业生产线
+                        </div>
+                        <div class="factory-caption">先进自动化生产线</div>
+                    </div>
+                    
+                    <div class="factory-item">
+                        <div class="factory-image factory-3">
+                            团队风采
+                        </div>
+                        <div class="factory-caption">专业团队集体风采</div>
+                    </div>
+                    
+                    <div class="factory-item">
+                        <div class="factory-image factory-4">
+                            生产车间
+                        </div>
+                        <div class="factory-caption">精密生产车间作业实景</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 出口经验 -->
+    <section class="section">
+        <div class="container">
+            <div class="export-experience">
+                <h2 class="section-title">全球视野</h2>
+                <p class="section-subtitle">深耕国际市场，将中国智造带向世界舞台</p>
+                
+                <div class="export-content">
+                    <div class="export-text">
+                        <h3>连接世界 · 品质通行</h3>
+                        <p>紫墙拥有完备的出口资质和丰富的国际贸易经验，自<span class="highlight">2015年</span>首次进军国际市场以来，我们已成功将产品与服务拓展至<span class="highlight">亚洲、美洲、欧洲</span>等全球主要市场。</p>
+                        <p>我们深谙不同国家与地区的市场需求与文化差异，能够为全球客户提供符合当地市场特点的定制化展示解决方案。无论是欧洲的精致奢华、美洲的现代简约，还是亚洲的东方美学，我们都能精准把握并完美呈现。</p>
+                        <p>我们的国际项目团队精通多国语言，熟悉各国贸易法规与物流流程，能够确保每一笔国际订单的顺利交付。至今，我们已经成功完成了<span class="highlight">500多个国际项目</span>，赢得了全球客户的广泛赞誉。</p>
+                    </div>
+                    <div class="export-visual">
+                        <!-- 全球业务分布图占位色块 -->
+                    </div>
+                </div>
+                
+                <div class="export-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">年国际出口经验</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">国家与地区覆盖</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">国际项目成功交付</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">客户满意度</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 环保公益模块 -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="environment-section">
+                <div class="environment-header">
+                    <h2 class="section-title">可持续发展</h2>
+                    <p class="section-subtitle">我们相信，卓越的企业不仅创造商业价值，更应承担社会责任，守护地球家园</p>
+                </div>
+                
+                <div class="environment-content">
+                    <div class="environment-text">
+                        <h3>绿色制造 · 责任未来</h3>
+                        <p>紫墙始终将<span class="highlight">环保与可持续发展</span>作为企业的核心战略。我们深知，制造业的每一个环节都与环境息息相关，因此我们从原材料选择、生产工艺到废弃物处理，都严格遵循环保原则。</p>
+                        <p>我们积极开发和采用<span class="highlight">环保型材料</span>，如水性涂料、可降解塑料和回收材料，减少生产过程中的污染排放。同时，我们不断优化生产工艺，降低能源消耗，提高资源利用效率。</p>
+                        <p>我们建立了完善的<span class="highlight">环境管理体系</span>，确保所有生产活动都符合国际环保标准。我们的目标是：在创造商业价值的同时，最大限度地减少对环境的影响，为子孙后代留下更美好的地球。</p>
+                    </div>
+                    <div class="environment-image">
+                        <!-- 环保生产车间占位色块 -->
+                    </div>
+                </div>
+                
+                <div class="environment-initiatives">
+                    <div class="initiative-card">
+                        <div class="initiative-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h4>材料循环利用</h4>
+                        <p>建立完整的材料回收体系，对生产废料进行分类回收与再利用，实现资源的最大化利用，减少原材料消耗与废弃物产生。</p>
+                    </div>
+                    
+                    <div class="initiative-card">
+                        <div class="initiative-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>环保材料应用</h4>
+                        <p>优先选用环保型材料，减少生产过程中的污染排放。我们与环保材料供应商建立战略合作，共同推动行业绿色发展。</p>
+                    </div>
+                    
+                    <div class="initiative-card">
+                        <div class="initiative-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <h4>节能技术改造</h4>
+                        <p>持续投入节能技术改造，引进高效节能设备，优化能源使用结构，降低单位产值的能源消耗，实现绿色低碳生产。</p>
+                    </div>
+                    
+                    <div class="initiative-card">
+                        <div class="initiative-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>社区环保参与</h4>
+                        <p>定期组织员工参与社区环保公益活动，提升全员环保意识。我们相信，环保不仅是一种责任，更是一种生活方式。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="contact.html" class="btn-primary">开启合作之旅</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1098,7 +1537,6 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html" class="footer-link">首页</a>
                     <a href="services.html" class="footer-link">服务</a>
                     <a href="cases.html" class="footer-link">案例</a>
                     <a href="about.html" class="footer-link active">关于</a>
@@ -1112,8 +1550,15 @@
         </div>
     </footer>
 
+    <!-- 移动端语言下拉菜单 -->
+    <div class="mobile-language-dropdown" id="mobileLanguageDropdown">
+        <a href="#" class="mobile-language-option active">CH</a>
+        <a href="#" class="mobile-language-option">EN</a>
+        <a href="#" class="mobile-language-option">FR</a>
+    </div>
+
     <script>
-        // ========== 核心功能类 - 与服务页面统一 ==========
+        // ========== 核心功能类 ==========
         class PurpleWall {
             constructor() {
                 this.init();
@@ -1121,17 +1566,20 @@
             
             init() {
                 this.setupNav();
+                this.setupScrollHideNav();
                 this.setupAnimations();
                 this.setupResize();
                 this.setupSocialMedia();
                 this.setupQrcodeModal();
             }
             
-            // 导航功能 - 与服务页面统一
+            // 导航功能
             setupNav() {
                 const header = document.getElementById('header');
                 const menuBtn = document.getElementById('menuBtn');
                 const navLinks = document.querySelector('.nav-links');
+                const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+                const mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 
                 // 滚动效果
                 const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
@@ -1140,21 +1588,54 @@
                 
                 // 移动菜单
                 if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', () => {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
                         const isActive = navLinks.classList.toggle('active');
                         menuBtn.querySelector('i').className = isActive ? 'fas fa-times' : 'fas fa-bars';
-                    });
-                    
-                    // 点击链接关闭菜单
-                    navLinks.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            if (window.innerWidth <= 480) {
-                                navLinks.classList.remove('active');
-                                menuBtn.querySelector('i').className = 'fas fa-bars';
-                            }
-                        });
+                        
+                        // 如果打开菜单，关闭语言下拉菜单
+                        if (isActive) {
+                            mobileLanguageDropdown.classList.remove('active');
+                        }
                     });
                 }
+                
+                // 移动端语言切换按钮
+                if (mobileLanguageBtn && mobileLanguageDropdown) {
+                    mobileLanguageBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isActive = mobileLanguageDropdown.classList.toggle('active');
+                        
+                        // 如果打开语言下拉菜单，关闭导航菜单
+                        if (isActive) {
+                            if (navLinks) {
+                                navLinks.classList.remove('active');
+                            }
+                            if (menuBtn) {
+                                menuBtn.querySelector('i').className = 'fas fa-bars';
+                            }
+                        }
+                    });
+                }
+                
+                // 点击页面其他区域关闭所有下拉菜单
+                document.addEventListener('click', (e) => {
+                    const isMenuBtn = menuBtn && menuBtn.contains(e.target);
+                    const isNavLinks = navLinks && navLinks.contains(e.target);
+                    const isLanguageBtn = mobileLanguageBtn && mobileLanguageBtn.contains(e.target);
+                    const isLanguageDropdown = mobileLanguageDropdown && mobileLanguageDropdown.contains(e.target);
+                    
+                    if (!isMenuBtn && !isNavLinks && navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        if (menuBtn) {
+                            menuBtn.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                    
+                    if (!isLanguageBtn && !isLanguageDropdown && mobileLanguageDropdown && mobileLanguageDropdown.classList.contains('active')) {
+                        mobileLanguageDropdown.classList.remove('active');
+                    }
+                });
                 
                 // 当前页面高亮
                 const currentPage = location.pathname.split('/').pop() || 'index.html';
@@ -1162,17 +1643,55 @@
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
                 });
                 
-                // 页脚链接当前页面高亮
+                // 页脚链接高亮
                 document.querySelectorAll('.footer-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentPage);
+                });
+                
+                // 点击语言下拉菜单选项
+                const languageOptions = mobileLanguageDropdown.querySelectorAll('.mobile-language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.textContent;
+                        alert(`切换到 ${lang}`);
+                        
+                        // 更新活动状态
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        mobileLanguageDropdown.classList.remove('active');
+                    });
+                });
+            }
+            
+            // 滚动时隐藏/显示导航栏
+            setupScrollHideNav() {
+                const header = document.getElementById('header');
+                let lastScrollTop = 0;
+                const scrollThreshold = 60;
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                        // 向下滚动，隐藏导航栏
+                        header.classList.add('hidden');
+                    } else {
+                        // 向上滚动，显示导航栏
+                        header.classList.remove('hidden');
+                    }
+                    
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 });
             }
             
             // 滚动动画
             setupAnimations() {
                 const animateOnScroll = () => {
-                    document.querySelectorAll('.history-item, .sustainability-card, .value-card, .team-member').forEach(el => {
-                        if (el.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                    document.querySelectorAll('.strength-item, .factory-item, .stat-item, .initiative-card, .intro-grid, .export-content, .environment-content').forEach(el => {
+                        if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
                             el.style.opacity = '1';
                             el.style.transform = 'translateY(0)';
                         }
@@ -1180,30 +1699,30 @@
                 };
                 
                 // 设置初始状态
-                document.querySelectorAll('.history-item, .sustainability-card, .value-card, .team-member').forEach(el => {
+                document.querySelectorAll('.strength-item, .factory-item, .stat-item, .initiative-card, .intro-grid, .export-content, .environment-content').forEach(el => {
                     el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 });
                 
                 window.addEventListener('scroll', animateOnScroll);
                 setTimeout(animateOnScroll, 100);
             }
             
-            // 响应式处理 - 与服务页面统一
+            // 响应式处理
             setupResize() {
                 window.addEventListener('resize', () => {
                     const navLinks = document.querySelector('.nav-links');
                     const menuBtn = document.getElementById('menuBtn');
                     
-                    if (window.innerWidth > 480 && navLinks && menuBtn) {
+                    if (window.innerWidth > 768 && navLinks && menuBtn) {
                         navLinks.classList.remove('active');
                         menuBtn.querySelector('i').className = 'fas fa-bars';
                     }
                 });
             }
             
-            // 社交媒体功能 - 与服务页面统一
+            // 社交媒体功能
             setupSocialMedia() {
                 // 微信按钮点击事件
                 const wechatBtn = document.getElementById('wechatBtn');
@@ -1214,7 +1733,7 @@
                 }
             }
             
-            // 二维码弹窗功能 - 与服务页面统一
+            // 二维码弹窗功能
             setupQrcodeModal() {
                 const modal = document.getElementById('qrcodeModal');
                 const closeBtn = document.querySelector('.close-qrcode');
