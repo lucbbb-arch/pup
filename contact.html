@@ -340,9 +340,9 @@
         }
         
         .contact-title {
-            font-size: clamp(20px, 3vw, 32px); /* 减小字体大小 */
-            font-weight: 300;
-            line-height: 1;
+            font-size: clamp(30px, 4.5vw, 42px); /* 减小字体大小 */
+            font-weight: 400;
+            line-height: 1.2;
             margin-bottom: 8px; /* 减小间距 */
             color: #fff;
         }
@@ -369,15 +369,15 @@
         }
         
         .contact-icon {
-            width: 30px; /* 减小尺寸 */
-            height: 30px; /* 减小尺寸 */
+            width: 36px; /* 减小尺寸 */
+            height: 36px; /* 减小尺寸 */
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.08); /* 增加透明度 */
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 12px; /* 减小字体大小 */
+            font-size: 15px; /* 减小字体大小 */
             color: var(--brand-re); /* 改为玫红色 */
             transition: var(--transition);
         }
@@ -405,7 +405,7 @@
         .contact-value {
             font-size: 15px; /* 减小字体大小 */
             color: #fff;
-            font-weight: 100;
+            font-weight: 400;
             transition: var(--transition);
             line-height: 1.4;
         }
@@ -415,7 +415,7 @@
             margin-top: 30px; /* 增加顶部间距 */
             padding-top: 24px; /* 减小内边距 */
             border-top: 1px solid rgba(255, 255, 255, 0.08); /* 增加透明度 */
-            padding-bottom: 30px; /* 底部增加间距 */
+            padding-bottom: 20px; /* 底部增加间距 */
         }
         
         .wechat-container {
@@ -428,7 +428,7 @@
             width: 100px; /* 减小尺寸 */
             height: 100px; /* 减小尺寸 */
             background: #fff;
-            border-radius: 5px; /* 减小圆角 */
+            border-radius: 6px; /* 减小圆角 */
             padding: 8px; /* 减小内边距 */
             flex-shrink: 0;
         }
@@ -443,10 +443,11 @@
             display: flex;
             flex-direction: column;
             gap: 8px; /* 减小间距 */
+            flex: 1;
         }
         
         .wechat-title {
-            font-size: 18px; /* 减小字体大小 */
+            font-size: 15px; /* 减小字体大小 */
             font-weight: 400;
             color: #fff;
         }
@@ -457,7 +458,7 @@
             line-height: 1.4;
         }
         
-        /* 留言板区域 - 缩小版 */
+        /* 留言板区域 - 精简版 */
         .message-board {
             background: rgba(255, 255, 255, 0.04); /* 增加透明度 */
             border-radius: 5px; /* 减小圆角 */
@@ -470,7 +471,7 @@
         }
         
         .message-title {
-            font-size: 18px; /* 减小字体大小 */
+            font-size: 20px; /* 减小字体大小 */
             font-weight: 400;
             color: #fff;
             margin-bottom: 6px; /* 减小间距 */
@@ -542,6 +543,72 @@
         .form-submit:hover {
             background: #b21f67; /* 更深的玫红色 */
             transform: translateY(-1px); /* 减小上移效果 */
+        }
+        
+        /* 成功提示样式 */
+        .success-message {
+            display: none;
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            color: #2ecc71;
+        }
+        
+        .success-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #2ecc71;
+        }
+        
+        .success-text {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .success-detail {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 加载中状态 */
+        .loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 错误提示样式 */
+        .form-error {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            color: #e74c3c;
+            font-size: 14px;
+            text-align: center;
         }
         
         /* 右下角版权信息 */
@@ -743,15 +810,17 @@
                 padding: 0 25px 80px; /* 两侧留足边距 */
                 width: 100%;
                 max-width: 100%;
-                align-items: center; /* 手机端居中 */
+                align-items: flex-start; /* 手机端改为左对齐 */
             }
             
             .contact-title {
                 font-size: 28px;
+                text-align: left; /* 左对齐 */
             }
             
             .contact-subtitle {
                 font-size: 15px;
+                text-align: left; /* 左对齐 */
             }
             
             .contact-list {
@@ -772,15 +841,32 @@
                 font-size: 15px;
             }
             
+            /* 手机端微信区域保持水平一排布局 */
             .wechat-container {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; /* 保持水平布局 */
+                align-items: flex-start; /* 顶部对齐 */
                 gap: 14px;
             }
             
             .wechat-qrcode {
                 width: 90px;
                 height: 90px;
+                flex-shrink: 0;
+            }
+            
+            .wechat-info {
+                text-align: left; /* 文字左对齐 */
+                gap: 6px;
+            }
+            
+            .wechat-title {
+                font-size: 15px;
+                text-align: left;
+            }
+            
+            .wechat-desc {
+                font-size: 12px;
+                text-align: left;
             }
             
             .message-board {
@@ -791,6 +877,12 @@
             
             .message-title {
                 font-size: 20px;
+                text-align: left; /* 左对齐 */
+            }
+            
+            .message-subtitle {
+                font-size: 12px;
+                text-align: left; /* 左对齐 */
             }
             
             .copyright {
@@ -1097,41 +1189,56 @@
                         <div class="wechat-qrcode">
                             <!-- 请替换为实际二维码图片 -->
                             <img src="assets/640.png" alt="PurpleWall微信公众号二维码">
+                            <div style="display:flex;align-items:center;justify-content:center;color:#666;font-size:12px;text-align:center;">
+                            </div>
                         </div>
                         <div class="wechat-info">
-                            <h3 class="wechat-title">微信公众号</h3>
-                            <p class="wechat-desc"></p>
+                            <h3 class="wechat-title">微信联系</h3>
+                            <p class="wechat-desc">关注PurpleWall微信公众号</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 留言板区域 -->
+            <!-- 留言板区域 - 精简版 -->
             <div class="message-board">
                 <h2 class="message-title">留言板</h2>
                 <p class="message-subtitle">请留下您的联系方式和需求，我们将尽快与您联系</p>
                 
                 <form class="message-form" id="contactForm">
                     <div class="form-group">
-                        <label for="name" class="form-label">姓名</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="请输入您的姓名">
+                        <label for="name" class="form-label">姓名 *</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="请输入您的姓名" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="email" class="form-label">邮箱</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="请输入您的邮箱">
+                        <label for="email" class="form-label">邮箱 *</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="请输入您的邮箱" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="message" class="form-label">留言内容</label>
-                        <textarea id="message" name="message" class="form-textarea" placeholder="请简要描述您的需求..."></textarea>
+                        <label for="message" class="form-label">留言内容 *</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="请简要描述您的需求..." required></textarea>
                     </div>
                     
-                    <button type="submit" class="form-submit">
+                    <button type="submit" class="form-submit" id="submitBtn">
                         <i class="fas fa-paper-plane"></i>
                         发送留言
                     </button>
                 </form>
+                
+                <!-- 成功提示 -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="success-text">留言发送成功！</div>
+                    <div class="success-detail">感谢您的留言，我们已收到您的信息，将在24小时内通过您留下的联系方式与您联系。</div>
+                    <button class="form-submit" id="sendAgainBtn" style="margin-top: 15px; background: rgba(255, 255, 255, 0.1);">
+                        <i class="fas fa-redo"></i>
+                        发送新留言
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1157,6 +1264,9 @@
                 this.mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
                 this.mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
                 this.contactForm = document.getElementById('contactForm');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.successMessage = document.getElementById('successMessage');
+                this.sendAgainBtn = document.getElementById('sendAgainBtn');
                 this.isMobile = window.innerWidth <= 768;
                 this.isTablet = window.innerWidth >= 769 && window.innerWidth <= 1024;
                 this.isDesktop = window.innerWidth >= 1025;
@@ -1217,6 +1327,11 @@
                         this.mobileLanguageDropdown.classList.remove('active');
                     });
                 });
+                
+                // 绑定"发送新留言"按钮事件
+                if (this.sendAgainBtn) {
+                    this.sendAgainBtn.addEventListener('click', () => this.resetForm());
+                }
             }
             
             // 更新设备类型
@@ -1265,29 +1380,166 @@
             // 绑定表单提交事件
             bindFormEvents() {
                 if (this.contactForm) {
-                    this.contactForm.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        
-                        // 获取表单数据
-                        const name = document.getElementById('name').value;
-                        const email = document.getElementById('email').value;
-                        const message = document.getElementById('message').value;
-                        
-                        // 构建邮件内容
-                        const subject = `PurpleWall留言 - ${name}`;
-                        const body = `姓名: ${name}%0D%0A邮箱: ${email}%0D%0A留言内容: ${message}%0D%0A%0D%0A时间: ${new Date().toLocaleString()}`;
-                        
-                        // 打开默认邮件客户端
-                        const mailtoLink = `mailto:hi@purplewall.com.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                        window.location.href = mailtoLink;
-                        
-                        // 显示成功提示
-                        alert('留言已准备发送，请在邮件客户端中确认发送。');
-                        
-                        // 清空表单
-                        this.contactForm.reset();
-                    });
+                    this.contactForm.addEventListener('submit', (e) => this.handleSubmit(e));
                 }
+            }
+            
+            // 处理表单提交
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                // 验证表单
+                if (!this.validateForm()) {
+                    return;
+                }
+                
+                // 显示加载状态
+                this.showLoading();
+                
+                // 收集表单数据
+                const formData = this.collectFormData();
+                
+                try {
+                    // 模拟发送邮件，延迟1.5秒后显示成功
+                    await this.mockSendEmail(formData);
+                    
+                    // 显示成功消息
+                    this.showSuccess();
+                    
+                    // 记录到控制台（便于调试）
+                    console.log('留言已发送:', formData);
+                    
+                } catch (error) {
+                    // 显示错误提示
+                    this.showError(error.message || '发送失败，请稍后重试');
+                    console.error('发送失败:', error);
+                } finally {
+                    // 移除加载状态
+                    this.hideLoading();
+                }
+            }
+            
+            // 验证表单
+            validateForm() {
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                // 简单验证
+                if (!name) {
+                    this.showError('请输入姓名');
+                    return false;
+                }
+                
+                if (!email) {
+                    this.showError('请输入邮箱');
+                    return false;
+                }
+                
+                // 邮箱格式验证
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    this.showError('请输入有效的邮箱地址');
+                    return false;
+                }
+                
+                if (!message) {
+                    this.showError('请输入留言内容');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            // 收集表单数据
+            collectFormData() {
+                return {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    message: document.getElementById('message').value.trim(),
+                    timestamp: new Date().toLocaleString('zh-CN'),
+                };
+            }
+            
+            // 模拟发送邮件（测试模式）
+            mockSendEmail(formData) {
+                return new Promise((resolve) => {
+                    // 模拟网络延迟
+                    setTimeout(() => {
+                        console.log('模拟发送邮件成功');
+                        console.log('邮件内容:', formData);
+                        resolve();
+                    }, 1500);
+                });
+            }
+            
+            // 显示加载状态
+            showLoading() {
+                this.submitBtn.classList.add('loading');
+                this.submitBtn.innerHTML = '发送中...';
+                this.submitBtn.disabled = true;
+            }
+            
+            // 隐藏加载状态
+            hideLoading() {
+                this.submitBtn.classList.remove('loading');
+                this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 发送留言';
+                this.submitBtn.disabled = false;
+            }
+            
+            // 显示成功消息
+            showSuccess() {
+                // 隐藏表单
+                this.contactForm.style.display = 'none';
+                
+                // 显示成功消息
+                this.successMessage.style.display = 'block';
+                
+                // 添加淡入动画
+                setTimeout(() => {
+                    this.successMessage.style.opacity = '1';
+                    this.successMessage.style.transform = 'translateY(0)';
+                }, 10);
+            }
+            
+            // 显示错误提示
+            showError(message) {
+                // 移除现有的错误提示
+                const existingError = this.contactForm.querySelector('.form-error');
+                if (existingError) {
+                    existingError.remove();
+                }
+                
+                // 创建错误提示
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'form-error';
+                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+                
+                // 插入到表单下方
+                this.contactForm.appendChild(errorDiv);
+                
+                // 3秒后自动移除
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.parentNode.removeChild(errorDiv);
+                    }
+                }, 3000);
+            }
+            
+            // 重置表单
+            resetForm() {
+                // 隐藏成功消息
+                this.successMessage.style.display = 'none';
+                
+                // 显示表单
+                this.contactForm.style.display = 'block';
+                this.contactForm.reset();
+                
+                // 添加淡入效果
+                setTimeout(() => {
+                    this.contactForm.style.opacity = '1';
+                    this.contactForm.style.transform = 'translateY(0)';
+                }, 10);
             }
             
             // 处理窗口大小变化
